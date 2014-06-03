@@ -166,9 +166,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201406030749482_InitDb.cs" />
-    <Compile Include="Migrations\201406030749482_InitDb.Designer.cs">
-      <DependentUpon>201406030749482_InitDb.cs</DependentUpon>
+    <Compile Include="Migrations\201406030933142_initDB.cs" />
+    <Compile Include="Migrations\201406030933142_initDB.Designer.cs">
+      <DependentUpon>201406030933142_initDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -182,6 +182,7 @@
     <Compile Include="Models\Resultaat.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentRollen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -243,8 +244,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201406030749482_InitDb.resx">
-      <DependentUpon>201406030749482_InitDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201406030933142_initDB.resx">
+      <DependentUpon>201406030933142_initDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

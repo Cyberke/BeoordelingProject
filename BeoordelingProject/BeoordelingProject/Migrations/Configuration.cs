@@ -12,6 +12,7 @@ namespace BeoordelingProject.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<BeoordelingProject.DAL.Context.BeoordelingsContext>
     {
         List<Rol> rollen;
+        List<Student> studenten;
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -24,6 +25,13 @@ namespace BeoordelingProject.Migrations
               new Rol { Naam = "Tweede lezer"},
               new Rol { Naam = "Kritische vriend"}
             };
+
+            studenten = new List<Student>{
+                new Student{Naam="Jelle", Opleiding="NMCT", Email="jelle@mail.be", Geboortedatum="20/08/1993",Geslacht='M', StudentId=245, Trajecttype="IOT"}
+            };
+
+            studenten.ForEach(s => context.Studenten.AddOrUpdate(p => p.Naam, s));
+            context.SaveChanges();
 
             rollen.ForEach(r => context.Rollen.AddOrUpdate(p => p.Naam, r));
             context.SaveChanges();
@@ -41,27 +49,39 @@ namespace BeoordelingProject.Migrations
 
             idManager.CreateRole("Admin", "Global Access");
             idManager.CreateRole("User", "Gewone Gebruiker");
-            
-            var userRollen = new List<Rol>{
-                rollen[0], rollen[1]
+
+            List<Rol> userRollen = new List<Rol> { rollen[0], rollen[1] };
+
+            var studentrol = new List<StudentRollen>
+            {
+                new StudentRollen{ Student = studenten[0], Rollen = userRollen}
             };
-            
+
+            var adminUser = new ApplicationUser()
+            {
+                UserName = "PeterVdK",
+                StudentRollen = studentrol
+            };
+
+            /*
             var adminUser = new ApplicationUser()
             {
                 UserName = "petervdk",
-                Rollen = userRollen                
+                Studenten = studenten,
+                Rollen = userRollen
             };
             var user = new ApplicationUser()
             {
                 UserName = "jellevdb",
+                Studenten = studenten,
                 Rollen = userRollen
             };
-
+            */
             idManager.Create(adminUser, "Password1");
-            idManager.Create(user, "Password1");
+            //idManager.Create(user, "Password1");
 
             idManager.AddUserToRole(adminUser.Id, "Admin");
-            idManager.AddUserToRole(user.Id, "User");
+            //idManager.AddUserToRole(user.Id, "User");
 
         }
         

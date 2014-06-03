@@ -28,9 +28,18 @@ namespace BeoordelingProject.DAL.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ApplicationUser>().HasMany(a => a.Rollen).WithMany();
+            /*
+            modelBuilder.Entity<ApplicationUser>().HasMany(a => a.Studenten).WithMany();
+            modelBuilder.Entity<ApplicationUser>().HasMany(s => s.Rollen).WithMany();
+            */
+
+            modelBuilder.Entity<ApplicationUser>().HasMany(a => a.StudentRollen).WithMany();
+
+            modelBuilder.Entity<StudentRollen>().HasMany(s => s.Rollen).WithMany();
+
             modelBuilder.Entity<Hoofdaspect>().HasMany(h => h.Deelaspecten).WithMany();
             modelBuilder.Entity<Matrix>().HasMany(m => m.Hoofdaspecten).WithMany();
+
             modelBuilder.Entity<Resultaat>().HasMany(r => r.DeelaspectResultaten).WithMany();
             modelBuilder.Entity<Resultaat>().HasMany(r => r.HoofdaspectResultaten).WithMany();
 

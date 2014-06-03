@@ -3,7 +3,7 @@ namespace BeoordelingProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitDb : DbMigration
+    public partial class initDB : DbMigration
     {
         public override void Up()
         {
@@ -161,6 +161,17 @@ namespace BeoordelingProject.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.StudentRollens",
+                c => new
+                    {
+                        Rol_ID = c.Int(nullable: false, identity: true),
+                        Student_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.Rol_ID)
+                .ForeignKey("dbo.Students", t => t.Student_ID)
+                .Index(t => t.Student_ID);
+            
+            CreateTable(
                 "dbo.HoofdaspectDeelaspects",
                 c => new
                     {
@@ -213,24 +224,40 @@ namespace BeoordelingProject.Migrations
                 .Index(t => t.HoofdaspectResultaat_ID);
             
             CreateTable(
-                "dbo.ApplicationUserRols",
+                "dbo.StudentRollenRols",
+                c => new
+                    {
+                        StudentRollen_Rol_ID = c.Int(nullable: false),
+                        Rol_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.StudentRollen_Rol_ID, t.Rol_ID })
+                .ForeignKey("dbo.StudentRollens", t => t.StudentRollen_Rol_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Rols", t => t.Rol_ID, cascadeDelete: true)
+                .Index(t => t.StudentRollen_Rol_ID)
+                .Index(t => t.Rol_ID);
+            
+            CreateTable(
+                "dbo.ApplicationUserStudentRollens",
                 c => new
                     {
                         ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
-                        Rol_ID = c.Int(nullable: false),
+                        StudentRollen_Rol_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.ApplicationUser_Id, t.Rol_ID })
+                .PrimaryKey(t => new { t.ApplicationUser_Id, t.StudentRollen_Rol_ID })
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Rols", t => t.Rol_ID, cascadeDelete: true)
+                .ForeignKey("dbo.StudentRollens", t => t.StudentRollen_Rol_ID, cascadeDelete: true)
                 .Index(t => t.ApplicationUser_Id)
-                .Index(t => t.Rol_ID);
+                .Index(t => t.StudentRollen_Rol_ID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ApplicationUserRols", "Rol_ID", "dbo.Rols");
-            DropForeignKey("dbo.ApplicationUserRols", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.ApplicationUserStudentRollens", "StudentRollen_Rol_ID", "dbo.StudentRollens");
+            DropForeignKey("dbo.ApplicationUserStudentRollens", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.StudentRollens", "Student_ID", "dbo.Students");
+            DropForeignKey("dbo.StudentRollenRols", "Rol_ID", "dbo.Rols");
+            DropForeignKey("dbo.StudentRollenRols", "StudentRollen_Rol_ID", "dbo.StudentRollens");
             DropForeignKey("dbo.AspNetUserClaims", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
@@ -243,8 +270,11 @@ namespace BeoordelingProject.Migrations
             DropForeignKey("dbo.MatrixHoofdaspects", "Matrix_ID", "dbo.Matrices");
             DropForeignKey("dbo.HoofdaspectDeelaspects", "Deelaspect_ID", "dbo.Deelaspects");
             DropForeignKey("dbo.HoofdaspectDeelaspects", "Hoofdaspect_ID", "dbo.Hoofdaspects");
-            DropIndex("dbo.ApplicationUserRols", new[] { "Rol_ID" });
-            DropIndex("dbo.ApplicationUserRols", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.ApplicationUserStudentRollens", new[] { "StudentRollen_Rol_ID" });
+            DropIndex("dbo.ApplicationUserStudentRollens", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.StudentRollens", new[] { "Student_ID" });
+            DropIndex("dbo.StudentRollenRols", new[] { "Rol_ID" });
+            DropIndex("dbo.StudentRollenRols", new[] { "StudentRollen_Rol_ID" });
             DropIndex("dbo.AspNetUserClaims", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -257,11 +287,13 @@ namespace BeoordelingProject.Migrations
             DropIndex("dbo.MatrixHoofdaspects", new[] { "Matrix_ID" });
             DropIndex("dbo.HoofdaspectDeelaspects", new[] { "Deelaspect_ID" });
             DropIndex("dbo.HoofdaspectDeelaspects", new[] { "Hoofdaspect_ID" });
-            DropTable("dbo.ApplicationUserRols");
+            DropTable("dbo.ApplicationUserStudentRollens");
+            DropTable("dbo.StudentRollenRols");
             DropTable("dbo.ResultaatHoofdaspectResultaats");
             DropTable("dbo.ResultaatDeelaspectResultaats");
             DropTable("dbo.MatrixHoofdaspects");
             DropTable("dbo.HoofdaspectDeelaspects");
+            DropTable("dbo.StudentRollens");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
