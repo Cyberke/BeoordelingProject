@@ -3,7 +3,7 @@ namespace BeoordelingProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initDB : DbMigration
+    public partial class InitDb : DbMigration
     {
         public override void Up()
         {
