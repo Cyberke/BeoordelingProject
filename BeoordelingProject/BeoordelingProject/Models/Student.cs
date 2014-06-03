@@ -14,7 +14,7 @@ namespace BeoordelingProject.Models
         public string Opleiding { get; set; }
         public string Email { get; set; }
         public int StudentId { get; set; }
-        public char Geslacht { get; set; }
+        public string Geslacht { get; set; }
         public string Geboortedatum { get; set; }
     }
 }

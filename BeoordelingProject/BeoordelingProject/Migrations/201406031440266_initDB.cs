@@ -3,7 +3,7 @@ namespace BeoordelingProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitDb : DbMigration
+    public partial class initDB : DbMigration
     {
         public override void Up()
         {
@@ -106,6 +106,7 @@ namespace BeoordelingProject.Migrations
                         Opleiding = c.String(),
                         Email = c.String(),
                         StudentId = c.Int(nullable: false),
+                        Geslacht = c.String(),
                         Geboortedatum = c.String(),
                     })
                 .PrimaryKey(t => t.ID);

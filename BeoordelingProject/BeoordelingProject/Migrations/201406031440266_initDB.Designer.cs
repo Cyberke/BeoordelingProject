@@ -7,13 +7,13 @@ namespace BeoordelingProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class InitDb : IMigrationMetadata
+    public sealed partial class initDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201406031140032_InitDb"; }
+            get { return "201406031440266_initDB"; }
         }
         
         string IMigrationMetadata.Source

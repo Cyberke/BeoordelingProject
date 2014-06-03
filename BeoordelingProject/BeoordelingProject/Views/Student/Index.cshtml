@@ -1,0 +1,35 @@
+﻿@model BeoordelingProject.ViewModel.CSVDataVM
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <input type="file" id="file" name="file" />
+    <input type="button" value="submit" id="submit" onclick="happytime()">
+    <input type="submit" value="testy" id="submit" />
+
+    @Html.Hidden("csvData", Model.csvData);
+}
+
+<script>
+    function happytime() {
+        var datafield = document.getElementById("csvData");
+        var fileInput = document.getElementById("file");
+
+        var file = fileInput.files[0];
+        var textType = /text.*/;
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            datafield.value = reader.result;
+        }
+
+        reader.readAsText(file, 'ISO-8859-1');
+
+    }
+
+</script>

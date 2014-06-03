@@ -27,7 +27,7 @@ namespace BeoordelingProject.Migrations
             };
 
             studenten = new List<Student>{
-                new Student{Naam="Jelle", Opleiding="NMCT", Email="jelle@mail.be", Geboortedatum="20/08/1993",Geslacht='M', StudentId=245, Trajecttype="IOT"}
+                new Student{Naam="Jelle", Opleiding="NMCT", Email="jelle@mail.be", Geboortedatum="20/08/1993",Geslacht="M", StudentId=245, Trajecttype="IOT"}
             };
 
             studenten.ForEach(s => context.Studenten.AddOrUpdate(p => p.Naam, s));
@@ -38,10 +38,10 @@ namespace BeoordelingProject.Migrations
 
             AddUserAndRoles(context);
             context.SaveChanges();
-            
+
         }
 
-        
+
         void AddUserAndRoles(BeoordelingsContext context)
         {
             var idManager = new IdentityManagerRepository(context);
@@ -84,6 +84,6 @@ namespace BeoordelingProject.Migrations
             //idManager.AddUserToRole(user.Id, "User");
 
         }
-        
+
     }
 }
