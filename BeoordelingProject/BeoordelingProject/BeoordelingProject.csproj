@@ -196,9 +196,12 @@
     <Compile Include="DAL\Services\UserManagementService.cs" />
     <Compile Include="DAL\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="DAL\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Engine\BeoordelingsEngine.cs" />
+    <Compile Include="Engine\IBeoordelingsEngine.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\KVPHelper.cs" />
     <Compile Include="Migrations\201406031440266_initDB.cs" />
     <Compile Include="Migrations\201406031440266_initDB.Designer.cs">
       <DependentUpon>201406031440266_initDB.cs</DependentUpon>
@@ -223,6 +226,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\help.png" />
+    <Content Include="Content\img\Logo.png" />
+    <Content Include="Content\img\min.png" />
+    <Content Include="Content\img\opties.png" />
+    <Content Include="Content\img\plus.png" />
+    <Content Include="Content\img\stats.png" />
+    <Content Include="Content\img\zoek.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -237,6 +247,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSfuncties.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
