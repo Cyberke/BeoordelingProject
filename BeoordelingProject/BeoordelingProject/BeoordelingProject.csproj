@@ -239,6 +239,7 @@
     <Content Include="Content\img\plus.png" />
     <Content Include="Content\img\stats.png" />
     <Content Include="Content\img\zoek.png" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

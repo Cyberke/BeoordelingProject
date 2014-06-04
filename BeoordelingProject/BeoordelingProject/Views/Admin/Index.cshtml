@@ -3,12 +3,42 @@
 @{
     ViewBag.Title = "Index";
 }
+<div id="container">
+    <h2>Index</h2>
 
-<h2>Index</h2>
+    @foreach (var Opleidingitem in Model.Opleidingen)
+    {
+        <div class="richtingmin" onselectstart="return false" onclick="ShowStudentTabel(this)">
+            @Html.DisplayFor(modelItem => Opleidingitem)
+        </div>
+        <table class="studentlist" style="display:block">
+            <tr>
+                <th>Student</th>
+                <th>Academiejaar</th>
+                <th>Traject</th>
+                <th>Tussentijdse evaluatie</th>
+                <th>Eind evaluatie</th>
+                <th>Evaluatie rapport</th>
+                <th>Feedback formulier</th>
+            </tr>
+            @foreach (var Studentitem in Model.Studenten)
+            {
+                if (Studentitem.Opleiding == Opleidingitem)
+                {
+                    //Punten zullen moeten uit de VM moeten gehaald worden
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => Studentitem.Naam)</td>
+                        <td>2013-2014</td>
+                        <td>@Html.DisplayFor(modelItem => Studentitem.Trajecttype)</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td><a href="">Download</a></td>
+                        <td><a href="">Download</a></td>
+                    </tr>
+                }
 
-@foreach(var item in Model.Opleidingen)
-{
-    <div class="richtingmin" onclick="ShowStudentTabel(this)">
-        @Html.DisplayFor(modelItem => item)
-    </div>
-}
+            }
+        </table>
+    }
+
+</div>
