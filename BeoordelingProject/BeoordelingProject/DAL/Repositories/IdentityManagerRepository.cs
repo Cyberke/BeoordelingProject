@@ -8,7 +8,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using BeoordelingProject.DAL.Context;
 
 namespace BeoordelingProject.DAL.Repositories
 {
