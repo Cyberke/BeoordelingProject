@@ -191,7 +191,9 @@
     <Compile Include="DAL\Repositories\IStudentRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
+    <Compile Include="DAL\Services\IUserManagementService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
+    <Compile Include="DAL\Services\UserManagementService.cs" />
     <Compile Include="DAL\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="DAL\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,6 +269,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\StudentLijst.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

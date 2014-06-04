@@ -18,7 +18,11 @@ namespace BeoordelingProject.DAL.Repositories
         public override IEnumerable<Student> All()
         {
             //alle studenten uit de DB halen
-            return null;
+            var query = (from s in context.Studenten
+                         select s);
+
+            return query;
         }
+
     }
 }

@@ -4,6 +4,10 @@ using Unity.Mvc5;
 using BeoordelingProject.DAL.Services;
 using BeoordelingProject.DAL.UnitOfWork;
 using BeoordelingProject.DAL.Repositories;
+using BeoordelingProject.DAL.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
+using BeoordelingProject.DAL.Context;
+using BeoordelingProject.Models;
 
 namespace BeoordelingProject
 {
@@ -17,6 +21,9 @@ namespace BeoordelingProject
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<IdentityDbContext<ApplicationUser>, BeoordelingsContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IIdentityManagerRepository, IdentityManagerRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserManagementService, UserManagementService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentService, StudentService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentRepository, StudentRepository>(new HierarchicalLifetimeManager());

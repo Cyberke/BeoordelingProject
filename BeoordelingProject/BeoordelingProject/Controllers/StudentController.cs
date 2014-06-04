@@ -39,5 +39,12 @@ namespace BeoordelingProject.Controllers
             studentService.CreateStudenten(vm.csvData);
             return RedirectToAction("Index", "Home");
         }
+
+
+        public ActionResult StudentLijst()
+        {
+            List<Student> studenten = studentService.GetStudenten();
+            return View(studenten);
+        }
 	}
 }

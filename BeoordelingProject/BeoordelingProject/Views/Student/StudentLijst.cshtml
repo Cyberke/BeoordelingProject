@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BeoordelingProject.Models.Student>
+
+@{
+    ViewBag.Title = "StudentLijst";
+}
+
+<h2>StudentLijst</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trajecttype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opleiding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Geslacht)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Geboortedatum)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trajecttype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opleiding)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Geslacht)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Geboortedatum)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

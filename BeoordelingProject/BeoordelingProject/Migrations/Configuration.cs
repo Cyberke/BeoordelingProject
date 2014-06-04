@@ -2,7 +2,7 @@ namespace BeoordelingProject.Migrations
 {
     using BeoordelingProject.DAL.Context;
     using BeoordelingProject.Models;
-    using ParkingApplicatie.DataAccess.Repositories;
+    using BeoordelingProject.DAL.Repositories;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
