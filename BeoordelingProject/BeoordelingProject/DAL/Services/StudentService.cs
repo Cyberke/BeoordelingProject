@@ -38,7 +38,7 @@ namespace BeoordelingProject.DAL.Services
             {
                 string line = textReader.ReadLine();
                 int skipCount = 0;
-                int Id = 2;
+
                 while (line != null && skipCount < 1)
                 {
                     line = textReader.ReadLine();
@@ -49,14 +49,13 @@ namespace BeoordelingProject.DAL.Services
                 while (line != null)
                 {
                     string[] columns = line.Split(';');
-                    Student student = new Student {ID=Id, Naam = columns[7], Trajecttype = columns[20], Opleiding = columns[1], Email = columns[15], StudentId = Int32.Parse(columns[14]), Geslacht = columns[18], Geboortedatum = columns[17] };
+                    Student student = new Student { Naam = columns[7], Trajecttype = columns[20], Opleiding = columns[1], Email = columns[15], StudentId = Int32.Parse(columns[14]), Geslacht = columns[18], Geboortedatum = columns[17] };
 
                     studentRepository.Insert(student);
                     uow.SaveChanges();
 
                     studenten.Add(student);
 
-                    Id++;
                     line = textReader.ReadLine();
                 }
             }
