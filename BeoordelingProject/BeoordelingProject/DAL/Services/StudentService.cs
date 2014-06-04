@@ -62,5 +62,10 @@ namespace BeoordelingProject.DAL.Services
             
             return studenten;
         }
+
+        public List<String> GetOpleidingen()
+        {
+            return studentRepository.GetOpleidingen().ToList<String>();
+        }
     }
 }

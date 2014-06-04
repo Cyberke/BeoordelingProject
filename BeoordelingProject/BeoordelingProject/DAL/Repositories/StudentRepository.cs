@@ -24,5 +24,13 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
+
+        public IEnumerable<String> GetOpleidingen()
+        {
+            var query = (from s in context.Studenten
+                         select s.Opleiding).Distinct();
+
+                return query;
+        }
     }
 }

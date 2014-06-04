@@ -1,0 +1,14 @@
+﻿@model BeoordelingProject.ViewModel.AdminOverzichtVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach(var item in Model.Opleidingen)
+{
+    <div class="richtingmin" onclick="ShowStudentTabel(this)">
+        @Html.DisplayFor(modelItem => item)
+    </div>
+}
