@@ -24,14 +24,14 @@ namespace BeoordelingProject
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css",
                       "~/Content/style.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascripts").Include(
-<<<<<<< HEAD
-                "~/Scripts/JSfuncties.js"));
-=======
+                       "~/Scripts/JSfuncties.js",
                       "~/Scripts/JSfuncties.js"));
->>>>>>> 56b37e5daef2c3e1efaa830a72a45ac83bb4b8bf
+
         }
 
             
