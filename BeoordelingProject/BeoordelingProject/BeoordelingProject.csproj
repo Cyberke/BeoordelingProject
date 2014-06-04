@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountbeheerController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BeoordelaarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Context\BeoordelingsContext.cs" />
@@ -194,6 +195,8 @@
     <Compile Include="DAL\Repositories\IIdentityManagerRepository.cs" />
     <Compile Include="DAL\Repositories\IStudentRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
+    <Compile Include="DAL\Services\BeoordelingsService.cs" />
+    <Compile Include="DAL\Services\IBeoordelingsService.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
     <Compile Include="DAL\Services\IUserManagementService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
@@ -228,6 +231,7 @@
     <Compile Include="ViewModel\AdminOverzichtVM.cs" />
     <Compile Include="ViewModel\AccountbeheerVM.cs" />
     <Compile Include="ViewModel\CSVDataVM.cs" />
+    <Compile Include="ViewModel\BeoordelingsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -293,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Beoordelaar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
