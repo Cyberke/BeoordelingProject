@@ -69,6 +69,7 @@ namespace BeoordelingProject.DAL.Services
         {
             return studentRepository.GetOpleidingen().ToList<String>();
         }
+
         public List<ApplicationUser> GetUsers()
         {
             return accountRepository.All().ToList();

@@ -1,0 +1,46 @@
+﻿@model BeoordelingProject.Models.Matrix
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>MatrixAfbeeldenDemo</h1>
+
+<h2>@Html.DisplayFor(model => model.Richting)</h2>
+<h3>@Html.DisplayNameFor(model => model.Tussentijds) @Html.DisplayFor(model => model.Tussentijds)</h3>
+
+<table>
+@foreach(var item in Model.Hoofdaspecten)
+{
+    <tr>
+        <th colspan="5" style="background-color:blue;">
+            @Html.DisplayFor(modelItem => item.Naam)
+        </th>
+    </tr>
+    foreach(var deelasp in item.Deelaspecten)
+    {
+        <tr>
+            <td colspan="5" style="background-color:green">
+                @Html.DisplayFor(modelItem => deelasp.Omschrijving)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => deelasp.VOVOmschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => deelasp.OVOmschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => deelasp.VOmschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => deelasp.GOmschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => deelasp.ZGOmschrijving)
+            </td>
+        </tr>
+    }
+}
+</table>
