@@ -23,13 +23,17 @@ namespace BeoordelingProject
             container.RegisterType<IdentityDbContext<ApplicationUser>, BeoordelingsContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager());
 
+            //SERVICES
             container.RegisterType<IUserManagementService, UserManagementService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentService, StudentService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IMatrixService, MatrixService>(new HierarchicalLifetimeManager());
 
+            //REPOSITORIES
             container.RegisterType<IStudentRepository, StudentRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IAccountRepository, AccountRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IIdentityManagerRepository, IdentityManagerRepository>(new HierarchicalLifetimeManager());
-
+            container.RegisterType<IMatrixRepository, MatrixRepository>(new HierarchicalLifetimeManager());
+            
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

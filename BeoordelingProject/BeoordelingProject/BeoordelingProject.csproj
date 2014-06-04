@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatrixController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Context\BeoordelingsContext.cs" />
     <Compile Include="DAL\Repositories\AccountRepository.cs" />
@@ -192,10 +193,14 @@
     <Compile Include="DAL\Repositories\IdentityManagerRepository.cs" />
     <Compile Include="DAL\Repositories\IGenericRepository.cs" />
     <Compile Include="DAL\Repositories\IIdentityManagerRepository.cs" />
+    <Compile Include="DAL\Repositories\IMatrixRepository.cs" />
     <Compile Include="DAL\Repositories\IStudentRepository.cs" />
+    <Compile Include="DAL\Repositories\MatrixRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
+    <Compile Include="DAL\Services\IMatrixService.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
     <Compile Include="DAL\Services\IUserManagementService.cs" />
+    <Compile Include="DAL\Services\MatrixService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
     <Compile Include="DAL\Services\UserManagementService.cs" />
     <Compile Include="DAL\UnitOfWork\IUnitOfWork.cs" />
@@ -289,9 +294,11 @@
     <Content Include="Views\Student\StudentLijst.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Accountbeheer\AddStudentRol.cshtml" />
+    <Content Include="Views\Matrix\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Beoordeling\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
