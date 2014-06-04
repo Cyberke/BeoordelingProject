@@ -142,12 +142,16 @@ function help(object)
 //Tabel met studenten voor bepaalde richtingen tonen/verbergen
 function ShowStudentTabel(object)
 {
-	var richting = object.innerHTML;
-	var tabel;
+    var richting = object.innerHTML;
+    var tabel;
+
+    richting = richting.trim();
+
 	switch(richting)
 	{
-		case "BAKO":
-			tabel = document.getElementsByClassName("studentlist")[0];
+		case "BaKo":
+		    tabel = document.getElementsByClassName("studentlist")[0];
+		    
 			if(tabel.style.display == "none")
 			{
 				tabel.style.display = "block";
@@ -159,7 +163,7 @@ function ShowStudentTabel(object)
 				object.className = "richting";
 			}
 		break;
-		case "BALO":
+		case "BaLo":
 			tabel = document.getElementsByClassName("studentlist")[1];
 			if(tabel.style.display == "none")
 			{
@@ -172,7 +176,7 @@ function ShowStudentTabel(object)
 				object.className = "richting";
 			}
 		break;
-		case "BASO":
+		case "BaSo":
 			tabel = document.getElementsByClassName("studentlist")[2];
 			if(tabel.style.display == "none")
 			{
