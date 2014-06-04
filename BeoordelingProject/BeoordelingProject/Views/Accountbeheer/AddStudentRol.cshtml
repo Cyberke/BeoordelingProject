@@ -1,0 +1,11 @@
+﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
+@using (Html.BeginForm())
+{
+    <p>
+        Kies een student: <br />
+        @Html.ListBoxFor(a => a.SelectedStudent, Model.Studenten, new {style = "width:268px;height:500px" })
+
+        Kies een gebruiker: <br />
+        @Html.ListBoxFor(a => a.SelectedAccount, Model.Accounts, new { style = "width:268px;height:500px" })
+    </p>
+}
