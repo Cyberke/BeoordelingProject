@@ -65,15 +65,13 @@ namespace BeoordelingProject.DAL.Services
             return studenten;
         }
 
-<<<<<<< HEAD
         public List<String> GetOpleidingen()
         {
             return studentRepository.GetOpleidingen().ToList<String>();
-=======
+        }
         public List<ApplicationUser> GetUsers()
         {
             return accountRepository.All().ToList();
->>>>>>> 90076f969009d0ebf83f20de1f445d9347758613
         }
     }
 }
