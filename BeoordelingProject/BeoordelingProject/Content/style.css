@@ -7,7 +7,7 @@
 
 html
 {
-	min-height:100%;/* make sure it is at least as tall as the viewport */
+	min-height:100%;
     position:relative
 }
 
@@ -50,24 +50,16 @@ header{
 
 #container
 {
-	z-index: -1;
-
 	padding: 20px;
-
-	position:absolute;
-    top:95px;
-    bottom:0;
-    left:0;
-    right:0; 
-
+    
     width: 960px; 
+    
     margin: 0 auto;
-
 
     background-color: #FFFFFF;
     color: #000000;
 
-	
+	height: 100%;
 }
 
 /* Top banner */
@@ -159,7 +151,7 @@ header{
 	margin-right: auto;
 
 	width:80%;
-	height:80%;
+	height: auto;
 	background-color: #4D8FBD;
 }
 
