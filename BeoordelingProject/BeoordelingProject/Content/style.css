@@ -66,23 +66,6 @@ header{
 	border-radius: 15px;
 }
 
-/* Top banner */
-#banner
-{
-	width:100%;
-	height:95px;
-	/* lichtblauw
-	background-color: #3CB6DF; */
-}
-
-#banner img
-{
-	height: 75px;
-
-	margin-left: 20px;
-	margin-top: 10px;
-}
-
 /* Login box */
 #loginbox
 {
@@ -100,6 +83,11 @@ header{
 	border: solid;
 	border-width: 1px;
 	border-radius: 15px;
+}
+
+.login
+{
+    margin-left: 15px;
 }
 
 /* Helpfunction box */
@@ -218,6 +206,16 @@ header{
 	border-radius: 20px;
 
 	background-color: #4D8FBD;
+}
+.logo
+{
+    background-image: url("img/Logo.png");
+	background-repeat: no-repeat;
+
+    height: 75px;
+
+	margin-left: 20px;
+	margin-top: 10px;
 }
 
 /* vergeten waarvoor dit was */
