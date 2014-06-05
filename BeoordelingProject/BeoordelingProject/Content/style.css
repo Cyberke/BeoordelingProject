@@ -19,10 +19,12 @@ body
 }
 
 
+
 header{
     width: 100%; 
     height: 95px;
-
+    background-color: #4D8FBD;
+    
 }
 
 
@@ -43,6 +45,7 @@ header{
 
     width: 960px; 
     margin: 0 auto;
+    
 }
 
 #container
@@ -60,10 +63,11 @@ header{
     width: 960px; 
     margin: 0 auto;
 
+
     background-color: #FFFFFF;
     color: #000000;
 
-	border-radius: 15px;
+	
 }
 
 /* Top banner */
@@ -75,13 +79,6 @@ header{
 	background-color: #3CB6DF; */
 }
 
-#banner img
-{
-	height: 75px;
-
-	margin-left: 20px;
-	margin-top: 10px;
-}
 
 /* Login box */
 #loginbox
@@ -125,7 +122,7 @@ header{
 {
 	position:absolute;
 	top:10px;
-	right:20px;
+	right:0px;
 
 	width: 75px;
 	height: 75px;
@@ -136,7 +133,7 @@ header{
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
 }
 
 #helpclick
@@ -188,7 +185,7 @@ header{
 {
 	position:absolute;
 	top:10px;
-	right:115px;
+	right:95px;
 
 	width: 75px;
 	height: 75px;
@@ -199,14 +196,14 @@ header{
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
 }
 
 .stats
 {
 	position:absolute;
 	top:10px;
-	right:210px;
+	right:190px;
 
 	width: 75px;
 	height: 75px;
@@ -217,9 +214,20 @@ header{
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
 }
 
+.logo {
+    background-image: url("img/logo_edit.png");
+	background-repeat: no-repeat;
+
+    background-color: #4D8FBD;
+
+    height: 75px;
+
+	margin-left: 0px;
+	margin-top: 10px;
+}
 /* vergeten waarvoor dit was */
 .selectie
 {
@@ -467,11 +475,6 @@ th
 	text-align: center;
 }
 
-.studentlist th
-{
-	width: 10%;
-}
-
 .studentlist td:first-child
 {
 	text-align: left;
@@ -480,6 +483,7 @@ th
 /* witte streep aan de rechterkant om makkelijk het einde af te bakenen */
 .studentlist th
 {
+    width: 10%;
 	background-color: #000000;
 	color: #FFFFFF;
 	border-right-style: solid;
@@ -544,7 +548,7 @@ th
 
 h1
 {
-	font-size: 16px;
+	font-size: 22px;
 	margin-top: 5px;
 	margin-bottom: 5px;
     margin-left:15px;
