@@ -16,9 +16,16 @@ namespace BeoordelingProject.DAL.Repositories
 
         public override IEnumerable<ApplicationUser> All()
         {
-            //alle applicationusers uit de DB halen
-            var query = (from a in context.Users 
-                         select a);
+            var query =
+            (
+                from u in context.Users
+                from r in u.Roles
+
+                where u.Id.Equals(r.UserId)
+                where r.Role.Name.Equals("User")
+                
+                select u
+            );
 
             return query;
         }

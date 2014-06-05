@@ -1,26 +1,28 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
-@using (Html.BeginForm())
-{
-    <div class="accountdiv">
-        <h1>
-            Kies een student:
-        </h1>
-        @Html.ListBoxFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox" })
-    </div>
-    <div class="accountdiv">
-        <h1>
-            Kies een gebruiker:
-        </h1>
-        @Html.ListBoxFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox" })
-    </div>
-    <div class="accountdiv">
-        <h1>
-            Nieuw/wijzig account:
-        </h1>
+<div id="container">
+    @using (Html.BeginForm())
+    {
+        <div class="accountdiv">
+            <h1>
+                Kies een student:
+            </h1>
+            @Html.ListBoxFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox" })
+        </div>
+        <div class="accountdiv">
+            <h1>
+                Kies een gebruiker:
+            </h1>
+            @Html.ListBoxFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox" })
+        </div>
+        <div class="accountdiv">
+            <h1>
+                Nieuw/wijzig account:
+            </h1>
 
-        @Html.LabelFor(model => model.Account.UserName)
-        @Html.EditorFor(model => model.Account.UserName)
-        @Html.ValidationMessageFor(model => model.Account.UserName)
-    </div>
+            @Html.LabelFor(model => model.Account.UserName)
+            @Html.EditorFor(model => model.Account.UserName)
+            @Html.ValidationMessageFor(model => model.Account.UserName)
+        </div>
 
-}
+    }
+</div>
