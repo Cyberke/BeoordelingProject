@@ -195,8 +195,10 @@
     <Compile Include="DAL\Repositories\IGenericRepository.cs" />
     <Compile Include="DAL\Repositories\IIdentityManagerRepository.cs" />
     <Compile Include="DAL\Repositories\IMatrixRepository.cs" />
+    <Compile Include="DAL\Repositories\IResultaatRepository.cs" />
     <Compile Include="DAL\Repositories\IStudentRepository.cs" />
     <Compile Include="DAL\Repositories\MatrixRepository.cs" />
+    <Compile Include="DAL\Repositories\ResultaatRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
@@ -300,10 +302,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Accountbeheer\AddStudentRol.cshtml" />
     <Content Include="Views\Matrix\Index.cshtml" />
+    <Content Include="Views\Beoordelaar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Beoordelaar\" />
     <Folder Include="Views\Beoordeling\" />
   </ItemGroup>
   <ItemGroup>

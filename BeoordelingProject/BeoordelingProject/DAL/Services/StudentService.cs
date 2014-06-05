@@ -74,5 +74,10 @@ namespace BeoordelingProject.DAL.Services
         {
             return accountRepository.All().ToList();
         }
+
+        public Student GetStudentByID(int id)
+        {
+            return studentRepository.GetByID(id);
+        }
     }
 }

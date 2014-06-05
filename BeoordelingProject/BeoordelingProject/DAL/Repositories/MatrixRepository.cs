@@ -14,7 +14,7 @@ namespace BeoordelingProject.DAL.Repositories
 
         }
 
-        public IEnumerable<Matrix> GetMatrixByID(int id)
+        public Matrix GetMatrixByID(int id)
         {            
             var query =
             (
@@ -27,7 +27,7 @@ namespace BeoordelingProject.DAL.Repositories
             select m
             );
 
-            return query;
+            return query.First();
         }
 
     }

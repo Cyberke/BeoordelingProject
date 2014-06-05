@@ -7,6 +7,7 @@ using BeoordelingProject.DAL.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 using BeoordelingProject.DAL.Context;
 using BeoordelingProject.Models;
+using BeoordelingProject.Engine;
 
 namespace BeoordelingProject
 {
@@ -28,12 +29,18 @@ namespace BeoordelingProject
             container.RegisterType<IStudentService, StudentService>(new HierarchicalLifetimeManager());
             container.RegisterType<IMatrixService, MatrixService>(new HierarchicalLifetimeManager());
 
+            container.RegisterType<IBeoordelingsService, BeoordelingsService>(new HierarchicalLifetimeManager());
+
             //REPOSITORIES
             container.RegisterType<IStudentRepository, StudentRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IAccountRepository, AccountRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IIdentityManagerRepository, IdentityManagerRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IMatrixRepository, MatrixRepository>(new HierarchicalLifetimeManager());
+
+            container.RegisterType<IResultaatRepository, ResultaatRepository>(new HierarchicalLifetimeManager());
             
+            //ENGINE
+            container.RegisterType<IBeoordelingsEngine, BeoordelingsEngine>(new HierarchicalLifetimeManager());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

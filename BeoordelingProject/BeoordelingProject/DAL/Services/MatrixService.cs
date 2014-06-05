@@ -26,7 +26,7 @@ namespace BeoordelingProject.DAL.Services
 
         public Matrix GetMatrixByID (int id)
         {
-            return matrixrepository.GetMatrixByID(id).ToList<Matrix>()[0];
+            return matrixrepository.GetMatrixByID(id);
         }
 
     }

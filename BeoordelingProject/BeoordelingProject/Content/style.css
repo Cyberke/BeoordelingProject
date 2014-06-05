@@ -329,6 +329,8 @@ input[type=radio]
 	width: 60px;
 	height: 60px;
 	text-align: center;
+
+    -moz-appearance: none;
 }
 
 /* lichte margin voor verticale alignment van checkbox */

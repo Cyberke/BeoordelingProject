@@ -26,13 +26,7 @@ namespace BeoordelingProject
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/style.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/javascripts").Include(
-<<<<<<< HEAD
-                "~/Scripts/JSfuncties.js"));
-=======
-                       "~/Scripts/JSfuncties.js"));
-
->>>>>>> 07dfa9beab609b943dad150ec70bbaf27195ef83
+            bundles.Add(new ScriptBundle("~/bundles/javascripts").Include("~/Scripts/JSfuncties.js"));
         }
 
             
