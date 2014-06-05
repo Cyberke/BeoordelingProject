@@ -18,6 +18,28 @@ body
 	background-color: #3CB6DF;
 }
 
+header{
+    width: 100%; 
+    height: 95px;
+
+}
+
+.header
+{
+    position:absolute;
+    top:0px;
+    bottom:0;
+    left:0;
+    right:0;
+
+    height: 95px;
+
+    
+
+    width: 1000px; 
+    margin: 0 auto;
+}
+
 #container
 {
 	z-index: -1;
@@ -506,7 +528,8 @@ th
 
 	font-size: 20px;
 	
-	background-color: #00FF00;
+	/*background-color: #00FF00;*/
+    background-color: #fff600;
 	background-image: url("img/min.png");
 	background-repeat: no-repeat;
 	background-position: left;
