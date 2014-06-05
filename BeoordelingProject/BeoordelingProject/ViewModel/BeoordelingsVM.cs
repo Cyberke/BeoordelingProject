@@ -6,8 +6,8 @@ using System.Web;
 
 namespace BeoordelingProject.ViewModel {
     public class BeoordelingsVM {
-        public List<Resultaat> Resultaten { get; set; }
-        public string Graad { get; set; }
+        public Resultaat Resultaten { get; set; }
         public Matrix Matrix { get; set; }
+        public Student Student { get; set; }
     }
 }

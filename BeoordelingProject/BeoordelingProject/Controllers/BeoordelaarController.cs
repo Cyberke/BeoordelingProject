@@ -1,4 +1,5 @@
 ﻿using BeoordelingProject.DAL.Services;
+using BeoordelingProject.Engine;
 using BeoordelingProject.Models;
 using BeoordelingProject.ViewModel;
 using System;
@@ -12,26 +13,49 @@ namespace BeoordelingProject.Controllers
     public class BeoordelaarController : Controller
     {
         private IBeoordelingsService beoordelingsService = null;
-        //private Beoordeling beoordeling = new Beoordeling();
+        private IMatrixService matrixService = null;
+        private IBeoordelingsEngine beoordelingsEngine = null;
+        private IStudentService studentService = null;
 
-        public BeoordelaarController(IBeoordelingsService beoordelingsService) {
+        public BeoordelaarController(IBeoordelingsService beoordelingsService, IMatrixService matrixService, IBeoordelingsEngine beoordelingsEngine, IStudentService studentService) {
             this.beoordelingsService = beoordelingsService;
+            this.matrixService = matrixService;
+            this.beoordelingsEngine = beoordelingsEngine;
+            this.studentService = studentService;
         }
 
         //
         // GET: /Beoordelaar/
+        [HttpGet]
         public ActionResult Index()
         {
-            
+            BeoordelingsVM vm = new BeoordelingsVM();
 
-            return View();
+            vm.Matrix = beoordelingsService.GetMatrix(2);
+            vm.Student = studentService.GetStudentByID(1);
+            vm.Resultaten = new Resultaat();
+
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Index(BeoordelingsVM beoordelingsVM) {
-            
+        public ActionResult Index(BeoordelingsVM vm)
+        {
+            Matrix m = matrixService.GetMatrixByID(vm.Matrix.ID);
+            Resultaat newres = new Resultaat();
+            newres.StudentId = vm.Student.ID;
 
-            return View(beoordelingsVM);
+            if (m.Tussentijds == true)
+            {
+                newres.TussentijdseId = m.ID;
+                newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                
+            }
+            else
+            {
+                //eindscoreberekening
+            }
+            return View();
         }
 	}
 }

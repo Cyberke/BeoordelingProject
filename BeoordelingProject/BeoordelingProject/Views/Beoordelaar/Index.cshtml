@@ -1,0 +1,71 @@
+﻿@model BeoordelingProject.ViewModel.BeoordelingsVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Beoordelen: @Html.DisplayFor(model => model.Student.Naam)</h1>
+
+<h2>@Html.DisplayFor(model => model.Matrix.Richting)</h2>
+<h3>@Html.DisplayNameFor(model => model.Matrix.Tussentijds) @Html.DisplayFor(model => model.Matrix.Tussentijds)</h3>
+
+
+@using (Html.BeginForm())
+{
+    Html.AntiForgeryToken();
+    Html.ValidationSummary(true);
+
+    int counter = 0;
+    <table>
+            
+    @foreach (var item in Model.Matrix.Hoofdaspecten)
+    {
+        <tr>
+            <th colspan="6" style="background-color:blue;">
+                @Html.DisplayFor(modelItem => item.Naam)
+            </th>
+        </tr>
+
+        for (int i = 0; i < item.Deelaspecten.Count; i++)
+        {
+            <tr>
+                <td colspan="6" style="background-color:green">
+                    @Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].OVOmschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].VOmschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].RVOmschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].GOmschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Deelaspecten[i].ZGOmschrijving)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 3)</td>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 8)</td>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 10.5)</td>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 12.5)</td>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 14.5)</td>
+                <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 18)</td>
+            </tr>
+            counter++;
+        }
+    }
+    </table>
+    @Html.HiddenFor(model => model.Matrix.ID)
+    @Html.HiddenFor(model => model.Student.ID)
+    <input type="submit" value="Opslaan"/>
+}
