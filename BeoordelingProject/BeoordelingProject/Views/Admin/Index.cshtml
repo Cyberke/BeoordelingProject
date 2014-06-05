@@ -11,7 +11,7 @@
 
     @foreach (var Opleidingitem in Model.Opleidingen)
     {
-        <div class="richtingmin" onselectstart="return false" onclick="ShowStudentTabel(this)">
+        <div class="richtingmin" onselect="return false" onclick="ShowStudentTabel(this)">
             @Html.DisplayFor(modelItem => Opleidingitem)
         </div>
         <table class="studentlist" style="display:block">

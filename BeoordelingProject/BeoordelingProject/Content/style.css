@@ -70,6 +70,7 @@ header{
 	
 }
 
+<<<<<<< HEAD
 /* Top banner */
 #banner
 {
@@ -80,6 +81,8 @@ header{
 }
 
 
+=======
+>>>>>>> bf4163a7b920223859724c4feba94233e30e9fe4
 /* Login box */
 #loginbox
 {
@@ -97,6 +100,11 @@ header{
 	border: solid;
 	border-width: 1px;
 	border-radius: 15px;
+}
+
+.login
+{
+    margin-left: 15px;
 }
 
 /* Helpfunction box */
@@ -215,6 +223,16 @@ header{
 	border-radius: 20px;
 
 	background-color: #3379ab;
+}
+.logo
+{
+    background-image: url("img/Logo.png");
+	background-repeat: no-repeat;
+
+    height: 75px;
+
+	margin-left: 20px;
+	margin-top: 10px;
 }
 
 .logo {
