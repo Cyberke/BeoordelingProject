@@ -1,6 +1,8 @@
 ﻿using BeoordelingProject.DAL.Repositories;
 using BeoordelingProject.DAL.UnitOfWork;
 using BeoordelingProject.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -73,6 +75,23 @@ namespace BeoordelingProject.DAL.Services
         public List<ApplicationUser> GetUsers()
         {
             return accountRepository.All().ToList();
+        }
+
+        public IHtmlString SerializeObject(object value)
+        {
+            using (var stringWriter = new StringWriter())
+            using (var jsonWriter = new JsonTextWriter(stringWriter))
+            {
+                var serializer = new JsonSerializer
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+
+                jsonWriter.QuoteName = false;
+                serializer.Serialize(jsonWriter, value);
+
+                return new HtmlString(stringWriter.ToString());
+            }
         }
     }
 }

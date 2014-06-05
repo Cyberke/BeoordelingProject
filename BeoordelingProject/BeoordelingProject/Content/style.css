@@ -221,16 +221,6 @@ header{
 
 	background-color: #3379ab;
 }
-.logo
-{
-    background-image: url("img/Logo.png");
-	background-repeat: no-repeat;
-
-    height: 75px;
-
-	margin-left: 20px;
-	margin-top: 10px;
-}
 
 .logo {
     background-image: url("img/logo_edit.png");

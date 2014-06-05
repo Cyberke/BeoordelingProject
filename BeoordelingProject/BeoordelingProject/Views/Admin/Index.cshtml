@@ -3,11 +3,23 @@
 @{
     ViewBag.Title = "Index";
 }
+<script>
+    angular.module("studentModule").value("studentenlijst", @Html.Raw(Model.StudentenString));
+</script>
+
 <div id="container">
     <h1>Overzicht</h1>
 
-    <input class="zoek" type="text" placeholder="zoek..." id="zoekterm" />
-    <input class="zoekbutton" type="button" value="zoek" id="zoek" />
+    <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
+    <input class="zoekbutton" type="button" value="" id="zoek" />
+
+    <ul>
+        <li ng-repeat="Student in studenten.StudentenLijst | filter:searchText">
+            {{Student.naam}}
+        </li>
+    </ul>
+
+    <hr />
 
     @foreach (var Opleidingitem in Model.Opleidingen)
     {
@@ -25,22 +37,22 @@
                 <th>Feedback formulier</th>
             </tr>
             @foreach (var Studentitem in Model.Studenten)
-            {
-                if (Studentitem.Opleiding == Opleidingitem)
-                {
-                    //Punten zullen moeten uit de VM moeten gehaald worden
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => Studentitem.Naam)</td>
-                        <td>2013-2014</td>
-                        <td>@Html.DisplayFor(modelItem => Studentitem.Trajecttype)</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td><a href="">Download</a></td>
-                        <td><a href="">Download</a></td>
-                    </tr>
-                }
+{
+    if (Studentitem.Opleiding == Opleidingitem)
+    {
+        //Punten zullen moeten uit de VM moeten gehaald worden
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Studentitem.Naam)</td>
+            <td>2013-2014</td>
+            <td>@Html.DisplayFor(modelItem => Studentitem.Trajecttype)</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="">Download</a></td>
+            <td><a href="">Download</a></td>
+        </tr>
+    }
 
-            }
+}
         </table>
     }
 

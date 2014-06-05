@@ -30,6 +30,8 @@ namespace BeoordelingProject.Controllers
             AdminOverzichtVM vm = new AdminOverzichtVM();
             vm.Studenten = studentService.GetStudenten();
             vm.Opleidingen = studentService.GetOpleidingen();
+            vm.StudentenString = studentService.SerializeObject(vm.Studenten);
+
             return View(vm);
         }
 	}
