@@ -4,11 +4,14 @@
     ViewBag.Title = "Index";
 }
 <div id="container">
-    <h2>Index</h2>
+    <h1>Overzicht</h1>
+
+    <input class="zoek" type="text" placeholder="zoek..." id="zoekterm" />
+    <input class="zoekbutton" type="button" value="zoek" id="zoek" />
 
     @foreach (var Opleidingitem in Model.Opleidingen)
     {
-        <div class="richtingmin" onselectstart="return false" onclick="ShowStudentTabel(this)">
+        <div class="richtingmin" onselect="return false" onclick="ShowStudentTabel(this)">
             @Html.DisplayFor(modelItem => Opleidingitem)
         </div>
         <table class="studentlist" style="display:block">

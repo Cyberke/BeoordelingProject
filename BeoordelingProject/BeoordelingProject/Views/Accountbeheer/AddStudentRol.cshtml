@@ -18,10 +18,19 @@
             <h1>
                 Nieuw/wijzig account:
             </h1>
+            <div class="login">
+                @Html.Label("Gebruikersnaam")
+                @Html.EditorFor(model => model.Account.UserName)
+                @Html.ValidationMessageFor(model => model.Account.UserName)
 
-            @Html.LabelFor(model => model.Account.UserName)
-            @Html.EditorFor(model => model.Account.UserName)
-            @Html.ValidationMessageFor(model => model.Account.UserName)
+                @Html.Label("Wachtwoord")
+                @Html.EditorFor(model => model.Account.PasswordHash)
+                @Html.ValidationMessageFor(model => model.Account.PasswordHash)
+
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Opslaan" class="btn btn-default" />
+                </div>
+            </div>
         </div>
 
     }

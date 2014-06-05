@@ -244,7 +244,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\help.png" />
-    <Content Include="Content\img\Logo.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logo_edit.png" />
     <Content Include="Content\img\min.png" />
     <Content Include="Content\img\opties.png" />
     <Content Include="Content\img\plus.png" />

@@ -18,6 +18,36 @@ body
 	background-color: #3CB6DF;
 }
 
+
+
+header{
+    width: 100%; 
+    height: 95px;
+    background-color: #4D8FBD;
+    
+}
+
+
+.header
+{
+    position:absolute;
+    top:0px;
+    bottom:0;
+    left:0;
+    right:0;
+
+    height: 95px;
+
+    
+
+    width: 1000px; 
+    right:0; 
+
+    width: 960px; 
+    margin: 0 auto;
+    
+}
+
 #container
 {
 	z-index: -1;
@@ -33,10 +63,11 @@ body
     width: 960px; 
     margin: 0 auto;
 
+
     background-color: #FFFFFF;
     color: #000000;
 
-	border-radius: 15px;
+	
 }
 
 /* Top banner */
@@ -48,13 +79,6 @@ body
 	background-color: #3CB6DF; */
 }
 
-#banner img
-{
-	height: 75px;
-
-	margin-left: 20px;
-	margin-top: 10px;
-}
 
 /* Login box */
 #loginbox
@@ -73,6 +97,11 @@ body
 	border: solid;
 	border-width: 1px;
 	border-radius: 15px;
+}
+
+.login
+{
+    margin-left: 15px;
 }
 
 /* Helpfunction box */
@@ -98,7 +127,7 @@ body
 {
 	position:absolute;
 	top:10px;
-	right:20px;
+	right:0px;
 
 	width: 75px;
 	height: 75px;
@@ -109,7 +138,7 @@ body
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
 }
 
 #helpclick
@@ -161,7 +190,7 @@ body
 {
 	position:absolute;
 	top:10px;
-	right:115px;
+	right:95px;
 
 	width: 75px;
 	height: 75px;
@@ -172,14 +201,14 @@ body
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
 }
 
 .stats
 {
 	position:absolute;
 	top:10px;
-	right:210px;
+	right:190px;
 
 	width: 75px;
 	height: 75px;
@@ -190,9 +219,30 @@ body
 
 	border-radius: 20px;
 
-	background-color: #4D8FBD;
+	background-color: #3379ab;
+}
+.logo
+{
+    background-image: url("img/Logo.png");
+	background-repeat: no-repeat;
+
+    height: 75px;
+
+	margin-left: 20px;
+	margin-top: 10px;
 }
 
+.logo {
+    background-image: url("img/logo_edit.png");
+	background-repeat: no-repeat;
+
+    background-color: #4D8FBD;
+
+    height: 75px;
+
+	margin-left: 0px;
+	margin-top: 10px;
+}
 /* vergeten waarvoor dit was */
 .selectie
 {
@@ -442,11 +492,6 @@ th
 	text-align: center;
 }
 
-.studentlist th
-{
-	width: 10%;
-}
-
 .studentlist td:first-child
 {
 	text-align: left;
@@ -455,6 +500,7 @@ th
 /* witte streep aan de rechterkant om makkelijk het einde af te bakenen */
 .studentlist th
 {
+    width: 10%;
 	background-color: #000000;
 	color: #FFFFFF;
 	border-right-style: solid;
@@ -508,7 +554,8 @@ th
 
 	font-size: 20px;
 	
-	background-color: #00FF00;
+	/*background-color: #00FF00;*/
+    background-color: #fff600;
 	background-image: url("img/min.png");
 	background-repeat: no-repeat;
 	background-position: left;
@@ -518,7 +565,7 @@ th
 
 h1
 {
-	font-size: 16px;
+	font-size: 22px;
 	margin-top: 5px;
 	margin-bottom: 5px;
     margin-left:15px;
