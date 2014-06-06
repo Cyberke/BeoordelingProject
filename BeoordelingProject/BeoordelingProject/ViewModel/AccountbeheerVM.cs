@@ -18,8 +18,8 @@ namespace BeoordelingProject.ViewModel
         public int[] SelectedStudent { get; set; }
         public List<SelectListItem> Accounts { get; set; }
         public int[] SelectedAccount { get; set; }
-        [Required]
         public ApplicationUser Account { get; set; }
+        public int[] SelectedRol { get; set; }
         public List<Rol> Rollen { get; set; }
     }
 }

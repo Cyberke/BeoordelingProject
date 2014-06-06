@@ -77,6 +77,11 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
+        public List<Rol> GetRoles()
+        {
+            return studentRepository.GetRoles().ToList();
+        }
+
         public IHtmlString SerializeObject(object value)
         {
             using (var stringWriter = new StringWriter())

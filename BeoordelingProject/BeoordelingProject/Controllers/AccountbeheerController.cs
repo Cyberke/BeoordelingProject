@@ -30,6 +30,7 @@ namespace BeoordelingProject.Controllers
             var accountbeheerVM = new AccountbeheerVM();
             accountbeheerVM.Studenten = GetStudenten();
             accountbeheerVM.Accounts = GetUsers();
+            accountbeheerVM.Rollen = GetRollen();
             return View(accountbeheerVM);
         }
 
@@ -59,6 +60,16 @@ namespace BeoordelingProject.Controllers
                 userList.Add(new SelectListItem { Value = user.Id, Text = user.UserName });
             }
             return userList;
+        }
+
+        private List<Rol> GetRollen()
+        {
+            var rolList = new List<Rol>();
+            foreach (Rol rol in studentService.GetRoles())
+            {
+                rolList.Add(new Rol { ID = rol.ID, Naam = rol.Naam });
+            }
+            return rolList;
         }
 	}
 }
