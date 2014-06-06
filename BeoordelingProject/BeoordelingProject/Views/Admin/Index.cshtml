@@ -14,8 +14,8 @@
     <input class="zoekbutton" type="button" value="" id="zoek" />
 
     <ul>
-        <li ng-repeat="Student in studenten.StudentenLijst | filter:searchText">
-            {{Student.naam}}
+        <li ng-repeat="student in studenten | filter:searchText">
+            {{student.naam}}
         </li>
     </ul>
 

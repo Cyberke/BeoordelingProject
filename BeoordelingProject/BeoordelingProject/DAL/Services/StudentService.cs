@@ -92,6 +92,8 @@ namespace BeoordelingProject.DAL.Services
 
                 return new HtmlString(stringWriter.ToString());
             }
+        }
+
         public Student GetStudentByID(int id)
         {
             return studentRepository.GetByID(id);
