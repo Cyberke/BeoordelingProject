@@ -11,13 +11,6 @@
     <h1>Overzicht</h1>
 
     <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
-    <input class="zoekbutton" type="button" value="" id="zoek" />
-    <!--
-    <ul>
-        <li ng-repeat="student in studenten | filter:searchText">{{student.naam}}</li>
-    </ul>
-    -->
-    <hr />
 
     @foreach (var Opleidingitem in Model.Opleidingen)
     {
@@ -42,8 +35,8 @@
             <td>{{student.trajecttype}}</td>
             <td>0</td>
             <td>0</td>
-            <td><a href="">Download</a></td>
-            <td><a href="">Download</a></td>
+            <td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}">Toon Rapport</a></td>
+            <td><a href="" class="link">Download</a></td>
             
         </tr>
 
