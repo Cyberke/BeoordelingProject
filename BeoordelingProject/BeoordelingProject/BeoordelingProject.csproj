@@ -218,7 +218,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\KVPHelper.cs" />
     <Compile Include="Migrations\201406031440266_initDB.cs" />
     <Compile Include="Migrations\201406031440266_initDB.Designer.cs">
       <DependentUpon>201406031440266_initDB.cs</DependentUpon>
