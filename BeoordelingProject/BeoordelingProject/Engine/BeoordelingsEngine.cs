@@ -15,8 +15,15 @@ namespace BeoordelingProject.Engine {
         public double totaalDeelaspect(List<double> middens, List<int> wegingen) {
             double totaal = 0;
 
-            for (int i = 0; i < middens.Count; i++) {
-                totaal += deelaspect(middens[i], wegingen[i]);
+            if (wegingen.Count > 1) {
+                for (int i = 0; i < middens.Count; i++) {
+                    totaal += deelaspect(middens[i], wegingen[i]);
+                }
+            }
+            else {
+                foreach (int midden in middens) {
+                    totaal += deelaspect(midden, wegingen[0]);
+                }
             }
 
             return totaal;
