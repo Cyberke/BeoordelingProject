@@ -27,8 +27,6 @@
                 <th>Evaluatie rapport</th>
                 <th>Feedback formulier</th>
             </tr>
-
-        
         <tr ng-repeat="student in studenten | filter:searchText" ng-if="showOpleiding(student, '@Opleidingitem')">
             <td>{{student.naam}}</td>
             <td>2013-2014</td>
