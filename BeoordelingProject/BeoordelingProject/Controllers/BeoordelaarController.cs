@@ -33,6 +33,7 @@ namespace BeoordelingProject.Controllers
 
             vm.Matrix = beoordelingsService.GetMatrix(2);
             vm.Student = studentService.GetStudentByID(1);
+            vm.Rol_ID = 1;
             vm.Resultaten = new Resultaat();
 
             return View(vm);
