@@ -36,7 +36,7 @@ namespace BeoordelingProject.Migrations
             rollen.ForEach(r => context.Rollen.AddOrUpdate(p => p.Naam, r));
             context.SaveChanges();
 
-            AddUserAndRoles(context);
+            //AddUserAndRoles(context);
             context.SaveChanges();
 
         }
@@ -77,10 +77,10 @@ namespace BeoordelingProject.Migrations
                 Rollen = userRollen
             };
             */
-            idManager.Create(adminUser, "Password1");
+            //idManager.Create(adminUser, "Password1");
             //idManager.Create(user, "Password1");
 
-            idManager.AddUserToRole(adminUser.Id, "Admin");
+            //idManager.AddUserToRole(adminUser.Id, "Admin");
             //idManager.AddUserToRole(user.Id, "User");
 
         }

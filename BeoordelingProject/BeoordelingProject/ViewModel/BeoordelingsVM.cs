@@ -9,5 +9,6 @@ namespace BeoordelingProject.ViewModel {
         public Resultaat Resultaten { get; set; }
         public Matrix Matrix { get; set; }
         public Student Student { get; set; }
+        public int Rol_ID { get; set; }
     }
 }
