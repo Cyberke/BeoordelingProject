@@ -6,13 +6,13 @@
             <h1>
                 Kies een student:
             </h1>
-            @Html.ListBoxFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox" })
+            @Html.DropDownListFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox", size="20" })
         </div>
         <div class="accountdiv">
             <h1>
                 Kies een gebruiker:
             </h1>
-            @Html.ListBoxFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox" })
+            @Html.DropDownListFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox", size="20" })
         </div>
         <div class="accountdiv">
             <h1>
