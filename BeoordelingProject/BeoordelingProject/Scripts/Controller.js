@@ -7,7 +7,6 @@ module.controller("studentController", function ($scope, studentenlijst)
 
     $scope.showOpleiding = function (student, opleiding)
     {
-    alert(opleiding);
         if(student.opleiding === opleiding)
             return student;
     }

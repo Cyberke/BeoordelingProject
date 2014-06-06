@@ -29,11 +29,6 @@ namespace BeoordelingProject.DAL.Services
             this.accountRepository = accountRepository;
         }
 
-        public Student GetStudentById(int id)
-        {
-            return studentRepository.GetByID(id);
-        }
-
         public List<Student> GetStudenten()
         {
             return studentRepository.All().ToList<Student>();
