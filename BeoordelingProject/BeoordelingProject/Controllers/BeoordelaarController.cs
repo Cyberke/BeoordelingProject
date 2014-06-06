@@ -50,6 +50,10 @@ namespace BeoordelingProject.Controllers
             {
                 newres.TussentijdseId = m.ID;
                 newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                List<double> scores = beoordelingsService.GetDeelaspectScores(newres);
+                List<int> wegingen = beoordelingsService.GetDeelaspectWegingen(newres.DeelaspectResultaten);
+                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+
                 
             }
             else
