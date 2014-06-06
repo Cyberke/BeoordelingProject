@@ -20,5 +20,6 @@ namespace BeoordelingProject.ViewModel
         public int[] SelectedAccount { get; set; }
         [Required]
         public ApplicationUser Account { get; set; }
+        public List<Rol> Rollen { get; set; }
     }
 }
