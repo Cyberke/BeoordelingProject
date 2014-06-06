@@ -1,0 +1,26 @@
+﻿@model BeoordelingProject.Models.Student
+
+@{
+    ViewBag.Title = "GetStudent";
+    Layout = "";
+}
+@Styles.Render("~/Content/css")
+<div class="rapport">
+    <h1>Eindbeoordeling bachelorproef</h1>
+    <h2>3e @Html.DisplayFor(model => model.Opleiding)</h2>
+
+    <h3>
+        @Html.Label("Naam student: ")
+        @Html.DisplayFor(model => model.Naam)
+        @Html.Label("Academiejaar: 2014-2015")
+    </h3><br />
+
+    <dl>
+        <dt>
+            @Html.Label("Punt")
+        </dt>
+        <dd>
+            @Html.Label("15")
+        </dd>
+    </dl>
+</div>
