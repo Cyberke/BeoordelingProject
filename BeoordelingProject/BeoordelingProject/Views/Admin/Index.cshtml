@@ -12,13 +12,11 @@
 
     <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
     <input class="zoekbutton" type="button" value="" id="zoek" />
-
+    <!--
     <ul>
-        <li ng-repeat="student in studenten | filter:searchText">
-            {{student.naam}}
-        </li>
+        <li ng-repeat="student in studenten | filter:searchText">{{student.naam}}</li>
     </ul>
-
+    -->
     <hr />
 
     @foreach (var Opleidingitem in Model.Opleidingen)
@@ -36,23 +34,19 @@
                 <th>Evaluatie rapport</th>
                 <th>Feedback formulier</th>
             </tr>
-            @foreach (var Studentitem in Model.Studenten)
-{
-    if (Studentitem.Opleiding == Opleidingitem)
-    {
-        //Punten zullen moeten uit de VM moeten gehaald worden
-        <tr>
-            <td>@Html.DisplayFor(modelItem => Studentitem.Naam)</td>
-            <td>2013-2014</td>
-            <td>@Html.DisplayFor(modelItem => Studentitem.Trajecttype)</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a href="">Download</a></td>
-            <td><a href="">Download</a></td>
-        </tr>
-    }
 
-}
+        
+        <tr ng-repeat="student in studenten | filter:searchText" ng-if="showOpleiding(student, '@Opleidingitem')">
+            <td>{{student.naam}}</td>
+            <td>2013-2014</td>
+            <td>{{student.trajecttype}}</td>
+            <td>0</td>
+            <td>0</td>
+            <td><a href="">Download</a></td>
+            <td><a href="">Download</a></td>
+            
+        </tr>
+
         </table>
     }
 
