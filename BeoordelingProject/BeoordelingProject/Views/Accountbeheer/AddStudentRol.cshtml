@@ -6,13 +6,13 @@
             <h1>
                 Kies een student:
             </h1>
-            @Html.ListBoxFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox" })
+            @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
                 Kies een gebruiker:
             </h1>
-            @Html.ListBoxFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox" })
+            @Html.DropDownListFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
@@ -26,12 +26,13 @@
                 @Html.Label("Wachtwoord")
                 @Html.EditorFor(model => model.Account.PasswordHash)
                 @Html.ValidationMessageFor(model => model.Account.PasswordHash)
-
                 @foreach (var rol in Model.Rollen)
                 {
-                    <input type="checkbox" id="@rol.ID" value="@rol.Naam" />
+                    <input type="checkbox" value="@rol.ID" name="rollen" />
+                    <label for="@rol.ID">@rol.Naam</label>
+                    <br />
                 }
-
+                <br />
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Opslaan" class="btn btn-default" />
                 </div>

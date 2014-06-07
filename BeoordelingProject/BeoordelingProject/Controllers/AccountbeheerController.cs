@@ -13,63 +13,48 @@ namespace BeoordelingProject.Controllers
     {
         private IStudentService studentService = null;
         private IUserManagementService userService = null;
+        private IStudentrolService studentrolService = null;
         
         public AccountbeheerController()
         {
 
         }
 
-        public AccountbeheerController(StudentService studentService, IUserManagementService userService)
+        public AccountbeheerController(StudentService studentService, IUserManagementService userService, IStudentrolService studentrolService)
         {
             this.studentService = studentService;
             this.userService = userService;
+            this.studentrolService = studentrolService;
         }
 
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();
-            accountbeheerVM.Studenten = GetStudenten();
-            accountbeheerVM.Accounts = GetUsers();
-            accountbeheerVM.Rollen = GetRollen();
+            accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+            accountbeheerVM.Accounts = new SelectList(studentService.GetUsers(), "Id", "UserName");
+            accountbeheerVM.Rollen = studentService.GetRoles();
             return View(accountbeheerVM);
         }
 
         [HttpPost]
-        public ActionResult AddStudentRol(AccountbeheerVM model)
+        public ActionResult AddStudentRol(AccountbeheerVM model, FormCollection collection)
         {
+            List<Rol> selectedRollen = new List<Rol>();
+            Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
+            string[] rollenId = collection.GetValues("rollen");
+            foreach (string id in rollenId)
+            {
+                Rol rol = studentService.GetRolById(Convert.ToInt32(id));
+                selectedRollen.Add(rol);
+            }
+
+            var studentrol = studentrolService.CreateStudentrol(selectedStudent,selectedRollen);
+
             var user = new ApplicationUser() { UserName = model.Account.UserName};
             var result = userService.Create(user, model.Account.PasswordHash);
             userService.AddUserToRoleUser(user.Id);
             return RedirectToAction("AddStudentRol", "Accountbeheer");
 
-        }
-        private List<SelectListItem> GetStudenten()
-        {
-            var studentenList = new List<SelectListItem>();
-            foreach (Student student in studentService.GetStudenten())
-            {
-                studentenList.Add(new SelectListItem { Value = student.ID.ToString(), Text = student.Naam });
-            }
-            return studentenList;
-        }
-        private List<SelectListItem> GetUsers()
-        {
-            var userList = new List<SelectListItem>();
-            foreach (ApplicationUser user in studentService.GetUsers())
-            {
-                userList.Add(new SelectListItem { Value = user.Id, Text = user.UserName });
-            }
-            return userList;
-        }
-
-        private List<Rol> GetRollen()
-        {
-            var rolList = new List<Rol>();
-            foreach (Rol rol in studentService.GetRoles())
-            {
-                rolList.Add(new Rol { ID = rol.ID, Naam = rol.Naam });
-            }
-            return rolList;
         }
 	}
 }

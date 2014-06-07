@@ -28,16 +28,17 @@ namespace BeoordelingProject
             container.RegisterType<IUserManagementService, UserManagementService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentService, StudentService>(new HierarchicalLifetimeManager());
             container.RegisterType<IMatrixService, MatrixService>(new HierarchicalLifetimeManager());
-
             container.RegisterType<IBeoordelingsService, BeoordelingsService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IStudentrolService, StudentrolService>(new HierarchicalLifetimeManager());
 
             //REPOSITORIES
             container.RegisterType<IStudentRepository, StudentRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IAccountRepository, AccountRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IIdentityManagerRepository, IdentityManagerRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IMatrixRepository, MatrixRepository>(new HierarchicalLifetimeManager());
-
             container.RegisterType<IResultaatRepository, ResultaatRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGenericRepository<Rol>, GenericRepository<Rol>>(new HierarchicalLifetimeManager());
+
             
             //ENGINE
             container.RegisterType<IBeoordelingsEngine, BeoordelingsEngine>(new HierarchicalLifetimeManager());

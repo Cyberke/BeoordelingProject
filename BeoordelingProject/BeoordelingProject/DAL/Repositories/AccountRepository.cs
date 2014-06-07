@@ -29,5 +29,6 @@ namespace BeoordelingProject.DAL.Repositories
 
             return query;
         }
+
     }
 }

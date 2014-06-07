@@ -10,16 +10,16 @@ namespace BeoordelingProject.ViewModel
 {
     public class AccountbeheerVM
     {
-        public AccountbeheerVM() {
+        public AccountbeheerVM()
+        {
 
         }
 
-        public List<SelectListItem> Studenten { get; set; }
-        public int[] SelectedStudent { get; set; }
-        public List<SelectListItem> Accounts { get; set; }
-        public int[] SelectedAccount { get; set; }
+        public SelectList Studenten { get; set; }
+        public int SelectedStudentId { get; set; }
+        public SelectList Accounts { get; set; }
+        public ApplicationUser SelectedAccount { get; set; }
         public ApplicationUser Account { get; set; }
-        public int[] SelectedRol { get; set; }
         public List<Rol> Rollen { get; set; }
     }
 }
