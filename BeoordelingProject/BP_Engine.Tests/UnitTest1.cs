@@ -58,5 +58,47 @@ namespace BeoordelingProject.Tests {
 
             Assert.AreEqual(res, 3.8438);
         }
+
+        [TestMethod]
+        public void EindScore() {
+            wegingen = new List<int>() {
+                2
+            };
+
+            // Promotor
+            middens.Add(8);
+            middens.Add(8);
+            middens.Add(8);
+
+            double resPromotor = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+
+            /*
+            // 2de lezer
+            middens.Add(8);
+            middens.Add(8);
+            middens.Add(8);
+
+            double resTweedelezer = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+             */
+
+            /*
+            // Critical Friend
+            middens.Add(8);
+            middens.Add(8);
+            middens.Add(8);
+
+            double resCriticalFriend = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+             */
+
+            double eindRes1 = (resPromotor) / 1.5;
+
+            Assert.AreEqual(eindRes1, 16);
+        }
     }
 }
