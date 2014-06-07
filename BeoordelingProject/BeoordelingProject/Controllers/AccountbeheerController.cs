@@ -27,6 +27,7 @@ namespace BeoordelingProject.Controllers
             this.studentrolService = studentrolService;
         }
 
+        [Authorize(Roles="Admin")]
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();

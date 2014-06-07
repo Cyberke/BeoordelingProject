@@ -99,11 +99,12 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 
-	padding: 10px;
+	padding: 30px;
 
 	border: solid;
 	border-width: 1px;
 	border-radius: 15px;
+    border-color: #C9C9C9;
 }
 
 .login
@@ -209,6 +210,11 @@ header{
 	border-radius: 20px;
 
 	background-color: #3379ab;
+}
+
+.opties:hover, .stats:hover, #help:hover{
+    /*background-color:#fff600; */
+    background-color:#ec008c;
 }
 
 .stats

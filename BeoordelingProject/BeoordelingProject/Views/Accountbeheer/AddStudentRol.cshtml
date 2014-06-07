@@ -24,7 +24,7 @@
                 @Html.ValidationMessageFor(model => model.Account.UserName)
 
                 @Html.Label("Wachtwoord")
-                @Html.EditorFor(model => model.Account.PasswordHash)
+                @Html.PasswordFor(model => model.Account.PasswordHash)
                 @Html.ValidationMessageFor(model => model.Account.PasswordHash)
                 @foreach (var rol in Model.Rollen)
                 {
@@ -33,8 +33,8 @@
                     <br />
                 }
                 <br />
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Opslaan" class="btn btn-default" />
+                <div>
+                    <input type="submit" value="Opslaan" />
                 </div>
             </div>
         </div>

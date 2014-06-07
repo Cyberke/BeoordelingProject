@@ -26,6 +26,7 @@ namespace BeoordelingProject.Controllers
             this.studentService = studentService;
         }
 
+        [Authorize(Roles="Admin")]
         public ActionResult Index()
         {
             AdminOverzichtVM vm = new AdminOverzichtVM();
