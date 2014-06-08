@@ -11,7 +11,7 @@ using System.Web;
 
 namespace BeoordelingProject.DAL.Services
 {
-    public class StudentService : BeoordelingProject.DAL.Services.IStudentService
+    public class StudentService: BeoordelingProject.DAL.Services.IStudentService
     {
         IUnitOfWork uow = null;
         IStudentRepository studentRepository = null;

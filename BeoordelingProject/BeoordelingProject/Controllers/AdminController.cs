@@ -26,19 +26,29 @@ namespace BeoordelingProject.Controllers
             this.studentService = studentService;
         }
 
-        [Authorize(Roles="Admin")]
         public ActionResult Index()
         {
-            AdminOverzichtVM vm = new AdminOverzichtVM();
-            vm.Studenten = studentService.GetStudenten();
-            vm.Opleidingen = studentService.GetOpleidingen();
+            if (User.IsInRole("Admin"))
+            {
+                AdminOverzichtVM vm = new AdminOverzichtVM();
+                vm.Studenten = studentService.GetStudenten();
+                vm.Opleidingen = studentService.GetOpleidingen();
 
-            WebClient c = new WebClient();
-            //var json = c.DownloadString("http://datatank.gent.be/Gezondheid/Huisartsen.json");
-            //vm.StudentenString = new HtmlString(json);
-            vm.StudentenString = studentService.SerializeObject(vm.Studenten);
+                WebClient c = new WebClient();
+                //var json = c.DownloadString("http://datatank.gent.be/Gezondheid/Huisartsen.json");
+                //vm.StudentenString = new HtmlString(json);
+                vm.StudentenString = studentService.SerializeObject(vm.Studenten);
 
-            return View(vm);
+                return View(vm);
+            }
+            else if (User.IsInRole("User"))
+            {
+                return RedirectToAction("Index", "Beoordelaar");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult GetStudent(int id)

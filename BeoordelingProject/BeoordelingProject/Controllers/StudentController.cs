@@ -21,7 +21,7 @@ namespace BeoordelingProject.Controllers
 
         }
 
-        public StudentController(StudentService studentService)
+        public StudentController(IStudentService studentService)
         {
             this.studentService = studentService;
         }

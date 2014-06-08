@@ -20,7 +20,7 @@ namespace BeoordelingProject.Controllers
 
         }
 
-        public AccountbeheerController(StudentService studentService, IUserManagementService userService, IStudentrolService studentrolService)
+        public AccountbeheerController(IStudentService studentService, IUserManagementService userService, IStudentrolService studentrolService)
         {
             this.studentService = studentService;
             this.userService = userService;

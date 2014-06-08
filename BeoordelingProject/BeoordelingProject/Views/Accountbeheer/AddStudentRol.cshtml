@@ -1,18 +1,30 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
+@using Microsoft.AspNet.Identity
+
 <div id="container">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.GetUserName() + "!", new { @class = "username" })
+    }
+    <br /><br />
     @using (Html.BeginForm())
     {
         <div class="accountdiv">
             <h1>
                 Kies een student:
             </h1>
+            <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" /><br /><br />
             @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
                 Kies een gebruiker:
             </h1>
-            @Html.DropDownListFor(a => a.SelectedAccount, Model.Accounts, new { @class = "listbox",size="20" })
+            <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" /><br /><br />
+            @Html.DropDownListFor(a => a.SelectedAccountId, Model.Accounts, new { @class = "listbox",size="20" })<br /><br />
         </div>
         <div class="accountdiv">
             <h1>
@@ -22,10 +34,11 @@
                 @Html.Label("Gebruikersnaam")
                 @Html.EditorFor(model => model.Account.UserName)
                 @Html.ValidationMessageFor(model => model.Account.UserName)
-
+                <br />
                 @Html.Label("Wachtwoord")
-                @Html.PasswordFor(model => model.Account.PasswordHash)
+                @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
                 @Html.ValidationMessageFor(model => model.Account.PasswordHash)
+                <br />
                 @foreach (var rol in Model.Rollen)
                 {
                     <input type="checkbox" value="@rol.ID" name="rollen" />
@@ -34,7 +47,7 @@
                 }
                 <br />
                 <div>
-                    <input type="submit" value="Opslaan" />
+                    <input type="submit" value="Opslaan" class="button" />
                 </div>
             </div>
         </div>

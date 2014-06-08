@@ -4,22 +4,28 @@
     ViewBag.Title = "Log in";
 }
 <div id="container">
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         <div>
             <div id="loginbox">
-                @Html.Label("Gebruikersnaam")
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-
-                @Html.Label("Wachtwoord")
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-                <div>
-                    <input type="submit" value="Log in" />
-                </div>
+                <table>
+                    <tr>
+                        <td>@Html.Label("Gebruikersnaam")</td>
+                        <td>@Html.TextBoxFor(m => m.UserName)</td>
+                        <td>@Html.ValidationMessageFor(m => m.UserName,"Gebruikersnaam is verplicht")</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Label("Wachtwoord")</td>
+                        <td>@Html.PasswordFor(m => m.Password)</td>
+                        <td>@Html.ValidationMessageFor(m => m.Password,"Wachtwoord is verplicht")</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Log in" class="button"/></td>
+                    </tr>
+                </table>
             </div>
         </div>
     }
