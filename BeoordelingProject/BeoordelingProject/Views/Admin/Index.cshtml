@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 <script>
-    angular.module("studentModule").value("studentenlijst", @Html.Raw(Model.StudentenString));
+    angular.module("appModule").value("studentenlijst", @Html.Raw(Model.StudentenString));
 </script>
 
 <div id="container">
@@ -19,24 +19,24 @@
         </div>
         <table class="studentlist" style="display:block">
             <tr>
-                <th>Student</th>
+                <th ng-click="reverse=!reverse;order('naam', reverse)">Student</th>
                 <th>Academiejaar</th>
-                <th>Traject</th>
-                <th>Tussentijdse evaluatie</th>
-                <th>Eind evaluatie</th>
+                <th ng-click="reverse=!reverse;order('trajecttype', reverse)">Traject</th>
+                <th ng-click="reverse=!reverse;order('naam', reverse)">Tussentijdse evaluatie</th>
+                <th ng-click="reverse=!reverse;order('naam', reverse)">Eind evaluatie</th>
                 <th>Evaluatie rapport</th>
                 <th>Feedback formulier</th>
             </tr>
-        <tr ng-repeat="student in studenten | filter:searchText" ng-if="showOpleiding(student, '@Opleidingitem')">
-            <td>{{student.naam}}</td>
-            <td>2013-2014</td>
-            <td>{{student.trajecttype}}</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}">Toon Rapport</a></td>
-            <td><a href="" class="link">Download</a></td>
-            
-        </tr>
+            <tr ng-repeat="student in studenten | filter:{naam:searchText} | orderBy:predicate:reverse" ng-if="showOpleiding(student, '@Opleidingitem')">
+                <td>{{student.naam}}</td>
+                <td>2013-2014</td>
+                <td>{{student.trajecttype}}</td>
+                <td>0</td>
+                <td>0</td>
+                <td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}">Toon Rapport</a></td>
+                <td><a href="" class="link">Download</a></td>
+
+            </tr>
 
         </table>
     }

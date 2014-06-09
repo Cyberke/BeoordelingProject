@@ -31,10 +31,6 @@ namespace BeoordelingProject.Controllers
             AdminOverzichtVM vm = new AdminOverzichtVM();
             vm.Studenten = studentService.GetStudenten();
             vm.Opleidingen = studentService.GetOpleidingen();
-
-            WebClient c = new WebClient();
-            //var json = c.DownloadString("http://datatank.gent.be/Gezondheid/Huisartsen.json");
-            //vm.StudentenString = new HtmlString(json);
             vm.StudentenString = studentService.SerializeObject(vm.Studenten);
 
             return View(vm);
