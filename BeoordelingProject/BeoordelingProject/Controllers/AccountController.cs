@@ -12,6 +12,8 @@ using BeoordelingProject.Models;
 using BeoordelingProject.DAL.Context;
 using BeoordelingProject.DAL.Repositories;
 using BeoordelingProject.DAL.Services;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace ParkingApplicatie.Controllers
 {
@@ -56,7 +58,7 @@ namespace ParkingApplicatie.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Admin");
                 }
                 else
                 {
@@ -284,7 +286,7 @@ namespace ParkingApplicatie.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

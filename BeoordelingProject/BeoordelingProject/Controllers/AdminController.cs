@@ -28,12 +28,23 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult Index()
         {
-            AdminOverzichtVM vm = new AdminOverzichtVM();
-            vm.Studenten = studentService.GetStudenten();
-            vm.Opleidingen = studentService.GetOpleidingen();
-            vm.StudentenString = studentService.SerializeObject(vm.Studenten);
+            if (User.IsInRole("Admin"))
+            {
+                AdminOverzichtVM vm = new AdminOverzichtVM();
+                vm.Studenten = studentService.GetStudenten();
+                vm.Opleidingen = studentService.GetOpleidingen();
+                vm.StudentenString = studentService.SerializeObject(vm.Studenten);
 
-            return View(vm);
+                return View(vm);
+            }
+            else if (User.IsInRole("User"))
+            {
+                return RedirectToAction("Index", "Beoordelaar");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult GetStudent(int id)

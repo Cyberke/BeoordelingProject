@@ -10,15 +10,15 @@ namespace BeoordelingProject.ViewModel
 {
     public class AccountbeheerVM
     {
-        public AccountbeheerVM() {
+        public AccountbeheerVM()
+        {
 
         }
 
-        public List<SelectListItem> Studenten { get; set; }
-        public int[] SelectedStudent { get; set; }
-        public List<SelectListItem> Accounts { get; set; }
-        public int[] SelectedAccount { get; set; }
-        [Required]
+        public SelectList Studenten { get; set; }
+        public int SelectedStudentId { get; set; }
+        public SelectList Accounts { get; set; }
+        public string SelectedAccountId { get; set; }
         public ApplicationUser Account { get; set; }
         public List<Rol> Rollen { get; set; }
     }
