@@ -45,6 +45,23 @@ header{
     
 }
 
+.username
+{
+    font-size:14px;
+    float:right;
+}
+.uitloggen
+{
+    font-size:14px;
+    float:right;
+    margin-top:4px;
+    color:#000000;
+}
+.uitloggen:hover
+{
+    color:#ec008c;
+}
+
 #container
 {
 	padding: 20px;
@@ -58,6 +75,11 @@ header{
 
 	height: 100%;
     overflow: auto;
+}
+
+.wachtwoordStudentrol
+{
+    margin-left:31px;
 }
 
 .link
@@ -91,8 +113,8 @@ header{
 /* Login box */
 #loginbox
 {
-	width: 480px;
-	height: 75px;
+	width: 55%;
+	height: auto;
 
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -100,16 +122,12 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 
-	padding: 10px;
+	padding: 30px;
 
 	border: solid;
 	border-width: 1px;
 	border-radius: 15px;
-}
-
-.login
-{
-    margin-left: 15px;
+    border-color: #C9C9C9;
 }
 
 /* Helpfunction box */
@@ -212,6 +230,11 @@ header{
 	background-color: #3379ab;
 }
 
+.opties:hover, .stats:hover, #help:hover{
+    background-color:#fff600;
+    /*background-color:#ec008c;*/
+}
+
 .stats
 {
 	position:absolute;
@@ -298,11 +321,17 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 }
+input
+{
+    font-size: 14px;
+	display:inline;
+	margin: 5px;
+}
 
-label,input
+label,input[type="checkbox"]
 {
 	font-size: 14px;
-	display:block;
+	display:inline;
 	margin: 5px;
 }
 
@@ -324,7 +353,6 @@ select
     overflow-x: hidden;
 
     width: 200px;
-    margin-left: 15px;
     margin-right: auto;
 }
 
@@ -339,6 +367,7 @@ select
 .accountdiv
 {
     float:left;
+    margin-right:15px;
 }
 
 /* zoekbar en button */
@@ -346,12 +375,13 @@ select
 {
 	display: inline;
 	height: 18px;
+    width:196px;
 	font-size: 16px;
 
 	border-style: solid;
 	border-width: 1px;
 
-	padding: 0;
+	padding: 2px;
 	margin: 0;
     background-image: url("img/zoek.png");
     background-position: right;
@@ -371,6 +401,13 @@ select
 	background-image: url("img/zoek.png");
 	background-position: center;
 	background-repeat: no-repeat;
+}
+
+.button
+{
+    float:right;
+    margin-right:12px;
+    padding:3px;
 }
 
 /* grote radiobuttons voor score ingeven */
@@ -566,10 +603,9 @@ th
 
 h1
 {
-	font-size: 22px;
+	font-size: 18px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-    margin-left:15px;
 }
 
 h2
@@ -592,4 +628,22 @@ h3
 span
 {
 	display: block;
+}
+
+/* Validatie styling */
+
+.field-validation-error
+{
+    color:#ff0000;
+    font-size:12px;
+    padding-left:5px;
+}
+.input-validation-error
+{
+    border:1px solid #ff0000;
+    background-color:#ffeeee;
+}
+.field-validation-valid
+{
+    display:none;
 }

@@ -32,5 +32,13 @@ namespace BeoordelingProject.DAL.Repositories
 
                 return query;
         }
+
+        public IEnumerable<Rol> GetRoles()
+        {
+            var query = (from r in context.Rollen
+                         select r);
+
+            return query;
+        }
     }
 }

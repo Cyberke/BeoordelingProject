@@ -1,12 +1,22 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
+@using Microsoft.AspNet.Identity
+
 <div id="container">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.GetUserName() + "!", new { @class = "username" })
+    }
+    <br /><br />
     @using (Html.BeginForm())
     {
         <div class="accountdiv">
             <h1>
                 Kies een student:
             </h1>
-            @Html.DropDownListFor(a => a.SelectedStudent, Model.Studenten, new { @class = "listbox", size="20" })
+            @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
@@ -22,15 +32,20 @@
                 @Html.Label("Gebruikersnaam")
                 @Html.EditorFor(model => model.Account.UserName)
                 @Html.ValidationMessageFor(model => model.Account.UserName)
-
+                <br />
                 @Html.Label("Wachtwoord")
-                @Html.EditorFor(model => model.Account.PasswordHash)
+                @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
                 @Html.ValidationMessageFor(model => model.Account.PasswordHash)
-
-                @Html.CheckBox("Promotor")
-
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Opslaan" class="btn btn-default" />
+                <br />
+                @foreach (var rol in Model.Rollen)
+                {
+                    <input type="checkbox" value="@rol.ID" name="rollen" />
+                    <label for="@rol.ID">@rol.Naam</label>
+                    <br />
+                }
+                <br />
+                <div>
+                    <input type="submit" value="Opslaan" class="button" />
                 </div>
             </div>
         </div>

@@ -206,9 +206,11 @@
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
     <Compile Include="DAL\Services\IMatrixService.cs" />
+    <Compile Include="DAL\Services\IStudentrolService.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
     <Compile Include="DAL\Services\IUserManagementService.cs" />
     <Compile Include="DAL\Services\MatrixService.cs" />
+    <Compile Include="DAL\Services\StudentrolService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
     <Compile Include="DAL\Services\UserManagementService.cs" />
     <Compile Include="DAL\UnitOfWork\IUnitOfWork.cs" />
@@ -247,8 +249,7 @@
     <Compile Include="ViewModel\BeoordelingsVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\help.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo_edit.png" />
@@ -261,7 +262,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="NuGet.exe" />
     <Content Include="Rotativa\libeay32.dll" />
     <Content Include="Rotativa\libgcc_s_dw2-1.dll" />

@@ -15,7 +15,6 @@ namespace BeoordelingProject.ViewModel
 
         public List<String> Opleidingen { get; set; }
         public List<Student> Studenten { get; set; }
-
         public IHtmlString StudentenString { get; set; }
     }
 }

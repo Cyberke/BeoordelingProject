@@ -11,27 +11,24 @@ using System.Web;
 
 namespace BeoordelingProject.DAL.Services
 {
-    public class StudentService : BeoordelingProject.DAL.Services.IStudentService
+    public class StudentService: BeoordelingProject.DAL.Services.IStudentService
     {
         IUnitOfWork uow = null;
         IStudentRepository studentRepository = null;
         IAccountRepository accountRepository = null;
+        IGenericRepository<Rol> rolRepository = null;
 
         public StudentService()
         {
 
         }
 
-        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository)
+        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository, IGenericRepository<Rol> rolRepository)
         {
             this.uow = uow;
             this.studentRepository = studentRepository;
             this.accountRepository = accountRepository;
-        }
-
-        public Student GetStudentById(int id)
-        {
-            return studentRepository.GetByID(id);
+            this.rolRepository = rolRepository;
         }
 
         public List<Student> GetStudenten()
@@ -82,6 +79,11 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
+        public List<Rol> GetRoles()
+        {
+            return studentRepository.GetRoles().ToList();
+        }
+
         public IHtmlString SerializeObject(object value)
         {
             using (var stringWriter = new StringWriter())
@@ -102,6 +104,11 @@ namespace BeoordelingProject.DAL.Services
         public Student GetStudentByID(int id)
         {
             return studentRepository.GetByID(id);
+        }
+
+        public Rol GetRolById(int id)
+        {
+            return rolRepository.GetByID(id);
         }
     }
 }

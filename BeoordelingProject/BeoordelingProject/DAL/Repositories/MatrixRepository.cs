@@ -30,17 +30,5 @@ namespace BeoordelingProject.DAL.Repositories
             return query.First();
         }
 
-        public Deelaspect GetDeelaspectById(int id)
-        {
-            var query =
-            (
-                from d in context.Deelaspect
-                where d.ID.Equals(id)
-                select d
-            );
-
-            return query.First();
-        }
-
     }
 }
