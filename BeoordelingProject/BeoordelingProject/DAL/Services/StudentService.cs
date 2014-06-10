@@ -11,7 +11,7 @@ using System.Web;
 
 namespace BeoordelingProject.DAL.Services
 {
-    public class StudentService: BeoordelingProject.DAL.Services.IStudentService
+    public class StudentService : BeoordelingProject.DAL.Services.IStudentService
     {
         IUnitOfWork uow = null;
         IStudentRepository studentRepository = null;
@@ -79,6 +79,11 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
+        public void DeleteUser(ApplicationUser user)
+        {
+            studentRepository.Delete(user);
+        }
+
         public List<Rol> GetRoles()
         {
             return studentRepository.GetRoles().ToList();
@@ -131,6 +136,10 @@ namespace BeoordelingProject.DAL.Services
         public Rol GetRolById(int id)
         {
             return rolRepository.GetByID(id);
+        }
+        public ApplicationUser GetUserById(string id)
+        {
+            return accountRepository.GetByID(id);
         }
     }
 }

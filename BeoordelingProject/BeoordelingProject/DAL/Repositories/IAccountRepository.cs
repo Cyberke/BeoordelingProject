@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BeoordelingProject.Models;
+using System;
 namespace BeoordelingProject.DAL.Repositories
 {
-    public interface IAccountRepository
+    public interface IAccountRepository: IGenericRepository<ApplicationUser>
     {
-        System.Collections.Generic.IEnumerable<BeoordelingProject.Models.ApplicationUser> All();
     }
 }

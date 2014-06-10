@@ -16,13 +16,18 @@
             <h1>
                 Kies een student:
             </h1>
+            <input class="zoek" type="text" ng-model="searchTextStudent" placeholder="zoek..." id="zoekterm" /> <br /><br />
+
             @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
                 Kies een gebruiker:
             </h1>
-            @Html.DropDownListFor(a => a.SelectedAccountId, Model.Accounts, new { @class = "listbox", size="20" })
+            <input class="zoek" type="text" ng-model="searchTextUser" placeholder="zoek..." id="zoekterm" /> <br /><br />
+
+            @Html.DropDownListFor(a => a.SelectedAccountId, Model.Accounts, new { @class = "listbox", size="20" })<br />
+            <input class="verwijder" type="button"  value="Verwijder gebruiker"/>
         </div>
         <div class="accountdiv">
             <h1>
