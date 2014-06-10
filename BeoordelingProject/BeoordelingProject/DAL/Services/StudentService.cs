@@ -86,19 +86,41 @@ namespace BeoordelingProject.DAL.Services
 
         public IHtmlString SerializeObject(object value)
         {
-            using (var stringWriter = new StringWriter())
-            using (var jsonWriter = new JsonTextWriter(stringWriter))
+            List<Student> studenten = (List<Student>)value;
+            string jsonString = "{Studenten:[";
+            foreach (Student student in studenten)
             {
-                var serializer = new JsonSerializer
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-
-                jsonWriter.QuoteName = false;
-                serializer.Serialize(jsonWriter, value);
-
-                return new HtmlString(stringWriter.ToString());
+                jsonString += "{";
+                jsonString+="id: "+ student.ID +",";
+                jsonString += "naam: \"" + student.Naam + "\",";
+                jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
+                jsonString += "opleiding: \"" + student.Opleiding + "\",";
+                jsonString += "email: \"" + student.Email + "\",";
+                jsonString += "studentId: " + student.StudentId + ",";
+                jsonString += "geslacht: \"" + student.Geslacht + "\",";
+                jsonString += "geboortedatum: \"" + student.Geboortedatum + "\"";
+                jsonString += "},";
             }
+            //laatste komma wissen, deze is niet nodig
+            jsonString = jsonString.Remove(jsonString.Length - 1);
+
+            jsonString += "]}";
+
+            return new HtmlString(jsonString);
+
+            //using (var stringWriter = new StringWriter())
+            //using (var jsonWriter = new JsonTextWriter(stringWriter))
+            //{
+            //    var serializer = new JsonSerializer
+            //    {
+            //        ContractResolver = new CamelCasePropertyNamesContractResolver()
+            //    };
+
+            //    jsonWriter.QuoteName = false;
+            //    serializer.Serialize(jsonWriter, value);
+
+            //    return new HtmlString(stringWriter.ToString());
+            //}
         }
 
         public Student GetStudentByID(int id)
