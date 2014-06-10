@@ -217,3 +217,7 @@ BeoordelingProject/packages/Modernizr.2.6.2/Content/Scripts/modernizr-2.6.2.js
 *.js
 BeoordelingProject/packages/bootstrap.3.0.0/content/fonts/glyphicons-halflings-regular.svg
 *.css
+BeoordelingProject/BeoordelingProject/fonts/glyphicons-halflings-regular.svg
+*.js
+*.css
+*.nuspec
