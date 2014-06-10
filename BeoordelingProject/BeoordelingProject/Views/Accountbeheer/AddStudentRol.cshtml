@@ -26,8 +26,8 @@
             </h1>
             <input class="zoek" type="text" ng-model="searchTextUser" placeholder="zoek..." id="zoekterm" /> <br /><br />
 
-            @Html.DropDownListFor(a => a.SelectedAccountId, Model.Accounts, new { @class = "listbox", size="20" })<br />
-            <input class="verwijder" type="button"  value="Verwijder gebruiker"/>
+            @Html.DropDownListFor(modelItem => modelItem.SelectedAccountId, Model.Accounts as SelectList, new { @class = "listbox", size="20" })<br />
+            <input type="submit" value="Verwijder gebruiker" class="verwijder" name="accountbeheerbuttons" />
         </div>
         <div class="accountdiv">
             <h1>
@@ -50,7 +50,7 @@
                 }
                 <br />
                 <div>
-                    <input type="submit" value="Opslaan" class="button" />
+                    <input type="submit" value="Opslaan" class="button" name="accountbeheerbuttons" />
                 </div>
             </div>
         </div>
