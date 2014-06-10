@@ -28,7 +28,7 @@
             <tr>
                 <th ng-repeat="(i, th) in head" ng-class="selectedCls(i)" ng-click="changeSorting(i)">{{th}}</th>
                 <th>Evaluatie rapport</th>
-<th>Feedback formulier</th>
+                <th>Feedback formulier</th>
             </tr>
             <tr ng-repeat="student in studenten | filter:{naam:searchText}"  ng-if="showOpleiding(student, '@Opleidingitem')">
                 <td>{{student.naam}}</td>
