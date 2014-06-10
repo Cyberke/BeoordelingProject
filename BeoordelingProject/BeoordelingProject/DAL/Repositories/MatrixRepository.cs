@@ -15,19 +15,37 @@ namespace BeoordelingProject.DAL.Repositories
         }
 
         public Matrix GetMatrixByID(int id)
-        {            
+        {
             var query =
             (
-            from m in context.Matrices
-            from h in m.Hoofdaspecten
-            from d in h.Deelaspecten
+                from m in context.Matrices
+                from h in m.Hoofdaspecten
+                from d in h.Deelaspecten
             
-            where m.ID.Equals(id)
+                where m.ID.Equals(id)
 
-            select m
+                select m
             );
 
             return query.First();
+        }
+
+        public Matrix GetMatrixForRol(int matrixID, int rolID)
+        {
+            /*
+            var query =
+            (
+                from m in context.Matrices
+                from h in m.Hoofdaspecten
+                from d in h.Deelaspecten
+
+                where d.Rollen.Any(r => r.ID == rolID)
+                select m
+            );
+
+            return query.First();
+            */
+            return null;
         }
 
     }

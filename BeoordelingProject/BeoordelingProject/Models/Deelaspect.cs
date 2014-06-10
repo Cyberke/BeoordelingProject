@@ -17,6 +17,5 @@ namespace BeoordelingProject.Models
         public string RVOmschrijving { get; set; }
         public string GOmschrijving { get; set; }
         public string ZGOmschrijving { get; set; }
-        public virtual List<Rol> Rollen { get; set; }
     }
 }
