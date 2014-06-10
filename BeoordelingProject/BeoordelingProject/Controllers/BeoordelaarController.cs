@@ -50,7 +50,6 @@ namespace BeoordelingProject.Controllers
             {
                 newres.TussentijdseId = m.ID;
                 newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
-                
             }
             else
             {
