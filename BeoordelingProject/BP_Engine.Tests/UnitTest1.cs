@@ -135,39 +135,65 @@ namespace BeoordelingProject.Tests {
                 3
             };
 
-            // Promotor (3x OV)
+            // Voorbeeld 1: Promotor (3x OV)
             middens.Add(8);
             middens.Add(8);
             middens.Add(8);
 
-            double resPromotor = engine.totaalScore(middens, wegingen);
-
-            middens.Clear();
-
-            // 2de lezer (3x OV)
-            middens.Add(8);
-            middens.Add(8);
-            middens.Add(8);
-
-            double resTweedelezer = engine.totaalScore(middens, wegingen);
+            double resPromotor1 = engine.totaalScore(middens, wegingen);
 
             middens.Clear();
 
-            // Critical Friend (3x OV)
+            // Voorbeeld 2: Promotor (2x OV)
+            middens.Add(8);
+            middens.Add(8);
+
+            double resPromotor2 = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+
+            // Voorbeeld 1: 2de lezer (3x OV)
             middens.Add(8);
             middens.Add(8);
             middens.Add(8);
 
-            double resCriticalFriend = engine.totaalScore(middens, wegingen);
+            double resTweedelezer1 = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+
+            // Voorbeeld 2: 2de lezer (2x OV)
+            middens.Add(8);
+            middens.Add(8);
+
+            double resTweedelezer2 = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+
+            // Voorbeeld 1: Critical Friend (3x OV)
+            middens.Add(8);
+            middens.Add(8);
+            middens.Add(8);
+
+            double resCriticalFriend1 = engine.totaalScore(middens, wegingen);
+
+            middens.Clear();
+
+            // Voorbeeld 2: Critical Friend (2x OV)
+            middens.Add(8);
+            middens.Add(8);
+
+            double resCriticalFriend2 = engine.totaalScore(middens, wegingen);
 
             middens.Clear();
 
             // Deler wordt berekend door het maximum aantal punten te delen door de herleden punt.
             // Voorbeeld 1: Max = (9x 20) = 180 op 60 = 3
             // Voorbeeld 2: Max = (6x 20) = 120 op 60 = 2
-            double eindRes1 = (resPromotor + resTweedelezer + resCriticalFriend) / 3;
+            double eindRes1 = (resPromotor1 + resTweedelezer1 + resCriticalFriend1) / 3;
+            double eindRes2 = (resPromotor2 + resTweedelezer2 + resCriticalFriend2) / 2;
 
             Assert.AreEqual(eindRes1, 24);
+            Assert.AreEqual(eindRes2, 24);
         }
     }
 }
