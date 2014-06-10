@@ -17,20 +17,18 @@ namespace BeoordelingProject.DAL.Services
         IStudentRepository studentRepository = null;
         IAccountRepository accountRepository = null;
         IGenericRepository<Rol> rolRepository = null;
-        IGenericRepository<ApplicationUser> userRepository = null;
 
         public StudentService()
         {
 
         }
 
-        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository, IGenericRepository<Rol> rolRepository, IGenericRepository<ApplicationUser> userRepository)
+        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository, IGenericRepository<Rol> rolRepository)
         {
             this.uow = uow;
             this.studentRepository = studentRepository;
             this.accountRepository = accountRepository;
             this.rolRepository = rolRepository;
-            this.userRepository = userRepository;
         }
 
         public List<Student> GetStudenten()
@@ -81,9 +79,9 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
-        public void DeleteUser(ApplicationUser user)
+        public void DeleteUser(string id)
         {
-            userRepository.Delete(user);
+            accountRepository.DeleteGebruiker(id);
         }
 
         public List<Rol> GetRoles()
@@ -138,10 +136,6 @@ namespace BeoordelingProject.DAL.Services
         public Rol GetRolById(int id)
         {
             return rolRepository.GetByID(id);
-        }
-        public ApplicationUser GetUserById(string id)
-        {
-            return accountRepository.GetByID(id);
         }
     }
 }

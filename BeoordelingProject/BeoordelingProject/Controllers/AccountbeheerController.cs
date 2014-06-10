@@ -62,8 +62,7 @@ namespace BeoordelingProject.Controllers
             }
             else if(accountbeheerbuttons == "Verwijder gebruiker")
             {
-                ApplicationUser user = studentService.GetUserById(model.SelectedAccountId);
-                studentService.DeleteUser(user);
+                studentService.DeleteUser(model.SelectedAccountId);
             }
             return RedirectToAction("AddStudentRol", "Accountbeheer");
         }

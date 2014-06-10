@@ -1,6 +1,14 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
 @using Microsoft.AspNet.Identity
 
+<script>
+    function deselect()
+    {
+        document.getElementById("studentList").selectedIndex = "0";
+        document.getElementById("accountList").selectedIndex = "0";
+    }
+</script>
+
 <div id="container">
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
@@ -18,7 +26,7 @@
             </h1>
             <input class="zoek" type="text" ng-model="searchTextStudent" placeholder="zoek..." id="zoekterm" /> <br /><br />
 
-            @Html.ListBoxFor(modelItem => modelItem.SelectedStudentId, Model.Studenten, new { @class = "listbox",size="20" })
+            @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList,string.Empty, new { @class = "listbox",size="20",id="studentList"})
         </div>
         <div class="accountdiv">
             <h1>
@@ -26,7 +34,7 @@
             </h1>
             <input class="zoek" type="text" ng-model="searchTextUser" placeholder="zoek..." id="zoekterm" /> <br /><br />
 
-            @Html.DropDownListFor(modelItem => modelItem.SelectedAccountId, Model.Accounts as SelectList, new { @class = "listbox", size="20" })<br />
+            @Html.DropDownListFor(modelItem => modelItem.SelectedAccountId, Model.Accounts as SelectList,string.Empty, new { @class = "listbox", size="20",id="accountList"})<br />
             <input type="submit" value="Verwijder gebruiker" class="verwijder" name="accountbeheerbuttons" />
         </div>
         <div class="accountdiv">
@@ -50,7 +58,8 @@
                 }
                 <br />
                 <div>
-                    <input type="submit" value="Opslaan" class="button" name="accountbeheerbuttons" />
+                    <input type="submit" value="Gebruiker toevoegen" class="button" name="accountbeheerbuttons" />
+                    <input type="button" value="Nieuw" onclick="deselect()" class="button" />
                 </div>
             </div>
         </div>
