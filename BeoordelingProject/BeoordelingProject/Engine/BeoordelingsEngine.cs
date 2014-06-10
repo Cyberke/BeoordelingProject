@@ -21,7 +21,7 @@ namespace BeoordelingProject.Engine {
                 }
             }
             else {
-                foreach (int midden in middens) {
+                foreach (double midden in middens) {
                     totaal += deelaspect(midden, wegingen[0]);
                 }
             }
@@ -29,7 +29,7 @@ namespace BeoordelingProject.Engine {
             return totaal;
         }
 
-        public double totaalWeging(List<int> wegingen) {
+        public int totaalWeging(List<int> wegingen) {
             int totaal = 0;
 
             foreach (int weging in wegingen) {
@@ -48,9 +48,7 @@ namespace BeoordelingProject.Engine {
 
             totaal = totaalDeelaspect(middens, wegingen) / totaalWeging(wegingen);
 
-            double afgerond = Math.Round(totaal, 4);
-
-            return afgerond;
+            return totaal;
         }
     }
 }
