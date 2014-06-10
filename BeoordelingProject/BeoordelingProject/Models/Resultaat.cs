@@ -10,6 +10,7 @@ namespace BeoordelingProject.Models
     {
         public int ID { get; set; }
         public int StudentId { get; set; }
+        public bool CFaanwezig { get; set; }
         public int TussentijdseId { get; set; }
         public double TotaalTussentijdResultaat { get; set; }
         public int EindId { get; set; }

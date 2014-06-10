@@ -12,6 +12,7 @@ namespace BeoordelingProject.Models
         public string Naam { get; set; }
         public int Weging { get; set; }
         public int GewogenScore { get; set; }
+        public virtual List<Rol> Rollen { get; set; }
         public virtual List<Deelaspect> Deelaspecten {get;set;}
     }
 }
