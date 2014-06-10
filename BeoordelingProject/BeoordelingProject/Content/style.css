@@ -36,8 +36,6 @@ header{
 
     height: 95px;
 
-    
-
     width: 1000px; 
     right:0; 
 
@@ -74,7 +72,7 @@ header{
     background-color: rgb(252,252,252);
     color: #000000;
 
-	height: 83%;
+	height: 100%;
     overflow: auto;
 }
 
@@ -242,7 +240,7 @@ header{
 }
 
 .opties:hover, .stats:hover, #help:hover{
-    background-color:#ec008c;
+    background-color:#fff600;
 }
 
 .stats
