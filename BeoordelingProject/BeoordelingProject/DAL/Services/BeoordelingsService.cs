@@ -36,6 +36,11 @@ namespace BeoordelingProject.DAL.Services {
         {
             return matrixRepository.GetMatrixByID(id);
         }
+
+        public Matrix GetMatrixForRol(int matrixID, int rolID)
+        {
+            return matrixRepository.GetMatrixForRol(matrixID, rolID);
+        }
         public void CreateBeoordeling(Resultaat res) {
             
         }
