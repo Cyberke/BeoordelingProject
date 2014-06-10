@@ -50,13 +50,14 @@ namespace BeoordelingProject.Tests {
         }
 
         [TestMethod]
-        public void totaalScore() {
+        public void totaalScoreTest() {
             middens.Add(midden1);
             middens.Add(midden2);
 
             double res = engine.totaalScore(middens, wegingen);
+            double afronding = Math.Round(res, 4);
 
-            Assert.AreEqual(res, 3.8438);
+            Assert.AreEqual(afronding, 3.8438);
         }
 
         // Volgende testen zijn gebaseerd op "Rekenblad bij eindbeoordeling BP 2013-2014 BAKO.xlsx"
@@ -64,7 +65,7 @@ namespace BeoordelingProject.Tests {
         // Tussentijdse beoordelingen hebben over elke deelaspect een weging. (zie boven)
 
         [TestMethod]
-        public void EindScorePromotor() {
+        public void eindScorePromotorTest() {
             // Eindbeoordeling waarbij alleen de promotor op 1 aspect beoordeelt.
             // Voorbeeld: Attitudes
             // Score op 40
@@ -90,7 +91,7 @@ namespace BeoordelingProject.Tests {
         }
 
         [TestMethod]
-        public void EindScorePromotorTweedelezer() {
+        public void eindScorePromotorTweedelezerTest() {
             // Eindbeoordeling waarbij de promotor en tweede lezer op 1 aspect beoordelen.
             // Voorbeeld: Vormtechnische aspecten
             // Score op 40
@@ -125,7 +126,7 @@ namespace BeoordelingProject.Tests {
         }
 
         [TestMethod]
-        public void EindScorePromotorTweedelezerCriticalFriend() {
+        public void eindScorePromotorTweedelezerCriticalFriendTest() {
             // Eindbeoordeling waarbij de promotor, tweede lezer en critical friend (cf) op 1 aspect beoordelen.
             // Voorbeeld 1: Inhoud en opbouw argumentatie
             // Voorbeeld 2: Praktische relevantie en/of realisaties
@@ -145,8 +146,8 @@ namespace BeoordelingProject.Tests {
             middens.Clear();
 
             // Voorbeeld 2: Promotor (2x OV)
-            middens.Add(8);
-            middens.Add(8);
+            middens.Add(10.5);
+            middens.Add(12.5);
 
             double resPromotor2 = engine.totaalScore(middens, wegingen);
 
@@ -179,8 +180,8 @@ namespace BeoordelingProject.Tests {
             middens.Clear();
 
             // Voorbeeld 2: Critical Friend (2x OV)
-            middens.Add(8);
-            middens.Add(8);
+            middens.Add(12.5);
+            middens.Add(10.5);
 
             double resCriticalFriend2 = engine.totaalScore(middens, wegingen);
 
@@ -192,8 +193,11 @@ namespace BeoordelingProject.Tests {
             double eindRes1 = (resPromotor1 + resTweedelezer1 + resCriticalFriend1) / 3;
             double eindRes2 = (resPromotor2 + resTweedelezer2 + resCriticalFriend2) / 2;
 
-            Assert.AreEqual(eindRes1, 24);
-            Assert.AreEqual(eindRes2, 24);
+            double afronding1 = Math.Ceiling(eindRes1);
+            double afronding2 = Math.Ceiling(eindRes2);
+
+            Assert.AreEqual(afronding1, 24);
+            Assert.AreEqual(afronding2, 31);
         }
     }
 }
