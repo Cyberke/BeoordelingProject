@@ -26,15 +26,11 @@
         </div>
         <table class="studentlist" style="display:block">
             <tr>
-                <th ng-click="reverse=!reverse;order('naam', reverse)">Student</th>
-                <th>Academiejaar</th>
-                <th ng-click="reverse=!reverse;order('trajecttype', reverse)">Traject</th>
-                <th ng-click="reverse=!reverse;order('naam', reverse)">Tussentijdse evaluatie</th>
-                <th ng-click="reverse=!reverse;order('naam', reverse)">Eind evaluatie</th>
+                <th ng-repeat="(i, th) in head" ng-class="selectedCls(i)" ng-click="changeSorting(i)">{{th}}</th>
                 <th>Evaluatie rapport</th>
-                <th>Feedback formulier</th>
+<th>Feedback formulier</th>
             </tr>
-            <tr ng-repeat="student in studenten | filter:{naam:searchText} | orderBy:predicate:reverse" ng-if="showOpleiding(student, '@Opleidingitem')">
+            <tr ng-repeat="student in studenten | filter:{naam:searchText}"  ng-if="showOpleiding(student, '@Opleidingitem')">
                 <td>{{student.naam}}</td>
                 <td>2013-2014</td>
                 <td>{{student.trajecttype}}</td>

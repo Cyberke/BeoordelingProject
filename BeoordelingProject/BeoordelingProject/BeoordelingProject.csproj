@@ -255,6 +255,8 @@
     <Content Include="Content\img\logo_edit.png" />
     <Content Include="Content\img\min.png" />
     <Content Include="Content\img\opties.png" />
+    <Content Include="Content\img\pijl_down.png" />
+    <Content Include="Content\img\pijl_up.png" />
     <Content Include="Content\img\plus.png" />
     <Content Include="Content\img\stats.png" />
     <Content Include="Content\img\zoek.png" />

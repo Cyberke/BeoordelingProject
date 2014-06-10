@@ -93,6 +93,16 @@ header{
     color:#ec008c;
 }
 
+.sort-true
+{
+    background: no-repeat right center url("img/pijl_up.png");
+}
+
+.sort-false
+{
+    background: no-repeat right center url("img/pijl_down.png");
+}
+
 /* Rapport CSS */
 .rapport
 {
