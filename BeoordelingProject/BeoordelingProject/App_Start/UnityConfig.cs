@@ -38,6 +38,8 @@ namespace BeoordelingProject
             container.RegisterType<IMatrixRepository, MatrixRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IResultaatRepository, ResultaatRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGenericRepository<Rol>, GenericRepository<Rol>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGenericRepository<ApplicationUser>, GenericRepository<ApplicationUser>>(new HierarchicalLifetimeManager());
+
             
             //ENGINE
             container.RegisterType<IBeoordelingsEngine, BeoordelingsEngine>(new HierarchicalLifetimeManager());

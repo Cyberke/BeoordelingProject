@@ -18,7 +18,7 @@
             </h1>
             <input class="zoek" type="text" ng-model="searchTextStudent" placeholder="zoek..." id="zoekterm" /> <br /><br />
 
-            @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { @class = "listbox",size="20" })
+            @Html.ListBoxFor(modelItem => modelItem.SelectedStudentId, Model.Studenten, new { @class = "listbox",size="20" })
         </div>
         <div class="accountdiv">
             <h1>
