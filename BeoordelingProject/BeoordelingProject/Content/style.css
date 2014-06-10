@@ -102,6 +102,13 @@ header{
     background: no-repeat right center url("img/pijl_down.png");
 }
 
+.verwijder
+{
+    width:200px;
+    padding:3px;
+    margin-left:-1px;
+}
+
 /* Rapport CSS */
 .rapport
 {
