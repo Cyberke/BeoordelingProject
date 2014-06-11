@@ -19,6 +19,7 @@ namespace BeoordelingProject.Controllers
 
         //
         // GET: /Adminpaneel/
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             AdminpaneelVM vm = new AdminpaneelVM();

@@ -8,6 +8,12 @@
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
     <label> > <strong> Adminpaneel</strong></label>
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
     <br /><br />
 @using (Html.BeginForm())
 {
