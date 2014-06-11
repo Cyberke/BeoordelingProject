@@ -64,12 +64,12 @@
             </div>
         </div>
     </div>
-    <div>
-        @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
-        <br />
-        @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
-    </div>
 }
+<div>
+    @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
+    <br />
+    @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
+</div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
