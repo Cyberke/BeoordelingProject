@@ -29,27 +29,39 @@ namespace BeoordelingProject.Controllers
 
         [HttpPost]
         public ActionResult Index(AdminpaneelVM vm, string adminpaneelButtons) {
-            if (adminpaneelButtons.Equals("Opslaan")) {
-                var email = vm.Email;
-                var wachtwoord = vm.WachtwoordVM.NewPassword;
-                var autoFeedback = vm.AutoFeedback;
+            if (ModelState.IsValid) {
+                if (adminpaneelButtons.Equals("Opslaan")) {
+                    var email = vm.Email;
+                    var wachtwoord = vm.WachtwoordVM.NewPassword;
+                    var autoFeedback = vm.AutoFeedback;
 
-                PasswordHasher pwdHasher = new PasswordHasher();
+                    PasswordHasher pwdHasher = new PasswordHasher();
 
-                var admin = adminService.GetAdminById(User.Identity.GetUserId());
-                admin.UserName = email;
-                admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
+                    var admin = adminService.GetAdminById(User.Identity.GetUserId());
 
-                adminService.UpdateAdmin(admin, autoFeedback);
+                    if (pwdHasher.VerifyHashedPassword(admin.PasswordHash, vm.WachtwoordVM.OldPassword) == PasswordVerificationResult.Success) {
+                        admin.UserName = email;
+                        admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
+
+                        adminService.UpdateAdmin(admin, autoFeedback);
+
+                        ViewBag.FeedBack = "Wachtwoord veranderd!";
+
+                        return View(new AdminpaneelVM());
+                    }
+                    else {
+                        ViewBag.FeedBack = "Wachtwoord niet veranderd omdat huidige wachtwoord niet klopt";
+                    }
+                }
+                else if (adminpaneelButtons.Equals("Studenten importeren")) {
+                    return RedirectToAction("Index", "Student");
+                }
+                else {
+                    return RedirectToAction("AddStudentRol", "Accountbeheer");
+                }
             }
-            else if (adminpaneelButtons.Equals("Studenten importeren")) {
-                return RedirectToAction("Index", "Student");
-            }
-            else {
-                return RedirectToAction("AddStudentRol", "Accountbeheer");
-            }
 
-            return RedirectToAction("Index");
+            return View(vm);
         }
 	}
 }
