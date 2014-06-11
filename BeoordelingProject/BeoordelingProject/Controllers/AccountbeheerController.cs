@@ -40,7 +40,7 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult AddStudentRol(AccountbeheerVM model, FormCollection collection, string accountbeheerbuttons)
         {
-            if (accountbeheerbuttons == "Opslaan")
+            if (accountbeheerbuttons == "Gebruiker toevoegen")
             {
                 List<Rol> selectedRollen = new List<Rol>();
                 Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
