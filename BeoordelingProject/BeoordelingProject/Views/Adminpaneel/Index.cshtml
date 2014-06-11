@@ -8,19 +8,26 @@
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
     <label> > <strong> Adminpaneel</strong></label>
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
     <br /><br />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <br />
+        @ViewBag.FeedBack
         @Html.ValidationSummary(true)
         <div class="form-group">
             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Label("Adres: ")
                 @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email, "Gelieve een valide e-mail adres in te geven")
             </div>
         </div>
         <br />
@@ -29,15 +36,15 @@
             <div class="col-md-10">
                 @Html.Label("Huidig wachtwoord: ")
                 @Html.EditorFor(model => model.WachtwoordVM.OldPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword, "Gelieve uw huidige wachtwoord in te geven")
                 <br />
                 @Html.Label("Nieuw wachtwoord: ")
                 @Html.EditorFor(model => model.WachtwoordVM.NewPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword, "Wachtwoord moet minstens 6 karakters lang zijn")
                 <br />
                 @Html.Label("Bevestig nieuw wachtwoord: ")
                 @Html.EditorFor(model => model.WachtwoordVM.ConfirmPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword, "Wachtwoord kon niet bevestigd worden!")
             </div>
         </div>
         <br />
@@ -64,3 +71,6 @@
     </div>
 }
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

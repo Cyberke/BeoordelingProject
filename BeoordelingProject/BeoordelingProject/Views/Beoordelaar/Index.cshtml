@@ -1,13 +1,13 @@
 ﻿@model BeoordelingProject.ViewModel.BeoordelingsVM
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
 }   
-    <h1>Beoordelen: @Html.DisplayFor(model => model.Student.Naam)</h1>
 
-    <h2>@Html.DisplayFor(model => model.Matrix.Richting)</h2>
-    <h3>@Html.DisplayNameFor(model => model.Matrix.Tussentijds) @Html.DisplayFor(model => model.Matrix.Tussentijds)</h3>
-
+<div id="container">
+    <h1>Beoordelen: @Html.DisplayFor(model => model.Student.Naam) - @Html.DisplayFor(model => model.Matrix.Richting)</h1>
+    <h2>Beoordelaar: @User.Identity.GetUserName()</h2>
 
     @using (Html.BeginForm())
     {
@@ -15,44 +15,31 @@
         Html.ValidationSummary(true);
 
         int counter = 0;
-        <table>
+        
+        <table id="beoordelingtabel">
 
-            @foreach (var item in Model.Matrix.Hoofdaspecten)
+            @foreach(var item in Model.Matrix.Hoofdaspecten)
             {
                 <tr>
-                    <th colspan="6" style="background-color:blue;">
-                        @Html.DisplayFor(modelItem => item.Naam)
-                    </th>
+                    <th colspan="6" class="aspect">@Html.DisplayFor(modelItem => item.Naam)</th>
                 </tr>
-
-                for (int i = 0; i < item.Deelaspecten.Count; i++)
+                
+                for(int i = 0; i < item.Deelaspecten.Count; i++)
                 {
                     <tr>
-                        <td colspan="6" style="background-color:green">
+                        <td colspan="6" class="deelaspectplus" onselectstart="return false" onclick="showinfo(this)">
                             @Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].OVOmschrijving)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].VOmschrijving)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].RVOmschrijving)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].GOmschrijving)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Deelaspecten[i].ZGOmschrijving)
-                        </td>
+                        <td>VOV (0-6)</td>
+                        <td>OV (7-8-9)</td>
+                        <td>V (10-11)</td>
+                        <td>RV (12-13)</td>
+                        <td>G (14-15)</td>
+                        <td>ZG (>=16)</td>
                     </tr>
-                    <tr>
+                    <tr class="buttons">
                         <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 3)</td>
                         <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 8)</td>
                         <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 10.5)</td>
@@ -60,11 +47,23 @@
                         <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 14.5)</td>
                         <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 18)</td>
                     </tr>
+                    <tr id="@Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)" style="display:none">
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)</td>
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].OVOmschrijving)</td>
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOmschrijving)</td>
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].RVOmschrijving)</td>
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].GOmschrijving)</td>
+                        <td>@Html.DisplayFor(model => item.Deelaspecten[i].ZGOmschrijving)</td>
+                    </tr>
                     counter++;
                 }
+                
             }
+
         </table>
         @Html.HiddenFor(model => model.Matrix.ID)
         @Html.HiddenFor(model => model.Student.ID)
         <input type="submit" value="Opslaan" />
     }
+
+</div>
