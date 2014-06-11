@@ -14,7 +14,7 @@
         @Html.AntiForgeryToken()
         
         <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
-        @Html.Label("Welkom " + User.Identity.GetUserName() + "!", new { @class = "username" })
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
 
     <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
