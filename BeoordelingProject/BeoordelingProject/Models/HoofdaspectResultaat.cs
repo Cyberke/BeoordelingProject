@@ -10,7 +10,7 @@ namespace BeoordelingProject.Models
     {
         public int ID { get; set; }
         public int HoofdaspectId { get; set; }
-        public int RolId { get; set; }
+        public virtual Rol Rol { get; set; }
         public double Score { get; set; }
     }
 }

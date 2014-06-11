@@ -23,8 +23,9 @@ _rys("document").ready(function()
 //Toont extra uitleg ivm puntenverdeling op beoordelingpagina
 function showinfo(object)
 {
-	var clicked = object;
-    var info = document.getElementById(clicked.innerHTML);
+    var clicked = object;
+    var id = clicked.innerHTML.trim();
+    var info = document.getElementById(id);
 
     if(clicked.className == "deelaspectplus")
     	clicked.className = "deelaspectmin";
