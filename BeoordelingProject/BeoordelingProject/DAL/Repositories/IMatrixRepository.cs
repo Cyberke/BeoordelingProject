@@ -5,5 +5,6 @@ namespace BeoordelingProject.DAL.Repositories
     {
         BeoordelingProject.Models.Matrix GetMatrixByID(int id);
         BeoordelingProject.Models.Matrix GetMatrixForRol(int matrixID, int rolID);
+        int GetWegingForDeelaspect(int deelresID);
     }
 }
