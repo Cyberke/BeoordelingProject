@@ -23,8 +23,9 @@ _rys("document").ready(function()
 //Toont extra uitleg ivm puntenverdeling op beoordelingpagina
 function showinfo(object)
 {
-	var clicked = object;
-    var info = document.getElementById(clicked.innerHTML);
+    var clicked = object;
+    var id = clicked.innerHTML.trim();
+    var info = document.getElementById(id);
 
     if(clicked.className == "deelaspectplus")
     	clicked.className = "deelaspectmin";
@@ -137,6 +138,20 @@ function help(object)
 		object.id = "scroll";
 		object.innerHTML = "";
 	}
+}
+
+//Toevoegen user formulier tonen/verbergen
+function toggleUserToevoegen()
+{
+    formdiv = document.getElementById("inklapdiv");
+
+    if (formdiv.style.display == "none") {
+        formdiv.style.display = "block";
+    }
+    else {
+        formdiv.style.display = "none";
+    }
+    
 }
 
 //Tabel met studenten voor bepaalde richtingen tonen/verbergen

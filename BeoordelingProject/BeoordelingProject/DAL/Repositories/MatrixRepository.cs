@@ -35,21 +35,36 @@ namespace BeoordelingProject.DAL.Repositories
         public Matrix GetMatrixForRol(int matrixID, int rolID)
         {
             
+            var innerquery =
+            (
+                from h in context.Hoofdaspecten
+                where h.Rollen.Any(r => r.ID == rolID)
+                select h
+            );
+
             var query =
             (
                 from m in context.Matrices
-                from h in m.Hoofdaspecten
-                from d in h.Deelaspecten
-              
-                where m.ID.Equals(matrixID) && h.Rollen.Any(r => r.ID == rolID)
-
+                where m.ID.Equals(matrixID)
                 select m
             );
 
             Matrix mat = query.First();
+            List<Hoofdaspect> haRol = innerquery.ToList<Hoofdaspect>();
 
-            return null;
-            
+            List<Hoofdaspect> newList = new List<Hoofdaspect>();
+            for(int i = 0; i < mat.Hoofdaspecten.Count; i++)
+            {
+                for(int j = 0; j < haRol.Count; j++)
+                {
+                    if(mat.Hoofdaspecten[i] == haRol[j])
+                        newList.Add(haRol[j]);
+                }
+            }
+
+            mat.Hoofdaspecten = newList;
+
+            return mat;
         }
 
     }

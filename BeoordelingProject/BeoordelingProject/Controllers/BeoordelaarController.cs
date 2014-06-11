@@ -32,7 +32,6 @@ namespace BeoordelingProject.Controllers
             BeoordelingsVM vm = new BeoordelingsVM();
             
             vm.Matrix = beoordelingsService.GetMatrixForRol(1, 2);
-            //vm.Matrix = beoordelingsService.GetMatrix(1);
             vm.Student = studentService.GetStudentByID(1);
             vm.Rol_ID = 2;
             vm.Resultaten = new Resultaat();
@@ -52,7 +51,7 @@ namespace BeoordelingProject.Controllers
                 newres.TussentijdseId = m.ID;
                 newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
 
-                int lol = 1;
+
             }
             else
             {

@@ -32,8 +32,8 @@ namespace BeoordelingProject.Controllers
         {
             var accountbeheerVM = new AccountbeheerVM();
             accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
-            accountbeheerVM.Accounts = new SelectList(studentService.GetUsers(), "Id", "UserName");
-            accountbeheerVM.Rollen = studentService.GetRoles();
+            accountbeheerVM.Accounts = studentService.GetUsers();
+            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID","Naam");
             return View(accountbeheerVM);
         }
 

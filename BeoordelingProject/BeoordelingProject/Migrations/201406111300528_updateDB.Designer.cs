@@ -13,7 +13,7 @@ namespace BeoordelingProject.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201406101258413_updateDB"; }
+            get { return "201406111300528_updateDB"; }
         }
         
         string IMigrationMetadata.Source

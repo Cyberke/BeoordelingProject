@@ -17,9 +17,10 @@ namespace BeoordelingProject.ViewModel
 
         public SelectList Studenten { get; set; }
         public int SelectedStudentId { get; set; }
-        public SelectList Accounts { get; set; }
+        public List<ApplicationUser> Accounts { get; set; }
         public string SelectedAccountId { get; set; }
         public ApplicationUser Account { get; set; }
-        public List<Rol> Rollen { get; set; }
+        public SelectList Rollen { get; set; }
+        public int SelectedRolId { get; set; }
     }
 }
