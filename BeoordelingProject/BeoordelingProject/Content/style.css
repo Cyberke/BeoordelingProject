@@ -98,6 +98,11 @@ header{
     background: no-repeat right center url("img/pijl_up.png");
 }
 
+.sort-true img
+{
+
+}
+
 .sort-false
 {
     background: no-repeat right center url("img/pijl_down.png");
@@ -249,7 +254,7 @@ header{
 }
 
 .opties:hover, .stats:hover, #help:hover{
-    background-color:#fff600;
+    background-color:#3CB6DF;
 }
 
 .stats

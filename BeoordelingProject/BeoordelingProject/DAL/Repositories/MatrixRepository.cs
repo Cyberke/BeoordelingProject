@@ -27,25 +27,29 @@ namespace BeoordelingProject.DAL.Repositories
                 select m
             );
 
+            Matrix mat = query.First();
+
             return query.First();
         }
 
         public Matrix GetMatrixForRol(int matrixID, int rolID)
         {
-            /*
+            
             var query =
             (
                 from m in context.Matrices
                 from h in m.Hoofdaspecten
                 from d in h.Deelaspecten
+              
+                where m.ID.Equals(matrixID) && h.Rollen.Any(r => r.ID == rolID)
 
-                where d.Rollen.Any(r => r.ID == rolID)
                 select m
             );
 
-            return query.First();
-            */
+            Matrix mat = query.First();
+
             return null;
+            
         }
 
     }
