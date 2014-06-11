@@ -73,11 +73,14 @@ header{
 	top:1px;
 }
 
+<<<<<<< HEAD
 .loginbutton
 {
     width:90%;
 }
 
+=======
+>>>>>>> 67e72f610e7518708ff6a9368b4cd2ede92c6855
 #inklapdiv
 {
     border-style:solid;
@@ -91,11 +94,19 @@ header{
 .gebruikerinfo
 {
     float: left;
+<<<<<<< HEAD
     margin-left:5px;
 }
 .gebruikerinfo input[type="submit"]
 {
     float: left;
+=======
+}
+
+.gebruikerinfo input[type="submit"]
+{
+    margin-top: 15px;
+>>>>>>> 67e72f610e7518708ff6a9368b4cd2ede92c6855
 }
 
 .studentrolinfo
@@ -586,6 +597,7 @@ th
 {
 	text-align: center;
     margin-top: 10px;
+    clear: both;
 }
 
 .studentlist td
