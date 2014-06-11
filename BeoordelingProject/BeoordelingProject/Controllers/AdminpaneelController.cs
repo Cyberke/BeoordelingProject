@@ -1,4 +1,6 @@
-﻿using BeoordelingProject.ViewModel;
+﻿using BeoordelingProject.DAL.Services;
+using BeoordelingProject.ViewModel;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,12 @@ namespace BeoordelingProject.Controllers
 {
     public class AdminpaneelController : Controller
     {
+        IAdministratorService adminService = null;
+
+        public AdminpaneelController(IAdministratorService adminService) {
+            this.adminService = adminService;
+        }
+
         //
         // GET: /Adminpaneel/
         public ActionResult Index()
@@ -25,7 +33,13 @@ namespace BeoordelingProject.Controllers
                 var wachtwoord = vm.WachtwoordVM.NewPassword;
                 var autoFeedback = vm.AutoFeedback;
 
-                // Service om email, wachtwoord en auto feedback te wijzigen
+                PasswordHasher pwdHasher = new PasswordHasher();
+
+                var admin = adminService.GetAdminByUserName(User.Identity.Name);
+                admin.UserName = email;
+                admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
+
+                adminService.UpdateAdmin(admin, autoFeedback);
             }
             else if (adminpaneelButtons.Equals("Studenten importeren")) {
                 return RedirectToAction("Index", "Student");

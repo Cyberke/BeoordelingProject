@@ -204,7 +204,9 @@
     <Compile Include="DAL\Repositories\MatrixRepository.cs" />
     <Compile Include="DAL\Repositories\ResultaatRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
+    <Compile Include="DAL\Services\AdministratorService.cs" />
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
+    <Compile Include="DAL\Services\IAdministratorService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
     <Compile Include="DAL\Services\IMatrixService.cs" />
     <Compile Include="DAL\Services\IStudentrolService.cs" />
