@@ -43,6 +43,8 @@ namespace BeoordelingProject.DAL.Context
             modelBuilder.Entity<Resultaat>().HasMany(r => r.DeelaspectResultaten).WithMany();
             modelBuilder.Entity<Resultaat>().HasMany(r => r.HoofdaspectResultaten).WithMany();
 
+            modelBuilder.Entity<Hoofdaspect>().HasMany(h => h.Rollen).WithMany();
+
             if (modelBuilder == null)
             {
                 throw new ArgumentNullException("modelBuilder");

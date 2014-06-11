@@ -38,24 +38,33 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddStudentRol(AccountbeheerVM model, FormCollection collection)
+        public ActionResult AddStudentRol(AccountbeheerVM model, FormCollection collection, string accountbeheerbuttons)
         {
-            List<Rol> selectedRollen = new List<Rol>();
-            Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
-            string[] rollenId = collection.GetValues("rollen");
-            foreach (string id in rollenId)
+            if (accountbeheerbuttons == "Opslaan")
             {
-                Rol rol = studentService.GetRolById(Convert.ToInt32(id));
-                selectedRollen.Add(rol);
+                List<Rol> selectedRollen = new List<Rol>();
+                Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
+                string[] rollenId = collection.GetValues("rollen");
+                foreach (string id in rollenId)
+                {
+                    Rol rol = studentService.GetRolById(Convert.ToInt32(id));
+                    selectedRollen.Add(rol);
+                }
+
+                StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+
+                var user = new ApplicationUser() { UserName = model.Account.UserName };
+                List<StudentRollen> studentrollen = new List<StudentRollen>();
+                studentrollen.Add(studentrol);
+                user.StudentRollen = studentrollen;
+                var result = userService.Create(user, model.Account.PasswordHash);
+                userService.AddUserToRoleUser(user.Id);
             }
-
-            var studentrol = studentrolService.CreateStudentrol(selectedStudent,selectedRollen);
-
-            var user = new ApplicationUser() { UserName = model.Account.UserName};
-            var result = userService.Create(user, model.Account.PasswordHash);
-            userService.AddUserToRoleUser(user.Id);
+            else if(accountbeheerbuttons == "Verwijder gebruiker")
+            {
+                studentService.DeleteUser(model.SelectedAccountId);
+            }
             return RedirectToAction("AddStudentRol", "Accountbeheer");
-
         }
 	}
 }

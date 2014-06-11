@@ -209,3 +209,8 @@ function setID(object)
 	var hidden = document.getElementById("IDvalue");
 	hidden.value = object.id;
 }
+
+// Extra opties die alleen te zien zijn voor de administrator (opties, statistieken)
+function redirectTo(controllerName) {
+    window.location = '../' + controllerName + '/Index';
+}

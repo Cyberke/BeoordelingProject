@@ -10,7 +10,6 @@ namespace BeoordelingProject.Models
     {
         public int ID { get; set; }
         public int Weging { get; set; }
-        public virtual Rol Rol { get; set; }
         public string Omschrijving { get; set; }
         public string VOVOmschrijving { get; set; }
         public string OVOmschrijving { get; set; }

@@ -4,6 +4,7 @@ namespace BeoordelingProject.DAL.Services
     public interface IStudentService
     {
         System.Collections.Generic.List<BeoordelingProject.Models.Student> CreateStudenten(string csvData);
+        void DeleteUser(string id);
         System.Collections.Generic.List<string> GetOpleidingen();
         BeoordelingProject.Models.Rol GetRolById(int id);
         System.Collections.Generic.List<BeoordelingProject.Models.Rol> GetRoles();

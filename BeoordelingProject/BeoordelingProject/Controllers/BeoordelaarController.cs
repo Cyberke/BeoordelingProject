@@ -30,10 +30,11 @@ namespace BeoordelingProject.Controllers
         public ActionResult Index()
         {
             BeoordelingsVM vm = new BeoordelingsVM();
-
-            vm.Matrix = beoordelingsService.GetMatrix(2);
+            
+            vm.Matrix = beoordelingsService.GetMatrixForRol(1, 2);
+            //vm.Matrix = beoordelingsService.GetMatrix(1);
             vm.Student = studentService.GetStudentByID(1);
-            vm.Rol_ID = 1;
+            vm.Rol_ID = 2;
             vm.Resultaten = new Resultaat();
 
             return View(vm);
@@ -50,7 +51,8 @@ namespace BeoordelingProject.Controllers
             {
                 newres.TussentijdseId = m.ID;
                 newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
-                
+
+                int lol = 1;
             }
             else
             {

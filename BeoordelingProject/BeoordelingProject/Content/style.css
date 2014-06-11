@@ -107,6 +107,13 @@ header{
     background: no-repeat right center url("img/pijl_down.png");
 }
 
+.verwijder
+{
+    width:200px;
+    padding:3px;
+    margin-left:-1px;
+}
+
 /* Rapport CSS */
 .rapport
 {
@@ -658,6 +665,16 @@ span
     background-color:#ffeeee;
 }
 .field-validation-valid
+{
+    display:none;
+}
+
+.validation-summary-errors
+{
+    font-weight:bold;
+    color:#ff0000;
+}
+.validation-summary-valid
 {
     display:none;
 }
