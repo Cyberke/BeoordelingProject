@@ -32,15 +32,15 @@ namespace BeoordelingProject.Controllers
         {
             var accountbeheerVM = new AccountbeheerVM();
             accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
-            accountbeheerVM.Accounts = new SelectList(studentService.GetUsers(), "Id", "UserName");
-            accountbeheerVM.Rollen = studentService.GetRoles();
+            accountbeheerVM.Accounts = studentService.GetUsers();
+            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID","Naam");
             return View(accountbeheerVM);
         }
 
         [HttpPost]
         public ActionResult AddStudentRol(AccountbeheerVM model, FormCollection collection, string accountbeheerbuttons)
         {
-            if (accountbeheerbuttons == "Opslaan")
+            if (accountbeheerbuttons == "Gebruiker toevoegen")
             {
                 List<Rol> selectedRollen = new List<Rol>();
                 Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);

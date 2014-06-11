@@ -139,6 +139,20 @@ function help(object)
 	}
 }
 
+//Toevoegen user formulier tonen/verbergen
+function toggleUserToevoegen()
+{
+    formdiv = document.getElementById("inklapdiv");
+
+    if (formdiv.style.display == "none") {
+        formdiv.style.display = "block";
+    }
+    else {
+        formdiv.style.display = "none";
+    }
+    
+}
+
 //Tabel met studenten voor bepaalde richtingen tonen/verbergen
 function ShowStudentTabel(object)
 {

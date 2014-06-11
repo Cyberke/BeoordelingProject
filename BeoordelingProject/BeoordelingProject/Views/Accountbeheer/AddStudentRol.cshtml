@@ -1,14 +1,6 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
 @using Microsoft.AspNet.Identity
 
-<script>
-    function deselect()
-    {
-        document.getElementById("studentList").selectedIndex = "0";
-        document.getElementById("accountList").selectedIndex = "0";
-    }
-</script>
-
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
     <label> > </label>
@@ -23,30 +15,12 @@
         @Html.Label("Welkom " + User.Identity.GetUserName() + "!", new { @class = "username" })
     }
     <br /><br />
-    @using (Html.BeginForm())
-    {
-        <div class="accountdiv">
-            <h1>
-                Kies een student:
-            </h1>
-            <input class="zoek" type="text" ng-model="searchTextStudent" placeholder="zoek..." id="zoekterm" /> <br /><br />
 
-            @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList,string.Empty, new { @class = "listbox",size="20",id="studentList"})
-        </div>
-        <div class="accountdiv">
-            <h1>
-                Kies een gebruiker:
-            </h1>
-            <input class="zoek" type="text" ng-model="searchTextUser" placeholder="zoek..." id="zoekterm" /> <br /><br />
+    <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
 
-            @Html.DropDownListFor(modelItem => modelItem.SelectedAccountId, Model.Accounts as SelectList,string.Empty, new { @class = "listbox", size="20",id="accountList"})<br />
-            <input type="submit" value="Verwijder gebruiker" class="verwijder" name="accountbeheerbuttons" />
-        </div>
-        <div class="accountdiv">
-            <h1>
-                Nieuw/wijzig account:
-            </h1>
-            <div class="login">
+    <div id="inklapdiv" style="display:none">
+        <div class="login">
+            <div class="gebruikerinfo">
                 @Html.Label("Gebruikersnaam")
                 @Html.EditorFor(model => model.Account.UserName)
                 @Html.ValidationMessageFor(model => model.Account.UserName)
@@ -55,19 +29,32 @@
                 @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
                 @Html.ValidationMessageFor(model => model.Account.PasswordHash)
                 <br />
-                @foreach (var rol in Model.Rollen)
-                {
-                    <input type="checkbox" value="@rol.ID" name="rollen" />
-                    <label for="@rol.ID">@rol.Naam</label>
-                    <br />
-                }
-                <br />
-                <div>
-                    <input type="submit" value="Gebruiker toevoegen" class="button" name="accountbeheerbuttons" />
-                    <input type="button" value="Nieuw" onclick="deselect()" class="button" />
-                </div>
+                <input type="submit" value="Gebruiker toevoegen" class="actionbutton" name="accountbeheerbuttons" />
             </div>
+            <div class="studentrolinfo">
+                Student:
+                @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new {id = "studentList" })
+                  Rol:
+                @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" })
+
+            </div>            
         </div>
 
-    }
+    </div>
+
+    <table class="studentlist" style="display:block">
+        <tr>
+            <th>Naam</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var user in Model.Accounts)
+        {
+            <tr class="buttonTable">
+                <td>@Html.DisplayFor(modelItem => user.UserName)</td>
+                <td>@Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
+                <td>@Html.ActionLink("Verwijderen", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
+            </tr>
+        }
+    </table>
 </div>

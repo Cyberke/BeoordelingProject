@@ -35,18 +35,20 @@ namespace BeoordelingProject.DAL.Repositories
         public Matrix GetMatrixForRol(int matrixID, int rolID)
         {
             
-            var query =
-            (
-                from m in context.Matrices
-                from h in m.Hoofdaspecten
-                from d in h.Deelaspecten
-              
-                where m.ID.Equals(matrixID) && h.Rollen.Any(r => r.ID == rolID)
+            //var query =
+            //(
+            //    from m in context.Matrices
+            //    join h in context.Hoofdaspecten
+            //    on m.Hoofdaspecten equals h.ID
 
-                select m
-            );
+                
+            //    //where m.ID.Equals(matrixID) && h.Rollen.Any(r => r.ID == rolID)
 
-            Matrix mat = query.First();
+            //    //select m
+            //    select new NewMat { M = m, H = h};
+            //);
+
+            //Matrix mat = query.First();
 
             return null;
             
