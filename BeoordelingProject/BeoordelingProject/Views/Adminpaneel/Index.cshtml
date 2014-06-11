@@ -60,14 +60,14 @@
         <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Opslaan" name="adminpaneelButtons" class="btn btn-default" />
+                <input type="submit" value="Opslaan" name="adminpaneelButtons" class="actionbutton" />
             </div>
         </div>
     </div>
     <div>
-        <input type="submit" value="Studenten importeren" name="adminpaneelButtons" />
+        @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
         <br />
-        <input type="submit" value="Accountbeheer" name="adminpaneelButtons" />
+        @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
     </div>
 }
 </div>

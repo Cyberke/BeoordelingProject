@@ -30,34 +30,26 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Index(AdminpaneelVM vm, string adminpaneelButtons) {
             if (ModelState.IsValid) {
-                if (adminpaneelButtons.Equals("Opslaan")) {
-                    var email = vm.Email;
-                    var wachtwoord = vm.WachtwoordVM.NewPassword;
-                    var autoFeedback = vm.AutoFeedback;
+                var email = vm.Email;
+                var wachtwoord = vm.WachtwoordVM.NewPassword;
+                var autoFeedback = vm.AutoFeedback;
 
-                    PasswordHasher pwdHasher = new PasswordHasher();
+                PasswordHasher pwdHasher = new PasswordHasher();
 
-                    var admin = adminService.GetAdminById(User.Identity.GetUserId());
+                var admin = adminService.GetAdminById(User.Identity.GetUserId());
 
-                    if (pwdHasher.VerifyHashedPassword(admin.PasswordHash, vm.WachtwoordVM.OldPassword) == PasswordVerificationResult.Success) {
-                        admin.UserName = email;
-                        admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
+                if (pwdHasher.VerifyHashedPassword(admin.PasswordHash, vm.WachtwoordVM.OldPassword) == PasswordVerificationResult.Success) {
+                    admin.UserName = email;
+                    admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
 
-                        adminService.UpdateAdmin(admin, autoFeedback);
+                    adminService.UpdateAdmin(admin, autoFeedback);
 
-                        ViewBag.FeedBack = "Wachtwoord veranderd!";
+                    ViewBag.FeedBack = "Wachtwoord veranderd!";
 
-                        return View(new AdminpaneelVM());
-                    }
-                    else {
-                        ViewBag.FeedBack = "Wachtwoord niet veranderd omdat huidige wachtwoord niet klopt";
-                    }
-                }
-                else if (adminpaneelButtons.Equals("Studenten importeren")) {
-                    return RedirectToAction("Index", "Student");
+                    return View(new AdminpaneelVM());
                 }
                 else {
-                    return RedirectToAction("AddStudentRol", "Accountbeheer");
+                    ViewBag.FeedBack = "Wachtwoord niet veranderd omdat huidige wachtwoord niet klopt";
                 }
             }
 
