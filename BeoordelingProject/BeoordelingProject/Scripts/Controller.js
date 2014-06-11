@@ -10,7 +10,7 @@ module.controller("appController", function ($scope, $filter, studentenlijst)
     scope.head = {
         a: "Student",
         b: "Academiejaar",
-        c: "Traject",
+        c: "Traject   ",
         d: "Tussentijdse evaluatie",
         e: "Eind evaluatie",
     };
