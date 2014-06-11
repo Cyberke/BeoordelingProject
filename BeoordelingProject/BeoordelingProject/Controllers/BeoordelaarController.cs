@@ -31,7 +31,7 @@ namespace BeoordelingProject.Controllers
         {
             BeoordelingsVM vm = new BeoordelingsVM();
             
-            vm.Matrix = beoordelingsService.GetMatrixForRol(1, 2);
+            vm.Matrix = beoordelingsService.GetMatrixForRol(2, 1);
             vm.Student = studentService.GetStudentByID(1);
             vm.Rol_ID = 2;
             vm.Resultaten = new Resultaat();
@@ -51,7 +51,12 @@ namespace BeoordelingProject.Controllers
                 newres.TussentijdseId = m.ID;
                 newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
 
+                List<double> scores = beoordelingsService.GetListScore(newres.DeelaspectResultaten);
+                List<int> wegingen = beoordelingsService.GetListWegingen(newres.DeelaspectResultaten);
 
+                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+
+                
             }
             else
             {
