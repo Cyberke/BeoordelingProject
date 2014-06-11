@@ -10,6 +10,11 @@
 </script>
 
 <div id="container">
+    <a href="../Admin/Index" class="link">Overzicht</a>
+    <label> > </label>
+    <a href="../Adminpaneel/Index" class="link">Adminpaneel</a>
+    <label> > <strong> Accountbeheer</strong></label>
+    <br />
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
