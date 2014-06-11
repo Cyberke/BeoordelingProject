@@ -663,3 +663,13 @@ span
 {
     display:none;
 }
+
+.validation-summary-errors
+{
+    font-weight:bold;
+    color:#ff0000;
+}
+.validation-summary-valid
+{
+    display:none;
+}
