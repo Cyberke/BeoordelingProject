@@ -1,0 +1,64 @@
+﻿@model BeoordelingProject.ViewModel.AdminpaneelVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Adminpaneel</h4>
+        <br />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Label("Adres: ")
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("Wachtwoord wijzigen", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Label("Huidig wachtwoord: ")
+                @Html.EditorFor(model => model.WachtwoordVM.OldPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword)
+                <br />
+                @Html.Label("Nieuw wachtwoord: ")
+                @Html.EditorFor(model => model.WachtwoordVM.NewPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword)
+                <br />
+                @Html.Label("Bevestig nieuw wachtwoord: ")
+                @Html.EditorFor(model => model.WachtwoordVM.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword)
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AutoFeedback)
+                @Html.ValidationMessageFor(model => model.AutoFeedback)
+                <label for="@Model.AutoFeedback" class="control-label col-md-2">
+                    Automatische feedback per mail verkrijgen.
+                </label>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Opslaan" name="adminpaneelButtons" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Studenten importeren" name="adminpaneelButtons" />
+        <br />
+        <input type="submit" value="Accountbeheer" name="adminpaneelButtons" />
+    </div>
+}
+</div>

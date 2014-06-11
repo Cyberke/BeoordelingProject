@@ -186,6 +186,7 @@
     <Compile Include="Controllers\AccountbeheerController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminpaneelController.cs" />
     <Compile Include="Controllers\BeoordelaarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatrixController.cs" />
@@ -203,7 +204,9 @@
     <Compile Include="DAL\Repositories\MatrixRepository.cs" />
     <Compile Include="DAL\Repositories\ResultaatRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
+    <Compile Include="DAL\Services\AdministratorService.cs" />
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
+    <Compile Include="DAL\Services\IAdministratorService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
     <Compile Include="DAL\Services\IMatrixService.cs" />
     <Compile Include="DAL\Services\IStudentrolService.cs" />
@@ -245,6 +248,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\AdminOverzichtVM.cs" />
     <Compile Include="ViewModel\AccountbeheerVM.cs" />
+    <Compile Include="ViewModel\AdminpaneelVM.cs" />
     <Compile Include="ViewModel\CSVDataVM.cs" />
     <Compile Include="ViewModel\BeoordelingsVM.cs" />
   </ItemGroup>
@@ -322,6 +326,7 @@
     <Content Include="Views\Matrix\Index.cshtml" />
     <Content Include="Views\Admin\GetStudent.cshtml" />
     <Content Include="Views\Beoordelaar\Index.cshtml" />
+    <Content Include="Views\Adminpaneel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

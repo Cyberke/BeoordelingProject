@@ -30,6 +30,7 @@ namespace BeoordelingProject
             container.RegisterType<IMatrixService, MatrixService>(new HierarchicalLifetimeManager());
             container.RegisterType<IBeoordelingsService, BeoordelingsService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentrolService, StudentrolService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IAdministratorService, AdministratorService>(new HierarchicalLifetimeManager());
 
             //REPOSITORIES
             container.RegisterType<IStudentRepository, StudentRepository>(new HierarchicalLifetimeManager());
@@ -38,6 +39,7 @@ namespace BeoordelingProject
             container.RegisterType<IMatrixRepository, MatrixRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IResultaatRepository, ResultaatRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGenericRepository<Rol>, GenericRepository<Rol>>(new HierarchicalLifetimeManager());
+
             
             //ENGINE
             container.RegisterType<IBeoordelingsEngine, BeoordelingsEngine>(new HierarchicalLifetimeManager());

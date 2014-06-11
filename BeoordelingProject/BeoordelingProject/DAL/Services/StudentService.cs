@@ -79,9 +79,9 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
-        public void DeleteUser(ApplicationUser user)
+        public void DeleteUser(string id)
         {
-            studentRepository.Delete(user);
+            accountRepository.DeleteGebruiker(id);
         }
 
         public List<Rol> GetRoles()
@@ -136,10 +136,6 @@ namespace BeoordelingProject.DAL.Services
         public Rol GetRolById(int id)
         {
             return rolRepository.GetByID(id);
-        }
-        public ApplicationUser GetUserById(string id)
-        {
-            return accountRepository.GetByID(id);
         }
     }
 }

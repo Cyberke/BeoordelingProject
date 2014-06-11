@@ -30,5 +30,12 @@ namespace BeoordelingProject.DAL.Repositories
 
             return query;
         }
+
+        public void DeleteGebruiker(string selectedId)
+        {
+            ApplicationUser user = context.Users.First(u => u.Id == selectedId);
+            context.Users.Remove(user);
+            context.SaveChanges();
+        }
     }
 }
