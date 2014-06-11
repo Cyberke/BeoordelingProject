@@ -35,7 +35,7 @@ namespace BeoordelingProject.Controllers
 
                 PasswordHasher pwdHasher = new PasswordHasher();
 
-                var admin = adminService.GetAdminByUserName(User.Identity.Name);
+                var admin = adminService.GetAdminById(User.Identity.GetUserId());
                 admin.UserName = email;
                 admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
 
