@@ -60,16 +60,16 @@
         <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Opslaan" name="adminpaneelButtons" class="btn btn-default" />
+                <input type="submit" value="Opslaan" name="adminpaneelButtons" class="actionbutton" />
             </div>
         </div>
     </div>
-    <div>
-        <input type="submit" value="Studenten importeren" name="adminpaneelButtons" />
-        <br />
-        <input type="submit" value="Accountbeheer" name="adminpaneelButtons" />
-    </div>
 }
+<div>
+    @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
+    <br />
+    @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
+</div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

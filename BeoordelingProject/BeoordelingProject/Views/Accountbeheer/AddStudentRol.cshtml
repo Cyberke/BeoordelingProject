@@ -15,32 +15,35 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
+    @using (Html.BeginForm())
+    {
+        <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
+    
+        <div id="inklapdiv" style="display:none">
+            <div class="login">
+                <div class="gebruikerinfo">
+                    @Html.Label("Gebruikersnaam")
+                    @Html.EditorFor(model => model.Account.UserName)
+                    @Html.ValidationMessageFor(model => model.Account.UserName)
+                    <br />
+                    @Html.Label("Wachtwoord")
+                    @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
+                    @Html.ValidationMessageFor(model => model.Account.PasswordHash)
+                    <br />
+                    <input type="submit" value="Gebruiker toevoegen" class="actionbutton" />
+                </div>
+                <div class="studentrolinfo">
+                    Student:
+                    @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" })
+                    Rol:
+                    @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" })
 
-    <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
-
-    <div id="inklapdiv" style="display:none">
-        <div class="login">
-            <div class="gebruikerinfo">
-                @Html.Label("Gebruikersnaam")
-                @Html.EditorFor(model => model.Account.UserName)
-                @Html.ValidationMessageFor(model => model.Account.UserName)
-                <br />
-                @Html.Label("Wachtwoord")
-                @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
-                @Html.ValidationMessageFor(model => model.Account.PasswordHash)
-                <br />
-                <input type="submit" value="Gebruiker toevoegen" class="actionbutton" name="accountbeheerbuttons" />
+                </div>
             </div>
-            <div class="studentrolinfo">
-                Student:
-                @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new {id = "studentList" })
-                  Rol:
-                @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" })
 
-            </div>            
         </div>
-
-    </div>
+    }
+    
 
     <table class="studentlist" style="display:block">
         <tr>
@@ -50,10 +53,11 @@
         </tr>
         @foreach (var user in Model.Accounts)
         {
+            //lists met foreach maken.
             <tr class="buttonTable">
                 <td>@Html.DisplayFor(modelItem => user.UserName)</td>
                 <td>@Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
-                <td>@Html.ActionLink("Verwijderen", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
+                <td>@Html.ActionLink("Verwijderen", "DeleteUser", "Accountbeheer", new { userId = user.Id.ToString() }, new { @class = "actionbutton tablebutton" })</td>
             </tr>
         }
     </table>

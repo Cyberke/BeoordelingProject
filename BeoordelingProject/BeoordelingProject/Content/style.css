@@ -63,6 +63,16 @@ header{
     cursor:pointer;
 }
 
+.actionbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.actionbutton:active {
+	position:relative;
+	top:1px;
+}
+
 #inklapdiv
 {
     border-style:solid;
@@ -76,12 +86,11 @@ header{
 .gebruikerinfo
 {
     float: left;
+}
 
-    border-style:solid;
-    border-width:1px;
-    border-top: none;
-
-
+.gebruikerinfo input[type="submit"]
+{
+    margin-top: 15px;
 }
 
 .studentrolinfo
@@ -89,27 +98,12 @@ header{
     padding-top: 5px;
     float: right;
     margin-right: 5px;
-
-    border-style:solid;
-    border-width:1px;
-    border-top: none;
 }
 
 .tablebutton
 {
-    display:table-cell;
-    width: 100vh;
-}
-
-
-.actionbutton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
-}.actionbutton:active {
-	position:relative;
-	top:1px;
+    display:inline-block;
+    width: 100%;
 }
 
 .header
@@ -436,13 +430,6 @@ input
 	margin: 5px;
 }
 
-label,input[type="checkbox"]
-{
-	font-size: 14px;
-	display:inline;
-	margin: 5px;
-}
-
 /* combobox met studentnamen/accounts */
 
 .accountdiv
@@ -589,6 +576,7 @@ th
 {
 	text-align: center;
     margin-top: 10px;
+    clear: both;
 }
 
 .studentlist td
