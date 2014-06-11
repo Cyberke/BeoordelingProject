@@ -28,7 +28,7 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AdminpaneelVM vm, string adminpaneelButtons) {
+        public ActionResult Index(AdminpaneelVM vm) {
             if (ModelState.IsValid) {
                 var email = vm.Email;
                 var wachtwoord = vm.WachtwoordVM.NewPassword;
