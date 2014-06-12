@@ -77,20 +77,13 @@ header{
 {
     width:90%;
 }
-#inklapdiv
-{
-    border-style:solid;
-    border-width:1px;
+#inklapdiv {
+    border-style: solid;
+    border-width: 1px;
     border-top: none;
     border-color: #C9C9C9;
     min-height: 20%;
     height: auto;
-    transition: opacity 3s;
-}
-
-#inklapdiv:hover
-{
-    transition: opacity 3s;
 }
 
 .gebruikerinfo
