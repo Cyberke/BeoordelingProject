@@ -24,12 +24,12 @@ namespace BeoordelingProject.DAL.Services
             this.uow = uow;
             this.studentrolRepository = studentrolRepository;
         }
-        public StudentRollen CreateStudentrol(Student student, Rol rol)
+        public StudentRollen CreateStudentrol(Student student, List<Rol> rollen)
         {
             StudentRollen newStudentrol = new StudentRollen()
             {
                 Student = student,
-                //R = rollen
+                Rollen = rollen
             };
             newStudentrol = studentrolRepository.Insert(newStudentrol);
             uow.SaveChanges();

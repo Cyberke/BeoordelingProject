@@ -18,6 +18,7 @@
     <br /><br />
     @using (Html.BeginForm())
     {
+        @ViewBag.Error<br />
         <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
     
         <div id="inklapdiv" style="display:none">
@@ -40,6 +41,18 @@
                     @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
                     Rol:
                     @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
+
+                    @if(Model.SelectedStudentId != null)
+                    {
+                        for(var i=1; i<Model.SelectedStudentId.Count;i++)
+                        {
+                            <text>Student:</text>
+                            Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList["+i+"]" });
+                            <text>Rol:</text>
+                            Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[" + i + "]" });
+                        }
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -81,7 +94,6 @@
 
         div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
 
-        alert(counter);
         counter++;
     }
 </script>
