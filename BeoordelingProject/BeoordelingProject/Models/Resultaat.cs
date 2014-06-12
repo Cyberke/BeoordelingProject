@@ -17,6 +17,7 @@ namespace BeoordelingProject.Models
         public double TotaalEindresultaat { get; set; }
         public virtual List<DeelaspectResultaat> DeelaspectResultaten { get; set; }
         public virtual List<HoofdaspectResultaat> HoofdaspectResultaten { get; set; }
-
+        public string CustomFeedback { get; set; }
+        public bool Breekpunten { get; set; }
     }
 }

@@ -60,6 +60,7 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult DeleteUser(string userId)
         {
+            
             studentService.DeleteUser(userId);
             
             return RedirectToAction("AddStudentRol", "Accountbeheer");
