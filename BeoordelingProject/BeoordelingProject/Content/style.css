@@ -77,20 +77,13 @@ header{
 {
     width:90%;
 }
-#inklapdiv
-{
-    border-style:solid;
-    border-width:1px;
+#inklapdiv {
+    border-style: solid;
+    border-width: 1px;
     border-top: none;
     border-color: #C9C9C9;
     min-height: 20%;
     height: auto;
-    transition: opacity 3s;
-}
-
-#inklapdiv:hover
-{
-    transition: opacity 3s;
 }
 
 .gebruikerinfo
@@ -634,6 +627,55 @@ th
 
 /* de laatste th heeft geen streep meer nodig */
 .studentlist th:last-child
+{
+	border-style: none;
+}
+
+/*User table*/
+.userlist
+{
+	text-align: center;
+    margin-top: 10px;
+    clear: both;
+}
+
+.userlist td
+{
+    border-bottom: 1px solid #C9C9C9;
+    border-left: 1px solid #C9C9C9;
+	padding: 5px;
+}
+
+.userlist tr:first-child th:first-child
+{
+	width: 100%;
+	text-align: center;
+}
+
+.userlist td:first-child
+{
+	text-align: left;
+    border-left: none;
+}
+
+.userlist th
+{
+    width: 10%;
+	background-color: #000000;
+	color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-color: #FFFFFF;
+
+	padding: 5px;
+}
+
+.userlist td:last-child
+{
+    border-left: none;
+}
+
+.userlist th:last-child
 {
 	border-style: none;
 }
