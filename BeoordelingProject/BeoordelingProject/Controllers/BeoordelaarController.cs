@@ -27,7 +27,7 @@ namespace BeoordelingProject.Controllers
         //
         // GET: /Beoordelaar/
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Beoordeling()
         {
             BeoordelingsVM vm = new BeoordelingsVM();
             
@@ -40,7 +40,7 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(BeoordelingsVM vm)
+        public ActionResult Beoordeling(BeoordelingsVM vm)
         {
             Matrix m = matrixService.GetMatrixByID(vm.Matrix.ID);
             Resultaat newres = new Resultaat();
@@ -63,6 +63,14 @@ namespace BeoordelingProject.Controllers
                 //eindscoreberekening
             }
             return View();
+        }
+
+        public ActionResult Index() {
+            StudentKeuzeVM vm = new StudentKeuzeVM();
+
+            // Moet alle STUDENTEN ophalen voor ELKE USER met zijn ROL
+
+            return View(vm);
         }
 	}
 }
