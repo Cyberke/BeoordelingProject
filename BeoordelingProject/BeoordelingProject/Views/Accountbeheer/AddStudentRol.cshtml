@@ -40,27 +40,8 @@
                     @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" })
                     Rol:
                     @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" })
-
-<<<<<<< HEAD
-    <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
-
-    <div id="inklapdiv" style="display:none">
-        <div class="login">
-            <div class="gebruikerinfo">
-                @Html.Label("Gebruikersnaam")
-                @Html.EditorFor(model => model.Account.UserName)
-                @Html.ValidationMessageFor(model => model.Account.UserName)
-                <br />
-                @Html.Label("Wachtwoord")
-                @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
-                @Html.ValidationMessageFor(model => model.Account.PasswordHash)
-                <br />
-                <input type="submit" value="Gebruiker toevoegen" class="actionbutton loginbutton" name="accountbeheerbuttons" />
-=======
                 </div>
->>>>>>> 67e72f610e7518708ff6a9368b4cd2ede92c6855
             </div>
-
         </div>
     }
     
@@ -84,15 +65,22 @@
 </div>
 
 <script>
+    var counter = 1;
     function newStudentRol()
     {
-
+        /*
+            min knop houd de waarde bij die de counter toen had.
+            wanneer op de min knop geduwt wordt: for van de "minwaarde" tot de huidige counter en alle elementen die overeen komen verwijderen uit de div EN uit de arrays van studentId en rolId
+        */
         var div = document.getElementsByClassName("studentrolinfo")[0];
         
         var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" }).ToString())
         
         var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" }).ToString())
 
-        div.innerHTML += "student:"+studentlist+"Rol:"+rollist;
+        div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
+
+        alert(counter);
+        counter++;
     }
 </script>
