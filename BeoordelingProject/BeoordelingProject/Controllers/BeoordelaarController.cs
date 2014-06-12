@@ -42,26 +42,7 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
-            Matrix m = matrixService.GetMatrixByID(vm.Matrix.ID);
-            Resultaat newres = new Resultaat();
-            newres.StudentId = vm.Student.ID;
-
-            if (m.Tussentijds == true)
-            {
-                newres.TussentijdseId = m.ID;
-                newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
-
-                List<double> scores = beoordelingsService.GetListScore(newres.DeelaspectResultaten);
-                List<int> wegingen = beoordelingsService.GetListWegingen(newres.DeelaspectResultaten);
-
-                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
-
-                
-            }
-            else
-            {
-                //eindscoreberekening
-            }
+            
             return View();
         }
 
