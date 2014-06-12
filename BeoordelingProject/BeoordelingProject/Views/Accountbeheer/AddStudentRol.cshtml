@@ -37,9 +37,9 @@
                     <label class="actionbutton" onclick="newStudentRol()">+</label>
 
                     Student:
-                    @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" })
+                    @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
                     Rol:
-                    @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" })
+                    @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
                 </div>
             </div>
         </div>
@@ -73,8 +73,9 @@
         */
         var div = document.getElementsByClassName("studentrolinfo")[0];
         
-        var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" }).ToString())
-        
+        var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[JSCounter]" }).ToString())
+        studentlist = studentlist.replace("JSCounter", counter);
+
         var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" }).ToString())
 
         div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
