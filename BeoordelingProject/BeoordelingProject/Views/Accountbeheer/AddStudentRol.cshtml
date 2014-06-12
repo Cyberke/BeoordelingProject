@@ -1,5 +1,6 @@
 ﻿@model BeoordelingProject.ViewModel.AccountbeheerVM
 @using Microsoft.AspNet.Identity
+@using BeoordelingProject.Helper
 
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
@@ -33,6 +34,8 @@
                     <input type="submit" value="Gebruiker toevoegen" class="actionbutton" />
                 </div>
                 <div class="studentrolinfo">
+                    <label class="actionbutton" onclick="newStudentRol()">+</label>
+
                     Student:
                     @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" })
                     Rol:
@@ -62,3 +65,17 @@
         }
     </table>
 </div>
+
+<script>
+    function newStudentRol()
+    {
+
+        var div = document.getElementsByClassName("studentrolinfo")[0];
+        
+        var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" }).ToString())
+        
+        var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" }).ToString())
+
+        div.innerHTML += "student:"+studentlist+"Rol:"+rollist;
+    }
+</script>
