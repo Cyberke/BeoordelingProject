@@ -15,12 +15,12 @@ namespace BeoordelingProject.ViewModel
 
         }
 
-        public SelectList Studenten { get; set; }
+        public List<Student> Studenten { get; set; }
         public List<int> SelectedStudentId { get; set; }
         public List<ApplicationUser> Accounts { get; set; }
         public string SelectedAccountId { get; set; }
         public ApplicationUser Account { get; set; }
-        public SelectList Rollen { get; set; }
+        public List<Rol> Rollen { get; set; }
         public List<int> SelectedRolId { get; set; }
     }
 }

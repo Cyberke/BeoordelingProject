@@ -31,9 +31,9 @@ namespace BeoordelingProject.Controllers
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();
-            accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+            accountbeheerVM.Studenten = studentService.GetStudenten();
             accountbeheerVM.Accounts = studentService.GetUsers();
-            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID","Naam");
+            accountbeheerVM.Rollen = studentService.GetRoles();
             return View(accountbeheerVM);
         }
 
@@ -56,9 +56,9 @@ namespace BeoordelingProject.Controllers
                                 ViewBag.Error = "Duplicaatje";
 
                                 var accountbeheerVM = new AccountbeheerVM();
-                                accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+                                accountbeheerVM.Studenten = studentService.GetStudenten();
                                 accountbeheerVM.Accounts = studentService.GetUsers();
-                                accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+                                accountbeheerVM.Rollen = studentService.GetRoles();
 
                                 accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
                                 accountbeheerVM.SelectedRolId = model.SelectedRolId;
