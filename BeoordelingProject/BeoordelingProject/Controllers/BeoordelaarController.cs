@@ -42,8 +42,8 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
-            
-            return View();
+            beoordelingsService.CreateBeoordeling(vm);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Index() {
