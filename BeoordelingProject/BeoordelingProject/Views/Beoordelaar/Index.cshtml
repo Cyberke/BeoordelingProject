@@ -4,9 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<script>
+    angular.module("appModule").value("studentenlijst", @Html.Raw(Model.StudentenString));
+</script>
 <div id="container">
     <h1>Student keuze</h1>
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
@@ -16,8 +16,8 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
-    
-    @foreach () {
-        //
-    }
+    <br /><br />
+    <select size="@Model.Aantal">
+        <option ng-repeat="student in studenten | filter:{naam:searchText}">{{student.naam}} ({{student.opleiding}} - {{student.rollen}})</option>
+    </select>
 </div>

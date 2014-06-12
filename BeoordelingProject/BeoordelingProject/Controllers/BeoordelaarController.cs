@@ -16,12 +16,19 @@ namespace BeoordelingProject.Controllers
         private IMatrixService matrixService = null;
         private IBeoordelingsEngine beoordelingsEngine = null;
         private IStudentService studentService = null;
+        private IUserManagementService userService = null;
 
-        public BeoordelaarController(IBeoordelingsService beoordelingsService, IMatrixService matrixService, IBeoordelingsEngine beoordelingsEngine, IStudentService studentService) {
+        public BeoordelaarController(
+            IBeoordelingsService beoordelingsService,
+            IMatrixService matrixService,
+            IBeoordelingsEngine beoordelingsEngine,
+            IStudentService studentService,
+            IUserManagementService userService) {
             this.beoordelingsService = beoordelingsService;
             this.matrixService = matrixService;
             this.beoordelingsEngine = beoordelingsEngine;
             this.studentService = studentService;
+            this.userService = userService;
         }
 
         //
@@ -49,7 +56,12 @@ namespace BeoordelingProject.Controllers
         public ActionResult Index() {
             StudentKeuzeVM vm = new StudentKeuzeVM();
 
-            // Moet alle STUDENTEN ophalen voor ELKE USER met zijn ROL
+            ApplicationUser beoordelaar = userService.GetUser(User.Identity.Name);
+
+            vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+            vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+            vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
+            vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent);
 
             return View(vm);
         }

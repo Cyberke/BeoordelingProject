@@ -41,19 +41,21 @@ function showinfo(object)
 //Functie om de juiste helptekst in te laden. Tekst (met mogelijkheid voor tags/images) wordt hier ingeladen
 //switch werkt op de paginanaam van in de URL
 //substring wordt gebruikt om .html weg te knippen, dit zal niet nodig zijn voor ASP, aangezien er geen zichtbaar bestandstype in de addressbar is
+var path = window.location.pathname;
+var page = path.split("/").pop();
+
+//page = page.substring(0, page.length - 5);
+
 function helptekst(pagename)
 {
-	var path = window.location.pathname;
-	var page = path.split("/").pop();
-	
-	page = page.substring(0, page.length - 5);
+
 
 	var helpTekst = "<Insert text here>";
 
 	switch(page)
 	{
-		case "Index":
-			helpTekst = "Voer je <b>gebruikersnaam</b> en <b>wachtwoord</b> in en klik op \"log in\".\n";
+		case "Login":
+			helpTekst = "Voer je <b>gebruikersnaam</b> en <b>wachtwoord</b> in en klik op \"Log in\".\n";
 			helpTekst += "Gebruikersnaam of Wachtwoord vergeten? Contacteer de Administrator.";
 
 			return helpTekst;
@@ -121,7 +123,7 @@ function help(object)
 	if(object.id == "help")
 	{
 		object.id = "helpclick";
-		object.innerHTML = helptekst("temp");
+		object.innerHTML = helptekst(page);
 	}
 	else if(object.id == "helpclick")
 	{
@@ -131,7 +133,7 @@ function help(object)
 	else if(object.id == "scroll")
 	{
 		object.id = "clickscroll";
-		object.innerHTML = helptekst("temp");
+		object.innerHTML = helptekst(page);
 	}
 	else
 	{

@@ -3,17 +3,18 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div id="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <input type="file" id="file" name="file"/>
+        <input type="button" value="Submit" id="submit" onclick="happytime()" class="actionbutton">
+        <input type="submit" value="Importeer" id="submit" class="actionbutton"/>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <input type="file" id="file" name="file" />
-    <input type="button" value="submit" id="submit" onclick="happytime()">
-    <input type="submit" value="Opslaan" id="submit" />
-
-    @Html.Hidden("csvData", Model.csvData);
-}
+        @Html.Hidden("csvData", Model.csvData);
+    }
+</div>
 
 <script>
     function happytime() {

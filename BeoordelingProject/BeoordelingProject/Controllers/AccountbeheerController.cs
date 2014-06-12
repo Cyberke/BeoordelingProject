@@ -38,16 +38,50 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddStudentRol(AccountbeheerVM model, string accountbeheerbuttons)
+        public ActionResult AddStudentRol(AccountbeheerVM model)
         {
-            List<Rol> selectedRollen = new List<Rol>();
-            selectedRollen.Add(studentService.GetRolById(model.SelectedRolId));
-            Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
-            StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+            bool inArray = false;
+            List<StudentRollen> studentrollen = new List<StudentRollen>();
+            for (int i = 0; i < model.SelectedRolId.Count;i++ )
+            {
+                Rol selectedRol = new Rol();
+                for (int s = 0; s < studentrollen.Count;s++ )
+                {
+                    if (model.SelectedStudentId[i].Equals(studentrollen[s].Student.ID))
+                    {
+                        for (int r = 0; r < studentrollen[s].Rollen.Count; r++)
+                        {
+                            if (model.SelectedRolId[i].Equals(studentrollen[s].Rollen[r].ID))
+                            {
+                                ViewBag.Error = "Duplicaatje";
+
+                                var accountbeheerVM = new AccountbeheerVM();
+                                accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+                                accountbeheerVM.Accounts = studentService.GetUsers();
+                                accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                                accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
+                                accountbeheerVM.SelectedRolId = model.SelectedRolId;
+                                return View(accountbeheerVM);
+
+                            }
+                        }
+                        selectedRol = studentService.GetRolById(model.SelectedRolId[i]);
+                        studentrollen[s].Rollen.Add(selectedRol);
+                        inArray = true;
+                    }
+                }
+                if (!inArray)
+                {
+                    Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId[i]);
+                    List<Rol> selectedRollen = new List<Rol>();
+                    selectedRollen.Add(studentService.GetRolById(model.SelectedRolId[i]));
+                    StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+                    studentrollen.Add(studentrol);
+                }
+            }
 
             var user = new ApplicationUser() { UserName = model.Account.UserName };
-            List<StudentRollen> studentrollen = new List<StudentRollen>();
-            studentrollen.Add(studentrol);
             user.StudentRollen = studentrollen;
             var result = userService.Create(user, model.Account.PasswordHash);
             userService.AddUserToRoleUser(user.Id);
@@ -57,6 +91,7 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult DeleteUser(string userId)
         {
+            
             studentService.DeleteUser(userId);
             
             return RedirectToAction("AddStudentRol", "Accountbeheer");

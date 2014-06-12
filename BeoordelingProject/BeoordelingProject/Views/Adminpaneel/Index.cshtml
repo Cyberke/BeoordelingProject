@@ -18,58 +18,47 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+    <div id="loginbox">
         <br />
         @ViewBag.FeedBack
         @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Label("Adres: ")
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email, "Gelieve een valide e-mail adres in te geven")
-            </div>
+        <table>
+            <tr>
+                <td>@Html.Label("E-mail: ")</td>
+                <td>@Html.EditorFor(model => model.Email)</td>
+                <td>@Html.ValidationMessageFor(model => model.Email, "Gelieve een correct e-mailadres in te geven")</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Huidig wachtwoord: ")</td>
+                <td>@Html.EditorFor(model => model.WachtwoordVM.OldPassword)</td>
+                <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword, "Gelieve uw huidig wachtwoord in te geven")</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Nieuw wachtwoord: ")</td>
+                <td>@Html.EditorFor(model => model.WachtwoordVM.NewPassword)</td>
+                <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword, "Wachtwoord moet minstens 6 karakters lang zijn")</td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Bevestig nieuw wachtwoord: ")</td>
+                <td>@Html.EditorFor(model => model.WachtwoordVM.ConfirmPassword)</td>
+                <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword, "Wachtwoord komt niet overeen")</td>
+            </tr>
+        </table>
+        <br />
+        <div>
+            @Html.EditorFor(model => model.AutoFeedback)
+            @Html.ValidationMessageFor(model => model.AutoFeedback)
+            <label for="@Model.AutoFeedback" class="control-label col-md-2">
+                Automatische feedback per mail verkrijgen.
+            </label>
         </div>
         <br />
-        <div class="form-group">
-            @Html.Label("Wachtwoord wijzigen", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Label("Huidig wachtwoord: ")
-                @Html.EditorFor(model => model.WachtwoordVM.OldPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword, "Gelieve uw huidige wachtwoord in te geven")
-                <br />
-                @Html.Label("Nieuw wachtwoord: ")
-                @Html.EditorFor(model => model.WachtwoordVM.NewPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword, "Wachtwoord moet minstens 6 karakters lang zijn")
-                <br />
-                @Html.Label("Bevestig nieuw wachtwoord: ")
-                @Html.EditorFor(model => model.WachtwoordVM.ConfirmPassword)
-                @Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword, "Wachtwoord kon niet bevestigd worden!")
-            </div>
-        </div>
+        <input type="submit" value="Opslaan" class="actionbutton" />
+        @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
         <br />
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AutoFeedback)
-                @Html.ValidationMessageFor(model => model.AutoFeedback)
-                <label for="@Model.AutoFeedback" class="control-label col-md-2">
-                    Automatische feedback per mail verkrijgen.
-                </label>
-            </div>
-        </div>
-        <br />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Opslaan" class="actionbutton" />
-            </div>
-        </div>
+        @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
     </div>
 }
-<div>
-    @Html.ActionLink("Studenten importeren", "Index", "Student", null, new { @class = "actionbutton" })
-    <br />
-    @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton" })
-</div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

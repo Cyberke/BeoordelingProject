@@ -89,6 +89,34 @@ namespace BeoordelingProject.DAL.Services
             return studentRepository.GetRoles().ToList();
         }
 
+        public IHtmlString SerializeObject(object value, object otherValue) {
+            List<Student> studenten = (List<Student>)value;
+            List<List<Rol>> studentPerRollen = (List<List<Rol>>)otherValue;
+
+            string jsonString = "{Studenten:[";
+
+            for (int i = 0; i < studenten.Count; i++) {
+                jsonString += "{";
+                jsonString += "naam: \"" + studenten[i].Naam + "\", ";
+                jsonString += "opleiding: \"" + studenten[i].Opleiding + "\", ";
+                jsonString += "rollen: [";
+                for (int j = 0; j < studentPerRollen[i].Count; j++) {
+                    jsonString += "\"" + studentPerRollen[i][j].Naam + "\", ";
+                }
+
+                //laatste komma wissen, deze is niet nodig
+                jsonString = jsonString.Remove(jsonString.Length - 1);
+                jsonString += "]},";
+            }
+
+            //laatste komma wissen, deze is niet nodig
+            jsonString = jsonString.Remove(jsonString.Length - 1);
+
+            jsonString += "]}";
+
+            return new HtmlString(jsonString);
+        }
+
         public IHtmlString SerializeObject(object value)
         {
             List<Student> studenten = (List<Student>)value;
@@ -136,6 +164,38 @@ namespace BeoordelingProject.DAL.Services
         public Rol GetRolById(int id)
         {
             return rolRepository.GetByID(id);
+        }
+
+        public List<Student> GetStudentenByStudentRollen(List<StudentRollen> studentRollen) {
+            List<Student> studenten = new List<Student>();
+            
+            foreach (StudentRollen studentRol in studentRollen) {
+                studenten.Add(studentRol.Student);
+            }
+
+            return studenten;
+        }
+
+        public List<List<Rol>> GetRollenByStudent(List<StudentRollen> studentRollen) {
+            List<List<Rol>> rollen = new List<List<Rol>>();
+
+            for (int i = 0; i < studentRollen.Count; i++) {
+                rollen.Add(studentRollen[i].Rollen);
+            }
+
+            return rollen;
+        }
+
+        public int GetAantalTeTonenStudenten(List<StudentRollen> studentRollen) {
+            int counter = 0;
+
+            for (int i = 0; i < GetStudentenByStudentRollen(studentRollen).Count; i++) {
+                for (int j = 0; j < GetRollenByStudent(studentRollen)[i].Count; j++) {
+                    counter++;
+                }
+            }
+
+            return counter;
         }
     }
 }

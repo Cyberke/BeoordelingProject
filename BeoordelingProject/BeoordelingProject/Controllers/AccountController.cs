@@ -62,7 +62,7 @@ namespace ParkingApplicatie.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Ongeldige gebruikersnaam of wachtwoord");
                 }
             }
 

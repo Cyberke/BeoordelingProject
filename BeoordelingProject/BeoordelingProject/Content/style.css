@@ -61,6 +61,7 @@ header{
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
     cursor:pointer;
+    margin-top:5px;
 }
 
 .actionbutton:hover {
@@ -75,22 +76,15 @@ header{
 
 .loginbutton
 {
-    width:90%;
+    width:51%;
 }
-#inklapdiv
-{
-    border-style:solid;
-    border-width:1px;
+#inklapdiv {
+    border-style: solid;
+    border-width: 1px;
     border-top: none;
     border-color: #C9C9C9;
     min-height: 20%;
     height: auto;
-    transition: opacity 3s;
-}
-
-#inklapdiv:hover
-{
-    transition: opacity 3s;
 }
 
 .gebruikerinfo
@@ -101,10 +95,6 @@ header{
 .gebruikerinfo input[type="submit"]
 {
     float: left;
-}
-
-.gebruikerinfo input[type="submit"]
-{
     margin-top: 15px;
 }
 
@@ -447,7 +437,6 @@ input
 {
     font-size: 14px;
 	display:inline;
-	margin: 5px;
 }
 
 /* combobox met studentnamen/accounts */
@@ -513,13 +502,17 @@ table
 {
 	border-style: none;
 	width: 100%;
-	table-layout: fixed;
+    border-collapse:initial;
 }
 
 th
 {
 	text-align: center;
 	border-style: none;
+}
+td
+{
+   padding-top:10px;
 }
 
 /* td met uitleg op beoordeling scherm */
@@ -634,6 +627,55 @@ th
 
 /* de laatste th heeft geen streep meer nodig */
 .studentlist th:last-child
+{
+	border-style: none;
+}
+
+/*User table*/
+.userlist
+{
+	text-align: center;
+    margin-top: 10px;
+    clear: both;
+}
+
+.userlist td
+{
+    border-bottom: 1px solid #C9C9C9;
+    border-left: 1px solid #C9C9C9;
+	padding: 5px;
+}
+
+.userlist tr:first-child th:first-child
+{
+	width: 100%;
+	text-align: center;
+}
+
+.userlist td:first-child
+{
+	text-align: left;
+    border-left: none;
+}
+
+.userlist th
+{
+    width: 10%;
+	background-color: #000000;
+	color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-color: #FFFFFF;
+
+	padding: 5px;
+}
+
+.userlist td:last-child
+{
+    border-left: none;
+}
+
+.userlist th:last-child
 {
 	border-style: none;
 }
