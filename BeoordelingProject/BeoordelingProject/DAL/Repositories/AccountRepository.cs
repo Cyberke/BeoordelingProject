@@ -34,6 +34,7 @@ namespace BeoordelingProject.DAL.Repositories
         public void DeleteGebruiker(string selectedId)
         {
             ApplicationUser user = context.Users.First(u => u.Id == selectedId);
+            
             context.Users.Remove(user);
             context.SaveChanges();
         }
