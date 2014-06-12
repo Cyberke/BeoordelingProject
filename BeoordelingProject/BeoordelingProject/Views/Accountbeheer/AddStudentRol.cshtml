@@ -44,6 +44,10 @@
             </div>
         </div>
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 75c982af0ae1a57d055328a6fef8115157646259
 
     <table class="studentlist" style="display:block">
         <tr>
@@ -64,15 +68,22 @@
 </div>
 
 <script>
+    var counter = 1;
     function newStudentRol()
     {
-
+        /*
+            min knop houd de waarde bij die de counter toen had.
+            wanneer op de min knop geduwt wordt: for van de "minwaarde" tot de huidige counter en alle elementen die overeen komen verwijderen uit de div EN uit de arrays van studentId en rolId
+        */
         var div = document.getElementsByClassName("studentrolinfo")[0];
         
         var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList" }).ToString())
         
         var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" }).ToString())
 
-        div.innerHTML += "student:"+studentlist+"Rol:"+rollist;
+        div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
+
+        alert(counter);
+        counter++;
     }
 </script>
