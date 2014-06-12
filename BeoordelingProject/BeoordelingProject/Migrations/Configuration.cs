@@ -27,7 +27,7 @@ namespace BeoordelingProject.Migrations
             };
 
             studenten = new List<Student>{
-                new Student{Naam="Jelle", Opleiding="NMCT", Email="jelle@mail.be", Geboortedatum="20/08/1993",Geslacht="M", StudentId=245, Trajecttype="IOT"}
+                new Student{Naam="Vanden Bulcke Jelle", Opleiding="BaSo", Email="jelle@mail.be", Geboortedatum="20/08/1993",Geslacht="M", StudentId=245, Trajecttype="IOT"}
             };
 
             studenten.ForEach(s => context.Studenten.AddOrUpdate(p => p.Naam, s));

@@ -147,9 +147,11 @@ function toggleUserToevoegen()
 
     if (formdiv.style.display == "none") {
         formdiv.style.display = "block";
+        formdiv.style.opacity = 1;
     }
     else {
         formdiv.style.display = "none";
+        formdiv.style.opacity = 0;
     }
     
 }

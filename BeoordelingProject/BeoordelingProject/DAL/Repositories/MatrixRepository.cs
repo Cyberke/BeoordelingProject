@@ -67,5 +67,17 @@ namespace BeoordelingProject.DAL.Repositories
             return mat;
         }
 
+        public int GetWegingForDeelaspect(int deelresID)
+        {
+            var query =
+                (
+                    from d in context.Deelaspect
+                    where d.ID.Equals(deelresID)
+                    select d.Weging
+                );
+
+            return query.First();
+        }
+
     }
 }

@@ -49,8 +49,6 @@ namespace BeoordelingProject.DAL.Services {
         {
             return resultaatRepository.GetTussentijdseResultaten(id).ToList<Resultaat>();
         }
-
-        //public List<DeelaspectResultaat> FillDeelaspectResultaten(BeoordelingsVM vm)
         public List<DeelaspectResultaat> FillDeelaspectResultaten(Matrix m, List<DeelaspectResultaat> scores)
         {
             List<DeelaspectResultaat> deelreslist = new List<DeelaspectResultaat>();
@@ -75,5 +73,28 @@ namespace BeoordelingProject.DAL.Services {
             return deelreslist;
         }
 
+        public List<double> GetListScore (List<DeelaspectResultaat> deelreslist)
+        {
+            List<double> scores = new List<double>();
+
+            foreach(DeelaspectResultaat deelres in deelreslist)
+            {
+                double score = deelres.Score;
+                scores.Add(score);
+            }
+            return scores;
+        }
+        public List<int> GetListWegingen (List<DeelaspectResultaat> deelreslist)
+        {
+            List<int> wegingen = new List<int>();
+
+            foreach(DeelaspectResultaat deelres in deelreslist)
+            {
+                int weging = matrixRepository.GetWegingForDeelaspect(deelres.DeelaspectId);
+                wegingen.Add(weging);
+            }
+
+            return wegingen;
+        }
     }
 }

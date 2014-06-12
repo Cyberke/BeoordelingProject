@@ -73,6 +73,10 @@ header{
 	top:1px;
 }
 
+.loginbutton
+{
+    width:90%;
+}
 #inklapdiv
 {
     border-style:solid;
@@ -81,9 +85,20 @@ header{
     border-color: #C9C9C9;
     min-height: 20%;
     height: auto;
+    transition: opacity 3s;
+}
+
+#inklapdiv:hover
+{
+    transition: opacity 3s;
 }
 
 .gebruikerinfo
+{
+    float: left;
+    margin-left:5px;
+}
+.gebruikerinfo input[type="submit"]
 {
     float: left;
 }
@@ -124,6 +139,11 @@ header{
     
 }
 
+label
+{
+    font-size:14px;
+}
+
 .username
 {
     font-size:14px;
@@ -133,8 +153,8 @@ header{
 {
     font-size:14px;
     float:right;
-    margin-top:4px;
     color:#000000;
+    margin-left:3px;
 }
 .uitloggen:hover
 {
