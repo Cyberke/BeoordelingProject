@@ -9,6 +9,6 @@ namespace BeoordelingProject.Models
     public class ApplicationUser:IdentityUser
     {
         public virtual List<StudentRollen> StudentRollen { get; set; }
-
+        public bool MailZenden { get; set; }
     }
 }

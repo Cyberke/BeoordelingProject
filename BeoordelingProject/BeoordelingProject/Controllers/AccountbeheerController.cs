@@ -40,14 +40,17 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult AddStudentRol(AccountbeheerVM model, string accountbeheerbuttons)
         {
-            List<Rol> selectedRollen = new List<Rol>();
-            selectedRollen.Add(studentService.GetRolById(model.SelectedRolId));
-            Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId);
-            StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+            List<StudentRollen> studentrollen = new List<StudentRollen>();
+            for (int id = 0; id <= model.SelectedRolId.Count;id++ )
+            {
+                List<Rol> selectedRollen = new List<Rol>();
+                selectedRollen.Add(studentService.GetRolById(id));
+                Student selectedStudent = studentService.GetStudentByID(id);
+                StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+                studentrollen.Add(studentrol);
+            }
 
             var user = new ApplicationUser() { UserName = model.Account.UserName };
-            List<StudentRollen> studentrollen = new List<StudentRollen>();
-            studentrollen.Add(studentrol);
             user.StudentRollen = studentrollen;
             var result = userService.Create(user, model.Account.PasswordHash);
             userService.AddUserToRoleUser(user.Id);

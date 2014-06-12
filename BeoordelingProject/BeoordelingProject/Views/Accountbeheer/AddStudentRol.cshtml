@@ -79,7 +79,6 @@
         var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[JSCounter]" }).ToString())
         rollist = rollist.replace("JSCounter", counter);
 
-
         div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
 
         alert(counter);

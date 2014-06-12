@@ -41,8 +41,27 @@ namespace BeoordelingProject.DAL.Services {
         {
             return matrixRepository.GetMatrixForRol(matrixID, rolID);
         }
-        public void CreateBeoordeling(Resultaat res) {
-            
+        public void CreateBeoordeling(BeoordelingsVM vm) {
+            Matrix m = matrixRepository.GetMatrixByID(vm.Matrix.ID);
+            Resultaat newres = new Resultaat();
+            newres.StudentId = vm.Student.ID;
+
+            if (m.Tussentijds == true)
+            {
+                newres.TussentijdseId = m.ID;
+                newres.DeelaspectResultaten = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+
+                List<double> scores = GetListScore(newres.DeelaspectResultaten);
+                List<int> wegingen = GetListWegingen(newres.DeelaspectResultaten);
+
+                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+
+                //resultaatRepository.Insert(newres);
+            }
+            else
+            {
+                //eindscoreberekening
+            }
         }
 
         public List<Resultaat> GetTussentijdseResultaten(int id)

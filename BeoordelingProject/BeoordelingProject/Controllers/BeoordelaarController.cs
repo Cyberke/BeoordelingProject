@@ -27,7 +27,7 @@ namespace BeoordelingProject.Controllers
         //
         // GET: /Beoordelaar/
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Beoordeling()
         {
             BeoordelingsVM vm = new BeoordelingsVM();
             
@@ -40,29 +40,18 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(BeoordelingsVM vm)
+        public ActionResult Beoordeling(BeoordelingsVM vm)
         {
-            Matrix m = matrixService.GetMatrixByID(vm.Matrix.ID);
-            Resultaat newres = new Resultaat();
-            newres.StudentId = vm.Student.ID;
-
-            if (m.Tussentijds == true)
-            {
-                newres.TussentijdseId = m.ID;
-                newres.DeelaspectResultaten = beoordelingsService.FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
-
-                List<double> scores = beoordelingsService.GetListScore(newres.DeelaspectResultaten);
-                List<int> wegingen = beoordelingsService.GetListWegingen(newres.DeelaspectResultaten);
-
-                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
-
-                
-            }
-            else
-            {
-                //eindscoreberekening
-            }
+            
             return View();
+        }
+
+        public ActionResult Index() {
+            StudentKeuzeVM vm = new StudentKeuzeVM();
+
+            // Moet alle STUDENTEN ophalen voor ELKE USER met zijn ROL
+
+            return View(vm);
         }
 	}
 }
