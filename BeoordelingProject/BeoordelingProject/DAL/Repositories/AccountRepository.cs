@@ -33,15 +33,13 @@ namespace BeoordelingProject.DAL.Repositories
 
         public void DeleteGebruiker(ApplicationUser user)
         {
-            for (int i = user.StudentRollen.Count - 1; i >= 0; i--)
-            {
-                //user.StudentRollen.RemoveAt(i);
-            }
+            string sql = "DELETE FROM studentrollens AS sr ";
+            sql += "INNER JOIN applicationuserstudentrollens AS ausr ";
+            sql += "ON sr.rol_id = ausr.studentrollen_rol_id ";
+            sql += "WHERE applicationuser_id = " + user.Id;
 
-            //foreach(StudentRollen studentrol in user.StudentRollen)
-            //{
-            //    user.StudentRollen.Remove(studentrol);
-            //}
+
+
 
             context.Users.Remove(user);
             context.SaveChanges();
