@@ -199,5 +199,31 @@ namespace BeoordelingProject.Tests {
             Assert.AreEqual(afronding1, 24);
             Assert.AreEqual(afronding2, 31);
         }
+
+        [TestMethod]
+        public void testTussentijds()
+        {
+            List<double> scores = new List<double>();
+            List<int> wegingen = new List<int>();
+
+            scores.Add(14.5);
+            scores.Add(12.5);
+            scores.Add(18);
+            scores.Add(18);
+            scores.Add(10.5);
+            scores.Add(12.5);
+            scores.Add(8);
+
+            wegingen.Add(3);
+            wegingen.Add(3);
+            wegingen.Add(2);
+            wegingen.Add(2);
+            wegingen.Add(1);
+            wegingen.Add(2);
+            wegingen.Add(3);
+
+            double totaal = engine.totaalScore(scores, wegingen);
+            Assert.IsNotNull(totaal);
+        }
     }
 }

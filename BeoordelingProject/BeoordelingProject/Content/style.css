@@ -61,6 +61,7 @@ header{
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
     cursor:pointer;
+    margin-top:5px;
 }
 
 .actionbutton:hover {
@@ -75,7 +76,7 @@ header{
 
 .loginbutton
 {
-    width:90%;
+    width:51%;
 }
 #inklapdiv {
     border-style: solid;
@@ -94,10 +95,6 @@ header{
 .gebruikerinfo input[type="submit"]
 {
     float: left;
-}
-
-.gebruikerinfo input[type="submit"]
-{
     margin-top: 15px;
 }
 
@@ -440,7 +437,6 @@ input
 {
     font-size: 14px;
 	display:inline;
-	margin: 5px;
 }
 
 /* combobox met studentnamen/accounts */
@@ -506,13 +502,17 @@ table
 {
 	border-style: none;
 	width: 100%;
-	table-layout: fixed;
+    border-collapse:initial;
 }
 
 th
 {
 	text-align: center;
 	border-style: none;
+}
+td
+{
+   padding-top:10px;
 }
 
 /* td met uitleg op beoordeling scherm */
