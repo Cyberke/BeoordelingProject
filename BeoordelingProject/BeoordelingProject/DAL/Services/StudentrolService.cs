@@ -35,9 +35,5 @@ namespace BeoordelingProject.DAL.Services
             uow.SaveChanges();
             return newStudentrol;
         }
-
-        public StudentRollen CreateStudentrol(Student student, List<Rol> rollen) {
-            throw new NotImplementedException();
-        }
     }
 }

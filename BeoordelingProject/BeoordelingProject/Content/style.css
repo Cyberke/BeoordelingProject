@@ -278,6 +278,7 @@ label
 	border-radius: 20px;
 
 	background-color: #3379ab;
+    cursor:pointer;
 }
 
 #helpclick
@@ -300,6 +301,7 @@ label
 	width:80%;
 	height: auto;
 	background-color: #4D8FBD;
+    cursor:pointer;
 }
 
 #clickscroll
@@ -320,7 +322,7 @@ label
 	margin-right: auto;
 
 	width:80%;
-	height:80%;
+	height:10%;
 	background-color: #4D8FBD;
 }
 
@@ -341,6 +343,7 @@ label
 	border-radius: 20px;
 
 	background-color: #3379ab;
+    cursor:pointer;
 }
 
 .opties:hover, .stats:hover, #help:hover{
@@ -363,6 +366,7 @@ label
 	border-radius: 20px;
 
 	background-color: #3379ab;
+    cursor:pointer;
 }
 
 .logo {
@@ -375,6 +379,7 @@ label
 
 	margin-left: 0px;
 	margin-top: 10px;
+    cursor:pointer;
 }
 /* vergeten waarvoor dit was */
 .selectie
