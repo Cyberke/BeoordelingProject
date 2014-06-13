@@ -28,9 +28,8 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
-        public IEnumerable<Resultaat> GetEindResultaten(int id)
+        public IEnumerable<Resultaat> GetEindResultaten()
         {
-
             return null;
         }
 
@@ -65,4 +64,6 @@ namespace BeoordelingProject.DAL.Repositories
             return query.First();
         }
     }
+
+    
 }
