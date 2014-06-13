@@ -31,12 +31,10 @@ namespace BeoordelingProject.DAL.Services {
             return identityManagerRepository.GetUser(userName);
         }
 
-        public void UpdateAdmin(ApplicationUser admin, bool autoFeedback) {
+        public void UpdateAdmin(ApplicationUser admin) {
             adminRepository.Update(admin);
 
             uow.SaveChanges();
-
-            // Auto feedback moet nog in de database!
         }
     }
 }

@@ -3,6 +3,6 @@ namespace BeoordelingProject.DAL.Services {
     public interface IAdministratorService {
         BeoordelingProject.Models.ApplicationUser GetAdminById(string id);
         BeoordelingProject.Models.ApplicationUser GetAdminByUserName(string userName);
-        void UpdateAdmin(BeoordelingProject.Models.ApplicationUser admin, bool autoFeedback);
+        void UpdateAdmin(BeoordelingProject.Models.ApplicationUser admin);
     }
 }
