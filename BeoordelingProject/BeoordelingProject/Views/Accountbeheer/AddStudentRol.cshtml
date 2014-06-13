@@ -2,6 +2,14 @@
 @using Microsoft.AspNet.Identity
 @using BeoordelingProject.Helper
 
+@{
+    int counterTotal = 0;
+    if(Model.SelectedStudentId != null)
+    {
+        counterTotal = Model.SelectedStudentId.Count;
+    }
+}
+
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
     <label> > </label>
@@ -36,22 +44,23 @@
                 </div>
                 <div class="studentrolinfo">
                     <label class="actionbutton" onclick="newStudentRol()">+</label>
-
-                    Student:
-                    @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
-                    Rol:
-                    @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
-
-                    @if(Model.SelectedStudentId != null)
-                    {
-                        for(var i=1; i<Model.SelectedStudentId.Count;i++)
+                        Student:
+                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
+                        Rol:
+                        @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
+                        <br/>
+                        @if(Model.SelectedStudentId != null)
                         {
-                            <text>Student:</text>
-                            Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList["+i+"]" });
-                            <text>Rol:</text>
-                            Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[" + i + "]" });
+                            for(int i = 1; i < Model.SelectedStudentId.Count; i++)
+                            {
+                                <text>Student:
+                                @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList["+@i+"]" })
+                                Rol:
+                                @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList["+@i+"]" })
+                                <br/>
+                                </text>
+                            }
                         }
-                    }
                     
                 </div>
             </div>
@@ -77,21 +86,48 @@
 </div>
 
 <script>
-    var counter = 1;
+    @if(Model.SelectedStudentId != null)
+    {
+        <text>var counter = @Model.SelectedStudentId.Count
+        counter--;
+        </text>
+    }
+    else
+    {
+        <text>var counter = 1;</text>
+    }
+    
+    @if(counterTotal != 0)
+    {
+        <text>var selectlist;</text>
+        for(int i = counterTotal-1; i > -1; i--)
+        {
+            <text>
+            selectlist = document.getElementById("studentList[@i]");        
+            selectlist.value = @Model.SelectedStudentId[i]
+
+            selectlist = document.getElementById("rolList[@i]");
+            selectlist.value = @Model.SelectedRolId[i]
+            </text>
+        }
+    }
+
     function newStudentRol()
     {
+        
         /*
             min knop houd de waarde bij die de counter toen had.
             wanneer op de min knop geduwt wordt: for van de "minwaarde" tot de huidige counter en alle elementen die overeen komen verwijderen uit de div EN uit de arrays van studentId en rolId
         */
         var div = document.getElementsByClassName("studentrolinfo")[0];
-        
+
         var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[JSCounter]" }).ToString())
         studentlist = studentlist.replace("JSCounter", counter);
 
-        var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList" }).ToString())
+        var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[JSCounter]" }).ToString())
+        rollist = rollist.replace("JSCounter", counter);
 
-        div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
+        div.innerHTML += "<br/>Student: " + studentlist + " Rol: " + rollist;
 
         counter++;
     }
