@@ -486,7 +486,7 @@ input
 }
 
 /* grote radiobuttons voor score ingeven */
-input[type=radio]
+.rbMatrices
 {
 	display: inline;
 	width: 60px;

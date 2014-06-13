@@ -42,25 +42,67 @@ namespace BeoordelingProject.DAL.Services {
             return matrixRepository.GetMatrixForRol(matrixID, rolID);
         }
         public void CreateBeoordeling(BeoordelingsVM vm) {
+            
             Matrix m = matrixRepository.GetMatrixByID(vm.Matrix.ID);
-            Resultaat newres = new Resultaat();
-            newres.StudentId = vm.Student.ID;
 
-            if (m.Tussentijds == true)
+            int studentid = resultaatRepository.ifExistsGetStudentId(vm.Student.ID);
+
+            if (studentid != 0) //bestaande record aanpassen
             {
-                newres.TussentijdseId = m.ID;
-                newres.DeelaspectResultaten = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                Resultaat exist = resultaatRepository.getByStudentId(studentid);
 
-                List<double> scores = GetListScore(newres.DeelaspectResultaten);
-                List<int> wegingen = GetListWegingen(newres.DeelaspectResultaten);
+                if (m.Tussentijds == true)
+                {
+                    exist.TussentijdseId = m.ID;
+                    
+                    //de bestaande lijst met deelaspectresultaten updaten we met de nieuw gekozen score
+                    //We hergebruiken de bestaande lijst zodat we zijn eigen ID waarde behouden zodat we de database niet overspoelen met onnodige records
+                    List<DeelaspectResultaat> newdeelres = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                    List<DeelaspectResultaat> olddeelres = exist.DeelaspectResultaten;
 
-                newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+                    for (int i = 0; i < newdeelres.Count(); i++ )
+                    {
+                        olddeelres[i].DeelaspectId = newdeelres[i].DeelaspectId;
+                        olddeelres[i].Score = newdeelres[i].Score;
+                    }
 
-                //resultaatRepository.Insert(newres);
+                    exist.DeelaspectResultaten = olddeelres;
+
+                    List<double> scores = GetListScore(exist.DeelaspectResultaten);
+                    List<int> wegingen = GetListWegingen(exist.DeelaspectResultaten);
+
+                    exist.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+
+                    resultaatRepository.Update(exist);
+                    uow.SaveChanges();
+                }
+                else
+                {
+                    //eindscoreberekening bestaand resultaat
+                }
+
             }
-            else
+            else //nieuw record in database
             {
-                //eindscoreberekening
+                Resultaat newres = new Resultaat();
+                newres.StudentId = vm.Student.ID;
+                if(m.Tussentijds == true)
+                {
+                    newres.TussentijdseId = m.ID;
+                    newres.DeelaspectResultaten = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+
+                    List<double> scores = GetListScore(newres.DeelaspectResultaten);
+                    List<int> wegingen = GetListWegingen(newres.DeelaspectResultaten);
+
+                    newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+
+                    resultaatRepository.Insert(newres);
+                    uow.SaveChanges();
+                }
+                else
+                {
+                    //eindscore nieuw resultaat
+                }
             }
         }
 
@@ -88,6 +130,8 @@ namespace BeoordelingProject.DAL.Services {
                     counter++;
                 }
             }
+
+            List<DeelaspectResultaat> test = deelreslist;
 
             return deelreslist;
         }

@@ -34,5 +34,35 @@ namespace BeoordelingProject.DAL.Repositories
             return null;
         }
 
+        public int ifExistsGetStudentId(int studentid)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                where r.StudentId.Equals(studentid)
+                select r.StudentId
+            );
+
+            if(query.Count() != 0)
+            {
+                return query.First();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public Resultaat getByStudentId(int studentid)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                where r.StudentId.Equals(studentid)
+                select r
+            );
+            
+            return query.First();
+        }
     }
 }

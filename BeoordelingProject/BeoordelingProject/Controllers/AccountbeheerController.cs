@@ -31,9 +31,11 @@ namespace BeoordelingProject.Controllers
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();
+            //accountbeheerVM.Studenten = studentService.GetStudenten();
             accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
             accountbeheerVM.Accounts = studentService.GetUsers();
-            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID","Naam");
+            //accountbeheerVM.Rollen = studentService.GetRoles();
+            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
             return View(accountbeheerVM);
         }
 
@@ -53,11 +55,13 @@ namespace BeoordelingProject.Controllers
                         {
                             if (model.SelectedRolId[i].Equals(studentrollen[s].Rollen[r].ID))
                             {
-                                ViewBag.Error = "Duplicaatje";
+                                ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
 
                                 var accountbeheerVM = new AccountbeheerVM();
+                                //accountbeheerVM.Studenten = studentService.GetStudenten();
                                 accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
                                 accountbeheerVM.Accounts = studentService.GetUsers();
+                                //accountbeheerVM.Rollen = studentService.GetRoles();
                                 accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
 
                                 accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
@@ -91,9 +95,14 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult DeleteUser(string userId)
         {
+            ApplicationUser tedeletenUser = studentService.GetUserById(userId);
+            //List<StudentRollen> studentrollenVanUser = tedeletenUser.StudentRollen;
             
-            studentService.DeleteUser(userId);
             
+
+            studentService.DeleteUser(tedeletenUser);
+
+
             return RedirectToAction("AddStudentRol", "Accountbeheer");
         }
 	}
