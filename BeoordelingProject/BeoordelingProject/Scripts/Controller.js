@@ -17,6 +17,7 @@ module.controller("appController", function ($scope, $filter, studentenlijst)
 
     scope.studenten = studentenlijst.Studenten;
 
+    scope.studentRol = scope.studenten[0].studentRol;
 
     scope.showOpleiding = function (student, opleiding)
     {

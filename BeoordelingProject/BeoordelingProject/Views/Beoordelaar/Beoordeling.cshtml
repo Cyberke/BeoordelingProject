@@ -56,12 +56,12 @@
                         <td>ZG (>=16)</td>
                     </tr>
                     <tr class="buttons">
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 3, new { @class = "rbMatrices" })</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 8, new { @class = "rbMatrices" })</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 10.5, new { @class = "rbMatrices" })</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 12.5, new { @class = "rbMatrices" })</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 14.5, new { @class = "rbMatrices" })</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 18, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 3, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 8, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 10.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 12.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 14.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Scores[counter], 18, new { @class = "rbMatrices" })</td>
                     </tr>
                     <tr id="@Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)" style="display:none">
                         <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)</td>
@@ -77,8 +77,9 @@
             }
 
         </table>
-        @Html.HiddenFor(model => model.Matrix.ID)
+        @Html.HiddenFor(model => model.MatrixID)
         @Html.HiddenFor(model => model.Student.ID)
+        @Html.HiddenFor(model => model.Rol_ID)
         <input type="submit" value="Opslaan" />
     }
 

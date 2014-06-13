@@ -25,7 +25,7 @@ namespace BeoordelingProject.DAL.Context
         public DbSet<Deelaspect> Deelaspect { get; set; }
         public DbSet<DeelaspectResultaat> DeelaspectResultaten { get; set; }
         public DbSet<Matrix> Matrices { get; set; }
-
+        public DbSet<StudentRollen> StudentRollen { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             /*
