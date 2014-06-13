@@ -42,9 +42,8 @@ function showinfo(object)
 //switch werkt op de paginanaam van in de URL
 //substring wordt gebruikt om .html weg te knippen, dit zal niet nodig zijn voor ASP, aangezien er geen zichtbaar bestandstype in de addressbar is
 var path = window.location.pathname;
-var page = path.split("/").pop();
-
-//page = page.substring(0, page.length - 5);
+var array = path.split("/");
+var page = array[1] + "/" + array[2];
 
 function helptekst(pagename)
 {
@@ -54,10 +53,9 @@ function helptekst(pagename)
 
 	switch(page)
 	{
-		case "Login":
+		case "Account/Login":
 			helpTekst = "Voer je <b>gebruikersnaam</b> en <b>wachtwoord</b> in en klik op \"Log in\".\n";
 			helpTekst += "Gebruikersnaam of Wachtwoord vergeten? Contacteer de Administrator.";
-
 			return helpTekst;
 		break;
 		case "Beoordeling":
@@ -67,31 +65,24 @@ function helptekst(pagename)
 
 			return helpTekst;
 		break;
-		case "StudentKeuze":
+		case "Beoordelaar/undefined":
 			helpTekst = "Selecteer de student dat u wenst te beoordelen.\n";
 			helpTekst += "U heeft de mogelijkheid om de naam op te zoeken.";
 
 			return helpTekst;
 		break;
-		case "Accountbeheer":
-			helpTekst = "U heeft de mogelijkheid om aan elk student één of meerdere beoordelaars toe te staan.\n";
-			helpTekst += "Elk beoordelaar heeft één of meerdere rollen naar gelang de situatie. Maar elk student moet een promotor hebben.\n";
-			helpTekst += "Het is ook mogelijk om bestaande accounts (beoordelaars) te kunnen wijzigen en/of toe wijzen aan een ander student. Maar opletten voor de rollen. Een student kan maar één promotor hebben!\n";
-
-			// Is dit genoeg? Of moet er nog iets speciek erbij?
+	    case "Accountbeheer/AddStudentRol":
+	        helpTekst = "Op dit scherm kunt u een beoordelaar linken met een bepaalde student en hem voor de gekozen student een rol toekennen."
+	        helpTekst += " Om een nieuwe beoordelaar aan te maken klikt u op de knop Toevoegen en vult u het formuliertje in zoals u wilt."
+	        helpTekst += " U hebt natuurlijk ook de mogelijkheid om een bestaande beoordelaar te wijzigen (naam, rol voor een student of studenten zelf)"
+            helpTekst += " Ten slotte kunt u de beoordelaar ook verwijderen, daarna kan deze beoordelaar niet meer inloggen om een evaluatie uit te voeren"
 
 			return helpTekst;
 		break;
-		case "Adminpaneel":
-			// Extra opties in header
-			helpTekst = "Bovenaan het scherm kunt u drie pictogrammen zien.\n";
-			helpTekst += "Het meeste linkse pictogram is voor statistieken te verkrijgen.\n";
-			helpTekst += "Het middelste pictogram is het \"Adminpaneel\" waar u zicht momenteel bevind.\n";
-			helpTekst += "En het meeste rechtse pictogram is de helper. Wat u momenteel aan het lezen bent.\n\n";
-
+		case "Adminpaneel/Index":
 			// Form
 			helpTekst += "U heeft de mogelijkheid om het e-mail adres te wijzigen en/of het wachtwoord te wijzigen van de administrator.\n";
-			helpTekst += "Indien u all feedbacks automatisch in uw e-mail adres wenst te verkrijgen kunt \"Feedback verzenden naar mijn mailbox\" aanvinken.\n";
+			helpTekst += "Indien u feedbacks automatisch in uw e-mail adres wenst te verkrijgen kunt \"Feedback verzenden naar mijn mailbox\" aanvinken.\n";
 			helpTekst += "Naast bovenstaande mogelijkheden kunt u ook studentdata importeren in de database.\n";
 			helpTekst += "En u kunt accounts beheren.\n";
 			helpTekst += "Deze optie biedt de mogelijkheid om beoordelaars aan te maken, wijzigen en/of verwijderen.";
@@ -103,17 +94,26 @@ function helptekst(pagename)
 
 			return helpTekst;
 		break;
-		case "Overzicht":
+		case "Admin/Index":
 			helpTekst = "Als administrator heeft u de mogelijkheid om alle studenten te zien per richting.\n";
-			helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eind evoluatie gehad heeft met de bijhorende resultaten.\n";
+			helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eindevaluatie gehad heeft met de bijhorende resultaten.\n";
 			helpTekst += "U ziet ook welke traject een student volgt.\n";
 			helpTekst += "En u kunt de rapporten en/of feedback formulieren downloaden.";
 
 			return helpTekst;
-		break;
+			break;
+	    case "/undefined":
+	        helpTekst = "Als administrator heeft u de mogelijkheid om alle studenten te zien per richting.\n";
+	        helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eindevaluatie gehad heeft met de bijhorende resultaten.\n";
+	        helpTekst += "U ziet ook welke traject een student volgt.\n";
+	        helpTekst += "En u kunt de rapporten en/of feedback formulieren downloaden.";
+
+	        return helpTekst;
+	        break;
 		default:
-			return "<b>placeholder, vervangen met eventuele switch die werkt op de paginaURL of iets in die aard</b> deze tekst is te vinden in het .js bestand, tags werken ook dus we kunnen gemakkelijk images toevoegen! Joepie! nu nog wat tekst spammen om te zien of we geen problemen hebben met word-wrapping, kwestie dat de afgebeelde tekst mooi in het helpvenster blijft, we willen geen zwevende woorden hebben natuurlijk. tekst tekst tekst tekst.";
-		break;
+		    helpTekst = "Er is iets misgelopen met de help."
+		    return helpTekst;
+		    break;
 	}
 }
 
