@@ -43,8 +43,7 @@ namespace BeoordelingProject.DAL.Services {
         }
         public void CreateBeoordeling(BeoordelingsVM vm) {
             
-            Matrix m = matrixRepository.GetMatrixByID(vm.Matrix.ID);
-
+            Matrix m = matrixRepository.GetMatrixByID(vm.MatrixID);
             int studentid = resultaatRepository.ifExistsGetStudentId(vm.Student.ID);
 
             if (studentid != 0) //bestaande record aanpassen
@@ -102,6 +101,7 @@ namespace BeoordelingProject.DAL.Services {
                 else
                 {
                     //eindscore nieuw resultaat
+
                 }
             }
         }

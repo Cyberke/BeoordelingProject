@@ -77,8 +77,9 @@
             }
 
         </table>
-        @Html.HiddenFor(model => model.Matrix.ID)
+        @Html.HiddenFor(model => model.MatrixID)
         @Html.HiddenFor(model => model.Student.ID)
+        @Html.HiddenFor(model => model.Rol_ID)
         <input type="submit" value="Opslaan" />
     }
 

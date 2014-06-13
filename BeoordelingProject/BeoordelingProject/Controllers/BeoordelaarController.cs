@@ -46,6 +46,7 @@ namespace BeoordelingProject.Controllers
                         if (matrix != 0) {
                             BeoordelingsVM vm = new BeoordelingsVM();
 
+                            vm.MatrixID = matrix;
                             vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);
                             vm.Student = studentService.GetStudentByID(studentID);
                             vm.Rol_ID = rolID;
