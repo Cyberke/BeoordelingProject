@@ -28,7 +28,25 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
-        public IEnumerable<Resultaat> GetEindResultaten()
+
+        public List<string> CheckIfRolesCompleted(int studentid)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                from hr in r.HoofdaspectResultaten
+
+                where r.StudentId.Equals(studentid)
+
+                select hr.Rol.Naam
+            );
+
+            List<string> namen = query.Distinct().ToList<string>();
+
+            return namen;
+        }
+
+        public IEnumerable<Resultaat> GetEindResultaten(int id)
         {
             return null;
         }

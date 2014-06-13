@@ -1,4 +1,5 @@
 ﻿using BeoordelingProject.DAL.Services;
+using BeoordelingProject.Models;
 using BeoordelingProject.ViewModel;
 using Microsoft.AspNet.Identity;
 using System;
@@ -23,6 +24,10 @@ namespace BeoordelingProject.Controllers
         public ActionResult Index()
         {
             AdminpaneelVM vm = new AdminpaneelVM();
+            ApplicationUser admin = adminService.GetAdminById(User.Identity.GetUserId());
+
+            vm.Email = admin.UserName;
+            vm.AutoFeedback = admin.MailZenden;
 
             return View(vm);
         }
@@ -41,8 +46,9 @@ namespace BeoordelingProject.Controllers
                 if (pwdHasher.VerifyHashedPassword(admin.PasswordHash, vm.WachtwoordVM.OldPassword) == PasswordVerificationResult.Success) {
                     admin.UserName = email;
                     admin.PasswordHash = pwdHasher.HashPassword(wachtwoord);
+                    admin.MailZenden = autoFeedback;
 
-                    adminService.UpdateAdmin(admin, autoFeedback);
+                    adminService.UpdateAdmin(admin);
 
                     ViewBag.FeedBack = "Wachtwoord veranderd!";
 

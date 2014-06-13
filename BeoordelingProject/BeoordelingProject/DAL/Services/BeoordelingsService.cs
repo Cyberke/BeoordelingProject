@@ -56,7 +56,7 @@ namespace BeoordelingProject.DAL.Services {
                     
                     //de bestaande lijst met deelaspectresultaten updaten we met de nieuw gekozen score
                     //We hergebruiken de bestaande lijst zodat we zijn eigen ID waarde behouden zodat we de database niet overspoelen met onnodige records
-                    List<DeelaspectResultaat> newdeelres = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                    List<DeelaspectResultaat> newdeelres = FillDeelaspectResultaten(m, vm.Scores);
                     List<DeelaspectResultaat> olddeelres = exist.DeelaspectResultaten;
 
                     for (int i = 0; i < newdeelres.Count(); i++ )
@@ -88,7 +88,7 @@ namespace BeoordelingProject.DAL.Services {
                 if(m.Tussentijds == true)
                 {
                     newres.TussentijdseId = m.ID;
-                    newres.DeelaspectResultaten = FillDeelaspectResultaten(m, vm.Resultaten.DeelaspectResultaten);
+                    newres.DeelaspectResultaten = FillDeelaspectResultaten(m, vm.Scores);
 
                     List<double> scores = GetListScore(newres.DeelaspectResultaten);
                     List<int> wegingen = GetListWegingen(newres.DeelaspectResultaten);
@@ -100,8 +100,24 @@ namespace BeoordelingProject.DAL.Services {
                 }
                 else
                 {
-                    //eindscore nieuw resultaat
+                    // eindscore nieuw resultaat
+                    // Ultieme eindscore kan pas berekend worden eens alle rollen de beoordeling hebben voltooid
+                    // totaalscores hoofdaspecten optellen en delen door (maximum te behalen punten / gewogen score)
+                    // de behaalde resultaten allemaal optellen en delen door 10
+                    // Math.Ceiling voor afronding
 
+                    //hoofdaspectresultaten in de database steken !checken of ze al bestaan, zo ja, overschrijven!
+                    
+
+
+                    //controleren of alle rollen de beoordeling hebben voltooid
+                    List<string> namen = resultaatRepository.CheckIfRolesCompleted(vm.Student.ID);
+
+                    //later if-statement aanpassen of CFaanwezig aangeduid is of niet
+                    if(namen.Count == 3)
+                    {
+                        //totaal eindscoreberekening
+                    }
                 }
             }
         }
@@ -110,7 +126,7 @@ namespace BeoordelingProject.DAL.Services {
         {
             return resultaatRepository.GetTussentijdseResultaten(id).ToList<Resultaat>();
         }
-        public List<DeelaspectResultaat> FillDeelaspectResultaten(Matrix m, List<DeelaspectResultaat> scores)
+        public List<DeelaspectResultaat> FillDeelaspectResultaten(Matrix m, List<double> scores)
         {
             List<DeelaspectResultaat> deelreslist = new List<DeelaspectResultaat>();
 
@@ -123,7 +139,7 @@ namespace BeoordelingProject.DAL.Services {
                     DeelaspectResultaat deelres = new DeelaspectResultaat();
 
                     deelres.DeelaspectId = m.Hoofdaspecten[i].Deelaspecten[j].ID;
-                    deelres.Score = scores[counter].Score;
+                    deelres.Score = scores[counter];
 
                     deelreslist.Add(deelres);
 
