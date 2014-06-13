@@ -100,7 +100,21 @@ namespace BeoordelingProject.DAL.Services {
                 }
                 else
                 {
-                    //eindscore nieuw resultaat
+                    // eindscore nieuw resultaat
+                    // Ultieme eindscore kan pas berekend worden eens alle rollen de beoordeling hebben voltooid
+                    // totaalscores hoofdaspecten optellen en delen door (maximum te behalen punten / gewogen score)
+                    // de behaalde resultaten allemaal optellen en delen door 10
+                    // Math.Ceiling voor afronding
+
+                    //controleren of alle rollen de beoordeling hebben voltooid
+                    List<string> namen = resultaatRepository.CheckIfRolesCompleted(vm.Student.ID);
+
+                    //later if-statement aanpassen of CFaanwezig aangeduid is of niet
+                    if(namen.Count == 3)
+                    {
+                        //succes!
+                        int lol = 1;
+                    }
 
                 }
             }
