@@ -97,17 +97,14 @@ namespace BeoordelingProject.DAL.Services
             string jsonString = "{Studenten:[";
 
             for (int i = 0; i < studenten.Count; i++) {
-                jsonString += "{";
-                jsonString += "naam: \"" + studenten[i].Naam + "\", ";
-                jsonString += "opleiding: \"" + studenten[i].Opleiding + "\", ";
-                jsonString += "rollen: [";
                 for (int j = 0; j < studentPerRollen[i].Count; j++) {
-                    jsonString += "\"" + studentPerRollen[i][j].Naam + "\", ";
+                    jsonString += "{";
+                    jsonString += "studentRol: \"" + studenten[i].ID + "." + studentPerRollen[i][j].ID + "\", ";
+                    jsonString += "naam: \"" + studenten[i].Naam + "\", ";
+                    jsonString += "opleiding: \"" + studenten[i].Opleiding + "\", ";
+                    jsonString += "rol: \"" + studentPerRollen[i][j].Naam + "\"";
+                    jsonString += "},";
                 }
-
-                //laatste komma wissen, deze is niet nodig
-                jsonString = jsonString.Remove(jsonString.Length - 1);
-                jsonString += "]},";
             }
 
             //laatste komma wissen, deze is niet nodig

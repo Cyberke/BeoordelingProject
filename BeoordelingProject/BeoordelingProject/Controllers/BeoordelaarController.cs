@@ -33,17 +33,31 @@ namespace BeoordelingProject.Controllers
 
         //
         // GET: /Beoordelaar/
-        [HttpGet]
-        public ActionResult Beoordeling()
+        public ActionResult Beoordeling(string studentRol, int matrix = 0)
         {
-            BeoordelingsVM vm = new BeoordelingsVM();
-            
-            vm.Matrix = beoordelingsService.GetMatrixForRol(2, 1);
-            vm.Student = studentService.GetStudentByID(1);
-            vm.Rol_ID = 2;
-            vm.Resultaten = new Resultaat();
+            if (studentRol != null && !studentRol.Equals("")) {
+                string[] parts = studentRol.Split('.');
 
-            return View(vm);
+                int studentID = 0;
+                int rolID = 0;
+
+                if (parts.Length == 2) {
+                    if (int.TryParse(parts[0], out studentID) && int.TryParse(parts[1], out rolID)) {
+                        if (matrix != 0) {
+                            BeoordelingsVM vm = new BeoordelingsVM();
+
+                            vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);
+                            vm.Student = studentService.GetStudentByID(studentID);
+                            vm.Rol_ID = rolID;
+                            vm.Resultaten = new Resultaat();
+
+                            return View(vm);
+                        }
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -53,6 +67,7 @@ namespace BeoordelingProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult Index() {
             StudentKeuzeVM vm = new StudentKeuzeVM();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace BeoordelingProject.DAL.Services
 {
     public interface IStudentrolService

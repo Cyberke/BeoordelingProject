@@ -35,6 +35,5 @@ namespace BeoordelingProject.DAL.Services
             uow.SaveChanges();
             return newStudentrol;
         }
-
     }
 }

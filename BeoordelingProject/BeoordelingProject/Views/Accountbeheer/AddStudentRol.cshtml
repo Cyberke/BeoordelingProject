@@ -2,6 +2,14 @@
 @using Microsoft.AspNet.Identity
 @using BeoordelingProject.Helper
 
+@{
+    int counterTotal = 0;
+    if(Model.SelectedStudentId != null)
+    {
+        counterTotal = Model.SelectedStudentId.Count;
+    }
+}
+
 <div id="container">
     <a href="../Admin/Index" class="link">Overzicht</a>
     <label> > </label>
@@ -36,87 +44,23 @@
                 </div>
                 <div class="studentrolinfo">
                     <label class="actionbutton" onclick="newStudentRol()">+</label>
-
-                    Student: 
-                    <select id="studentList[0]">
-                        @for (int i = 0; i < Model.Studenten.Count(); i++)
-                        {
-                            if(Model.SelectedStudentId != null && Model.SelectedStudentId[0].Equals(Model.Studenten[i].ID))
-                            {
-                                <option selected value="@Model.Studenten[i].ID">@Model.Studenten[i].Naam</option>
-                            }
-                            else
-                            {
-                                <option value="@Model.Studenten[i].ID">@Model.Studenten[i].Naam</option>
-                            }
-                            
-                            
-                        }
-                    </select>
-
-                    Rol: 
-                    <select id="rolList[0]">
-                        @for (int i = 0; i < Model.Rollen.Count(); i++)
-                        {
-                            if(Model.SelectedRolId != null && Model.SelectedRolId[0].Equals(Model.Rollen[i].ID))
-                            {
-                                <option selected value="@Model.Rollen[i].ID">@Model.Rollen[i].Naam</option>
-                            }
-                            else
-                            {
-                                <option value="@Model.Rollen[i].ID">@Model.Rollen[i].Naam</option>
-                            }
-                        }
-                    </select>
-
-                    @*
                         Student:
-                        Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
+                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
                         Rol:
                         @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
-                    *@
-                    
-
-                    @if(Model.SelectedStudentId != null)
-                    {
-                        
-                        for (int s = 1; s < Model.SelectedStudentId.Count(); s++ )
+                        <br/>
+                        @if(Model.SelectedStudentId != null)
                         {
-                            <text>Student: </text>
-                            <select>
-                            @for (int i = 0; i < Model.Studenten.Count(); i++)
+                            for(int i = 1; i < Model.SelectedStudentId.Count; i++)
                             {
-                                if(Model.SelectedStudentId[0].Equals(Model.Studenten[i].ID))
-                            {
-                                <option selected value="@Model.Studenten[i].ID">@Model.Studenten[i].Naam</option>
+                                <text>Student:
+                                @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList["+@i+"]" })
+                                Rol:
+                                @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList["+@i+"]" })
+                                <br/>
+                                </text>
                             }
-                            else
-                            {
-                                <option value="@Model.Studenten[i].ID">@Model.Studenten[i].Naam</option>
-                            }
-
-                            }
-                            </select>
-                            
-                            <text> Rol: </text>
-                            <select>
-                            @for (int i = 0; i < Model.Rollen.Count(); i++)
-                            {
-                                if(Model.SelectedRolId[0].Equals(Model.Rollen[i].ID))
-                            {
-                                <option selected value="@Model.Rollen[i].ID">@Model.Rollen[i].Naam</option>
-                            }
-                            else
-                            {
-                                <option value="@Model.Rollen[i].ID">@Model.Rollen[i].Naam</option>
-                            }
-
-                            }
-                            </select>
-                            <br />
                         }
-                       
-                    }
                     
                 </div>
             </div>
@@ -142,51 +86,49 @@
 </div>
 
 <script>
+    @if(Model.SelectedStudentId != null)
+    {
+        <text>var counter = @Model.SelectedStudentId.Count
+        counter--;
+        </text>
+    }
+    else
+    {
+        <text>var counter = 1;</text>
+    }
+    
+    @if(counterTotal != 0)
+    {
+        <text>var selectlist;</text>
+        for(int i = counterTotal-1; i > -1; i--)
+        {
+            <text>
+            selectlist = document.getElementById("studentList[@i]");        
+            selectlist.value = @Model.SelectedStudentId[i]
 
-    @functions{int counter = 1;}
+            selectlist = document.getElementById("rolList[@i]");
+            selectlist.value = @Model.SelectedRolId[i]
+            </text>
+        }
+    }
 
     function newStudentRol()
     {
+        
         /*
             min knop houd de waarde bij die de counter toen had.
             wanneer op de min knop geduwt wordt: for van de "minwaarde" tot de huidige counter en alle elementen die overeen komen verwijderen uit de div EN uit de arrays van studentId en rolId
         */
         var div = document.getElementsByClassName("studentrolinfo")[0];
-        
-        var studentlist = "<select id='studentList[@counter]'>";
-        
-        @for (int i = 0; i < Model.Studenten.Count(); i++)
-        {
-            if (Model.SelectedStudentId != null && Model.SelectedStudentId[counter].Equals(Model.Studenten[i].ID))
-            {
-                <text>studentlist += "<option selected value='@Model.Studenten[i].ID'>@Model.Studenten[i].Naam</option>";</text>
-            }
-            else
-            {
-                <text>studentlist += "<option value='@Model.Studenten[i].ID'>@Model.Studenten[i].Naam</option>";</text>
-            }
-        }
-    
-        studentlist += "</select>";
 
-        var rollist = "<select id='rolList[@counter]'>";
-        
-        @for (int i = 0; i < Model.Rollen.Count(); i++)
-        {
-            if(Model.SelectedRolId != null && Model.SelectedRolId[counter].Equals(Model.Rollen[i].ID))
-            {
-                <text>rollist += "<option selected value='@Model.Rollen[i].ID'>@Model.Rollen[i].Naam</option>";</text>
-            }
-            else
-            {
-                <text>rollist += "<option value='@Model.Rollen[i].ID'>@Model.Rollen[i].Naam</option>";</text>
-            }
+        var studentlist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[JSCounter]" }).ToString())
+        studentlist = studentlist.replace("JSCounter", counter);
 
-        }
-        rollist += "</select>";
+        var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[JSCounter]" }).ToString())
+        rollist = rollist.replace("JSCounter", counter);
 
+        div.innerHTML += "<br/>Student: " + studentlist + " Rol: " + rollist;
 
-        div.innerHTML += "<br/>Student: "+studentlist+" Rol: "+rollist;
-        @{counter++;}
+        counter++;
     }
 </script>

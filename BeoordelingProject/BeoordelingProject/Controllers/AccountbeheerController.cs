@@ -31,9 +31,11 @@ namespace BeoordelingProject.Controllers
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();
-            accountbeheerVM.Studenten = studentService.GetStudenten();
+            //accountbeheerVM.Studenten = studentService.GetStudenten();
+            accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
             accountbeheerVM.Accounts = studentService.GetUsers();
-            accountbeheerVM.Rollen = studentService.GetRoles();
+            //accountbeheerVM.Rollen = studentService.GetRoles();
+            accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
             return View(accountbeheerVM);
         }
 
@@ -56,9 +58,11 @@ namespace BeoordelingProject.Controllers
                                 ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
 
                                 var accountbeheerVM = new AccountbeheerVM();
-                                accountbeheerVM.Studenten = studentService.GetStudenten();
+                                //accountbeheerVM.Studenten = studentService.GetStudenten();
+                                accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
                                 accountbeheerVM.Accounts = studentService.GetUsers();
-                                accountbeheerVM.Rollen = studentService.GetRoles();
+                                //accountbeheerVM.Rollen = studentService.GetRoles();
+                                accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
 
                                 accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
                                 accountbeheerVM.SelectedRolId = model.SelectedRolId;

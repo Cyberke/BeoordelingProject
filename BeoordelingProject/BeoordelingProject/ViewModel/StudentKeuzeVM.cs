@@ -9,7 +9,6 @@ namespace BeoordelingProject.ViewModel {
         public List<Student> Studenten { get; set; }
         public List<List<Rol>> RollenPerStudent { get; set; }
         public int Aantal { get; set; }
-        public bool IsTussentijd { get; set; }
         public IHtmlString StudentenString { get; set; }
     }
 }
