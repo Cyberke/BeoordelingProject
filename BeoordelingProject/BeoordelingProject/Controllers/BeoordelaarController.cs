@@ -44,15 +44,19 @@ namespace BeoordelingProject.Controllers
                 if (parts.Length == 2) {
                     if (int.TryParse(parts[0], out studentID) && int.TryParse(parts[1], out rolID)) {
                         if (matrix != 0) {
-                            BeoordelingsVM vm = new BeoordelingsVM();
+                            if (!((rolID == 2 && matrix == 2) || (rolID == 3 && matrix == 2))) {
+                                // Geen tweede lezer of kritische vriend mag tussenbeoordelingen doen
 
-                            vm.MatrixID = matrix;
-                            vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);
-                            vm.Student = studentService.GetStudentByID(studentID);
-                            vm.Rol_ID = rolID;
-                            vm.Resultaten = new Resultaat();
+                                BeoordelingsVM vm = new BeoordelingsVM();
 
-                            return View(vm);
+                                vm.MatrixID = matrix;
+                                vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);
+                                vm.Student = studentService.GetStudentByID(studentID);
+                                vm.Rol_ID = rolID;
+                                vm.Resultaten = new Resultaat();
+
+                                return View(vm);
+                            }
                         }
                     }
                 }
