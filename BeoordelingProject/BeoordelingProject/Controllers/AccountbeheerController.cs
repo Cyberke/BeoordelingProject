@@ -1,6 +1,7 @@
 ﻿using BeoordelingProject.DAL.Services;
 using BeoordelingProject.Models;
 using BeoordelingProject.ViewModel;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,9 +86,10 @@ namespace BeoordelingProject.Controllers
                 }
             }
 
-            var user = new ApplicationUser() { UserName = model.Account.UserName };
+            var user = new ApplicationUser() { UserName = model.registerVM.UserName };
             user.StudentRollen = studentrollen;
-            var result = userService.Create(user, model.Account.PasswordHash);
+
+            var result = userService.Create(user, model.registerVM.Password);
             userService.AddUserToRoleUser(user.Id);
 
             return RedirectToAction("AddStudentRol", "Accountbeheer");
