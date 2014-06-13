@@ -53,7 +53,7 @@ namespace BeoordelingProject.Controllers
                         {
                             if (model.SelectedRolId[i].Equals(studentrollen[s].Rollen[r].ID))
                             {
-                                ViewBag.Error = "Duplicaatje";
+                                ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
 
                                 var accountbeheerVM = new AccountbeheerVM();
                                 accountbeheerVM.Studenten = studentService.GetStudenten();
@@ -91,9 +91,14 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult DeleteUser(string userId)
         {
+            ApplicationUser tedeletenUser = studentService.GetUserById(userId);
+            //List<StudentRollen> studentrollenVanUser = tedeletenUser.StudentRollen;
             
-            studentService.DeleteUser(userId);
             
+
+            studentService.DeleteUser(tedeletenUser);
+
+
             return RedirectToAction("AddStudentRol", "Accountbeheer");
         }
 	}

@@ -31,10 +31,18 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
-        public void DeleteGebruiker(string selectedId)
+        public void DeleteGebruiker(ApplicationUser user)
         {
-            ApplicationUser user = context.Users.First(u => u.Id == selectedId);
-            
+            for (int i = user.StudentRollen.Count - 1; i >= 0; i--)
+            {
+                //user.StudentRollen.RemoveAt(i);
+            }
+
+            //foreach(StudentRollen studentrol in user.StudentRollen)
+            //{
+            //    user.StudentRollen.Remove(studentrol);
+            //}
+
             context.Users.Remove(user);
             context.SaveChanges();
         }

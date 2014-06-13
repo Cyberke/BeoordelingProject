@@ -79,9 +79,10 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.All().ToList();
         }
 
-        public void DeleteUser(string id)
+        public void DeleteUser(ApplicationUser user)
         {
-            accountRepository.DeleteGebruiker(id);
+            accountRepository.DeleteGebruiker(user);
+
         }
 
         public List<Rol> GetRoles()
@@ -140,20 +141,6 @@ namespace BeoordelingProject.DAL.Services
             jsonString += "]}";
 
             return new HtmlString(jsonString);
-
-            //using (var stringWriter = new StringWriter())
-            //using (var jsonWriter = new JsonTextWriter(stringWriter))
-            //{
-            //    var serializer = new JsonSerializer
-            //    {
-            //        ContractResolver = new CamelCasePropertyNamesContractResolver()
-            //    };
-
-            //    jsonWriter.QuoteName = false;
-            //    serializer.Serialize(jsonWriter, value);
-
-            //    return new HtmlString(stringWriter.ToString());
-            //}
         }
 
         public Student GetStudentByID(int id)
@@ -197,5 +184,11 @@ namespace BeoordelingProject.DAL.Services
 
             return counter;
         }
+
+        public ApplicationUser GetUserById(string userId)
+        {
+            return accountRepository.GetByID(userId);
+        }
+
     }
 }
