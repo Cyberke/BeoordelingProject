@@ -6,6 +6,15 @@
 }   
 
 <div id="container">
+    <a href="../Beoordelaar/Index" class="link">Studentkeuze</a>
+    <label> > <strong> Beoordelingen</strong></label>
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
     @if (Model.Matrix.Tussentijds) {
         <h1>Tussentijdsbeoordelingen</h1>
     }
@@ -14,7 +23,7 @@
     }
     
     <h2>Beoordelen: @Html.DisplayFor(model => model.Student.Naam) - @Html.DisplayFor(model => model.Matrix.Richting)</h2>
-    <h3>Beoordelaar: @User.Identity.GetUserName()</h3>
+    <h2>Beoordelaar: @User.Identity.GetUserName()</h2>
 
     @using (Html.BeginForm())
     {
@@ -47,12 +56,12 @@
                         <td>ZG (>=16)</td>
                     </tr>
                     <tr class="buttons">
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 3)</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 8)</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 10.5)</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 12.5)</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 14.5)</td>
-                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 18)</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 3, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 8, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 10.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 12.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 14.5, new { @class = "rbMatrices" })</td>
+                        <td>@Html.RadioButtonFor(model => model.Resultaten.DeelaspectResultaten[counter].Score, 18, new { @class = "rbMatrices" })</td>
                     </tr>
                     <tr id="@Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)" style="display:none">
                         <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)</td>

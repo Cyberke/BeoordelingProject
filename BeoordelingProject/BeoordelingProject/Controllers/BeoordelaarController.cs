@@ -33,7 +33,7 @@ namespace BeoordelingProject.Controllers
 
         //
         // GET: /Beoordelaar/
-        public ActionResult Beoordeling(string studentRol, int matrix)
+        public ActionResult Beoordeling(string studentRol, int matrix = 0)
         {
             if (studentRol != null && !studentRol.Equals("")) {
                 string[] parts = studentRol.Split('.');
@@ -43,7 +43,7 @@ namespace BeoordelingProject.Controllers
 
                 if (parts.Length == 2) {
                     if (int.TryParse(parts[0], out studentID) && int.TryParse(parts[1], out rolID)) {
-                        if (matrix != 0 && matrix != null) {
+                        if (matrix != 0) {
                             BeoordelingsVM vm = new BeoordelingsVM();
 
                             vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);

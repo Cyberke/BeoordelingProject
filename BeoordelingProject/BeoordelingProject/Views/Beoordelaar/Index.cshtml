@@ -23,8 +23,11 @@
         </option>
     </select>
     <div>
-        <input type="radio" checked="checked" ng-model="matrixID" value="2" /> Tussentijdsbeoordeling | 
-        <input type="radio" ng-model="matrixID" value="1" /> Eindbeoordeling
+        <input id="rbTussentijds" checked="checked" type="radio" ng-model="matrixID" value="2" />
+        <label for="rbTussentijds">Tussentijdsbeoordeling |</label>
+
+        <input id="rbEindbeoordeling" type="radio" ng-model="matrixID" value="1" />
+        <label for="rbEindbeoordeling">Eindbeoordeling</label>
     </div>
     <a href="/Beoordelaar/Beoordeling?studentRol={{studentRol}}&matrix={{matrixID}}" class="actionbutton">Beoordelen</a>
 </div>
