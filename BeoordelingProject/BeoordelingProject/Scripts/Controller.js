@@ -5,7 +5,7 @@ module.service('appService', function () {
     // Dus hier een lege service.
 });
 
-module.controller("appController", function ($scope, $filter, studentenlijst)
+module.controller("appController", ['appService', function ($scope, $filter, studentenlijst)
 {
     var scope = $scope;
     var orderBy = $filter('orderBy');
@@ -50,4 +50,4 @@ module.controller("appController", function ($scope, $filter, studentenlijst)
         scope.studenten = orderBy(scope.studenten, sort.column, sort.descending);
     };
 
-});
+}]);
