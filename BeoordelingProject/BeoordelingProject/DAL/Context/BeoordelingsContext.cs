@@ -12,7 +12,7 @@ namespace BeoordelingProject.DAL.Context
     public class BeoordelingsContext: IdentityDbContext<ApplicationUser>
     {
         public BeoordelingsContext()
-            :base("BeoordelingsProject")
+            :base("BeoordelingProject")
         {
 
         }
