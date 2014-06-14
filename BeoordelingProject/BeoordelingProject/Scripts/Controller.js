@@ -1,7 +1,7 @@
 var module = angular.module("appModule", []);
 
 
-module.controller("appController", ['$scope', function ($scope, $filter, studentenlijst)
+module.controller("appController", ['$hello', function ($scope, $filter, studentenlijst)
 {
     var scope = $scope;
     var orderBy = $filter('orderBy');
