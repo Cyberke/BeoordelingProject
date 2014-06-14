@@ -7,6 +7,7 @@ namespace BeoordelingProject.DAL.Services
         void DeleteUser(BeoordelingProject.Models.ApplicationUser user);
         int GetAantalTeTonenStudenten(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);
         System.Collections.Generic.List<string> GetOpleidingen();
+        System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaat();
         BeoordelingProject.Models.Rol GetRolById(int id);
         System.Collections.Generic.List<BeoordelingProject.Models.Rol> GetRoles();
         System.Collections.Generic.List<System.Collections.Generic.List<BeoordelingProject.Models.Rol>> GetRollenByStudent(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);
@@ -15,7 +16,7 @@ namespace BeoordelingProject.DAL.Services
         System.Collections.Generic.List<BeoordelingProject.Models.Student> GetStudentenByStudentRollen(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);
         BeoordelingProject.Models.ApplicationUser GetUserById(string userId);
         System.Collections.Generic.List<BeoordelingProject.Models.ApplicationUser> GetUsers();
-        System.Web.IHtmlString SerializeObject(object value);
+        System.Web.IHtmlString MaakStudentString(object studentlijst, object resultaatlijst);
         System.Web.IHtmlString SerializeObject(object value, object otherValue);
     }
 }

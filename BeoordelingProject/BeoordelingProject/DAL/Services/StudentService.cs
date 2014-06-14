@@ -17,18 +17,20 @@ namespace BeoordelingProject.DAL.Services
         IStudentRepository studentRepository = null;
         IAccountRepository accountRepository = null;
         IGenericRepository<Rol> rolRepository = null;
+        IResultaatRepository resultaatRepository = null;
 
         public StudentService()
         {
 
         }
 
-        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository, IGenericRepository<Rol> rolRepository)
+        public StudentService(IUnitOfWork uow, IStudentRepository studentRepository, IAccountRepository accountRepository, IGenericRepository<Rol> rolRepository, IResultaatRepository resultaatRepository)
         {
             this.uow = uow;
             this.studentRepository = studentRepository;
             this.accountRepository = accountRepository;
             this.rolRepository = rolRepository;
+            this.resultaatRepository = resultaatRepository;
         }
 
         public List<Student> GetStudenten()
@@ -90,6 +92,11 @@ namespace BeoordelingProject.DAL.Services
             return studentRepository.GetRoles().ToList();
         }
 
+        public List<Resultaat> GetResultaat()
+        {
+            return resultaatRepository.All().ToList<Resultaat>();
+        }
+
         public IHtmlString SerializeObject(object value, object otherValue) {
             List<Student> studenten = (List<Student>)value;
             List<List<Rol>> studentPerRollen = (List<List<Rol>>)otherValue;
@@ -115,23 +122,59 @@ namespace BeoordelingProject.DAL.Services
             return new HtmlString(jsonString);
         }
 
-        public IHtmlString SerializeObject(object value)
+        public IHtmlString MaakStudentString(object studentlijst, object resultaatlijst)
         {
-            List<Student> studenten = (List<Student>)value;
+            List<Student> studenten = (List<Student>)studentlijst;
+            List<Resultaat> resultaten = (List<Resultaat>)resultaatlijst;
             string jsonString = "{Studenten:[";
+
             foreach (Student student in studenten)
             {
                 jsonString += "{";
-                jsonString+="id: "+ student.ID +",";
                 jsonString += "naam: \"" + student.Naam + "\",";
+                jsonString += "academiejaar: \"" + "2014-2015" + "\",";
                 jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
+                foreach (Resultaat resultaat in resultaten)
+                {
+                    if (resultaat.StudentId.Equals(student.ID) && !resultaat.TotaalTussentijdResultaat.Equals(0))
+                    {
+                        jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
+                    }
+                    else
+                    {
+                        jsonString += "tussentijdse: \"" + "-" + "\",";
+                    }
+                    if (resultaat.StudentId.Equals(student.ID) && !resultaat.TotaalEindresultaat.Equals(0))
+                    {
+                        jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
+                    }
+                    else
+                    {
+                        jsonString += "eind: \"" + "-" + "\",";
+                    }
+                }
+                jsonString += "id: " + student.ID + ",";
                 jsonString += "opleiding: \"" + student.Opleiding + "\",";
-                jsonString += "email: \"" + student.Email + "\",";
-                jsonString += "studentId: " + student.StudentId + ",";
-                jsonString += "geslacht: \"" + student.Geslacht + "\",";
-                jsonString += "geboortedatum: \"" + student.Geboortedatum + "\"";
+                jsonString += "studentId: " + student.StudentId + "";
                 jsonString += "},";
             }
+
+
+            //foreach (Student student in studenten)
+            //{
+            //    jsonString += "{";
+            //    jsonString += "id: " + student.ID + ",";
+            //    jsonString += "naam: \"" + student.Naam + "\",";
+            //    jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
+            //    jsonString += "opleiding: \"" + student.Opleiding + "\",";
+            //    jsonString += "email: \"" + student.Email + "\",";
+            //    jsonString += "studentId: " + student.StudentId + ",";
+            //    jsonString += "geslacht: \"" + student.Geslacht + "\",";
+            //    jsonString += "geboortedatum: \"" + student.Geboortedatum + "\"";
+            //    jsonString += "},";
+            //}
+
+
             //laatste komma wissen, deze is niet nodig
             jsonString = jsonString.Remove(jsonString.Length - 1);
 

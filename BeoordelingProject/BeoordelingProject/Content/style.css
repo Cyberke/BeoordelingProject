@@ -26,6 +26,11 @@ header{
     
 }
 
+li
+{
+    list-style:none;
+}
+
 .actionbutton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -74,23 +79,33 @@ header{
 	top:1px;
 }
 
+.addUser{
+    column-span:all;
+}
+
 .loginbutton
 {
     width:51%;
 }
 #inklapdiv {
-    border-style: solid;
-    border-width: 1px;
-    border-top: none;
-    border-color: #C9C9C9;
     min-height: 20%;
     height: auto;
+}
+
+.studentrolSelectlist {
+    margin-top: 10px;
+}
+
+.errorViewbag
+{
+    color:#ff0000;
 }
 
 .gebruikerinfo
 {
     float: left;
     margin-left:5px;
+    margin-bottom:20px;
 }
 .gebruikerinfo input[type="submit"]
 {
@@ -103,6 +118,7 @@ header{
     padding-top: 5px;
     float: right;
     margin-right: 5px;
+    margin-bottom:50px;
 }
 
 .tablebutton
@@ -165,11 +181,6 @@ label
 	height: 100%;
     overflow: auto;
     
-}
-
-.wachtwoordStudentrol
-{
-    margin-left:31px;
 }
 
 .link
@@ -641,7 +652,7 @@ td
 {
 	text-align: center;
     margin-top: 10px;
-    clear: both;
+    clear:both;
 }
 
 .userlist td

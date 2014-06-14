@@ -11,5 +11,6 @@ namespace BeoordelingProject.ViewModel {
         public Matrix Matrix { get; set; }
         public Student Student { get; set; }
         public int Rol_ID { get; set; }
+        public List<double> Scores { get; set; }
     }
 }

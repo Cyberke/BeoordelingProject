@@ -28,6 +28,7 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
+
         public List<string> CheckIfRolesCompleted(int studentid)
         {
             var query =
@@ -47,7 +48,6 @@ namespace BeoordelingProject.DAL.Repositories
 
         public IEnumerable<Resultaat> GetEindResultaten(int id)
         {
-
             return null;
         }
 
@@ -82,4 +82,6 @@ namespace BeoordelingProject.DAL.Repositories
             return query.First();
         }
     }
+
+    
 }
