@@ -6,7 +6,7 @@
 }   
 
 <div id="container">
-    <a href="../Beoordelaar/Index" class="link">Studentkeuze</a>
+    @Html.ActionLink("Studentkeuze", "Index", null, new { @class = "link" })
     <label> > <strong> Beoordelingen</strong></label>
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
         @Html.AntiForgeryToken()

@@ -6,7 +6,7 @@
 }
 
 <div id="container">
-    <a href="../Admin/Index" class="link">Overzicht</a>
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
     <label> > <strong> Adminpaneel</strong></label>
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
         @Html.AntiForgeryToken()

@@ -4,6 +4,18 @@
     ViewBag.Title = "Home Page";
 }
 <div id="container">
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
+    <label> > </label>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
+    <label> > <strong> Studenten importeren</strong></label>
+    <br />
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()

@@ -11,9 +11,9 @@
 }
 
 <div id="container">
-    <a href="../Admin/Index" class="link">Overzicht</a>
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
     <label> > </label>
-    <a href="../Adminpaneel/Index" class="link">Adminpaneel</a>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
     <label> > <strong> Accountbeheer</strong></label>
     <br />
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
