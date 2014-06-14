@@ -1,5 +1,9 @@
 var module = angular.module("appModule", []);
 
+module.service('appService', function () {
+    // Blijkbaar moet er een service.
+    // Dus hier een lege service.
+});
 
 module.controller("appController", function ($scope, $filter, studentenlijst)
 {
