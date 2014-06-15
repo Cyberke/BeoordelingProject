@@ -63,8 +63,9 @@ namespace BeoordelingProject.Controllers
         public ActionResult SendMail(int id)
         {
             var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = id });
-            var file = "rapport.pdf";
+            var file = Server.MapPath("~/rapport.pdf");
             var binary = pdf.BuildPdf(this.ControllerContext);
+            
             System.IO.File.WriteAllBytes(file, binary);
             
 
@@ -80,7 +81,7 @@ namespace BeoordelingProject.Controllers
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(msg.From.Address, "password");
+            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
