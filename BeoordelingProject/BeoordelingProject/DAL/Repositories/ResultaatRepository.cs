@@ -27,6 +27,11 @@ namespace BeoordelingProject.DAL.Repositories
 
             return query;
         }
+        public IEnumerable<Resultaat> GetEindResultaten(int id)
+        {
+
+            return null;
+        }
 
 
         public List<string> CheckIfRolesCompleted(int studentid)
@@ -44,11 +49,6 @@ namespace BeoordelingProject.DAL.Repositories
             List<string> namen = query.Distinct().ToList<string>();
 
             return namen;
-        }
-
-        public IEnumerable<Resultaat> GetEindResultaten(int id)
-        {
-            return null;
         }
 
         public int ifExistsGetStudentId(int studentid)
