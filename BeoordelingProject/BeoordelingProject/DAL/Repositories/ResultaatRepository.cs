@@ -28,6 +28,18 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
+        public List<double> GetScoresForHoofdaspect(int aspectID, int studentID)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                from h in r.HoofdaspectResultaten
+                where h.HoofdaspectId.Equals(aspectID) && r.StudentId.Equals(studentID)
+                select h.Score
+            );
+
+            return query.ToList<double>();
+        }
 
         public List<string> CheckIfRolesCompleted(int studentid)
         {

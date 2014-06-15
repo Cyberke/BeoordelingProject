@@ -4,8 +4,9 @@ namespace BeoordelingProject.DAL.Repositories
 {
     public interface IMatrixRepository : IGenericRepository<Matrix>
     {
-        BeoordelingProject.Models.Matrix GetMatrixByID(int id);
+        System.Collections.Generic.List<BeoordelingProject.Models.Hoofdaspect> GetHoofdaspectenForMatrix(int matrixid);
         BeoordelingProject.Models.Matrix GetMatrixForRol(int matrixID, int rolID);
         int GetWegingForDeelaspect(int deelresID);
+        int GetWegingForHoofdaspect(int hoofdresID);
     }
 }
