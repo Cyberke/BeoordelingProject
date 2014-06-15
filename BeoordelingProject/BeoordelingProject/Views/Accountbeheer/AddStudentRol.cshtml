@@ -56,26 +56,26 @@
                 </div>
                 <div class="studentrolinfo">
                     <label class="actionbutton" onclick="newStudentRol()">+</label><br /><br />
-                        Student:
-                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
-                        Rol:
-                        @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
-                        <br />
+                    <div class='studentrolSelectlist'>
+                    Student: @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
+                    Rol: @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
+                    </div>
                         @if(Model.SelectedStudentId != null)
                         {
                             for(int i = 1; i < Model.SelectedStudentId.Count; i++)
                             {
                                 <text>
-                                <div class="studentrolSelectlist">
-                                    Student:
-                                    @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[" + @i + "]" })
-                                    Rol:
-                                    @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[" + @i + "]" })
-                                </div>
+                                    <div class="studentrolSelectlist">
+                                        Student:
+                                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[" + @i + "]" })
+                                        Rol:
+                                        @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[" + @i + "]" })
+                                    </div>
                                 </text>
                             }
                         }
-                </div>
+                    </div>
+                    <label class="actionbutton" onclick="removeStudentRol()">-</label><br /><br />
             </div>
         </div>
     }
@@ -147,6 +147,12 @@
 
     function removeStudentRol()
     {
+        var div = document.getElementsByClassName("studentrolinfo")[0];
+        var removelast = document.getElementsByClassName("studentrolSelectlist")[counter-1];
+        
+        //alert(removelast.innerHTML);
+
+        div.removeChild(removelast);
         counter--;
     }
 
