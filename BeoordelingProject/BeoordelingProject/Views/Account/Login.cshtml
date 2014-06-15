@@ -14,12 +14,12 @@
                 <table>
                     <tr>
                         <td>@Html.Label("Gebruikersnaam")</td>
-                        <td>@Html.TextBoxFor(m => m.UserName)</td>
+                        <td>@Html.TextBoxFor(m => m.UserName, new { @class = "textbox" })</td>
                         <td>@Html.ValidationMessageFor(m => m.UserName,"Gebruikersnaam is verplicht")</td>
                     </tr>
                     <tr>
                         <td>@Html.Label("Wachtwoord")</td>
-                        <td>@Html.PasswordFor(m => m.Password)</td>
+                        <td>@Html.PasswordFor(m => m.Password, new { @class = "textbox" })</td>
                         <td>@Html.ValidationMessageFor(m => m.Password,"Wachtwoord is verplicht")</td>
                     </tr>
                     <tr>

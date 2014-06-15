@@ -189,7 +189,6 @@
     <Compile Include="Controllers\AdminpaneelController.cs" />
     <Compile Include="Controllers\BeoordelaarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MatrixController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Context\BeoordelingsContext.cs" />
     <Compile Include="DAL\Repositories\AccountRepository.cs" />
@@ -208,11 +207,9 @@
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
     <Compile Include="DAL\Services\IAdministratorService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
-    <Compile Include="DAL\Services\IMatrixService.cs" />
     <Compile Include="DAL\Services\IStudentrolService.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
     <Compile Include="DAL\Services\IUserManagementService.cs" />
-    <Compile Include="DAL\Services\MatrixService.cs" />
     <Compile Include="DAL\Services\StudentrolService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
     <Compile Include="DAL\Services\UserManagementService.cs" />
@@ -265,6 +262,8 @@
     <Content Include="Content\img\pijl_up.png" />
     <Content Include="Content\img\plus.png" />
     <Content Include="Content\img\stats.png" />
+    <Content Include="Content\img\upload-button02.png" />
+    <Content Include="Content\img\Upload.png" />
     <Content Include="Content\img\zoek.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -325,7 +324,6 @@
     <Content Include="Views\Student\StudentLijst.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Accountbeheer\AddStudentRol.cshtml" />
-    <Content Include="Views\Matrix\Index.cshtml" />
     <Content Include="Views\Admin\GetStudent.cshtml" />
     <Content Include="Views\Beoordelaar\Beoordeling.cshtml" />
     <Content Include="Views\Adminpaneel\Index.cshtml" />

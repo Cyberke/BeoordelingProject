@@ -17,7 +17,7 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
 
-    <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
+    <input class="zoek textbox" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
 
     @foreach (var Opleidingitem in Model.Opleidingen)
     {

@@ -11,9 +11,9 @@
 }
 
 <div id="container">
-    <a href="../Admin/Index" class="link">Overzicht</a>
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
     <label> > </label>
-    <a href="../Adminpaneel/Index" class="link">Adminpaneel</a>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
     <label> > <strong> Accountbeheer</strong></label>
     <br />
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -24,44 +24,63 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-    @using (Html.BeginForm())
+        @using (Html.BeginForm())
     {
-        @ViewBag.Error<br />
+        <label class="errorViewbag">@ViewBag.Error</label><br />
         <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
     
         <div id="inklapdiv" style="display:none">
             <div class="login">
                 <div class="gebruikerinfo">
-                    @Html.Label("Gebruikersnaam")
-                    @Html.EditorFor(model => model.Account.UserName)
-                    @Html.ValidationMessageFor(model => model.Account.UserName)
-                    <br />
-                    @Html.Label("Wachtwoord")
-                    @Html.PasswordFor(model => model.Account.PasswordHash, new { @class = "wachtwoordStudentrol" })
-                    @Html.ValidationMessageFor(model => model.Account.PasswordHash)
-                    <br />
-                    <input type="submit" value="Gebruiker toevoegen" class="actionbutton" />
+                    <table>
+                        <tr>
+                            <td>@Html.Label("Gebruikersnaam")</td>
+                            <td>@Html.TextBoxFor(model => model.registerVM.UserName, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.registerVM.UserName, "Gelieve een correct e-mailadres in te geven")</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Wachtwoord")</td>
+                            <td>@Html.PasswordFor(model => model.registerVM.Password, new { @class = "textbox" })</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ValidationMessageFor(model => model.registerVM.Password, "Wachtwoord moet minstens 6 karakters lang zijn")</td>
+                        </tr>
+                        <tr>
+                            <td class="addUser"><input type="submit" value="Gebruiker toevoegen" class="actionbutton" /></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="studentrolinfo">
-                    <label class="actionbutton" onclick="newStudentRol()">+</label>
-                        Student:
-                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
-                        Rol:
-                        @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
-                        <br/>
-                        @if(Model.SelectedStudentId != null)
+                    <table class="AddDeleteTable">
+                        <tr>
+                            <td><label class="actionbutton addDeleteButton" onclick="newStudentRol()">+</label></td>
+                            <td><label class="actionbutton addDeleteButton" onclick="removeStudentRol()">-</label></td>
+                        </tr>
+                    </table>
+                    <div class="studentrollen">
+                        <div class='studentrolSelectlist'>
+                            Student: @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
+                            Rol: @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
+                        </div>
+                        @if (Model.SelectedStudentId != null)
                         {
-                            for(int i = 1; i < Model.SelectedStudentId.Count; i++)
+                            for (int i = 1; i < Model.SelectedStudentId.Count; i++)
                             {
-                                <text>Student:
-                                @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList["+@i+"]" })
-                                Rol:
-                                @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList["+@i+"]" })
-                                <br/>
+                                <text>
+                                    <div class="studentrolSelectlist">
+                                        Student:
+                                        @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[" + @i + "]" })
+                                        Rol:
+                                        @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[" + @i + "]" })
+                                    </div>
                                 </text>
                             }
                         }
-                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,8 +146,22 @@
         var rollist = @JShelper.EncodeJavaScriptString(Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[JSCounter]" }).ToString())
         rollist = rollist.replace("JSCounter", counter);
 
-        div.innerHTML += "<br/>Student: " + studentlist + " Rol: " + rollist;
+        div.innerHTML += "<div class='studentrolSelectlist'>Student: " + studentlist + " Rol: " + rollist + "</div>";
 
         counter++;
     }
-</script>
+
+    function removeStudentRol()
+    {
+        var div = document.getElementsByClassName("studentrolinfo")[0];
+        var removelast = document.getElementsByClassName("studentrolSelectlist")[counter-1];
+        
+        //alert(removelast.innerHTML);
+
+        div.removeChild(removelast);
+        counter--;
+    }
+
+</script>@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

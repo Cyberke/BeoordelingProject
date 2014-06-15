@@ -13,19 +13,16 @@ namespace BeoordelingProject.Controllers
     public class BeoordelaarController : Controller
     {
         private IBeoordelingsService beoordelingsService = null;
-        private IMatrixService matrixService = null;
         private IBeoordelingsEngine beoordelingsEngine = null;
         private IStudentService studentService = null;
         private IUserManagementService userService = null;
 
         public BeoordelaarController(
             IBeoordelingsService beoordelingsService,
-            IMatrixService matrixService,
             IBeoordelingsEngine beoordelingsEngine,
             IStudentService studentService,
             IUserManagementService userService) {
             this.beoordelingsService = beoordelingsService;
-            this.matrixService = matrixService;
             this.beoordelingsEngine = beoordelingsEngine;
             this.studentService = studentService;
             this.userService = userService;

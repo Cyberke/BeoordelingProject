@@ -4,11 +4,29 @@
     ViewBag.Title = "Home Page";
 }
 <div id="container">
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
+    <label> > </label>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
+    <label> > <strong> Studenten importeren</strong></label>
+    <br />
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        <input type="file" id="file" name="file"/>
+        <table>
+            <tr>
+                <td><input id="uploadFile" class="filetext" placeholder="Geen bestand gekozen..." disabled="disabled" /></td>
+                <td class="upload"><input id="file" type="file" name="upload" /></td>
+            </tr>
+        </table>
+        
         <input type="button" value="Submit" id="submit" onclick="happytime()" class="actionbutton">
         <input type="submit" value="Importeer" id="submit" class="actionbutton"/>
 
@@ -32,5 +50,11 @@
         reader.readAsText(file, 'ISO-8859-1');
 
     }
+
+    document.getElementById("file").onchange = function () {
+        var path = this.value;
+        var stukken =  path.split("\\");
+        document.getElementById("uploadFile").value = stukken[2];
+    };
 
 </script>
