@@ -80,7 +80,7 @@ namespace BeoordelingProject.Controllers
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Credentials = new NetworkCredential(msg.From.Address, "password");
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
