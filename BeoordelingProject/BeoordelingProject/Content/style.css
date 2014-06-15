@@ -102,8 +102,8 @@ li
 }
 
 #inklapdiv {
-    min-height: 20%;
-    height: auto;
+
+    height: 100%;
 }
 
 .studentrolSelectlist {
@@ -139,6 +139,25 @@ li
 {
     display:inline-block;
     width: 100%;
+}
+
+.AddDeleteTable
+{
+    width:0%;
+    float:right;
+}
+
+.addDeleteButton
+{
+    float:right;
+    height:30px;
+    width:30px;
+    margin-left:10px;
+}
+
+.studentrollen
+{
+    margin-top:60px;
 }
 
 .header
@@ -560,6 +579,10 @@ td
 	font-size: 16px;
 }
 
+.studentkeuze{
+    margin-top:40px;
+}
+
 /* Aspecten beoordelingtabel */
 .aspect
 {
@@ -581,12 +604,13 @@ td
 	height: 35px;
 
 	cursor:pointer;
+    text-align:center;
 }
 
 /* deelaspect met knop voor inklappen */
 .deelaspectmin
 {
-	background-color: #00FF00;
+	background-color: #fff600;
 	background-image: url("img/min.png");
 	background-position: left;
 	background-repeat: no-repeat;
@@ -594,6 +618,7 @@ td
 	color: #000000;
 	font-size: 16px;
 	height: 35px;
+    text-align:center;
 
 	cursor:pointer;
 }

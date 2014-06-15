@@ -43,7 +43,7 @@
                 for(int i = 0; i < item.Deelaspecten.Count; i++)
                 {
                     <tr>
-                        <td colspan="6" class="deelaspectplus" onselectstart="return false" onclick="showinfo(this)">
+                        <td colspan="6" class="deelaspectmin" onselectstart="return false" onclick="showinfo(this)">
                             @Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)
                         </td>
                     </tr>
@@ -63,7 +63,7 @@
                         <td>@Html.RadioButtonFor(model => model.Scores[counter], 14.5, new { @class = "rbMatrices" })</td>
                         <td>@Html.RadioButtonFor(model => model.Scores[counter], 18, new { @class = "rbMatrices" })</td>
                     </tr>
-                    <tr id="@Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)" style="display:none">
+                    <tr id="@Html.DisplayFor(model => item.Deelaspecten[i].Omschrijving)" >
                         <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOVOmschrijving)</td>
                         <td>@Html.DisplayFor(model => item.Deelaspecten[i].OVOmschrijving)</td>
                         <td>@Html.DisplayFor(model => item.Deelaspecten[i].VOmschrijving)</td>
