@@ -63,8 +63,8 @@ namespace BeoordelingProject.Controllers
         public ActionResult SendMail(int id)
         {
             var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = id });
-            var file = "rapport.pdf";
-            //var file = Server.MapPath("~/rapport.pdf");
+            //var file = "rapport.pdf";
+            var file = Server.MapPath("~/rapport.pdf");
             var binary = pdf.BuildPdf(this.ControllerContext);
 
             System.IO.File.WriteAllBytes(file, binary);
