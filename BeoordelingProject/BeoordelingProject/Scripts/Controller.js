@@ -1,6 +1,5 @@
 var module = angular.module("appModule", []);
 
-
 module.controller("appController", function ($scope, $filter, studentenlijst)
 {
     var scope = $scope;
