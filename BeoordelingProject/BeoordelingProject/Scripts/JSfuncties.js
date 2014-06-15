@@ -58,7 +58,7 @@ function helptekst(pagename)
 			helpTekst += "Gebruikersnaam of Wachtwoord vergeten? Contacteer de Administrator.";
 			return helpTekst;
 		break;
-		case "Beoordeling":
+		case "Beoordelaar/Beoordeling":
 			helpTekst = "Om meer informatie te krijgen over de beoordelingsgraden kunt u op \"+\" knop drukken.\n";
 			helpTekst += "Beoordelingsaspecten kunnen meerdere deelaspecten hebben.\n";
 			helpTekst += "Voor elke deelaspect moet er een punt gegeven worden!";
@@ -67,7 +67,7 @@ function helptekst(pagename)
 		break;
 		case "Beoordelaar/undefined":
 			helpTekst = "Selecteer de student dat u wenst te beoordelen.\n";
-			helpTekst += "U heeft de mogelijkheid om de naam op te zoeken.";
+			helpTekst += "Naast de student moet u ook kiezen als het om een tussentijdse of een eindbeoordeling gaat";
 
 			return helpTekst;
 		break;
@@ -107,6 +107,12 @@ function helptekst(pagename)
 	        helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eindevaluatie gehad heeft met de bijhorende resultaten.\n";
 	        helpTekst += "U ziet ook welke traject een student volgt.\n";
 	        helpTekst += "En u kunt de rapporten en/of feedback formulieren downloaden.";
+
+	        return helpTekst;
+	        break;
+	    case "Student/undefined":
+	        helpTekst = "Kies eerst een .csv bestand met de nodige studentgegevens door op de knop 'Bladeren' te klikken."
+            helpTekst += " Om dit bestand te importeren in de applicatie klikt u op de knop 'Importeren'"
 
 	        return helpTekst;
 	        break;

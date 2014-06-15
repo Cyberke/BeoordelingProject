@@ -35,7 +35,7 @@
                     <table>
                         <tr>
                             <td>@Html.Label("Gebruikersnaam")</td>
-                            <td>@Html.EditorFor(model => model.registerVM.UserName)</td>
+                            <td>@Html.TextBoxFor(model => model.registerVM.UserName, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td>@Html.Label("Wachtwoord")</td>
-                            <td>@Html.PasswordFor(model => model.registerVM.Password)</td>
+                            <td>@Html.PasswordFor(model => model.registerVM.Password, new { @class = "textbox" })</td>
                         </tr>
                         <tr>
                             <td></td>

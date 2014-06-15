@@ -85,8 +85,22 @@ li
 
 .loginbutton
 {
-    width:51%;
+    width:50%;
+    float:right;
 }
+
+.textbox
+{
+    background: white; 
+    border: 1px solid #DDD; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px #DDD inset; 
+    color: #666; 
+    outline: none; 
+    padding:2px;
+    width:100%;
+}
+
 #inklapdiv {
     min-height: 20%;
     height: auto;
@@ -798,4 +812,40 @@ span
 .validation-summary-valid
 {
     display:none;
+}
+
+/* File input */
+
+.upload {
+    width: 100px;
+    height: 30px;
+    background-image: url("img/upload-button02.png");
+    background-size:100px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+    float:left;
+    margin-top:10px;
+}
+.upload:hover
+{
+    background-image: url("img/Upload.png");
+}
+
+.upload input {
+    width: 100px;
+    height: 30px;
+    opacity: 0;
+    overflow: hidden;
+}
+.filetext
+{
+    background: white; 
+    border: 1px solid #DDD; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px #DDD inset; 
+    color: #666; 
+    outline: none; 
+    padding:2px;
+    width:98%;
 }

@@ -25,22 +25,22 @@
         <table>
             <tr>
                 <td>@Html.Label("E-mail: ")</td>
-                <td>@Html.EditorFor(model => model.Email)</td>
+                <td>@Html.TextBoxFor(model => model.Email, new { @class = "textbox" })</td>
                 <td>@Html.ValidationMessageFor(model => model.Email, "Gelieve een correct e-mailadres in te geven")</td>
             </tr>
             <tr>
                 <td>@Html.Label("Huidig wachtwoord: ")</td>
-                <td>@Html.EditorFor(model => model.WachtwoordVM.OldPassword)</td>
+                <td>@Html.PasswordFor(model => model.WachtwoordVM.OldPassword, new { @class = "textbox" })</td>
                 <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.OldPassword, "Gelieve uw huidig wachtwoord in te geven")</td>
             </tr>
             <tr>
                 <td>@Html.Label("Nieuw wachtwoord: ")</td>
-                <td>@Html.EditorFor(model => model.WachtwoordVM.NewPassword)</td>
+                <td>@Html.PasswordFor(model => model.WachtwoordVM.NewPassword, new { @class = "textbox" })</td>
                 <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.NewPassword, "Wachtwoord moet minstens 6 karakters lang zijn")</td>
             </tr>
             <tr>
                 <td>@Html.Label("Bevestig nieuw wachtwoord: ")</td>
-                <td>@Html.EditorFor(model => model.WachtwoordVM.ConfirmPassword)</td>
+                <td>@Html.PasswordFor(model => model.WachtwoordVM.ConfirmPassword, new { @class = "textbox" })</td>
                 <td>@Html.ValidationMessageFor(model => model.WachtwoordVM.ConfirmPassword, "Wachtwoord komt niet overeen")</td>
             </tr>
         </table>

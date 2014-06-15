@@ -265,6 +265,8 @@
     <Content Include="Content\img\pijl_up.png" />
     <Content Include="Content\img\plus.png" />
     <Content Include="Content\img\stats.png" />
+    <Content Include="Content\img\upload-button02.png" />
+    <Content Include="Content\img\Upload.png" />
     <Content Include="Content\img\zoek.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
