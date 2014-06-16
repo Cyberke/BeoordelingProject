@@ -232,36 +232,32 @@ namespace BeoordelingProject.DAL.Services {
 
                     List<double> hoofdaspectScore = new List<double>();
                     List<int> wegingen = new List<int>();
-                    /*
-                    foreach (Hoofdaspect h in mat.Hoofdaspecten)
-                    {
-                        HoofdaspectResultaat hoofdres = new HoofdaspectResultaat();
-                        foreach (Deelaspect d in h.Deelaspecten)
-                        {
-                            hoofdaspectScore.Add(vm.Scores[counter]);
-                            counter++;
-                        }
-                        hoofdres.HoofdaspectId = h.ID;
-                        hoofdres.Rol.ID = vm.Rol_ID;
-                        hoofdres.Score = beoordelingsEngine.totaalScore(hoofdaspectScore, wegingen);
-
-                        hoofdreslist.Add(hoofdres);
-                    }
-                    */
 
                     foreach (Hoofdaspect h in mat.Hoofdaspecten)
                     {
                         if(h.Rollen.Any(r => r.ID == vm.Rol_ID))
                         {
+                            HoofdaspectResultaat hoofdres = new HoofdaspectResultaat();
+
                             foreach(Deelaspect d in h.Deelaspecten)
                             {
                                 hoofdaspectScore.Add(vm.Scores[counter]);
                                 counter++;
                             }
+
+                            hoofdres.HoofdaspectId = h.ID;
+                            hoofdres.Rol = rolRepository.GetByID(vm.Rol_ID);
+
+                            wegingen.Add(matrixRepository.GetWegingForHoofdaspect(h.ID));
+
+                            hoofdres.Score = beoordelingsEngine.totaalScore(hoofdaspectScore, wegingen);
+
+                            hoofdreslist.Add(hoofdres);
+                            wegingen.Clear();
                         }
                     }
 
-                    newres.HoofdaspectResultaten.AddRange(hoofdreslist);
+                    newres.HoofdaspectResultaten = hoofdreslist;
                     resultaatRepository.Insert(newres);
                     uow.SaveChanges();
                 }
@@ -347,6 +343,11 @@ namespace BeoordelingProject.DAL.Services {
             }
 
             return wegingen;
+        }
+
+        public int GetMatrixIdByRichtingByType(bool type, string richting)
+        {
+            return matrixRepository.GetMatrixIdByRichtingByType(type, richting);
         }
     }
 }

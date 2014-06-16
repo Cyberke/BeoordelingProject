@@ -104,5 +104,25 @@ namespace BeoordelingProject.DAL.Repositories
             return query.First();
         }
 
+        public int GetMatrixIdByRichtingByType(bool tussentijds, string richting)
+        {
+            /*
+            int lol = 0;
+
+            if (tussentijds)
+                lol = 1;
+            else
+                lol = 0;
+            */
+            var query =
+            (
+                from m in context.Matrices
+                where m.Richting.Equals(richting) && m.Tussentijds.Equals(tussentijds)
+                select m.ID
+            );
+
+            return query.First();
+        }
+
     }
 }

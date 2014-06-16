@@ -7,6 +7,7 @@ namespace BeoordelingProject.DAL.Repositories
         int GetDeelaspectenCountForHoofdaspect(int hoofdid);
         System.Collections.Generic.List<BeoordelingProject.Models.Hoofdaspect> GetHoofdaspectenForMatrix(int matrixid);
         BeoordelingProject.Models.Matrix GetMatrixForRol(int matrixID, int rolID);
+        int GetMatrixIdByRichtingByType(bool tussentijds, string richting);
         int GetWegingForDeelaspect(int deelresID);
         int GetWegingForHoofdaspect(int hoofdresID);
     }

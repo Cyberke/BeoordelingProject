@@ -46,8 +46,20 @@ namespace BeoordelingProject.Controllers
 
                                 BeoordelingsVM vm = new BeoordelingsVM();
 
-                                vm.MatrixID = matrix;
-                                vm.Matrix = beoordelingsService.GetMatrixForRol(matrix, rolID);
+                                //tussentijds=2, eind=1
+                                if(matrix == 1)
+                                {
+                                    Student temp = studentService.GetStudentByID(studentID);
+                                    vm.MatrixID = beoordelingsService.GetMatrixIdByRichtingByType(false, temp.Opleiding);
+                                }
+                                else
+                                {
+                                    Student temp = studentService.GetStudentByID(studentID);
+                                    vm.MatrixID = beoordelingsService.GetMatrixIdByRichtingByType(true, temp.Opleiding);
+                                }
+
+                                //vm.MatrixID = matrix;
+                                vm.Matrix = beoordelingsService.GetMatrixForRol(vm.MatrixID, rolID);
                                 vm.Student = studentService.GetStudentByID(studentID);
                                 vm.Rol_ID = rolID;
                                 vm.Resultaten = new Resultaat();
