@@ -89,9 +89,8 @@ namespace BeoordelingProject.DAL.Services {
                     //hoofdaspectresultaten in de database steken !checken of ze al bestaan, zo ja, overschrijven!
                     if(exist.HoofdaspectResultaten.Any(h => h.Rol.ID == vm.Rol_ID))
                     {
-                        int counter = 0;
                         int hoofdaspectcounter = 0;
-                        Matrix mat = matrixRepository.GetMatrixForRol(vm.MatrixID, vm.Rol_ID);
+                        //Matrix mat = matrixRepository.GetMatrixForRol(vm.MatrixID, vm.Rol_ID);
 
                         List<double> hoofdaspectScore = new List<double>();
                         List<int> weging = new List<int>();
@@ -100,12 +99,10 @@ namespace BeoordelingProject.DAL.Services {
                         {
                             if (h.Rol.ID == vm.Rol_ID)
                             {
-                                foreach (Deelaspect d in mat.Hoofdaspecten[hoofdaspectcounter].Deelaspecten)
+                                for (int i = 0; i < matrixRepository.GetDeelaspectenCountForHoofdaspect(h.HoofdaspectId); i++ )
                                 {
-                                    hoofdaspectScore.Add(vm.Scores[counter]);
-                                    counter++;
+                                    hoofdaspectScore.Add(vm.Scores[i]);
                                 }
-
 
                                 weging.Add(matrixRepository.GetWegingForHoofdaspect(h.HoofdaspectId));
 
@@ -117,9 +114,11 @@ namespace BeoordelingProject.DAL.Services {
                                 hoofdaspectcounter++;
                             }
                         }
-
+                        
+                        /*
                         resultaatRepository.Update(exist);
                         uow.SaveChanges();
+                        */ 
                     }
                     else //er zijn nog GEEN hoofdaspectresultaten van deze rol
                     {
@@ -168,18 +167,21 @@ namespace BeoordelingProject.DAL.Services {
                         List<int> wegingen = new List<int>();
                         List<double> tussenscores = new List<double>();
 
-                        foreach(Hoofdaspect h in matrixRepository.GetHoofdaspectenForMatrix(vm.MatrixID))
+                        List<Hoofdaspect> test = matrixRepository.GetHoofdaspectenForMatrix(vm.MatrixID);
+
+                        foreach(Hoofdaspect h in test)
                         {
                             List<double> hoofdaspectscores = resultaatRepository.GetScoresForHoofdaspect(h.ID, vm.Student.ID);
-                            double delingfactor = 1;
+
                             double totaalaspectscore = 0;
                             foreach(double score in hoofdaspectscores)
                             {
-                                delingfactor++;
                                 totaalaspectscore += score;
                             }
 
-                            totaalaspectscore = totaalaspectscore / ((delingfactor * 20) / h.GewogenScore);
+                            int aantalRollen = resultaatRepository.GetAantalRollenForHoofdaspect(h.ID);
+                            double delingfactor = h.Deelaspecten.Count() * aantalRollen * 20;
+                            totaalaspectscore = totaalaspectscore / (delingfactor / h.GewogenScore);
                             tussenscores.Add(totaalaspectscore);
                         }
 
@@ -194,6 +196,8 @@ namespace BeoordelingProject.DAL.Services {
 
                         exist.TotaalEindresultaat = somtotaal;
                     }
+
+                    vm.Matrix = matrixRepository.GetByID(vm.MatrixID);
 
                     resultaatRepository.Update(exist);
                     uow.SaveChanges();
@@ -223,12 +227,12 @@ namespace BeoordelingProject.DAL.Services {
 
                     List<HoofdaspectResultaat> hoofdreslist = new List<HoofdaspectResultaat>();
 
-                    Matrix mat = matrixRepository.GetMatrixForRol(m.ID, vm.Rol_ID);
+                    Matrix mat = matrixRepository.GetByID(m.ID);
                     int counter = 0;
 
                     List<double> hoofdaspectScore = new List<double>();
                     List<int> wegingen = new List<int>();
-
+                    /*
                     foreach (Hoofdaspect h in mat.Hoofdaspecten)
                     {
                         HoofdaspectResultaat hoofdres = new HoofdaspectResultaat();
@@ -242,6 +246,19 @@ namespace BeoordelingProject.DAL.Services {
                         hoofdres.Score = beoordelingsEngine.totaalScore(hoofdaspectScore, wegingen);
 
                         hoofdreslist.Add(hoofdres);
+                    }
+                    */
+
+                    foreach (Hoofdaspect h in mat.Hoofdaspecten)
+                    {
+                        if(h.Rollen.Any(r => r.ID == vm.Rol_ID))
+                        {
+                            foreach(Deelaspect d in h.Deelaspecten)
+                            {
+                                hoofdaspectScore.Add(vm.Scores[counter]);
+                                counter++;
+                            }
+                        }
                     }
 
                     newres.HoofdaspectResultaten.AddRange(hoofdreslist);

@@ -65,6 +65,7 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
+            vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
             beoordelingsService.CreateBeoordeling(vm);
             return RedirectToAction("Index");
         }
