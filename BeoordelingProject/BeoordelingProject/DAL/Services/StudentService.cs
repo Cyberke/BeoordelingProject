@@ -217,22 +217,6 @@ namespace BeoordelingProject.DAL.Services
                 jsonString += "},";
             }
 
-
-            //foreach (Student student in studenten)
-            //{
-            //    jsonString += "{";
-            //    jsonString += "id: " + student.ID + ",";
-            //    jsonString += "naam: \"" + student.Naam + "\",";
-            //    jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
-            //    jsonString += "opleiding: \"" + student.Opleiding + "\",";
-            //    jsonString += "email: \"" + student.Email + "\",";
-            //    jsonString += "studentId: " + student.StudentId + ",";
-            //    jsonString += "geslacht: \"" + student.Geslacht + "\",";
-            //    jsonString += "geboortedatum: \"" + student.Geboortedatum + "\"";
-            //    jsonString += "},";
-            //}
-
-
             //laatste komma wissen, deze is niet nodig
             jsonString = jsonString.Remove(jsonString.Length - 1);
 

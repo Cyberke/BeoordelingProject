@@ -266,7 +266,6 @@
     <Content Include="Content\img\Upload.png" />
     <Content Include="Content\img\zoek.png" />
     <Content Include="Content\style.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="NuGet.exe" />
