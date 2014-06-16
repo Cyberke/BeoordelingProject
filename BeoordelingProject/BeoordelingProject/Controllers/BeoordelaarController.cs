@@ -78,7 +78,7 @@ namespace BeoordelingProject.Controllers
             vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
             vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
             vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
-            vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent);
+            vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
 
             return View(vm);
         }

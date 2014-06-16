@@ -23,5 +23,7 @@ namespace BeoordelingProject.ViewModel
         public RegisterViewModel registerVM { get; set; }
         public SelectList Rollen { get; set; }
         public List<int> SelectedRolId { get; set; }
+        public List<StudentKeuzeVM> studentKeuzesVM { get; set; }
+        public IHtmlString StudentenString { get; set; }
     }
 }
