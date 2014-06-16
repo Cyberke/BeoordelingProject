@@ -110,6 +110,7 @@ namespace BeoordelingProject.DAL.Services
                 List<List<Rol>> studentPerRollen = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
 
                 jsonString += "{beoordelaar: \"" + beoordelaar.UserName + "\", ";
+                jsonString += "beoordelaarID: \"" + beoordelaar.Id + "\", ";
                 jsonString += "leerlingen:[";
 
                 for (int i = 0; i < studenten.Count; i++) {
