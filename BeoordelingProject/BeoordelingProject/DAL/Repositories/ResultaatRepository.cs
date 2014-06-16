@@ -27,7 +27,24 @@ namespace BeoordelingProject.DAL.Repositories
 
             return query;
         }
+        public IEnumerable<Resultaat> GetEindResultaten(int id)
+        {
 
+            return null;
+        }
+
+        public List<double> GetScoresForHoofdaspect(int aspectID, int studentID)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                from h in r.HoofdaspectResultaten
+                where h.HoofdaspectId.Equals(aspectID) && r.StudentId.Equals(studentID)
+                select h.Score
+            );
+
+            return query.ToList<double>();
+        }
 
         public List<string> CheckIfRolesCompleted(int studentid)
         {
@@ -44,11 +61,6 @@ namespace BeoordelingProject.DAL.Repositories
             List<string> namen = query.Distinct().ToList<string>();
 
             return namen;
-        }
-
-        public IEnumerable<Resultaat> GetEindResultaten(int id)
-        {
-            return null;
         }
 
         public int ifExistsGetStudentId(int studentid)

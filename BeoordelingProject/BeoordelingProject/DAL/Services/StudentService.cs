@@ -130,29 +130,43 @@ namespace BeoordelingProject.DAL.Services
 
             foreach (Student student in studenten)
             {
+                bool heeftScore = false;
                 jsonString += "{";
                 jsonString += "naam: \"" + student.Naam + "\",";
                 jsonString += "academiejaar: \"" + "2014-2015" + "\",";
                 jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
                 foreach (Resultaat resultaat in resultaten)
                 {
-                    if (resultaat.StudentId.Equals(student.ID) && !resultaat.TotaalTussentijdResultaat.Equals(0))
+                    if (resultaat.StudentId.Equals(student.ID))
                     {
-                        jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
+                        heeftScore = true;
+                        if(!resultaat.TotaalTussentijdResultaat.Equals(0) && !resultaat.TotaalEindresultaat.Equals(0))
+                        {
+                            jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
+                            jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
+                        }else if(!resultaat.TotaalTussentijdResultaat.Equals(0) && resultaat.TotaalEindresultaat.Equals(0))
+                        {
+                            jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
+                            jsonString += "eind: \"" + "-" + "\",";
+                        }else if(resultaat.TotaalTussentijdResultaat.Equals(0) && !resultaat.TotaalEindresultaat.Equals(0))
+                        {
+                            jsonString += "tussentijdse: \"" + "-" + "\",";
+                            jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
+                        }
+                        else
+                        {
+                            jsonString += "tussentijdse: \"" + "-" + "\",";
+                            jsonString += "eind: \"" + "-" + "\",";
+                        }
                     }
-                    else
+                    if (!heeftScore)
                     {
                         jsonString += "tussentijdse: \"" + "-" + "\",";
-                    }
-                    if (resultaat.StudentId.Equals(student.ID) && !resultaat.TotaalEindresultaat.Equals(0))
-                    {
-                        jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
-                    }
-                    else
-                    {
                         jsonString += "eind: \"" + "-" + "\",";
                     }
                 }
+                
+
                 jsonString += "id: " + student.ID + ",";
                 jsonString += "opleiding: \"" + student.Opleiding + "\",";
                 jsonString += "studentId: " + student.StudentId + "";
