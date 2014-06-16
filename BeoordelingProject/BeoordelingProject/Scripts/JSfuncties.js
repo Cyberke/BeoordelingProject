@@ -21,6 +21,20 @@ _rys("document").ready(function()
 });
 */
 
+//Container hoogte instellen
+function zetContainer()
+{
+    var container = document.getElementById("container");
+    var header = document.getElementById("mijnheader");
+
+    container.style.height = (document.body.clientHeight - header.clientHeight);
+
+    //alert(document.body.clientHeight - header.clientHeight);
+    //alert(header.offsetHeight + " - " + header.clientHeight + " - " + header.scrollHeight);
+    //alert(window.screen.availWidth + " x " + window.screen.availHeight);
+    //alert(document.body.clientWidth + " x " + document.body.clientHeight)
+}
+
 //BELANGRIJK: <tr> met uitleg moet als ID dezelfde waarde hebben als de naam van het deelaspect
 //Toont extra uitleg ivm puntenverdeling op beoordelingpagina
 function showinfo(object)

@@ -5,6 +5,23 @@
 	margin: 0;
 }
 
+#container
+{
+	padding: 20px;
+    
+    width: 960px; 
+    
+    margin: 0 auto;
+    padding-top:95px;
+
+    background-color: rgb(252,252,252);
+    color: #000000;
+
+	height: 100%;
+    overflow: auto;
+    
+}
+
 html
 {
     height:100%;
@@ -201,6 +218,7 @@ label
     color:#ec008c;
 }
 
+<<<<<<< HEAD
 #container
 {
 	padding: 20px;
@@ -218,6 +236,8 @@ label
     
 }
 
+=======
+>>>>>>> d8e69e6798883249eacb91336afacf80c7731f77
 .link
 {
     color:#000000;

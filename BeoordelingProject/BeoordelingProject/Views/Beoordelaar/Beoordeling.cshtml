@@ -15,13 +15,13 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-    @if (Model.Matrix.Tussentijds) {
+    if (Model.Matrix.Tussentijds) {
         <h1>Tussentijdsbeoordelingen</h1>
     }
     else {
         <h1>Eindbeoordelingen</h1>
     }
-    
+
     <h2>Beoordelen: @Html.DisplayFor(model => model.Student.Naam) - @Html.DisplayFor(model => model.Matrix.Richting)</h2>
     <h2>Beoordelaar: @User.Identity.GetUserName()</h2>
 

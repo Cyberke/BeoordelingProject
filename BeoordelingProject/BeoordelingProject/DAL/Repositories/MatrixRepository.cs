@@ -14,6 +14,22 @@ namespace BeoordelingProject.DAL.Repositories
 
         }
 
+        public int GetDeelaspectenCountForHoofdaspect(int hoofdid)
+        {
+            var query =
+            (
+                from h in context.Hoofdaspecten
+                from d in h.Deelaspecten
+
+                where h.ID.Equals(hoofdid)
+
+                select d.ID
+            );
+
+            int count = query.ToList<int>().Count();
+            return count;
+        }
+
         public List<Hoofdaspect> GetHoofdaspectenForMatrix(int matrixid)
         {
             var query =
@@ -83,6 +99,26 @@ namespace BeoordelingProject.DAL.Repositories
                 from h in context.Hoofdaspecten
                 where h.ID.Equals(hoofdresID)
                 select h.Weging
+            );
+
+            return query.First();
+        }
+
+        public int GetMatrixIdByRichtingByType(bool tussentijds, string richting)
+        {
+            /*
+            int lol = 0;
+
+            if (tussentijds)
+                lol = 1;
+            else
+                lol = 0;
+            */
+            var query =
+            (
+                from m in context.Matrices
+                where m.Richting.Equals(richting) && m.Tussentijds.Equals(tussentijds)
+                select m.ID
             );
 
             return query.First();

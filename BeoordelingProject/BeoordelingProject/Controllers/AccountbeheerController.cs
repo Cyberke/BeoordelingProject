@@ -37,6 +37,23 @@ namespace BeoordelingProject.Controllers
             accountbeheerVM.Accounts = studentService.GetUsers();
             //accountbeheerVM.Rollen = studentService.GetRoles();
             accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+            List<StudentKeuzeVM> studentKeuzes = new List<StudentKeuzeVM>();
+
+            foreach (ApplicationUser beoordelaar in accountbeheerVM.Accounts) {
+                StudentKeuzeVM vm = new StudentKeuzeVM();
+
+                vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+                vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+                vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
+                vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
+
+                studentKeuzes.Add(vm);
+            }
+
+            accountbeheerVM.studentKeuzesVM = studentKeuzes;
+            accountbeheerVM.StudentenString = studentService.SerializeObject(accountbeheerVM.Accounts);
+
             return View(accountbeheerVM);
         }
 
@@ -95,9 +112,9 @@ namespace BeoordelingProject.Controllers
             return RedirectToAction("AddStudentRol", "Accountbeheer");
         }
 
-        public ActionResult DeleteUser(string userId)
+        public ActionResult DeleteUser(string userID)
         {
-            ApplicationUser tedeletenUser = studentService.GetUserById(userId);
+            ApplicationUser tedeletenUser = studentService.GetUserById(userID);
             //List<StudentRollen> studentrollenVanUser = tedeletenUser.StudentRollen;
             
             

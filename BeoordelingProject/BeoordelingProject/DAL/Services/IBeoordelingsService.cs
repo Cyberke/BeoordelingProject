@@ -11,6 +11,7 @@ namespace BeoordelingProject.DAL.Services
         System.Collections.Generic.List<int> GetListHoofdAspectWegingen(System.Collections.Generic.List<BeoordelingProject.Models.HoofdaspectResultaat> hoofdreslist);
         BeoordelingProject.Models.Matrix GetMatrix(int id);
         BeoordelingProject.Models.Matrix GetMatrixForRol(int matrixID, int rolID);
+        int GetMatrixIdByRichtingByType(bool type, string richting);
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaten();
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetTussentijdseResultaten(int id);
     }

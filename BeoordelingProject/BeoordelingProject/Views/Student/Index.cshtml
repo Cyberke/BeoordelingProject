@@ -27,15 +27,15 @@
             </tr>
         </table>
         
-        <input type="button" value="Submit" id="submit" onclick="happytime()" class="actionbutton">
-        <input type="submit" value="Importeer" id="submit" class="actionbutton"/>
+        <!--<input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">-->
+        <input type="button" value="Importeer" id="submit" onclick="getFile();" class="actionbutton"/>
 
         @Html.Hidden("csvData", Model.csvData);
     }
 </div>
 
 <script>
-    function happytime() {
+    function getFile() {
         var datafield = document.getElementById("csvData");
         var fileInput = document.getElementById("file");
 
@@ -49,6 +49,7 @@
 
         reader.readAsText(file, 'ISO-8859-1');
 
+        this.form.submit();
     }
 
     document.getElementById("file").onchange = function () {
