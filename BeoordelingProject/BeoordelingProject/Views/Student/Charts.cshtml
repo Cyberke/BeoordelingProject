@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Charts";
+}
+
+<div id="container">
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
+    <label> > <strong> Statistieken</strong></label>
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
+    <h1>BaKo</h1>
+    <table class="statslist">
+        <tr>
+            <th>Tussentijdse beoordeling</th>
+            <th>Eindbeoordeling</th>
+        </tr>
+        <tr>
+            <td><img src="ChartTussentijdsBako" width="400" height="400"/></td>
+            <td><img src="ChartEindBako" width="400" height="400" /></td>
+        </tr>
+    </table>
+    <br />
+    <h1>BaLo</h1>
+    <table class="statslist">
+        <tr>
+            <th>Tussentijdse beoordeling</th>
+            <th>Eindbeoordeling</th>
+        </tr>
+        <tr>
+            <td><img src="ChartTussentijdsBalo" width="400" height="400" /></td>
+            <td><img src="ChartEindBalo" width="400" height="400" /></td>
+        </tr>
+    </table>
+    <h1>BaSo</h1>
+    <table class="statslist">
+        <tr>
+            <th>Tussentijdse beoordeling</th>
+            <th>Eindbeoordeling</th>
+        </tr>
+        <tr>
+            <td><img src="ChartTussentijdsBaso" width="400" height="400" /></td>
+            <td><img src="ChartEindBaso" width="400" height="400" /></td>
+        </tr>
+    </table>
+</div>

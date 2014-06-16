@@ -61,6 +61,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -266,7 +267,6 @@
     <Content Include="Content\img\Upload.png" />
     <Content Include="Content\img\zoek.png" />
     <Content Include="Content\style.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="NuGet.exe" />
@@ -328,6 +328,13 @@
     <Content Include="Views\Beoordelaar\Beoordeling.cshtml" />
     <Content Include="Views\Adminpaneel\Index.cshtml" />
     <Content Include="Views\Beoordelaar\Index.cshtml" />
+    <Content Include="Views\Student\ChartTussentijdsBako.cshtml" />
+    <Content Include="Views\Student\ChartTussentijdsBalo.cshtml" />
+    <Content Include="Views\Student\ChartTussentijdsBaso.cshtml" />
+    <Content Include="Views\Student\ChartEindBako.cshtml" />
+    <Content Include="Views\Student\ChartEindBalo.cshtml" />
+    <Content Include="Views\Student\ChartEindBaso.cshtml" />
+    <Content Include="Views\Student\Charts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

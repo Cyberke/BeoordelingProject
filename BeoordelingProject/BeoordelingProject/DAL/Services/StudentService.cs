@@ -173,22 +173,6 @@ namespace BeoordelingProject.DAL.Services
                 jsonString += "},";
             }
 
-
-            //foreach (Student student in studenten)
-            //{
-            //    jsonString += "{";
-            //    jsonString += "id: " + student.ID + ",";
-            //    jsonString += "naam: \"" + student.Naam + "\",";
-            //    jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
-            //    jsonString += "opleiding: \"" + student.Opleiding + "\",";
-            //    jsonString += "email: \"" + student.Email + "\",";
-            //    jsonString += "studentId: " + student.StudentId + ",";
-            //    jsonString += "geslacht: \"" + student.Geslacht + "\",";
-            //    jsonString += "geboortedatum: \"" + student.Geboortedatum + "\"";
-            //    jsonString += "},";
-            //}
-
-
             //laatste komma wissen, deze is niet nodig
             jsonString = jsonString.Remove(jsonString.Length - 1);
 
@@ -244,5 +228,14 @@ namespace BeoordelingProject.DAL.Services
             return accountRepository.GetByID(userId);
         }
 
+        public int GetAantalTussentijds(string opleiding, int minimum, int maximum)
+        {
+            return studentRepository.AantalStudentenTussentijds(opleiding,minimum,maximum);
+        }
+
+        public int GetAantalEind(string opleiding, int minimum, int maximum)
+        {
+            return studentRepository.AantalStudentenEind(opleiding, minimum, maximum);
+        }
     }
 }

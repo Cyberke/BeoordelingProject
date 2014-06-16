@@ -41,5 +41,30 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
+        public int AantalStudentenTussentijds(string opleiding, int minimum, int maximum)
+        {
+            var query =
+                (
+                    from r in context.Resultaten
+                    join s in context.Studenten on r.StudentId equals s.ID
+                    where r.TotaalTussentijdResultaat >= minimum && r.TotaalTussentijdResultaat < maximum && r.TotaalTussentijdResultaat > -1
+                    where s.Opleiding == opleiding
+                    select r
+                ).Count();
+            return query;
+        }
+
+        public int AantalStudentenEind(string opleiding, int minimum, int maximum)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                join s in context.Studenten on r.StudentId equals s.ID
+                where r.TotaalEindresultaat >= minimum && r.TotaalEindresultaat < maximum && r.TotaalEindresultaat > -1
+                where s.Opleiding == opleiding
+                select r
+            ).Count();
+            return query;
+        }
     }
 }

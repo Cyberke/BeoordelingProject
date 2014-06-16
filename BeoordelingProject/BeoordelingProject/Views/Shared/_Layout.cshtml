@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beoordelingsapplicatie Howest</title>
-    <link rel="icon" type="image/ico" href="~/img/favicon.ico">
+    <link rel="icon" type="image/ico" href="@Url.Content("~/Content/img/favicon.ico")">
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
@@ -23,7 +23,7 @@
             </div>
             @if (User.IsInRole("Admin") && (User.Identity.IsAuthenticated)) {
                 <div class="opties" onclick="redirectTo('Adminpaneel');"></div>
-                <div class="stats"></div>
+                <a href="../Student/Charts" class="stats"></a>
             }
             <div id="help" onclick="help(this);"></div>
         </div>

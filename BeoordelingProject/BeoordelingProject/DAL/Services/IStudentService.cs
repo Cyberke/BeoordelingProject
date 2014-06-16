@@ -5,7 +5,9 @@ namespace BeoordelingProject.DAL.Services
     {
         System.Collections.Generic.List<BeoordelingProject.Models.Student> CreateStudenten(string csvData);
         void DeleteUser(BeoordelingProject.Models.ApplicationUser user);
+        int GetAantalEind(string opleiding, int minimum, int maximum);
         int GetAantalTeTonenStudenten(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);
+        int GetAantalTussentijds(string opleiding, int minimum, int maximum);
         System.Collections.Generic.List<string> GetOpleidingen();
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaat();
         BeoordelingProject.Models.Rol GetRolById(int id);

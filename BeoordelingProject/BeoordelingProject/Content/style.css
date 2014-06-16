@@ -208,7 +208,7 @@ label
     width: 960px; 
     
     margin: 0 auto;
-    padding-top:95px;
+    padding-top:120px;
 
     background-color: rgb(252,252,252);
     color: #000000;
@@ -685,6 +685,55 @@ td
 
 /* de laatste th heeft geen streep meer nodig */
 .studentlist th:last-child
+{
+	border-style: none;
+}
+
+/* studentlijst tabel */
+.statslist
+{
+	text-align: center;
+    margin-top: 10px;
+    clear: both;
+}
+
+.statslist td
+{
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+    width:50%;
+    padding-left:30px;
+}
+
+
+/* namen zullen niet gecentreerd staan */
+.statslist tr:first-child th:first-child
+{
+	width: 30%;
+	text-align: center;
+}
+
+.statslist td:first-child
+{
+	text-align: left;
+}
+
+/* witte streep aan de rechterkant om makkelijk het einde af te bakenen */
+.statslist th
+{
+    width: 10%;
+	background-color: #000000;
+	color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-color: #FFFFFF;
+
+	padding: 5px;
+}
+
+/* de laatste th heeft geen streep meer nodig */
+.statslist th:last-child
 {
 	border-style: none;
 }
