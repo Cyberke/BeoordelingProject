@@ -8,34 +8,18 @@
     angular.module("appModule").value("studentenlijst", @Html.Raw(Model.StudentenString));
 </script>
 <div id="container">
-    
-    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-        @Html.AntiForgeryToken()
-
-        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
-        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
-    }
-<<<<<<< HEAD
-    <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
-    <br /><br />
-    <select size="@Model.Aantal" ng-model="studentRol">
-        <option ng-repeat="student in studenten | filter:{naam:searchText}" value="{{student.studentRol}}">
-            {{student.naam}} ({{student.opleiding}} - {{student.rol}})
-        </option>
-    </select>
-    <div>
-        <input id="rbTussentijds" checked="checked" type="radio" ng-model="matrixID" value="2" />
-        <label for="rbTussentijds">Tussentijdsbeoordeling |</label>
-
-        <input id="rbEindbeoordeling" type="radio" ng-model="matrixID" value="1" />
-        <label for="rbEindbeoordeling">Eindbeoordeling</label>
-=======
     <div class="studentkeuze">
         <h1>Student keuze</h1>
-        <input class="zoek" style="width:26.5%" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+
+            <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+            @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+        }
+        <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
         <br /><br />
-        <select size="15" ng-model="studentRol">
-            <option ng-repeat="student in studenten" value="{{student.studentRol}}">
+        <select size="@Model.Aantal" ng-model="studentRol">
+            <option ng-repeat="student in studenten | filter:{naam:searchText}" value="{{student.studentRol}}">
                 {{student.naam}} ({{student.opleiding}} - {{student.rol}})
             </option>
         </select>
@@ -47,7 +31,6 @@
             <input id="rbEindbeoordeling" type="radio" ng-model="matrixID" value="1" />
             <label for="rbEindbeoordeling">Eindbeoordeling</label>
         </div>
-        <a href="/Beoordelaar/Beoordeling?studentRol={{studentRol}}&matrix={{matrixID}}" class="actionbutton" style="width:27%;margin-top:15px">Beoordelen</a>
->>>>>>> branch 'master' of ssh://git@github.com/Cyberke/BeoordelingProject.git
+        <a href="/Beoordelaar/Beoordeling?studentRol={{studentRol}}&matrix={{matrixID}}" class="actionbutton">Beoordelen</a>
     </div>
 </div>
