@@ -18,7 +18,7 @@
     <input class="zoek" type="text" ng-model="searchText" placeholder="zoek..." id="zoekterm" />
     <br /><br />
     <select size="@Model.Aantal" ng-model="studentRol">
-        <option ng-repeat="student in studenten" value="{{student.studentRol}}">
+        <option ng-repeat="student in studenten | filter:{naam:searchText}" value="{{student.studentRol}}">
             {{student.naam}} ({{student.opleiding}} - {{student.rol}})
         </option>
     </select>

@@ -10,6 +10,11 @@
     }
 }
 
+<script>
+    var module = angular.module("appModule");
+    
+    module.value("studentenlijst", @Html.Raw(Model.StudentenString))
+</script>
 <div id="container">
     @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
     <label> > </label>
@@ -80,21 +85,36 @@
         </div>
     }
 
-    <table class="userlist" style="display:block">
+    <table class="userlist" style="display:block" ng-model="studentRol">
         <tr>
             <th>Naam</th>
-            <th></th>
-            <th></th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
         </tr>
-        @foreach (var user in Model.Accounts)
-        {
-            //lists met foreach maken.
-            <tr class="buttonTable">
-                <td>@Html.DisplayFor(modelItem => user.UserName)</td>
-                <td>@Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
-                <td>@Html.ActionLink("Verwijderen", "DeleteUser", "Accountbeheer", new { userId = user.Id.ToString() }, new { @class = "actionbutton tablebutton" })</td>
-            </tr>
-        }
+        @*@foreach (var user in Model.Accounts)
+            {
+                //lists met foreach maken.
+                <tr class="buttonTable">
+                    <td>@Html.DisplayFor(modelItem => user.UserName)</td>
+                    <td>@Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })</td>
+                    <td>@Html.ActionLink("Verwijderen", "DeleteUser", "Accountbeheer", new { userId = user.Id.ToString() }, new { @class = "actionbutton tablebutton" })</td>
+                </tr>
+            }*@
+
+        <tr class="buttonTable" ng-repeat="student in studenten">
+            <td>
+                {{student.beoordelaar}}
+                <div class="inklapdiv" id="{{leerling.studentRol}}" ng-repeat="leerling in student.leerlingen">
+                    {{leerling.naam}} ({{leerling.opleiding}} - {{leerling.rol}})
+                </div>
+            </td>
+            <td>
+                @Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })
+            </td>
+            <td>
+                <a href="Accountbeheer/DeleteUser/{{leerling.userID}}" class="actionbutton tablebutton">Verwijderen</a>
+            </td>
+        </tr>
     </table>
 </div>
 

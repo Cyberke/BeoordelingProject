@@ -1,6 +1,7 @@
 ﻿using BeoordelingProject.DAL.Repositories;
 using BeoordelingProject.DAL.UnitOfWork;
 using BeoordelingProject.Models;
+using BeoordelingProject.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -97,9 +98,50 @@ namespace BeoordelingProject.DAL.Services
             return resultaatRepository.All().ToList<Resultaat>();
         }
 
-        public IHtmlString SerializeObject(object value, object otherValue) {
-            List<Student> studenten = (List<Student>)value;
-            List<List<Rol>> studentPerRollen = (List<List<Rol>>)otherValue;
+        public IHtmlString SerializeObject(object beoordelaarslijst) {
+            StudentService studentService = new StudentService();
+
+            List<ApplicationUser> beoordelaars = (List<ApplicationUser>)beoordelaarslijst;
+
+            string jsonString = "{Studenten:[";
+
+            foreach (ApplicationUser beoordelaar in beoordelaars) {
+                List<Student> studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+                List<List<Rol>> studentPerRollen = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+
+                jsonString += "{beoordelaar: \"" + beoordelaar.UserName + "\", ";
+                jsonString += "leerlingen:[";
+
+                for (int i = 0; i < studenten.Count; i++) {
+                    for (int j = 0; j < studentPerRollen[i].Count; j++) {
+                        jsonString += "{";
+                        jsonString += "studentRol: \"" + studenten[i].ID + "." + studentPerRollen[i][j].ID + "\", ";
+                        jsonString += "naam: \"" + studenten[i].Naam + "\", ";
+                        jsonString += "opleiding: \"" + studenten[i].Opleiding + "\", ";
+                        jsonString += "userName: \"" + beoordelaar.UserName + "\", ";
+                        jsonString += "userID: \"" + beoordelaar.Id + "\", ";
+                        jsonString += "rol: \"" + studentPerRollen[i][j].Naam + "\"";
+                        jsonString += "},";
+                    }
+                }
+
+                //laatste komma wissen, deze is niet nodig
+                jsonString = jsonString.Remove(jsonString.Length - 1);
+
+                jsonString += "]},";
+            }
+
+            //laatste komma wissen, deze is niet nodig
+            jsonString = jsonString.Remove(jsonString.Length - 1);
+
+            jsonString += "]}";
+
+            return new HtmlString(jsonString);
+        }
+
+        public IHtmlString SerializeObject(object studentenlijst, object studentPerRollenlijst, object userID) {
+            List<Student> studenten = (List<Student>)studentenlijst;
+            List<List<Rol>> studentPerRollen = (List<List<Rol>>)studentPerRollenlijst;
 
             string jsonString = "{Studenten:[";
 
@@ -109,6 +151,7 @@ namespace BeoordelingProject.DAL.Services
                     jsonString += "studentRol: \"" + studenten[i].ID + "." + studentPerRollen[i][j].ID + "\", ";
                     jsonString += "naam: \"" + studenten[i].Naam + "\", ";
                     jsonString += "opleiding: \"" + studenten[i].Opleiding + "\", ";
+                    jsonString += "userID: \"" + userID + "\", ";
                     jsonString += "rol: \"" + studentPerRollen[i][j].Naam + "\"";
                     jsonString += "},";
                 }
