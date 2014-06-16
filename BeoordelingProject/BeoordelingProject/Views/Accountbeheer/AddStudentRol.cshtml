@@ -91,7 +91,7 @@
         </div>
     }
 
-    <table class="userlist" style="display:block" ng-model="studentRol">
+    <table class="userlist" style="display:block">
         <tr>
             <th>Naam</th>
             <th colspan="2">&nbsp;</th>
@@ -109,7 +109,7 @@
         <tr class="buttonTable" ng-repeat="student in studenten">
             <td>
                 {{student.beoordelaar}}
-                <div class="inklapdiv" id="{{leerling.studentRol}}" ng-repeat="leerling in student.leerlingen">
+                <div class="inklapdiv" ng-repeat="leerling in student.leerlingen">
                     {{leerling.naam}} ({{leerling.opleiding}} - {{leerling.rol}})
                 </div>
             </td>
@@ -117,7 +117,7 @@
                 @Html.ActionLink("Bewerken", "AddStudentRol", "Accountbeheer", null, new { @class = "actionbutton tablebutton" })
             </td>
             <td>
-                <a href="Accountbeheer/DeleteUser/{{leerling.userID}}" class="actionbutton tablebutton">Verwijderen</a>
+                <a href="DeleteUser?userID={{student.beoordelaarID}}" class="actionbutton tablebutton">Verwijderen</a>
             </td>
         </tr>
     </table>
