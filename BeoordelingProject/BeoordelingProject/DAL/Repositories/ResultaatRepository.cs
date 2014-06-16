@@ -46,6 +46,21 @@ namespace BeoordelingProject.DAL.Repositories
             return query.ToList<double>();
         }
 
+        public int GetAantalRollenForHoofdaspect(int aspectID)
+        {
+            var query = 
+            (
+                from h in context.HoofdaspectResultaten
+                where h.HoofdaspectId.Equals(aspectID)
+                select h.Rol.ID
+            );
+
+            List<int> rollen = query.Distinct().ToList<int>();
+            int aantalrollen = rollen.Count;
+
+            return aantalrollen;
+        }
+
         public List<string> CheckIfRolesCompleted(int studentid)
         {
             var query =

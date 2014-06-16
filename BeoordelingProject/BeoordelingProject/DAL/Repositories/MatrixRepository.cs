@@ -14,6 +14,22 @@ namespace BeoordelingProject.DAL.Repositories
 
         }
 
+        public int GetDeelaspectenCountForHoofdaspect(int hoofdid)
+        {
+            var query =
+            (
+                from h in context.Hoofdaspecten
+                from d in h.Deelaspecten
+
+                where h.ID.Equals(hoofdid)
+
+                select d.ID
+            );
+
+            int count = query.ToList<int>().Count();
+            return count;
+        }
+
         public List<Hoofdaspect> GetHoofdaspectenForMatrix(int matrixid)
         {
             var query =
