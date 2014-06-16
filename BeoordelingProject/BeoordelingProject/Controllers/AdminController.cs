@@ -63,9 +63,16 @@ namespace BeoordelingProject.Controllers
         public ActionResult SendMail(int id)
         {
             var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = id });
-            //var file = "rapport.pdf";
-            var file = Server.MapPath("~/rapport.pdf");
+            DateTime now = DateTime.Now;
+            string dat = now.Day + "_" + now.Month + "_" + now.Year;
+ 
+            string filepath = Server.MapPath("~/rapport/");
+            var file = String.Format(filepath + "rapport_{0}_{1}.pdf",id, dat);
             var binary = pdf.BuildPdf(this.ControllerContext);
+
+            bool isExcists = System.IO.Directory.Exists(file);
+            if (!isExcists)
+                System.IO.Directory.CreateDirectory(filepath);
 
             System.IO.File.WriteAllBytes(file, binary);
             
@@ -78,7 +85,7 @@ namespace BeoordelingProject.Controllers
             msg.Body = bodyTekst;
             msg.Subject = "BP Rapport van student x";
             //waarschijnlijk nog aanpassen
-            msg.Priority = MailPriority.High;
+            msg.Priority = MailPriority.Normal;
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
