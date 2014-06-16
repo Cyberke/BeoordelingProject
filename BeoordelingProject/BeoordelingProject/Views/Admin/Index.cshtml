@@ -12,7 +12,7 @@
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
@@ -30,17 +30,19 @@
                 <th>Evaluatie rapport</th>
                 <th>Feedback formulier</th>
             </tr>
-            <tr ng-repeat="student in studenten | filter:{naam:searchText}"  ng-if="showOpleiding(student, '@Opleidingitem')">
+            <tr ng-repeat="student in studenten | filter:{naam:searchText}" ng-if="showOpleiding(student, '@Opleidingitem')">
                 <td>{{student.naam}}</td>
-                <td>2013-2014</td>
+                <td>{{student.academiejaar}}</td>
                 <td>{{student.trajecttype}}</td>
-                <td>0</td>
-                <td>0</td>
+                <td>{{student.tussentijdse}}</td>
+                <td>{{student.eind}}</td>
                 <td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}">Toon Rapport</a></td>
-                <td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}" download>Download</a></td>
+                <td><a class="link" href="/Admin/SendMail/{{student.id}}">Stuur Mail</a></td>
+                <!--<td><a class="link" href="/Admin/GeneratePDFStudent/{{student.id}}" download>Download</a></td>-->
 
             </tr>
         </table>
+        
     }
-
+    <a class="link" href="/Admin/SendMail/1">Stuur Mail</a>
 </div>

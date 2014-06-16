@@ -14,22 +14,19 @@ namespace BeoordelingProject.DAL.Repositories
 
         }
 
-        public Matrix GetMatrixByID(int id)
+        public List<Hoofdaspect> GetHoofdaspectenForMatrix(int matrixid)
         {
             var query =
             (
                 from m in context.Matrices
                 from h in m.Hoofdaspecten
-                from d in h.Deelaspecten
-            
-                where m.ID.Equals(id)
 
-                select m
+                where m.ID.Equals(matrixid)
+
+                select h
             );
 
-            Matrix mat = query.First();
-
-            return query.First();
+            return query.ToList<Hoofdaspect>();
         }
 
         public Matrix GetMatrixForRol(int matrixID, int rolID)
@@ -75,6 +72,18 @@ namespace BeoordelingProject.DAL.Repositories
                     where d.ID.Equals(deelresID)
                     select d.Weging
                 );
+
+            return query.First();
+        }
+
+        public int GetWegingForHoofdaspect(int hoofdresID)
+        {
+            var query =
+            (
+                from h in context.Hoofdaspecten
+                where h.ID.Equals(hoofdresID)
+                select h.Weging
+            );
 
             return query.First();
         }

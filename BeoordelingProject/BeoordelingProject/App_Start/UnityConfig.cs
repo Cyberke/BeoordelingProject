@@ -27,7 +27,6 @@ namespace BeoordelingProject
             //SERVICES
             container.RegisterType<IUserManagementService, UserManagementService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentService, StudentService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IMatrixService, MatrixService>(new HierarchicalLifetimeManager());
             container.RegisterType<IBeoordelingsService, BeoordelingsService>(new HierarchicalLifetimeManager());
             container.RegisterType<IStudentrolService, StudentrolService>(new HierarchicalLifetimeManager());
             container.RegisterType<IAdministratorService, AdministratorService>(new HierarchicalLifetimeManager());

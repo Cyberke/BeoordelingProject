@@ -19,7 +19,7 @@
     <header>
         <div class="header">
             <div id="banner">
-                <div class="logo" onclick="redirectTo('Admin')"></div>
+                <div class="logo"></div>
             </div>
             @if (User.IsInRole("Admin") && (User.Identity.IsAuthenticated)) {
                 <div class="opties" onclick="redirectTo('Adminpaneel');"></div>

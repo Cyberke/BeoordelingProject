@@ -2,6 +2,7 @@
 //door Milan Tocan
 
 //de help knop laten meescrollen met de pagina, zodat deze altijd zichtbaar is
+/*
 var _rys = jQuery.noConflict();
 _rys("document").ready(function()
 {
@@ -18,6 +19,7 @@ _rys("document").ready(function()
 		}
 	});
 });
+*/
 
 //BELANGRIJK: <tr> met uitleg moet als ID dezelfde waarde hebben als de naam van het deelaspect
 //Toont extra uitleg ivm puntenverdeling op beoordelingpagina

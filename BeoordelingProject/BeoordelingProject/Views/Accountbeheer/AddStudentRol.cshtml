@@ -44,7 +44,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>@Html.ValidationMessageFor(model => model.registerVM.UserName, "Gelieve een correct e-mailadres in te geven")</td>
+                            <td>@Html.ValidationMessageFor(model => model.registerVM.UserName, "Gelieve een naam in te geven")</td>
                         </tr>
                         <tr>
                             <td>@Html.Label("Wachtwoord")</td>
@@ -60,14 +60,20 @@
                     </table>
                 </div>
                 <div class="studentrolinfo">
-                    <label class="actionbutton" onclick="newStudentRol()">+</label><br /><br />
-                    <div class='studentrolSelectlist'>
-                    Student: @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
-                    Rol: @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
-                    </div>
-                        @if(Model.SelectedStudentId != null)
+                    <table class="AddDeleteTable">
+                        <tr>
+                            <td><label class="actionbutton addDeleteButton" onclick="newStudentRol()">+</label></td>
+                            <td><label class="actionbutton addDeleteButton" onclick="removeStudentRol()">-</label></td>
+                        </tr>
+                    </table>
+                    <div class="studentrollen">
+                        <div class='studentrolSelectlist'>
+                            Student: @Html.DropDownListFor(modelItem => modelItem.SelectedStudentId, Model.Studenten as SelectList, new { id = "studentList[0]" })
+                            Rol: @Html.DropDownListFor(modelItem => modelItem.SelectedRolId, Model.Rollen as SelectList, new { id = "rolList[0]" })
+                        </div>
+                        @if (Model.SelectedStudentId != null)
                         {
-                            for(int i = 1; i < Model.SelectedStudentId.Count; i++)
+                            for (int i = 1; i < Model.SelectedStudentId.Count; i++)
                             {
                                 <text>
                                     <div class="studentrolSelectlist">
@@ -80,7 +86,7 @@
                             }
                         }
                     </div>
-                    <label class="actionbutton" onclick="removeStudentRol()">-</label><br /><br />
+                </div>
             </div>
         </div>
     }

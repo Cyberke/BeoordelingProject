@@ -47,7 +47,6 @@ namespace BeoordelingProject.Models
     {
         [Required]
         [Display(Name = "User name")]
-        [EmailAddress]
         public string UserName { get; set; }
 
         [Required]
