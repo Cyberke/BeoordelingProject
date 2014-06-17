@@ -42,10 +42,10 @@ function showinfo(object)
     var id = clicked.innerHTML.trim();
     var info = document.getElementById(id);
 
-    if(clicked.className == "deelaspectplus")
-    	clicked.className = "deelaspectmin";
+    if(clicked.className == "expanderPlus")
+    	clicked.className = "collapseMin";
     else
-    	clicked.className = "deelaspectplus";
+    	clicked.className = "expanderPlus";
 
     if(info.style.display == "none")
     	info.style.display = "table-row";

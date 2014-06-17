@@ -97,10 +97,12 @@
             <th colspan="2">&nbsp;</th>
         </tr>
         <tr class="buttonTable" ng-repeat="student in studenten">
-            <td>
-                {{student.beoordelaar}}
-                <div class="inklapdiv" ng-repeat="leerling in student.leerlingen" style="display:none">
-                    {{leerling.naam}} ({{leerling.opleiding}} - {{leerling.rol}})
+            <td id="{{student.beoordelaarID}}" class="expanderPlus" ng-click="toggleStudentRol(student.beoordelaar, student.beoordelaarID)">
+                <b style="padding-left:40px">{{student.beoordelaar}}</b>
+                <div id="{{student.beoordelaar}}" style="display: none;padding-left:60px">
+                    <p ng-repeat="leerling in student.leerlingen">
+                        {{leerling.naam}} ({{leerling.opleiding}} - {{leerling.rol}})
+                    </p>
                 </div>
             </td>
             <td>
@@ -112,7 +114,6 @@
         </tr>
     </table>
 </div>
-
 <script>
     @if(Model.SelectedStudentId != null)
     {

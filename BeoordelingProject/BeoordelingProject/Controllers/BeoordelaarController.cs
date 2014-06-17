@@ -32,7 +32,6 @@ namespace BeoordelingProject.Controllers
         // GET: /Beoordelaar/
         public ActionResult Beoordeling(string studentRol, bool cfaanwezig = false, int matrix = 0)
         {
-
             if (studentRol != null && !studentRol.Equals("")) {
                 string[] parts = studentRol.Split('.');
 
