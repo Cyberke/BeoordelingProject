@@ -89,6 +89,7 @@ namespace BeoordelingProject.DAL.Services {
                     //hoofdaspectresultaten in de database steken !checken of ze al bestaan, zo ja, overschrijven!
                     if(exist.HoofdaspectResultaten.Any(h => h.Rol.ID == vm.Rol_ID))
                     {
+                        exist.CFaanwezig = vm.CFaanwezig;
                         int hoofdaspectcounter = 0;
                         //Matrix mat = matrixRepository.GetMatrixForRol(vm.MatrixID, vm.Rol_ID);
 
@@ -115,43 +116,49 @@ namespace BeoordelingProject.DAL.Services {
                             }
                         }
                         
-                        /*
                         resultaatRepository.Update(exist);
                         uow.SaveChanges();
-                        */ 
+                         
                     }
                     else //er zijn nog GEEN hoofdaspectresultaten van deze rol
                     {
                         List<HoofdaspectResultaat> hoofdreslist = new List<HoofdaspectResultaat>();
 
-                        Matrix mat = matrixRepository.GetMatrixForRol(m.ID, vm.Rol_ID);
+                        //Matrix mat = matrixRepository.GetMatrixForRol(m.ID, vm.Rol_ID);
+                        List<Hoofdaspect> hoofdaspecten = matrixRepository.GetHoofdaspectenForMatrix(vm.MatrixID);
                         int counter = 0;
 
                         List<double> hoofdaspectScore = new List<double>();
                         List<int> wegingen = new List<int>();
                         
-                        foreach(Hoofdaspect h in mat.Hoofdaspecten)
+                        foreach(Hoofdaspect h in hoofdaspecten)
                         {
-                            HoofdaspectResultaat hoofdres = new HoofdaspectResultaat();
-                            foreach(Deelaspect d in h.Deelaspecten)
+                            if (h.Rollen.Any(r => r.ID == exist.StudentId))
                             {
-                                hoofdaspectScore.Add(vm.Scores[counter]);
-                                counter++;
+                                HoofdaspectResultaat hoofdres = new HoofdaspectResultaat();
+                                foreach (Deelaspect d in h.Deelaspecten)
+                                {
+                                    hoofdaspectScore.Add(vm.Scores[counter]);
+                                    counter++;
+                                }
+                                hoofdres.HoofdaspectId = h.ID;
+                                hoofdres.Rol = rolRepository.GetByID(vm.Rol_ID);
+
+                                wegingen.Add(matrixRepository.GetWegingForHoofdaspect(h.ID));
+
+                                hoofdres.Score = beoordelingsEngine.totaalScore(hoofdaspectScore, wegingen);
+
+                                hoofdreslist.Add(hoofdres);
+
+                                hoofdaspectScore.Clear();
+                                wegingen.Clear();
                             }
-                            hoofdres.HoofdaspectId = h.ID;
-                            hoofdres.Rol = rolRepository.GetByID(vm.Rol_ID);
-
-                            wegingen.Add(matrixRepository.GetWegingForHoofdaspect(h.ID));
-
-                            hoofdres.Score = beoordelingsEngine.totaalScore(hoofdaspectScore, wegingen);
-
-                            hoofdreslist.Add(hoofdres);
-
-                            hoofdaspectScore.Clear();
-                            wegingen.Clear();
                         }
-
+                        exist.CFaanwezig = vm.CFaanwezig;
                         exist.HoofdaspectResultaten.AddRange(hoofdreslist);
+
+                        resultaatRepository.Update(exist);
+                        uow.SaveChanges();
                     }
                     
                     exist.EindId = m.ID;
@@ -159,44 +166,58 @@ namespace BeoordelingProject.DAL.Services {
                     //controleren of alle rollen de beoordeling hebben voltooid
                     List<string> namen = resultaatRepository.CheckIfRolesCompleted(vm.Student.ID);
 
-                    //later if-statement aanpassen of CFaanwezig aangeduid is of niet
-                    if (namen.Count == 3)
+                    if (vm.breekpunten == false)
                     {
-                        //totaalscore berekenen
-                        List<double> eindscore = new List<double>();
-                        List<int> wegingen = new List<int>();
-                        List<double> tussenscores = new List<double>();
-
-                        List<Hoofdaspect> test = matrixRepository.GetHoofdaspectenForMatrix(vm.MatrixID);
-
-                        foreach(Hoofdaspect h in test)
+                        if (namen.Count == 3 || (namen.Count == 2 && exist.CFaanwezig == false))
                         {
-                            List<double> hoofdaspectscores = resultaatRepository.GetScoresForHoofdaspect(h.ID, vm.Student.ID);
+                            //totaalscore berekenen
+                            List<double> eindscore = new List<double>();
+                            List<int> wegingen = new List<int>();
+                            List<double> tussenscores = new List<double>();
 
-                            double totaalaspectscore = 0;
-                            foreach(double score in hoofdaspectscores)
+                            List<Hoofdaspect> test = matrixRepository.GetHoofdaspectenForMatrix(vm.MatrixID);
+
+                            foreach (Hoofdaspect h in test)
                             {
-                                totaalaspectscore += score;
+                                List<double> hoofdaspectscores = resultaatRepository.GetScoresForHoofdaspect(h.ID, vm.Student.ID);
+
+                                double totaalaspectscore = 0;
+                                foreach (double score in hoofdaspectscores)
+                                {
+                                    totaalaspectscore += score;
+                                }
+
+                                int aantalRollen = 0;
+                                if (exist.CFaanwezig == true)
+                                {
+                                    aantalRollen = resultaatRepository.GetAantalRollenForHoofdaspect(h.ID, true);
+                                }
+                                else
+                                {
+                                    aantalRollen = resultaatRepository.GetAantalRollenForHoofdaspect(h.ID, false);
+                                }
+
+                                double delingfactor = h.Deelaspecten.Count() * aantalRollen * 20;
+                                totaalaspectscore = totaalaspectscore / (delingfactor / h.GewogenScore);
+                                tussenscores.Add(totaalaspectscore);
                             }
 
-                            int aantalRollen = resultaatRepository.GetAantalRollenForHoofdaspect(h.ID);
-                            double delingfactor = h.Deelaspecten.Count() * aantalRollen * 20;
-                            totaalaspectscore = totaalaspectscore / (delingfactor / h.GewogenScore);
-                            tussenscores.Add(totaalaspectscore);
+                            double somtotaal = 0;
+
+                            foreach (double score in tussenscores)
+                            {
+                                somtotaal += score;
+                            }
+
+                            somtotaal = Math.Round(somtotaal / 10);
+
+                            exist.TotaalEindresultaat = somtotaal;
                         }
-
-                        double somtotaal = 0;
-
-                        foreach(double score in tussenscores)
-                        {
-                            somtotaal += score;
-                        }
-
-                        somtotaal = Math.Ceiling(somtotaal / 10);
-
-                        exist.TotaalEindresultaat = somtotaal;
                     }
-
+                    else
+                    {
+                        exist.TotaalEindresultaat = 6;
+                    }
                     vm.Matrix = matrixRepository.GetByID(vm.MatrixID);
 
                     resultaatRepository.Update(exist);
@@ -217,7 +238,10 @@ namespace BeoordelingProject.DAL.Services {
                     List<double> scores = GetListDeelaspectScore(newres.DeelaspectResultaten);
                     List<int> wegingen = GetListDeelaspectWegingen(newres.DeelaspectResultaten);
 
-                    newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+                    if (vm.breekpunten == false)
+                        newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
+                    else
+                        newres.TotaalTussentijdResultaat = 6;
 
                     resultaatRepository.Insert(newres);
                     uow.SaveChanges();
