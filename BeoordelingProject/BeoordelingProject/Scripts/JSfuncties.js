@@ -22,17 +22,16 @@ _rys("document").ready(function()
 */
 
 //Container hoogte instellen
-function zetContainer()
-{
+function zetContainer() {
     var container = document.getElementById("container");
     var header = document.getElementById("mijnheader");
+    var body = document.body;
+    var html = document.documentElement;
 
-    container.style.height = (document.body.clientHeight - header.clientHeight);
+    container.style.height = (html.height - header.clientHeight) - 20 + "px";
 
-    //alert(document.body.clientHeight - header.clientHeight);
-    //alert(header.offsetHeight + " - " + header.clientHeight + " - " + header.scrollHeight);
-    //alert(window.screen.availWidth + " x " + window.screen.availHeight);
-    //alert(document.body.clientWidth + " x " + document.body.clientHeight)
+    //alert("Doc ClientHeight:" + myHeight + "\nHeader ClientHeight: " + header.clientHeight + "\nTotaal:" + container.style.height);
+
 }
 
 //BELANGRIJK: <tr> met uitleg moet als ID dezelfde waarde hebben als de naam van het deelaspect
