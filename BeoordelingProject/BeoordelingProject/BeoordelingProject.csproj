@@ -232,9 +232,9 @@
     <Compile Include="Migrations\201406031440266_initDB.Designer.cs">
       <DependentUpon>201406031440266_initDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201406120745433_updateDB.cs" />
-    <Compile Include="Migrations\201406120745433_updateDB.Designer.cs">
-      <DependentUpon>201406120745433_updateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201406171804305_updateDB.cs" />
+    <Compile Include="Migrations\201406171804305_updateDB.Designer.cs">
+      <DependentUpon>201406171804305_updateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -357,8 +357,8 @@
     <EmbeddedResource Include="Migrations\201406031440266_initDB.resx">
       <DependentUpon>201406031440266_initDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201406120745433_updateDB.resx">
-      <DependentUpon>201406120745433_updateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201406171804305_updateDB.resx">
+      <DependentUpon>201406171804305_updateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
