@@ -193,7 +193,7 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(string userId)
+        public ActionResult EditUser()
         {
 
 
