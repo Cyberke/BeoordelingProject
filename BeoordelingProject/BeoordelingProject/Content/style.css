@@ -17,7 +17,6 @@
     background-color: rgb(252,252,252);
     color: #000000;
 
-	height: 100%;
     overflow: auto;
     
 }
@@ -218,6 +217,7 @@ label
     color:#ec008c;
 }
 
+<<<<<<< HEAD
 #container
 {
 	padding: 20px;
@@ -235,6 +235,8 @@ label
     
 }
 
+=======
+>>>>>>> 1831fc6630f639a869838b2e3bf3f4c132c0e51c
 .link
 {
     color:#000000;
@@ -434,10 +436,10 @@ label
 }
 
 .logo {
-    background-image: url("img/logo_edit.png");
+    /*background-image: url("img/logo_edit.png");
 	background-repeat: no-repeat;
 
-    background-color: #4D8FBD;
+    background-color: #4D8FBD;*/
 
     height: 75px;
 
@@ -611,8 +613,8 @@ td
 	font-size: 22px;
 }
 
-/* deelaspact met knop voor uitklappen */
-.deelaspectplus
+/* deelaspact met knop voor uitklappen VERANDEREN */
+.expanderPlus
 {
 	background-color: #C9C9C9;
 	background-image: url("img/plus.png");
@@ -627,8 +629,8 @@ td
     text-align:center;
 }
 
-/* deelaspect met knop voor inklappen */
-.deelaspectmin
+/* deelaspect met knop voor inklappen VERANDEREN */
+.collapseMin
 {
 	background-color: #fff600;
 	background-image: url("img/min.png");
@@ -942,4 +944,10 @@ span
     outline: none; 
     padding:2px;
     width:98%;
+}
+
+#feedback
+{
+    width: 100%;
+    height: 200px;
 }

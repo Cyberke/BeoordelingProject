@@ -2,7 +2,7 @@
 using System;
 namespace BeoordelingProject.DAL.Repositories
 {
-    public interface IStudentRepository:IGenericRepository<Student>
+    public interface IStudentRepository : IGenericRepository<Student>
     {
         int AantalStudentenEind(string opleiding, int minimum, int maximum);
         int AantalStudentenTussentijds(string opleiding, int minimum, int maximum);

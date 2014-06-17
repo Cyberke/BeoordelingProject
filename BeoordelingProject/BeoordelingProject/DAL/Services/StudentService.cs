@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace BeoordelingProject.DAL.Services
+namespace BeoordelingProject.DAL.Services 
 {
     public class StudentService : BeoordelingProject.DAL.Services.IStudentService
     {
@@ -80,6 +80,11 @@ namespace BeoordelingProject.DAL.Services
         public List<ApplicationUser> GetUsers()
         {
             return accountRepository.All().ToList();
+        }
+
+        public Student GetUserById(int Id)
+        {
+            return studentRepository.GetByID(Id);
         }
 
         public void DeleteUser(ApplicationUser user)
@@ -184,18 +189,20 @@ namespace BeoordelingProject.DAL.Services
                     if (resultaat.StudentId.Equals(student.ID))
                     {
                         heeftScore = true;
-                        if(!resultaat.TotaalTussentijdResultaat.Equals(0) && !resultaat.TotaalEindresultaat.Equals(0))
+                        if (!resultaat.TotaalTussentijdResultaat.Equals(-1) && !resultaat.TotaalEindresultaat.Equals(-1))
                         {
-                            jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
-                            jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
-                        }else if(!resultaat.TotaalTussentijdResultaat.Equals(0) && resultaat.TotaalEindresultaat.Equals(0))
+                            jsonString += "tussentijdse: \"" + Math.Round(resultaat.TotaalTussentijdResultaat, 0) + "\",";
+                            jsonString += "eind: \"" + Math.Round(resultaat.TotaalEindresultaat, 0) + "\",";
+                        }
+                        else if (!resultaat.TotaalTussentijdResultaat.Equals(-1) && resultaat.TotaalEindresultaat.Equals(-1))
                         {
-                            jsonString += "tussentijdse: \"" + resultaat.TotaalTussentijdResultaat + "\",";
+                            jsonString += "tussentijdse: \"" + Math.Round(resultaat.TotaalTussentijdResultaat, 0) + "\",";
                             jsonString += "eind: \"" + "-" + "\",";
-                        }else if(resultaat.TotaalTussentijdResultaat.Equals(0) && !resultaat.TotaalEindresultaat.Equals(0))
+                        }
+                        else if (resultaat.TotaalTussentijdResultaat.Equals(-1) && !resultaat.TotaalEindresultaat.Equals(-1))
                         {
                             jsonString += "tussentijdse: \"" + "-" + "\",";
-                            jsonString += "eind: \"" + resultaat.TotaalEindresultaat + "\",";
+                            jsonString += "eind: \"" + Math.Round(resultaat.TotaalEindresultaat, 0) + "\",";
                         }
                         else
                         {

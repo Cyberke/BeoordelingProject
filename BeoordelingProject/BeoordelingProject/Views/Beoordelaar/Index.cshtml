@@ -30,7 +30,10 @@
             <br />
             <input id="rbEindbeoordeling" type="radio" ng-model="matrixID" value="1" />
             <label for="rbEindbeoordeling">Eindbeoordeling</label>
+            <br />
+            <input type="checkbox" id="CFaanwezig" ng-model="CFaanwezig" value="1" />
+            <label for="CFaanwezig">Kritische vriend aanwezig</label>
         </div>
-        <a href="/Beoordelaar/Beoordeling?studentRol={{studentRol}}&matrix={{matrixID}}" class="actionbutton">Beoordelen</a>
+        <a href="/Beoordelaar/Beoordeling?studentRol={{studentRol}}&cfaanwezig={{CFaanwezig}}&matrix={{matrixID}}" class="actionbutton">Beoordelen</a>
     </div>
 </div>

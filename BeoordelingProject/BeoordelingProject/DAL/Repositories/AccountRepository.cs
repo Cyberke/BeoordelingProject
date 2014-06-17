@@ -31,6 +31,22 @@ namespace BeoordelingProject.DAL.Repositories
             return query;
         }
 
+        public ApplicationUser GetAdmin()
+        {
+            var query =
+            (
+                from u in context.Users
+                from r in u.Roles
+
+                where u.Id.Equals(r.UserId)
+                where r.Role.Name.Equals("Admin")
+
+                select u
+            );
+
+            return query.First();
+        }
+
         public void DeleteGebruiker(ApplicationUser user)
         {
             /*

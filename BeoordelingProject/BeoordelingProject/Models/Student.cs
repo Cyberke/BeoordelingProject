@@ -16,5 +16,6 @@ namespace BeoordelingProject.Models
         public int StudentId { get; set; }
         public string Geslacht { get; set; }
         public string Geboortedatum { get; set; }
+        public string academiejaar { get; set; }
     }
 }

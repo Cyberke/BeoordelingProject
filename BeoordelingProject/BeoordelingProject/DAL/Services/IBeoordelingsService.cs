@@ -12,7 +12,9 @@ namespace BeoordelingProject.DAL.Services
         BeoordelingProject.Models.Matrix GetMatrix(int id);
         BeoordelingProject.Models.Matrix GetMatrixForRol(int matrixID, int rolID);
         int GetMatrixIdByRichtingByType(bool type, string richting);
+        BeoordelingProject.Models.Resultaat getResultaatByStudentId(int studentid);
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaten();
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetTussentijdseResultaten(int id);
+        bool isCFaanwezig(int studentid);
     }
 }

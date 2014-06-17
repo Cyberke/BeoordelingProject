@@ -45,4 +45,21 @@ module.controller("appController", function ($scope, $filter, studentenlijst)
         scope.studenten = orderBy(scope.studenten, sort.column, sort.descending);
     };
 
+    scope.toggleStudentRol = function (beoordelaar, beoordelaarID) {
+        var formdiv = document.getElementById(beoordelaar);
+        var td = document.getElementById(beoordelaarID);
+
+        if (formdiv.style.display == "none") {
+            formdiv.style.display = "block";
+            formdiv.style.opacity = 1;
+
+            td.className = "collapseMin";
+        }
+        else {
+            formdiv.style.display = "none";
+            formdiv.style.opacity = 0;
+
+            td.className = "expanderPlus";
+        }
+    };
 });

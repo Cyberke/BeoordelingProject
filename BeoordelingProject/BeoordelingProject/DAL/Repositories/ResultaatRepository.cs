@@ -46,19 +46,36 @@ namespace BeoordelingProject.DAL.Repositories
             return query.ToList<double>();
         }
 
-        public int GetAantalRollenForHoofdaspect(int aspectID)
+        public int GetAantalRollenForHoofdaspect(int aspectID, bool cfaanwezig)
         {
-            var query = 
-            (
-                from h in context.HoofdaspectResultaten
-                where h.HoofdaspectId.Equals(aspectID)
-                select h.Rol.ID
-            );
+            if(cfaanwezig == true)
+            {
+                var query = 
+                (
+                    from h in context.HoofdaspectResultaten
+                    where h.HoofdaspectId.Equals(aspectID)
+                    select h.Rol.ID
+                );
 
-            List<int> rollen = query.Distinct().ToList<int>();
-            int aantalrollen = rollen.Count;
+                List<int> rollen = query.Distinct().ToList<int>();
+                int aantalrollen = rollen.Count;
 
-            return aantalrollen;
+                return aantalrollen;
+            }
+            else
+            {
+                var query =
+                (
+                    from h in context.HoofdaspectResultaten
+                    where h.HoofdaspectId.Equals(aspectID) && !h.Rol.ID.Equals(3)
+                    select h.Rol.ID
+                );
+
+                List<int> rollen = query.Distinct().ToList<int>();
+                int aantalrollen = rollen.Count;
+
+                return aantalrollen;
+            }
         }
 
         public List<string> CheckIfRolesCompleted(int studentid)
@@ -108,6 +125,19 @@ namespace BeoordelingProject.DAL.Repositories
             
             return query.First();
         }
+
+        public bool isCFaanwezig(int studentid)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                where r.StudentId.Equals(studentid)
+                select r.CFaanwezig
+            );
+
+            return query.First();
+        }
+
     }
 
     

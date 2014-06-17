@@ -82,6 +82,7 @@ namespace BeoordelingProject.DAL.Repositories
                 userManager.RemoveFromRole(userId, role.Role.Name);
             }
         }
+
     }
 
 }
