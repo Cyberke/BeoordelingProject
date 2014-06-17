@@ -10,5 +10,6 @@ namespace BeoordelingProject.ViewModel {
         public List<List<Rol>> RollenPerStudent { get; set; }
         public int Aantal { get; set; }
         public IHtmlString StudentenString { get; set; }
+        public bool CFaanwezig { get; set; }
     }
 }

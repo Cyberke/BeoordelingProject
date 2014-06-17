@@ -30,8 +30,9 @@ namespace BeoordelingProject.Controllers
 
         //
         // GET: /Beoordelaar/
-        public ActionResult Beoordeling(string studentRol, int matrix = 0)
+        public ActionResult Beoordeling(string studentRol, bool cfaanwezig = false, int matrix = 0)
         {
+
             if (studentRol != null && !studentRol.Equals("")) {
                 string[] parts = studentRol.Split('.');
 
@@ -58,9 +59,11 @@ namespace BeoordelingProject.Controllers
                                     vm.MatrixID = beoordelingsService.GetMatrixIdByRichtingByType(true, temp.Opleiding);
                                 }
 
+                                vm.CFaanwezig = cfaanwezig;
                                 //vm.MatrixID = matrix;
                                 vm.Matrix = beoordelingsService.GetMatrixForRol(vm.MatrixID, rolID);
                                 vm.Student = studentService.GetStudentByID(studentID);
+
                                 vm.Rol_ID = rolID;
                                 vm.Resultaten = new Resultaat();
 

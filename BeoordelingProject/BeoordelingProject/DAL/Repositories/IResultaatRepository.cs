@@ -11,5 +11,6 @@ namespace BeoordelingProject.DAL.Repositories
         System.Collections.Generic.List<double> GetScoresForHoofdaspect(int aspectID, int studentID);
         System.Collections.Generic.IEnumerable<BeoordelingProject.Models.Resultaat> GetTussentijdseResultaten(int id);
         int ifExistsGetStudentId(int studentid);
+        bool isCFaanwezig(int studentid);
     }
 }

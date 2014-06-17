@@ -108,6 +108,19 @@ namespace BeoordelingProject.DAL.Repositories
             
             return query.First();
         }
+
+        public bool isCFaanwezig(int studentid)
+        {
+            var query =
+            (
+                from r in context.Resultaten
+                where r.StudentId.Equals(studentid)
+                select r.CFaanwezig
+            );
+
+            return query.First();
+        }
+
     }
 
     

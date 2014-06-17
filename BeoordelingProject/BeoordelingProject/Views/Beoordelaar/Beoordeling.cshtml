@@ -15,7 +15,7 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-    if (Model.Matrix.Tussentijds) {
+    @if (Model.Matrix.Tussentijds) {
         <h1>Tussentijdsbeoordelingen</h1>
     }
     else {
@@ -25,12 +25,19 @@
     <h2>Beoordelen: @Html.DisplayFor(model => model.Student.Naam) - @Html.DisplayFor(model => model.Matrix.Richting)</h2>
     <h2>Beoordelaar: @User.Identity.GetUserName()</h2>
 
+    @if(Model.CFaanwezig == false)
+    {
+        <h2>Kritische vriend is niet aanwezig</h2>
+    }
+
     @using (Html.BeginForm())
     {
         Html.AntiForgeryToken();
         Html.ValidationSummary(true);
 
         int counter = 0;
+        
+        @Html.EditorFor(model => model.breekpunten) <label for="breekpunten">Breekpunten aanwezig</label>
         
         <table id="beoordelingtabel">
 
@@ -80,7 +87,11 @@
         @Html.HiddenFor(model => model.MatrixID)
         @Html.HiddenFor(model => model.Student.ID)
         @Html.HiddenFor(model => model.Rol_ID)
-        <input type="submit" value="Opslaan" />
+        
+        <br/>
+        @Html.EditorFor(model => model.feedback)
+        
+        <input type="submit" value="Opslaan" class="actionbutton"/>
     }
 
 </div>

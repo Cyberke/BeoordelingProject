@@ -52,7 +52,7 @@ namespace BeoordelingProject.DAL.Services {
             if (studentid != 0) //bestaande record aanpassen
             {
                 Resultaat exist = resultaatRepository.getByStudentId(studentid);
-
+                exist.CustomFeedback = vm.feedback;
                 if (m.Tussentijds == true)
                 {
                     exist.TussentijdseId = m.ID;
@@ -207,6 +207,7 @@ namespace BeoordelingProject.DAL.Services {
             else //nieuw record in database
             {
                 Resultaat newres = new Resultaat();
+                newres.CustomFeedback = vm.feedback;
                 newres.StudentId = vm.Student.ID;
                 if(m.Tussentijds == true)
                 {
@@ -348,6 +349,15 @@ namespace BeoordelingProject.DAL.Services {
         public int GetMatrixIdByRichtingByType(bool type, string richting)
         {
             return matrixRepository.GetMatrixIdByRichtingByType(type, richting);
+        }
+        public Resultaat getResultaatByStudentId(int studentid)
+        {
+            return resultaatRepository.getByStudentId(studentid);
+        }
+
+        public bool isCFaanwezig(int studentid)
+        {
+            return resultaatRepository.isCFaanwezig(studentid);
         }
     }
 }
