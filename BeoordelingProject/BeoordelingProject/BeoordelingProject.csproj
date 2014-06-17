@@ -330,7 +330,7 @@
     <Content Include="Views\Student\StudentLijst.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Accountbeheer\AddStudentRol.cshtml" />
-    <Content Include="Views\Admin\GetStudent.cshtml" />
+    <Content Include="Views\Student\GetStudent.cshtml" />
     <Content Include="Views\Beoordelaar\Beoordeling.cshtml" />
     <Content Include="Views\Adminpaneel\Index.cshtml" />
     <Content Include="Views\Beoordelaar\Index.cshtml" />

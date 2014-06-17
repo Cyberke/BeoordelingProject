@@ -50,16 +50,6 @@ namespace BeoordelingProject.Controllers
             }
         }
 
-        public ActionResult GetStudent(int id)
-        {
-            return View(studentService.GetStudentByID(id));
-        }
-
-        public ActionResult GeneratePDFStudent(int id)
-        {
-            return new Rotativa.ActionAsPdf("GetStudent", new { id = id });
-        }
-
         public ActionResult SendMail(int id)
         {
             var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = id });
