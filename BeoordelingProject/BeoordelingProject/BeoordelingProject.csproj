@@ -196,6 +196,7 @@
     <Compile Include="Controllers\AdminpaneelController.cs" />
     <Compile Include="Controllers\BeoordelaarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatrixController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Context\BeoordelingsContext.cs" />
     <Compile Include="DAL\Repositories\AccountRepository.cs" />
@@ -214,9 +215,11 @@
     <Compile Include="DAL\Services\BeoordelingsService.cs" />
     <Compile Include="DAL\Services\IAdministratorService.cs" />
     <Compile Include="DAL\Services\IBeoordelingsService.cs" />
+    <Compile Include="DAL\Services\IMatrixbeheerService.cs" />
     <Compile Include="DAL\Services\IStudentrolService.cs" />
     <Compile Include="DAL\Services\IStudentService.cs" />
     <Compile Include="DAL\Services\IUserManagementService.cs" />
+    <Compile Include="DAL\Services\MatrixbeheerService.cs" />
     <Compile Include="DAL\Services\StudentrolService.cs" />
     <Compile Include="DAL\Services\StudentService.cs" />
     <Compile Include="DAL\Services\UserManagementService.cs" />
@@ -256,6 +259,8 @@
     <Compile Include="ViewModel\AdminpaneelVM.cs" />
     <Compile Include="ViewModel\CSVDataVM.cs" />
     <Compile Include="ViewModel\BeoordelingsVM.cs" />
+    <Compile Include="ViewModel\MatrixbeheerVM.cs" />
+    <Compile Include="ViewModel\Selectlist.cs" />
     <Compile Include="ViewModel\StudentKeuzeVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -342,6 +347,8 @@
     <Content Include="Views\Student\ChartEindBaso.cshtml" />
     <Content Include="Views\Student\Charts.cshtml" />
     <Content Include="Views\Accountbeheer\EditUser.cshtml" />
+    <Content Include="Views\Matrix\Index.cshtml" />
+    <Content Include="Views\Matrix\EditMatrix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
