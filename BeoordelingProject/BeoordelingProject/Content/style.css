@@ -217,7 +217,6 @@ label
     color:#ec008c;
 }
 
-<<<<<<< HEAD
 #container
 {
 	padding: 20px;
@@ -235,8 +234,6 @@ label
     
 }
 
-=======
->>>>>>> d8e69e6798883249eacb91336afacf80c7731f77
 .link
 {
     color:#000000;
@@ -436,10 +433,10 @@ label
 }
 
 .logo {
-    background-image: url("img/logo_edit.png");
+    /*background-image: url("img/logo_edit.png");
 	background-repeat: no-repeat;
 
-    background-color: #4D8FBD;
+    background-color: #4D8FBD;*/
 
     height: 75px;
 

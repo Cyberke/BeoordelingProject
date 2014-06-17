@@ -32,10 +32,10 @@ namespace BeoordelingProject.Controllers
         public ActionResult AddStudentRol()
         {
             var accountbeheerVM = new AccountbeheerVM();
-            //accountbeheerVM.Studenten = studentService.GetStudenten();
+            
             accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
             accountbeheerVM.Accounts = studentService.GetUsers();
-            //accountbeheerVM.Rollen = studentService.GetRoles();
+            
             accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
 
             List<StudentKeuzeVM> studentKeuzes = new List<StudentKeuzeVM>();
@@ -58,6 +58,7 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult AddStudentRol(AccountbeheerVM model)
         {
             bool inArray = false;
@@ -76,14 +77,32 @@ namespace BeoordelingProject.Controllers
                                 ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
 
                                 var accountbeheerVM = new AccountbeheerVM();
-                                //accountbeheerVM.Studenten = studentService.GetStudenten();
+                                
                                 accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
                                 accountbeheerVM.Accounts = studentService.GetUsers();
-                                //accountbeheerVM.Rollen = studentService.GetRoles();
+       
                                 accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                                List<StudentKeuzeVM> studentKeuzes = new List<StudentKeuzeVM>();
+
+                                foreach (ApplicationUser beoordelaar in accountbeheerVM.Accounts)
+                                {
+                                    StudentKeuzeVM vm = new StudentKeuzeVM();
+
+                                    vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+                                    vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+                                    vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
+                                    vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
+
+                                    studentKeuzes.Add(vm);
+                                }
+
+                                accountbeheerVM.studentKeuzesVM = studentKeuzes;
+                                accountbeheerVM.StudentenString = studentService.SerializeObject(accountbeheerVM.Accounts);
 
                                 accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
                                 accountbeheerVM.SelectedRolId = model.SelectedRolId;
+
                                 return View(accountbeheerVM);
 
                             }
@@ -115,14 +134,70 @@ namespace BeoordelingProject.Controllers
         public ActionResult DeleteUser(string userID)
         {
             ApplicationUser tedeletenUser = studentService.GetUserById(userID);
-            //List<StudentRollen> studentrollenVanUser = tedeletenUser.StudentRollen;
-            
-            
-
+           
             studentService.DeleteUser(tedeletenUser);
 
 
             return RedirectToAction("AddStudentRol", "Accountbeheer");
+        }
+
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        public ActionResult EditUser(string userId)
+        {
+            if (userId != null)
+            {
+                var accountbeheerVM = new AccountbeheerVM();
+
+                accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+
+                List<ApplicationUser> accounts = new List<ApplicationUser>();
+                ApplicationUser user = studentService.GetUserById(userId);
+                accounts.Add(user);
+                accountbeheerVM.Accounts = accounts;
+
+                accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                List<StudentKeuzeVM> vms = new List<StudentKeuzeVM>();
+                StudentKeuzeVM vm = new StudentKeuzeVM();
+                vm.Studenten = studentService.GetStudentenByStudentRollen(user.StudentRollen);
+                vm.RollenPerStudent = studentService.GetRollenByStudent(user.StudentRollen);
+                vms.Add(vm);
+
+                accountbeheerVM.studentKeuzesVM = vms;
+
+                List<int> selectedStudentIds = new List<int>();
+                List<int> selectedRolIds = new List<int>();
+
+                foreach(Student student in vm.Studenten)
+                {
+                    selectedStudentIds.Add(student.ID);
+                }
+                foreach(List<Rol> rollen in vm.RollenPerStudent)
+                {
+                    foreach(Rol rol in rollen)
+                    {
+                        selectedRolIds.Add(rol.ID);
+                    }
+                }
+
+                accountbeheerVM.SelectedStudentId = selectedStudentIds;
+                accountbeheerVM.SelectedRolId = selectedRolIds;
+
+                return View(accountbeheerVM);
+            }
+            else
+            {
+                return RedirectToAction("AddStudentRol", "Accountbeheer");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(string userId)
+        {
+
+
+            return View();
         }
 	}
 }

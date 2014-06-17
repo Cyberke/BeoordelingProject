@@ -1,6 +1,8 @@
 ﻿using System;
-namespace BeoordelingProject.DAL.Services {
-    public interface IStudentService {
+namespace BeoordelingProject.DAL.Services
+{
+    public interface IStudentService
+    {
         System.Collections.Generic.List<BeoordelingProject.Models.Student> CreateStudenten(string csvData);
         void DeleteUser(BeoordelingProject.Models.ApplicationUser user);
         int GetAantalEind(string opleiding, int minimum, int maximum);
@@ -14,6 +16,7 @@ namespace BeoordelingProject.DAL.Services {
         BeoordelingProject.Models.Student GetStudentByID(int id);
         System.Collections.Generic.List<BeoordelingProject.Models.Student> GetStudenten();
         System.Collections.Generic.List<BeoordelingProject.Models.Student> GetStudentenByStudentRollen(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);
+        BeoordelingProject.Models.Student GetUserById(int Id);
         BeoordelingProject.Models.ApplicationUser GetUserById(string userId);
         System.Collections.Generic.List<BeoordelingProject.Models.ApplicationUser> GetUsers();
         System.Web.IHtmlString MaakStudentString(object studentlijst, object resultaatlijst);

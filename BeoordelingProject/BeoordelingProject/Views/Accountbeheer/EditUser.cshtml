@@ -4,9 +4,9 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
     int counterTotal = 0;
-    if(Model.SelectedStudentId != null)
+    if (Model.SelectedStudentId != null)
     {
         counterTotal = Model.SelectedStudentId.Count;
     }
@@ -19,7 +19,9 @@
     @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
     <label> > </label>
     @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
-    <label> > <strong> Accountbeheer</strong></label>
+    <label> > </label>
+    @Html.ActionLink("Accountbeheer", "AddStudentRol", "Accountbeheer", null, new { @class = "link" })
+    <label> > <strong>Bewerken</strong></label>
     <br />
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
@@ -29,33 +31,27 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-        @using (Html.BeginForm())
+    @using (Html.BeginForm())
     {
         <label class="errorViewbag">@ViewBag.Error</label><br />
-        <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
-    
-        <div id="inklapdiv" style="display:none">
+
             <div class="login">
                 <div class="gebruikerinfo">
                     <table>
                         <tr>
                             <td>@Html.Label("Gebruikersnaam")</td>
-                            <td>@Html.TextBoxFor(model => model.registerVM.UserName, new { @class = "textbox" })</td>
+                            <td>@Html.TextBoxFor(model => model.registerVM.UserName, new { @Value = Model.Accounts[0].UserName , @class = "textbox" })</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>@Html.ValidationMessageFor(model => model.registerVM.UserName, "Gelieve een naam in te geven")</td>
                         </tr>
                         <tr>
-                            <td>@Html.Label("Wachtwoord")</td>
-                            <td>@Html.PasswordFor(model => model.registerVM.Password, new { @class = "textbox" })</td>
-                        </tr>
-                        <tr>
                             <td></td>
                             <td>@Html.ValidationMessageFor(model => model.registerVM.Password, "Wachtwoord moet minstens 6 karakters lang zijn")</td>
                         </tr>
                         <tr>
-                            <td class="addUser"><input type="submit" value="Gebruiker toevoegen" class="actionbutton" /></td>
+                            <td class="addUser"><input type="submit" value="Bewerken" class="actionbutton" /></td>
                         </tr>
                     </table>
                 </div>
@@ -88,29 +84,7 @@
                     </div>
                 </div>
             </div>
-        </div>
     }
-
-    <table class="userlist" style="display:block">
-        <tr>
-            <th>Naam</th>
-            <th colspan="2">&nbsp;</th>
-        </tr>
-        <tr class="buttonTable" ng-repeat="student in studenten">
-            <td>
-                {{student.beoordelaar}}
-                <div class="inklapdiv" ng-repeat="leerling in student.leerlingen" style="display:none">
-                    {{leerling.naam}} ({{leerling.opleiding}} - {{leerling.rol}})
-                </div>
-            </td>
-            <td>
-                <a href="EditUser?userID={{student.beoordelaarID}}" class="actionbutton tablebutton">Bewerken</a>
-            </td>
-            <td>
-                <a href="DeleteUser?userID={{student.beoordelaarID}}" class="actionbutton tablebutton">Verwijderen</a>
-            </td>
-        </tr>
-    </table>
 </div>
 
 <script>
@@ -124,14 +98,14 @@
     {
         <text>var counter = 1;</text>
     }
-    
+
     @if (counterTotal != 0)
     {
         <text>var selectlist;</text>
         for (int i = counterTotal - 1; i > -1; i--)
         {
             <text>
-            selectlist = document.getElementById("studentList[@i]");        
+            selectlist = document.getElementById("studentList[@i]");
             selectlist.value = @Model.SelectedStudentId[i]
 
             selectlist = document.getElementById("rolList[@i]");
@@ -142,7 +116,7 @@
 
     function newStudentRol()
     {
-        
+
         /*
             min knop houd de waarde bij die de counter toen had.
             wanneer op de min knop geduwt wordt: for van de "minwaarde" tot de huidige counter en alle elementen die overeen komen verwijderen uit de div EN uit de arrays van studentId en rolId
@@ -166,17 +140,17 @@
     function removeStudentRol()
     {
         var div = document.getElementsByClassName("studentrollen")[0];
-        var removelast = document.getElementsByClassName("studentrolSelectlist")[counter-1];
-        
+        var removelast = document.getElementsByClassName("studentrolSelectlist")[counter];
+
         //alert(removelast.innerHTML);
 
-        
-        if(counter > 1)
+
+        if(counter > 0)
         {
             div.removeChild(removelast);
             counter--;
         }
-        
+
     }
 
 </script>

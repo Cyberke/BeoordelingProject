@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace BeoordelingProject.DAL.Services
+namespace BeoordelingProject.DAL.Services 
 {
     public class StudentService : BeoordelingProject.DAL.Services.IStudentService
     {
@@ -80,6 +80,11 @@ namespace BeoordelingProject.DAL.Services
         public List<ApplicationUser> GetUsers()
         {
             return accountRepository.All().ToList();
+        }
+
+        public Student GetUserById(int Id)
+        {
+            return studentRepository.GetByID(Id);
         }
 
         public void DeleteUser(ApplicationUser user)

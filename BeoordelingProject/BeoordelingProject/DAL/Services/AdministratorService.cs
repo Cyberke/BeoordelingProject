@@ -7,20 +7,24 @@ using System.Linq;
 using System.Web;
 
 namespace BeoordelingProject.DAL.Services {
-    public class AdministratorService : BeoordelingProject.DAL.Services.IAdministratorService {
+    public class AdministratorService : BeoordelingProject.DAL.Services.IAdministratorService
+    {
         IUnitOfWork uow = null;
         IGenericRepository<ApplicationUser> adminRepository = null;
         IIdentityManagerRepository identityManagerRepository = null;
+        IAccountRepository accountRepository = null;
 
         public AdministratorService() {
         }
 
         public AdministratorService(IUnitOfWork uow,
             IGenericRepository<ApplicationUser> adminRepository,
-            IIdentityManagerRepository identityManagerRepository) {
+            IIdentityManagerRepository identityManagerRepository,
+            IAccountRepository accountRepository) {
             this.uow = uow;
             this.adminRepository = adminRepository;
             this.identityManagerRepository = identityManagerRepository;
+            this.accountRepository = accountRepository;
         }
 
         public ApplicationUser GetAdminById(string id) {
@@ -35,6 +39,11 @@ namespace BeoordelingProject.DAL.Services {
             adminRepository.Update(admin);
 
             uow.SaveChanges();
+        }
+
+        public ApplicationUser GetAdmin()
+        {
+            return accountRepository.GetAdmin();
         }
     }
 }

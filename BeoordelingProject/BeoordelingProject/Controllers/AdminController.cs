@@ -1,4 +1,5 @@
 ﻿using BeoordelingProject.DAL.Services;
+using BeoordelingProject.Models;
 using BeoordelingProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,17 @@ namespace BeoordelingProject.Controllers
         // GET: /Admin/
 
         private IStudentService studentService = null;
+        private IAdministratorService adminService = null;
 
         public AdminController()
         {
 
         }
 
-        public AdminController(IStudentService studentService)
+        public AdminController(IStudentService studentService, IAdministratorService adminService)
         {
             this.studentService = studentService;
+            this.adminService = adminService;
         }
 
         public ActionResult Index()
@@ -62,12 +65,17 @@ namespace BeoordelingProject.Controllers
 
         public ActionResult SendMail(int id)
         {
+            //admin & user ophalen
+            ApplicationUser admin = adminService.GetAdmin();
+            Student student = studentService.GetStudentByID(id);
+
+
             var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = id });
             DateTime now = DateTime.Now;
             string dat = now.Day + "_" + now.Month + "_" + now.Year;
  
             string filepath = Server.MapPath("~/rapport/");
-            var file = String.Format(filepath + "rapport_{0}_{1}.pdf",id, dat);
+            var file = String.Format(filepath + "rapport_{0}_{1}.pdf",student.Naam, dat);
             var binary = pdf.BuildPdf(this.ControllerContext);
 
             bool isExcists = System.IO.Directory.Exists(file);
@@ -79,11 +87,11 @@ namespace BeoordelingProject.Controllers
 
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
-            msg.To.Add("jelle.vanden.bulcke@student.howest.be");
-            string bodyTekst = "Hier is het rapport van x\n";
+            msg.From = new MailAddress(admin.UserName);
+            msg.To.Add(admin.UserName);
+            string bodyTekst = "Hier is het rapport van "+ student.Naam + "\n";
             msg.Body = bodyTekst;
-            msg.Subject = "BP Rapport van student x";
+            msg.Subject = "BP Rapport van " + student.Naam;
             //waarschijnlijk nog aanpassen
             msg.Priority = MailPriority.Normal;
 
