@@ -69,9 +69,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RazorPDF.1.0.0\lib\net45\RazorPDF.dll</HintPath>
     </Reference>
-    <Reference Include="Rotativa">
-      <HintPath>..\packages\Rotativa.1.6.1\lib\net40\Rotativa.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -303,16 +300,8 @@
     <Content Include="Content\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="NuGet.exe" />
-    <Content Include="Rotativa\libeay32.dll" />
-    <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
-    <Content Include="Rotativa\mingwm10.dll" />
-    <Content Include="Rotativa\README.txt" />
-    <Content Include="Rotativa\ssleay32.dll" />
-    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controller.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -358,7 +347,6 @@
     <Content Include="Views\Student\StudentLijst.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Accountbeheer\AddStudentRol.cshtml" />
-    <Content Include="Views\Student\GetStudent.cshtml" />
     <Content Include="Views\Beoordelaar\Beoordeling.cshtml" />
     <Content Include="Views\Adminpaneel\Index.cshtml" />
     <Content Include="Views\Beoordelaar\Index.cshtml" />

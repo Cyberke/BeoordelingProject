@@ -314,5 +314,10 @@ namespace BeoordelingProject.DAL.Services
         {
             return studentRepository.AantalStudentenEind(opleiding, minimum, maximum);
         }
+
+        public Resultaat GetResultaatByStudentId(int id)
+        {
+            return resultaatRepository.getByStudentId(id);
+        }
     }
 }

@@ -122,7 +122,7 @@ namespace BeoordelingProject.DAL.Repositories
                 where r.StudentId.Equals(studentid)
                 select r
             );
-            
+
             return query.First();
         }
 

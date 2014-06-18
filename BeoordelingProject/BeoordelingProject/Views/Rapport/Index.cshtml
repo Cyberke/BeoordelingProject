@@ -5,29 +5,27 @@
 }
 
 <itext>
-    <paragraph>
-        <chunk>Peter VandenKerckhove</chunk>
+    <paragraph align="right" size="8">
+        HOWEST - Campus Sint-Jorisstraat
+        Bachelor in het onderwijs, lager onderwijs
     </paragraph>
+
+
+    <paragraph align="Center" size="24">Bachelorproef</paragraph>
+
+    <table>
+        <row>
+            <cell>@Model.Naam</cell>
+        </row>
+        <row>
+            <cell>@Model.Academiejaar</cell>
+        </row>
+        <row>
+            <cell>@Model.Richting</cell>
+        </row>
+        <row>
+            <cell>@Model.Punt/20 </cell>
+        </row>
+    </table>
 </itext>
-
-@*
-
-@Styles.Render("~/Content/css")
-
-<div class="rapport">
-    <h1>Eindbeoordeling bachelorproef</h1>
-    <h2>3e @Html.DisplayFor(model => model.Richting)</h2>
-
-    <h3>
-        @Html.Label("Naam student: ")
-        @Html.DisplayFor(model => model.Naam)
-        <br />
-        @Html.Label("Academiejaar: ")
-        @Html.DisplayFor(model => model.Academiejaar)
-        <br />
-        @Html.Label("Punt: ")
-        @Html.DisplayFor(model => model.Punt)
-    </h3><br />
-</div>
-    *@
 

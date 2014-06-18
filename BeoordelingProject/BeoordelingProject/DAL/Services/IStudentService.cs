@@ -10,6 +10,7 @@ namespace BeoordelingProject.DAL.Services
         int GetAantalTussentijds(string opleiding, int minimum, int maximum);
         System.Collections.Generic.List<string> GetOpleidingen();
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaat();
+        BeoordelingProject.Models.Resultaat GetResultaatByStudentId(int id);
         BeoordelingProject.Models.Rol GetRolById(int id);
         System.Collections.Generic.List<BeoordelingProject.Models.Rol> GetRoles();
         System.Collections.Generic.List<System.Collections.Generic.List<BeoordelingProject.Models.Rol>> GetRollenByStudent(System.Collections.Generic.List<BeoordelingProject.Models.StudentRollen> studentRollen);

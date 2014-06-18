@@ -10,6 +10,6 @@ namespace BeoordelingProject.ViewModel
         public string Naam { get; set; }
         public string Richting { get; set; }
         public string Academiejaar { get; set; }
-        public int Punt { get; set; }
+        public double Punt { get; set; }
     }
 }
