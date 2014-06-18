@@ -1,0 +1,50 @@
+﻿@model BeoordelingProject.ViewModel.MatrixbeheerVM
+@using Microsoft.AspNet.Identity
+@using BeoordelingProject.Helper
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="container">
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
+    <label> > </label>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
+    <label> > <strong> Matrixbeheer</strong></label>
+    <br />
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
+    <h1>Matrices Beheren</h1>
+    <div id="loginbox">
+        <table class="userlist">
+            @foreach (var o in Model.Opleidingen)
+            {
+
+                <tr>
+                    <th colspan="2">@o</th>
+                </tr>
+                <tr>
+                    <td>Tussentijdse Beoordeling</td>
+                    <td><a href="Matrix/EditMatrix?opleiding=@o&tussentijds=true" class="actionbutton">Bewerken</a></td>
+                </tr>
+                <tr>
+                    <td>Eindbeoordeling</td>
+                    <td><a href="Matrix/EditMatrix?opleiding=@o&tussentijds=false" class="actionbutton">Bewerken</a></td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

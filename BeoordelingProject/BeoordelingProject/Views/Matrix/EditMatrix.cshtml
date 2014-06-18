@@ -1,0 +1,97 @@
+﻿@model BeoordelingProject.ViewModel.MatrixbeheerVM
+@using Microsoft.AspNet.Identity
+@using BeoordelingProject.Helper
+
+@{
+    ViewBag.Title = "EditMatrix";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="container">
+    @Html.ActionLink("Overzicht", "Index", "Admin", null, new { @class = "link" })
+    <label> > </label>
+    @Html.ActionLink("Adminpaneel", "Index", "Adminpaneel", null, new { @class = "link" })
+    <label> > </label>
+    @Html.ActionLink("Matrixbeheer", "Index", "Matrix", null, new { @class = "link" })
+    <label> > <strong> Matrix Bewerken</strong></label>
+    <br />
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <b><a class="uitloggen" href="javascript:document.getElementById('logoutForm').submit()">Log uit.</a></b>
+        @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
+    }
+    <br /><br />
+    <h1>Matrix @Model.Matrix.Richting - @if(Model.Matrix.Tussentijds){<text>Tussentijds</text>}else{<text>Eindbeoordeling</text>}</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        foreach (var item in Model.Matrix.Hoofdaspecten)
+        {
+            <table>
+                <tr>
+                    <th>@Html.EditorFor(modelItem => item.Naam)</th>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" name="rol" value="1" />Promotor</th>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" name="rol" value="2" />Tweede lezer</th>
+                </tr>
+                <tr>
+                    <th><input type="checkbox" name="rol" value="3" />Kritische Vriend</th>
+                </tr>
+                @foreach(var aspect in item.Deelaspecten)
+                {
+                <tr>
+                    <td>Omschrijving Deelaspect:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.Omschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Volstrekt Onvoldoende Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.VOVOmschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Onvoldoende Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.OVOmschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Voldoende Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.VOmschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Ruim Voldoende Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.RVOmschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Goed Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.GOmschrijving)</td>
+                </tr>
+                <tr>
+                    <td>Zeer Goed Omschrijving:</td>
+                    <td>@Html.EditorFor(modelItem => aspect.ZGOmschrijving)</td>
+                </tr>
+                }
+            </table>
+        }
+        <input type="submit" value="Opslaan" class="actionbutton" />
+    }
+
+</div>
+
+<script>
+    //met js id's toevoegen aan checkboxen
+    var nodelist = document.getElementsByTagName("input");
+    var counter = 0;
+
+    for(var i = 0; i < nodelist.length; i++)
+    {
+        if(nodelist[i].type == "checkbox")
+        {
+            nodelist[i].name = "Rollen[" + counter + "]";
+            nodelist[i].id = "Rollen[" + counter + "]";
+        }
+    }
+</script>
