@@ -1,11 +1,19 @@
 ﻿@model BeoordelingProject.ViewModel.RapportVM
 
 @{
-    ViewBag.Title = "GetStudent";
     Layout = "";
 }
 
+<itext>
+    <paragraph>
+        <chunk>Peter VandenKerckhove</chunk>
+    </paragraph>
+</itext>
+
+@*
+
 @Styles.Render("~/Content/css")
+
 <div class="rapport">
     <h1>Eindbeoordeling bachelorproef</h1>
     <h2>3e @Html.DisplayFor(model => model.Richting)</h2>
@@ -21,3 +29,5 @@
         @Html.DisplayFor(model => model.Punt)
     </h3><br />
 </div>
+    *@
+
