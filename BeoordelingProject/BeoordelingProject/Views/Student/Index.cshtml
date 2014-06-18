@@ -16,7 +16,7 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "csvForm"}))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -25,11 +25,21 @@
                 <td><input id="uploadFile" class="filetext" placeholder="Geen bestand gekozen..." disabled="disabled" /></td>
                 <td class="upload"><input id="file" type="file" name="upload" /></td>
             </tr>
+            <tr>
+                <td>
+                    <label for="academiejaar">Academiejaar:</label>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" class="filetext" name="academiejaar" id="academiejaar" /></td>
+            </tr>
         </table>
+        <br />
         
         <!--<input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">-->
-        <input type="button" value="Importeer" id="submit" onclick="getFile();" class="actionbutton"/>
-
+        <input type="button" value="Importeer" id="importStudenten" onclick="getFile();" class="actionbutton"/>
+        <input type="submit" value="Submit" id="submit" onclick="getFile();" class="actionbutton">
+        
         @Html.Hidden("csvData", Model.csvData);
     }
 </div>
@@ -49,7 +59,7 @@
 
         reader.readAsText(file, 'ISO-8859-1');
 
-        this.form.submit();
+        //document.getElementById("csvForm").submit();
     }
 
     document.getElementById("file").onchange = function () {

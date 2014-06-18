@@ -6,15 +6,21 @@ using BeoordelingProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 
 namespace BeoordelingProject.DAL.Services {
-    public class BeoordelingsService : BeoordelingProject.DAL.Services.IBeoordelingsService{
+    public class BeoordelingsService : BeoordelingProject.DAL.Services.IBeoordelingsService 
+    {
         IUnitOfWork uow = null;
         IMatrixRepository matrixRepository = null;
         IResultaatRepository resultaatRepository = null;
         IBeoordelingsEngine beoordelingsEngine = null;
         IGenericRepository<Rol> rolRepository = null;
+        IStudentService studentService = null;
+        IAdministratorService adminService = null;
 
         public BeoordelingsService() {
         }
@@ -23,12 +29,16 @@ namespace BeoordelingProject.DAL.Services {
             IMatrixRepository matrixRepository,
             IResultaatRepository resultaatRepository,
             IBeoordelingsEngine beoordelingsEngine,
-            IGenericRepository<Rol> rolRepository) {
+            IGenericRepository<Rol> rolRepository,
+            IStudentService studentService,
+            IAdministratorService adminService) {
                 this.uow = uow;
                 this.matrixRepository = matrixRepository;
                 this.resultaatRepository = resultaatRepository;
                 this.beoordelingsEngine = beoordelingsEngine;
                 this.rolRepository = rolRepository;
+                this.studentService = studentService;
+                this.adminService = adminService;
         }
 
         public List<Resultaat> GetResultaten() {
@@ -217,6 +227,7 @@ namespace BeoordelingProject.DAL.Services {
                     else
                     {
                         exist.TotaalEindresultaat = 6;
+                        //mail sturen hier
                     }
                     vm.Matrix = matrixRepository.GetByID(vm.MatrixID);
 
@@ -242,6 +253,7 @@ namespace BeoordelingProject.DAL.Services {
                         newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
                     else
                         newres.TotaalTussentijdResultaat = 6;
+                        //mail sturen
 
                     resultaatRepository.Insert(newres);
                     uow.SaveChanges();
@@ -382,6 +394,62 @@ namespace BeoordelingProject.DAL.Services {
         public bool isCFaanwezig(int studentid)
         {
             return resultaatRepository.isCFaanwezig(studentid);
+        }
+
+        public void stuurMail(int studentId)
+        {
+            //admin & user ophalen
+            ApplicationUser admin = adminService.GetAdmin();
+            Student student = studentService.GetStudentByID(studentId);
+
+
+            //var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = studentId });
+            //DateTime now = DateTime.Now;
+            //string dat = now.Day + "_" + now.Month + "_" + now.Year;
+
+            //string filepath = Server.MapPath("~/rapport/");
+            //var file = String.Format(filepath + "rapport_{0}_{1}.pdf", student.Naam, dat);
+            //var binary = pdf.BuildPdf(this.ControllerContext);
+
+            //bool isExcists = System.IO.Directory.Exists(file);
+            //if (!isExcists)
+            //    System.IO.Directory.CreateDirectory(filepath);
+
+            //System.IO.File.WriteAllBytes(file, binary);
+
+
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(admin.UserName);
+            msg.To.Add(admin.UserName);
+            string bodyTekst = "Hier is het rapport van " + student.Naam + "\n";
+            msg.Body = bodyTekst;
+            msg.Subject = "BP Rapport van " + student.Naam;
+            //waarschijnlijk nog aanpassen
+            msg.Priority = MailPriority.Normal;
+
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Host = "smtp.office365.com";
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            client.EnableSsl = true;
+
+
+            //// Create  the file attachment for this e-mail message.
+            //Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+            //// Add time stamp information for the file.
+            //ContentDisposition disposition = data.ContentDisposition;
+            //disposition.CreationDate = System.IO.File.GetCreationTime(file);
+            //disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
+            //disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
+            //// Add the file attachment to this e-mail message.
+            //msg.Attachments.Add(data);
+
+
+            client.Send(msg);
         }
     }
 }

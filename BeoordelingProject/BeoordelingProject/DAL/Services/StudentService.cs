@@ -39,7 +39,7 @@ namespace BeoordelingProject.DAL.Services
             return studentRepository.All().ToList<Student>();
         }
 
-        public List<Student> CreateStudenten(string csvData)
+        public List<Student> CreateStudenten(string csvData, string academiejaar)
         {
             List<Student> studenten = new List<Student>();
 
@@ -58,7 +58,7 @@ namespace BeoordelingProject.DAL.Services
                 while (line != null)
                 {
                     string[] columns = line.Split(';');
-                    Student student = new Student { Naam = columns[7], Trajecttype = columns[20], Opleiding = columns[1], Email = columns[15], StudentId = Int32.Parse(columns[14]), Geslacht = columns[18], Geboortedatum = columns[17] };
+                    Student student = new Student { Naam = columns[7], Trajecttype = columns[20], Opleiding = columns[1], Email = columns[15], StudentId = Int32.Parse(columns[14]), Geslacht = columns[18], Geboortedatum = columns[17], academiejaar = academiejaar };
 
                     studentRepository.Insert(student);
                     uow.SaveChanges();
@@ -182,7 +182,7 @@ namespace BeoordelingProject.DAL.Services
                 bool heeftScore = false;
                 jsonString += "{";
                 jsonString += "naam: \"" + student.Naam + "\",";
-                jsonString += "academiejaar: \"" + "2014-2015" + "\",";
+                jsonString += "academiejaar: \"" + student.academiejaar + "\",";
                 jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
                 foreach (Resultaat resultaat in resultaten)
                 {

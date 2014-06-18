@@ -7,18 +7,24 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using BeoordelingProject.DAL.UnitOfWork;
 
 namespace BeoordelingProject.DAL.Services {
-    public class UserManagementService : IUserManagementService {
+    public class UserManagementService : BeoordelingProject.DAL.Services.IUserManagementService
+    {
 
         private IIdentityManagerRepository identityRepository = null;
+        IGenericRepository<ApplicationUser> userRepository = null;
+        IUnitOfWork uow = null;
 
         public UserManagementService() {
 
         }
 
-        public UserManagementService(IIdentityManagerRepository repo) {
+        public UserManagementService(IIdentityManagerRepository repo, IGenericRepository<ApplicationUser> userRepository, IUnitOfWork uow) {
             this.identityRepository = repo;
+            this.userRepository = userRepository;
+            this.uow = uow;
         }
 
         public ApplicationUser Find(string userName, string password) {
@@ -39,6 +45,13 @@ namespace BeoordelingProject.DAL.Services {
 
         public ApplicationUser GetUser(string userName) {
             return identityRepository.GetUser(userName);
+        }
+
+        public void EditUser(ApplicationUser user)
+        {
+            userRepository.Update(user);
+
+            uow.SaveChanges();
         }
     }
 }

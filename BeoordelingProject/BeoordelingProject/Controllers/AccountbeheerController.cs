@@ -169,18 +169,17 @@ namespace BeoordelingProject.Controllers
                 List<int> selectedStudentIds = new List<int>();
                 List<int> selectedRolIds = new List<int>();
 
-                foreach(Student student in vm.Studenten)
+                foreach(StudentRollen studentrol in user.StudentRollen)
                 {
-                    selectedStudentIds.Add(student.ID);
-                }
-                foreach(List<Rol> rollen in vm.RollenPerStudent)
-                {
-                    foreach(Rol rol in rollen)
+                    
+                    foreach(Rol rol in studentrol.Rollen)
                     {
+                        selectedStudentIds.Add(studentrol.Student.ID);
                         selectedRolIds.Add(rol.ID);
                     }
                 }
 
+                accountbeheerVM.SelectedAccountId = user.Id;
                 accountbeheerVM.SelectedStudentId = selectedStudentIds;
                 accountbeheerVM.SelectedRolId = selectedRolIds;
 
@@ -193,11 +192,81 @@ namespace BeoordelingProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser()
+        public ActionResult EditUser(AccountbeheerVM model)
         {
+            //user editen
+            ApplicationUser user = studentService.GetUserById(model.SelectedAccountId);
+            user.UserName = model.registerVM.UserName;
+            user.StudentRollen.Clear();
 
+            //studentrollen editen
+            bool inArray = false;
+            List<StudentRollen> studentrollen = new List<StudentRollen>();
+            for (int i = 0; i < model.SelectedRolId.Count; i++)
+            {
+                Rol selectedRol = new Rol();
+                for (int s = 0; s < studentrollen.Count; s++)
+                {
+                    inArray = false;
+                    if (model.SelectedStudentId[i].Equals(studentrollen[s].Student.ID))
+                    {
+                        for (int r = 0; r < studentrollen[s].Rollen.Count; r++)
+                        {
+                            if (model.SelectedRolId[i].Equals(studentrollen[s].Rollen[r].ID))
+                            {
+                                ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
 
-            return View();
+                                var accountbeheerVM = new AccountbeheerVM();
+
+                                accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+                                accountbeheerVM.Accounts = studentService.GetUsers();
+
+                                accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                                List<StudentKeuzeVM> studentKeuzes = new List<StudentKeuzeVM>();
+
+                                foreach (ApplicationUser beoordelaar in accountbeheerVM.Accounts)
+                                {
+                                    StudentKeuzeVM vm = new StudentKeuzeVM();
+
+                                    vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+                                    vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+                                    vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
+                                    vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
+
+                                    studentKeuzes.Add(vm);
+                                }
+
+                                accountbeheerVM.studentKeuzesVM = studentKeuzes;
+                                accountbeheerVM.StudentenString = studentService.SerializeObject(accountbeheerVM.Accounts);
+
+                                accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
+                                accountbeheerVM.SelectedRolId = model.SelectedRolId;
+
+                                return View(accountbeheerVM);
+
+                            }
+                        }
+                        selectedRol = studentService.GetRolById(model.SelectedRolId[i]);
+                        studentrollen[s].Rollen.Add(selectedRol);
+                        inArray = true;
+                    }
+                }
+                if (!inArray)
+                {
+                    Student selectedStudent = studentService.GetStudentByID(model.SelectedStudentId[i]);
+                    List<Rol> selectedRollen = new List<Rol>();
+                    selectedRollen.Add(studentService.GetRolById(model.SelectedRolId[i]));
+                    StudentRollen studentrol = studentrolService.CreateStudentrol(selectedStudent, selectedRollen);
+                    studentrollen.Add(studentrol);
+                }
+            }
+
+            user.StudentRollen = studentrollen;
+
+            userService.EditUser(user);
+
+            return RedirectToAction("AddStudentRol","Accountbeheer");
         }
 	}
 }

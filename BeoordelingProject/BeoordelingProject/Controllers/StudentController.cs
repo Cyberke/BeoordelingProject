@@ -39,7 +39,7 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Index(CSVDataVM vm)
         {
-            studentService.CreateStudenten(vm.csvData);
+            studentService.CreateStudenten(vm.csvData, vm.academiejaar);
             return RedirectToAction("StudentLijst", "Student");
         }
 

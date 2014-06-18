@@ -13,5 +13,7 @@ namespace BeoordelingProject.ViewModel
         }
 
         public string csvData { get; set; }
+
+        public string academiejaar { get; set; }
     }
 }

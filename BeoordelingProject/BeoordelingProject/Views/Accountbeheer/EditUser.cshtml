@@ -47,10 +47,6 @@
                             <td>@Html.ValidationMessageFor(model => model.registerVM.UserName, "Gelieve een naam in te geven")</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>@Html.ValidationMessageFor(model => model.registerVM.Password, "Wachtwoord moet minstens 6 karakters lang zijn")</td>
-                        </tr>
-                        <tr>
                             <td class="addUser"><input type="submit" value="Bewerken" class="actionbutton" /></td>
                         </tr>
                     </table>
@@ -84,6 +80,7 @@
                     </div>
                 </div>
             </div>
+        @Html.Hidden("SelectedAccountId", Model.SelectedAccountId);
     }
 </div>
 
