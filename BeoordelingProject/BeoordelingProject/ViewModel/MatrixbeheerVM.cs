@@ -13,11 +13,13 @@ namespace BeoordelingProject.ViewModel
         {
 
         }
-
         public List<string> Opleidingen { get; set; }
         public string opleiding { get; set; }
         public bool tussentijds { get; set; }
         public Matrix Matrix { get; set; }
         public List<int> Rollen { get; set; }
+
+        public int matrixid { get; set; }
+        public List<Hoofdaspect> hoofdaspecten { get; set; }
     }
 }

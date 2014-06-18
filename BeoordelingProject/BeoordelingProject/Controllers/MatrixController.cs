@@ -29,17 +29,25 @@ namespace BeoordelingProject.Controllers
                 vm.Matrix = matrixbeheerservice.GetMatrixByRichtingByTussentijds(opleiding, tussentijds);
 
                 if (vm.Matrix != null)
+                {
+                    vm.Rollen = matrixbeheerservice.getRollenMatrix(vm.Matrix.ID);
+                    vm.hoofdaspecten = matrixbeheerservice.GetHoofdaspectenByMatrixId(vm.Matrix.ID);
                     return View(vm);
+                }
                 else
+                {
                     return RedirectToAction("Index");
+                }
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult EditMatrix()
+        public ActionResult EditMatrix(MatrixbeheerVM vm)
         {
-            return View();
+
+            //matrixbeheerservice.UpdateMatrix(vm.Matrix);
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Admin")]

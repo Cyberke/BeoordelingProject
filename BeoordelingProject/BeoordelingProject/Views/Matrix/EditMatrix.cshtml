@@ -28,54 +28,55 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        foreach (var item in Model.Matrix.Hoofdaspecten)
+        
+        <table class="studentlist">
+        
+        @foreach (var hoofdaspect in Model.hoofdaspecten)
         {
-            <table>
+            <tr>
+                <th rowspan="3">Omschrijving Hoofdaspect:<br />@Html.EditorFor(modelItem => hoofdaspect.Naam, new { @rows = 1, @cols = 80 })</th>
+                <th><input type="checkbox" name="rol" value="1" />Promotor</th>
+                <th rowspan="3">
+                    Weging:<br/>
+                    @Html.EditorFor(modelItem => hoofdaspect.Weging, new { @rows = 1, @cols = 5 })<br/>
+                    Gewogen Deelscore:
+                    @Html.EditorFor(modelItem => hoofdaspect.GewogenScore, new { @rows = 1, @cols = 5 })
+                    </th>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="rol" value="2" />Tweede lezer</th>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="rol" value="3" />Kritische Vriend</th>
+            </tr>
+            foreach (var aspect in hoofdaspect.Deelaspecten)
+            {
                 <tr>
-                    <th>@Html.EditorFor(modelItem => item.Naam)</th>
+                    <td class="deelaspect" colspan="3">Omschrijving Deelaspect:<br/>@Html.TextAreaFor(modelItem => aspect.Omschrijving, new { @rows = 1, @cols = 140 })</td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="rol" value="1" />Promotor</th>
+                    <td colspan="2">Volstrekt Onvoldoende Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.VOVOmschrijving, new { @rows = 10, @cols = 120 })</td>
+                    <td rowspan="6" class="weging">Weging Deelaspect:<br />@Html.EditorFor(modelItem => aspect.Weging)</td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="rol" value="2" />Tweede lezer</th>
+                    <td colspan="2">Onvoldoende Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.OVOmschrijving, new { @rows = 10, @cols = 120 })</td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="rol" value="3" />Kritische Vriend</th>
-                </tr>
-                @foreach(var aspect in item.Deelaspecten)
-                {
-                <tr>
-                    <td>Omschrijving Deelaspect:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.Omschrijving)</td>
+                    <td colspan="2">Voldoende Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.VOmschrijving, new { @rows = 10, @cols = 120 })</td>
                 </tr>
                 <tr>
-                    <td>Volstrekt Onvoldoende Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.VOVOmschrijving)</td>
+                    <td colspan="2">Ruim Voldoende Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.RVOmschrijving, new { @rows = 10, @cols = 120 })</td>
                 </tr>
                 <tr>
-                    <td>Onvoldoende Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.OVOmschrijving)</td>
+                    <td colspan="2">Goed Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.GOmschrijving, new { @rows = 10, @cols = 120 })</td>
                 </tr>
                 <tr>
-                    <td>Voldoende Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.VOmschrijving)</td>
+                    <td colspan="2">Zeer Goed Omschrijving:<br/>@Html.TextAreaFor(modelItem => aspect.ZGOmschrijving, new { @rows = 10, @cols = 120 })</td>
                 </tr>
-                <tr>
-                    <td>Ruim Voldoende Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.RVOmschrijving)</td>
-                </tr>
-                <tr>
-                    <td>Goed Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.GOmschrijving)</td>
-                </tr>
-                <tr>
-                    <td>Zeer Goed Omschrijving:</td>
-                    <td>@Html.EditorFor(modelItem => aspect.ZGOmschrijving)</td>
-                </tr>
-                }
-            </table>
+            }
         }
+        </table>
+        <input type="hidden" id="matrixid" value="@Model.Matrix.ID"/>
         <input type="submit" value="Opslaan" class="actionbutton" />
     }
 
@@ -92,6 +93,21 @@
         {
             nodelist[i].name = "Rollen[" + counter + "]";
             nodelist[i].id = "Rollen[" + counter + "]";
+            counter++;
         }
     }
+
+    @{
+        for(int i = 0; i < Model.Rollen.Count; i++)
+        {
+            if(Model.Rollen[i] != 0)
+            {
+                <text>
+                    document.getElementById("Rollen[@i]").checked = true;
+                </text>
+            }
+        }
+        
+    }
+
 </script>
