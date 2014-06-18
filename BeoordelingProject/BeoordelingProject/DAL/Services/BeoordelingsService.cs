@@ -228,6 +228,7 @@ namespace BeoordelingProject.DAL.Services {
                     {
                         exist.TotaalEindresultaat = 6;
                         //mail sturen hier
+                        stuurBreekpuntMail(studentid); 
                     }
                     vm.Matrix = matrixRepository.GetByID(vm.MatrixID);
 
@@ -252,9 +253,12 @@ namespace BeoordelingProject.DAL.Services {
                     if (vm.breekpunten == false)
                         newres.TotaalTussentijdResultaat = beoordelingsEngine.totaalScore(scores, wegingen);
                     else
+                    {
                         newres.TotaalTussentijdResultaat = 6;
                         //mail sturen
-
+                        stuurBreekpuntMail(studentid); 
+                    }
+                         
                     resultaatRepository.Insert(newres);
                     uow.SaveChanges();
                 }
@@ -448,6 +452,33 @@ namespace BeoordelingProject.DAL.Services {
             //// Add the file attachment to this e-mail message.
             //msg.Attachments.Add(data);
 
+
+            client.Send(msg);
+        }
+
+        public void stuurBreekpuntMail(int studentId)
+        {
+            //admin & user ophalen
+            ApplicationUser admin = adminService.GetAdmin();
+            Student student = studentService.GetStudentByID(studentId);
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(admin.UserName);
+            msg.To.Add(admin.UserName);
+            string bodyTekst = "Er zijn breekpunten aanwezig bij de bachelorproef van " + student.Naam + "\n";
+            msg.Body = bodyTekst;
+            msg.Subject = "BP breekpunt gevonden bij " + student.Naam;
+            //waarschijnlijk nog aanpassen
+            msg.Priority = MailPriority.Normal;
+
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Host = "smtp.office365.com";
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            client.EnableSsl = true;
 
             client.Send(msg);
         }
