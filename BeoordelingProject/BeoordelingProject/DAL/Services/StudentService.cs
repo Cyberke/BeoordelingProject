@@ -86,8 +86,8 @@ namespace BeoordelingProject.DAL.Services
                         academiejaar = academiejaar
                     };
 
-                    /*studentRepository.Insert(student);
-                    uow.SaveChanges();*/
+                    studentRepository.Insert(student);
+                    uow.SaveChanges();
 
                     studenten.Add(student);
 
