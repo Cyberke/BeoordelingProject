@@ -24,6 +24,11 @@ module.controller("appController", function ($scope, $filter, studentenlijst)
             return student;
     }
 
+    scope.heeftPunten = function (student) {
+        if (student.eind != "-")
+            return student;
+    }
+
     scope.sort = {
         column: 'a',
         descending: false

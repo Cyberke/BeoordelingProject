@@ -5,8 +5,14 @@ using BeoordelingProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.html;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Net.Mail;
 
 namespace BeoordelingProject.Controllers
 {
@@ -16,16 +22,19 @@ namespace BeoordelingProject.Controllers
         private IBeoordelingsEngine beoordelingsEngine = null;
         private IStudentService studentService = null;
         private IUserManagementService userService = null;
+        private IAdministratorService adminService = null;
 
         public BeoordelaarController(
             IBeoordelingsService beoordelingsService,
             IBeoordelingsEngine beoordelingsEngine,
             IStudentService studentService,
-            IUserManagementService userService) {
+            IUserManagementService userService,
+            IAdministratorService adminService) {
             this.beoordelingsService = beoordelingsService;
             this.beoordelingsEngine = beoordelingsEngine;
             this.studentService = studentService;
             this.userService = userService;
+            this.adminService = adminService;
         }
 
         //
@@ -81,7 +90,7 @@ namespace BeoordelingProject.Controllers
         {
             vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
             beoordelingsService.CreateBeoordeling(vm);
-            beoordelingsService.stuurMail(vm.Student.ID);
+            stuurMail(vm.Student.ID);
             return RedirectToAction("Index");
         }
 
@@ -97,6 +106,38 @@ namespace BeoordelingProject.Controllers
             vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
 
             return View(vm);
+        }
+
+        public void stuurMail(int studentId)
+        {
+            //admin & user ophalen
+            ApplicationUser admin = adminService.GetAdmin();
+            Student student = studentService.GetStudentByID(studentId);
+
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(admin.UserName);
+            msg.To.Add(admin.UserName);
+            string bodyTekst = "Hier is het rapport van " + student.Naam + "\n";
+            bodyTekst += "http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\n";
+            bodyTekst += "<a href="+Uri.EscapeUriString("bachelorproef.azurewebsites.net/Beoordelaar/Rapport/"+student.ID)+"' download='"+ student.Naam+"_"+student.academiejaar+".pdf'>Download Rapport</a>";
+
+            msg.Body = bodyTekst;
+            msg.Subject = "BP Rapport van " + student.Naam;
+            //waarschijnlijk nog aanpassen
+            msg.Priority = MailPriority.Normal;
+
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Host = "smtp.office365.com";
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            client.EnableSsl = true;
+
+
+            client.Send(msg);
         }
 
         public ActionResult Rapport(int id)

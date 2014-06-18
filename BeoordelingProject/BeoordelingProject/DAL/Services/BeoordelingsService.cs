@@ -12,7 +12,7 @@ using System.Net.Mime;
 using System.Web;
 
 namespace BeoordelingProject.DAL.Services {
-    public class BeoordelingsService : BeoordelingProject.DAL.Services.IBeoordelingsService 
+    public class BeoordelingsService : BeoordelingProject.DAL.Services.IBeoordelingsService
     {
         IUnitOfWork uow = null;
         IMatrixRepository matrixRepository = null;
@@ -400,16 +400,15 @@ namespace BeoordelingProject.DAL.Services {
             return resultaatRepository.isCFaanwezig(studentid);
         }
 
-        public void stuurMail(int studentId)
+        public void stuurMail(int studentId, object pdf)
         {
             //admin & user ophalen
             ApplicationUser admin = adminService.GetAdmin();
             Student student = studentService.GetStudentByID(studentId);
 
 
-            //var pdf = new Rotativa.ActionAsPdf("GetStudent", new { id = studentId });
-            //DateTime now = DateTime.Now;
-            //string dat = now.Day + "_" + now.Month + "_" + now.Year;
+            DateTime now = DateTime.Now;
+            string dat = now.Day + "_" + now.Month + "_" + now.Year;
 
             //string filepath = Server.MapPath("~/rapport/");
             //var file = String.Format(filepath + "rapport_{0}_{1}.pdf", student.Naam, dat);
