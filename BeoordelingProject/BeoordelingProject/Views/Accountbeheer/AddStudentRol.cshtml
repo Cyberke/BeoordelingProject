@@ -34,7 +34,7 @@
     {
         <label class="errorViewbag">@ViewBag.Error</label><br />
         <label class="actionbutton tablebutton" onclick="toggleUserToevoegen()">Toevoegen</label>
-    
+
         <div id="inklapdiv" style="display:none">
             <div class="login">
                 <div class="gebruikerinfo">
@@ -120,11 +120,15 @@
     {
         <text>var counter = @Model.SelectedStudentId.Count
         counter--;
+        document.getElementById("inklapdiv").style.display = "block";
         </text>
     }
     else
     {
-        <text>var counter = 1;</text>
+        <text>
+    var counter = 1;
+    document.getElementById("inklapdiv").style.display = "none";
+        </text>
     }
     
     @if (counterTotal != 0)

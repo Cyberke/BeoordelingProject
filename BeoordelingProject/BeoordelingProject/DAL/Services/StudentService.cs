@@ -58,7 +58,7 @@ namespace BeoordelingProject.DAL.Services
             return kolommen;
         }
 
-        public List<Student> CreateStudenten(string csvData)
+        public List<Student> CreateStudenten(string csvData, string academiejaar)
         {
             List<Student> studenten = new List<Student>();
 
@@ -82,7 +82,8 @@ namespace BeoordelingProject.DAL.Services
                         Email = columns[kolommen["howest_email"]],
                         StudentId = int.Parse(columns[kolommen["studentid"]]),
                         Geslacht = columns[kolommen["geslacht"]],
-                        Geboortedatum = columns[kolommen["geboordat"]]
+                        Geboortedatum = columns[kolommen["geboordat"]],
+                        academiejaar = academiejaar
                     };
 
                     studentRepository.Insert(student);
@@ -207,7 +208,7 @@ namespace BeoordelingProject.DAL.Services
                 bool heeftScore = false;
                 jsonString += "{";
                 jsonString += "naam: \"" + student.Naam + "\",";
-                jsonString += "academiejaar: \"" + "2014-2015" + "\",";
+                jsonString += "academiejaar: \"" + student.academiejaar + "\",";
                 jsonString += "trajecttype: \"" + student.Trajecttype + "\",";
                 foreach (Resultaat resultaat in resultaten)
                 {

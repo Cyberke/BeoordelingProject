@@ -81,6 +81,7 @@ namespace BeoordelingProject.Controllers
         {
             vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
             beoordelingsService.CreateBeoordeling(vm);
+            beoordelingsService.stuurMail(vm.Student.ID);
             return RedirectToAction("Index");
         }
 

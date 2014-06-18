@@ -16,5 +16,6 @@ namespace BeoordelingProject.DAL.Services
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaten();
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetTussentijdseResultaten(int id);
         bool isCFaanwezig(int studentid);
+        void stuurMail(int studentId);
     }
 }

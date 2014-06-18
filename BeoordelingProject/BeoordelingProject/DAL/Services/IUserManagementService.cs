@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using BeoordelingProject.Models;
-using System;
-using System.Security.Claims;
+﻿using System;
 namespace BeoordelingProject.DAL.Services
 {
-    public interface IUserManagementService {
-        IdentityResult Create(ApplicationUser user, string password);
-        ClaimsIdentity CreateIdentity(ApplicationUser user, string auth);
-        ApplicationUser Find(string userName, string password);
+    public interface IUserManagementService
+    {
         bool AddUserToRoleUser(string userId);
-        ApplicationUser GetUser(string userName);
+        Microsoft.AspNet.Identity.IdentityResult Create(BeoordelingProject.Models.ApplicationUser user, string password);
+        System.Security.Claims.ClaimsIdentity CreateIdentity(BeoordelingProject.Models.ApplicationUser user, string auth);
+        void EditUser(BeoordelingProject.Models.ApplicationUser user);
+        BeoordelingProject.Models.ApplicationUser Find(string userName, string password);
+        BeoordelingProject.Models.ApplicationUser GetUser(string userName);
     }
 }
