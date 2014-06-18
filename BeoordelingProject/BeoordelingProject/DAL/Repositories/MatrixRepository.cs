@@ -183,6 +183,23 @@ namespace BeoordelingProject.DAL.Repositories
 
             return rollist;
         }
+        
+        public int getTotaalAantalDeelaspecten(int matid)
+        {
+            var query =
+            (
+                from m in context.Matrices
+                from h in m.Hoofdaspecten
+                from d in h.Deelaspecten
+
+                where m.ID.Equals(matid)
+
+                select d
+            );
+
+            int count = query.ToList<Deelaspect>().Count;
+            return count;
+        }
 
     }
 }

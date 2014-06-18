@@ -456,5 +456,10 @@ namespace BeoordelingProject.DAL.Services {
 
             client.Send(msg);
         }
+
+        public int getTotaalAantalDeelaspecten(int matid)
+        {
+            return matrixRepository.getTotaalAantalDeelaspecten(matid);
+        }
     }
 }

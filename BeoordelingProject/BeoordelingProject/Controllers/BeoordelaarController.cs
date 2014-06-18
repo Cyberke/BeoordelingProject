@@ -89,15 +89,46 @@ namespace BeoordelingProject.Controllers
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
             vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
-            beoordelingsService.CreateBeoordeling(vm);
 
-            ApplicationUser admin = adminService.GetAdmin();
-            if(admin.MailZenden)
+            int count = beoordelingsService.getTotaalAantalDeelaspecten(vm.MatrixID);
+
+            try
             {
-                beoordelingsService.stuurMail(vm.Student.ID);
+                if(count == vm.Scores.Count)
+                {
+                    beoordelingsService.CreateBeoordeling(vm);
+
+                    ApplicationUser admin = adminService.GetAdmin();
+                    if (admin.MailZenden)
+                    {
+                        beoordelingsService.stuurMail(vm.Student.ID);
+                    }
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
+
+                    vm.Student = studentService.GetStudentByID(vm.Student.ID);
+                    vm.Resultaten = new Resultaat();
+                    vm.Scores.Clear();
+
+                    return View(vm);
+                }
             }
+            catch(Exception ex)
+            {
+                ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
+
+                vm.Student = studentService.GetStudentByID(vm.Student.ID);
+                vm.Resultaten = new Resultaat();
+                vm.Scores.Clear();
+
+                return View(vm);
+            }
+
             
-            return RedirectToAction("Index");
+            
         }
 
         [Authorize(Roles = "User")]

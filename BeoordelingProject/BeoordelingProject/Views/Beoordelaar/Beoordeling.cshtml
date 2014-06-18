@@ -30,6 +30,8 @@
         <h2>Kritische vriend is niet aanwezig</h2>
     }
 
+    <label class="errorViewbag">@ViewBag.Error</label><br />
+
     @using (Html.BeginForm())
     {
         Html.AntiForgeryToken();
