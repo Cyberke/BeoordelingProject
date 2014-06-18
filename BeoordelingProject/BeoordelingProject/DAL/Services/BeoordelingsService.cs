@@ -400,35 +400,21 @@ namespace BeoordelingProject.DAL.Services {
             return resultaatRepository.isCFaanwezig(studentid);
         }
 
-        public void stuurMail(int studentId, object pdf)
+        public void stuurMail(int studentId)
         {
             //admin & user ophalen
             ApplicationUser admin = adminService.GetAdmin();
             Student student = studentService.GetStudentByID(studentId);
 
 
-            DateTime now = DateTime.Now;
-            string dat = now.Day + "_" + now.Month + "_" + now.Year;
-
-            //string filepath = Server.MapPath("~/rapport/");
-            //var file = String.Format(filepath + "rapport_{0}_{1}.pdf", student.Naam, dat);
-            //var binary = pdf.BuildPdf(this.ControllerContext);
-
-            //bool isExcists = System.IO.Directory.Exists(file);
-            //if (!isExcists)
-            //    System.IO.Directory.CreateDirectory(filepath);
-
-            //System.IO.File.WriteAllBytes(file, binary);
-
-
-
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress(admin.UserName);
             msg.To.Add(admin.UserName);
-            string bodyTekst = "Hier is het rapport van " + student.Naam + "\n";
+            string bodyTekst = "<p>Hier is het rapport van " + student.Naam + "</p>";
+            bodyTekst += "<a href=\"http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\" download=\"" + student.Naam + "_" + student.academiejaar + ".pdf \">Download Rapport</a>";
+            msg.IsBodyHtml = true;
             msg.Body = bodyTekst;
             msg.Subject = "BP Rapport van " + student.Naam;
-            //waarschijnlijk nog aanpassen
             msg.Priority = MailPriority.Normal;
 
             SmtpClient client = new SmtpClient();
@@ -439,17 +425,6 @@ namespace BeoordelingProject.DAL.Services {
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
             client.EnableSsl = true;
-
-
-            //// Create  the file attachment for this e-mail message.
-            //Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
-            //// Add time stamp information for the file.
-            //ContentDisposition disposition = data.ContentDisposition;
-            //disposition.CreationDate = System.IO.File.GetCreationTime(file);
-            //disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
-            //disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
-            //// Add the file attachment to this e-mail message.
-            //msg.Attachments.Add(data);
 
 
             client.Send(msg);

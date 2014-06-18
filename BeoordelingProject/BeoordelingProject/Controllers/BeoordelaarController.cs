@@ -90,7 +90,13 @@ namespace BeoordelingProject.Controllers
         {
             vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
             beoordelingsService.CreateBeoordeling(vm);
-            stuurMail(vm.Student.ID);
+
+            ApplicationUser admin = adminService.GetAdmin();
+            if(admin.MailZenden)
+            {
+                beoordelingsService.stuurMail(vm.Student.ID);
+            }
+            
             return RedirectToAction("Index");
         }
 
@@ -106,38 +112,6 @@ namespace BeoordelingProject.Controllers
             vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
 
             return View(vm);
-        }
-
-        public void stuurMail(int studentId)
-        {
-            //admin & user ophalen
-            ApplicationUser admin = adminService.GetAdmin();
-            Student student = studentService.GetStudentByID(studentId);
-
-
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(admin.UserName);
-            msg.To.Add(admin.UserName);
-            string bodyTekst = "Hier is het rapport van " + student.Naam + "\n";
-            bodyTekst += "http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\n";
-            bodyTekst += "<a href="+Uri.EscapeUriString("bachelorproef.azurewebsites.net/Beoordelaar/Rapport/"+student.ID)+"' download='"+ student.Naam+"_"+student.academiejaar+".pdf'>Download Rapport</a>";
-
-            msg.Body = bodyTekst;
-            msg.Subject = "BP Rapport van " + student.Naam;
-            //waarschijnlijk nog aanpassen
-            msg.Priority = MailPriority.Normal;
-
-            SmtpClient client = new SmtpClient();
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
-            client.Host = "smtp.office365.com";
-            client.Port = 587;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-            client.EnableSsl = true;
-
-
-            client.Send(msg);
         }
 
         public ActionResult Rapport(int id)
