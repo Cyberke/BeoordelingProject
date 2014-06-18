@@ -5,45 +5,38 @@
 }
 
 <itext>
-    <table align="right" size="8">
-        <row>
-            <cell>HOWEST - Campus Sint-Jorisstraat</cell>
-            <cell></cell>
-        </row>
-        <row>
-            <cell>Bachelor in het onderwijs, lager onderwijs</cell>
-            <cell></cell>
-        </row>
-        <row>
-            <cell>St.-Jorisstraat 71, 8000 Brugge</cell>
-            <cell></cell>
-        </row>
-        <row>
-            <cell>Tel.: 050 33 32 68   Fax: 050 34 62 54</cell>
-            <cell></cell>
-        </row>
-        <row>
-            <cell>Opleidingscoördinator: isabelle.donck@howest.be</cell>
-            <cell></cell>
-        </row>
-    </table>
-
-    <paragraph align="Center" size="24">Bachelorproef</paragraph>
-
     <table>
         <row>
-            <cell>@Model.Naam</cell>
-        </row>
-        <row>
-            <cell>@Model.Academiejaar</cell>
-        </row>
-        <row>
-            <cell>@Model.Richting</cell>
-        </row>
-        <row>
-            <cell>@Model.Punt/20 </cell>
+            <cell>
+                <paragraph size="8" leading="10">
+                    HOWEST - Campus Sint-Jorisstraat
+                    <newline />
+                    Bachelor in het onderwijs, lager onderwijs
+                    <newline />
+                    St.-Jorisstraat 71, 8000 Brugge
+                    <newline />
+                    Tel.: 050 33 32 68   Fax: 050 34 62 54
+                    <newline />
+                    Opleidingscoördinator: isabelle.donck@howest.be
+                </paragraph>
+            </cell>
+            <cell borderwidth="1" left="true" right="false" top="false" bottom="false">
+                <image url="@Context.Server.MapPath("~/Content/img/logo.jpg")" />
+            </cell>
         </row>
     </table>
+
+
+    <paragraph indentationleft="52" size="12" style="font-weight:bold;">Eindbeoordeling bachelorproef</paragraph>
+    <paragraph indentationleft="52" size="12">3de @Model.Richting</paragraph>
+
+    <paragraph indentationright="52" size="10" align="right">Naam student: @Model.Naam</paragraph>
+    <paragraph indentationright="52" size="10" align="right">Academiejaar: @Model.Academiejaar</paragraph>
+    <paragraph indentationright="52" size="10" align="right">Eindscore: @Model.Punt/20</paragraph>
+
+    <paragraph indentationleft="52" size="10" style="font-weight:bold;">Feedback: </paragraph>
+    <paragraph indentationleft="52" size="10">@Model.Feedback</paragraph>
+
 </itext>
 
 

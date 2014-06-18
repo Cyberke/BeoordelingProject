@@ -108,7 +108,8 @@ namespace BeoordelingProject.Controllers
                 Academiejaar = student.academiejaar,
                 Naam = student.Naam,
                 Richting = student.Opleiding,
-                Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat
+                Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat,
+                Feedback = studentService.GetResultaatByStudentId(id).CustomFeedback
             };
             return new RazorPDF.PdfResult(rapport, "Rapport");
 

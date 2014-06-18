@@ -11,5 +11,6 @@ namespace BeoordelingProject.ViewModel
         public string Richting { get; set; }
         public string Academiejaar { get; set; }
         public double Punt { get; set; }
+        public string Feedback { get; set; }
     }
 }
