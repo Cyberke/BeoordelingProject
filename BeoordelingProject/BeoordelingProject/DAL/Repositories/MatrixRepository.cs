@@ -124,5 +124,17 @@ namespace BeoordelingProject.DAL.Repositories
             return query.First();
         }
 
+        public List<string> GetOpleidingen()
+        {
+            var query = 
+            (
+                from m in context.Matrices
+                select m.Richting
+            );
+
+            List<string> opleidingen = query.Distinct().ToList<string>();
+            return opleidingen;
+        }
+
     }
 }

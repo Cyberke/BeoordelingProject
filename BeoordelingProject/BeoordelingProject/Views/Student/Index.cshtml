@@ -35,11 +35,10 @@
             </tr>
         </table>
         <br />
-        
-        <!--<input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">-->
-        <input type="button" value="Importeer" id="importStudenten" onclick="getFile();" class="actionbutton"/>
-        <input type="submit" value="Submit" id="submit" onclick="getFile();" class="actionbutton">
-        
+       
+        <input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">
+        <input type="submit" value="Importeer" id="importeer" class="actionbutton"/>
+
         @Html.Hidden("csvData", Model.csvData);
     }
 </div>

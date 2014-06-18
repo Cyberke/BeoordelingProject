@@ -29,6 +29,7 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
+
         @using (Html.BeginForm())
     {
         <label class="errorViewbag">@ViewBag.Error</label><br />

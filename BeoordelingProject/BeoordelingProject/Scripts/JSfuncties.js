@@ -62,8 +62,6 @@ var page = array[1] + "/" + array[2];
 
 function helptekst(pagename)
 {
-
-
 	var helpTekst = "<Insert text here>";
 
 	switch(page)
@@ -129,6 +127,12 @@ function helptekst(pagename)
 	        helpTekst = "Kies eerst een .csv bestand met de nodige studentgegevens door op de knop 'Bladeren' te klikken."
             helpTekst += " Om dit bestand te importeren in de applicatie klikt u op de knop 'Importeren'"
 
+	        return helpTekst;
+	        break;
+	    case "Student/Charts":
+	        helpTekst = "Deze pagina toont de statistieken weer voor de punten van de studenten. "
+	        helpTekst += "Er zijn 2 grafieken te zien per richting, voor tussentijds beoordeling en voor eindbeoordeling. "
+	        helpTekst += "In de grafiek is voor iedere puntengroep een andere kleur."
 	        return helpTekst;
 	        break;
 		default:

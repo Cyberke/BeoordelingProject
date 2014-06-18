@@ -72,6 +72,7 @@ namespace BeoordelingProject.Controllers
                     {
                         for (int r = 0; r < studentrollen[s].Rollen.Count; r++)
                         {
+                            //unieke studentrol?
                             if (model.SelectedRolId[i].Equals(studentrollen[s].Rollen[r].ID))
                             {
                                 ViewBag.Error = "De rol voor een gekozen student dient uniek te zijn.";
@@ -125,9 +126,46 @@ namespace BeoordelingProject.Controllers
             var user = new ApplicationUser() { UserName = model.registerVM.UserName };
             user.StudentRollen = studentrollen;
 
+            var users = studentService.GetUsers();
+            foreach (ApplicationUser gebruiker in users)
+            {
+                //unieke gebruiker?
+                if (gebruiker.UserName.ToLower() == user.UserName.ToLower())
+                {
+                    ViewBag.Error = "De gebruiker bestaat al.";
+
+                    var accountbeheerVM = new AccountbeheerVM();
+
+                    accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+                    accountbeheerVM.Accounts = studentService.GetUsers();
+
+                    accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                    List<StudentKeuzeVM> studentKeuzes = new List<StudentKeuzeVM>();
+
+                    foreach (ApplicationUser beoordelaar in accountbeheerVM.Accounts)
+                    {
+                        StudentKeuzeVM vm = new StudentKeuzeVM();
+
+                        vm.Studenten = studentService.GetStudentenByStudentRollen(beoordelaar.StudentRollen);
+                        vm.RollenPerStudent = studentService.GetRollenByStudent(beoordelaar.StudentRollen);
+                        vm.Aantal = studentService.GetAantalTeTonenStudenten(beoordelaar.StudentRollen);
+                        vm.StudentenString = studentService.SerializeObject(vm.Studenten, vm.RollenPerStudent, beoordelaar.Id);
+
+                        studentKeuzes.Add(vm);
+                    }
+
+                    accountbeheerVM.studentKeuzesVM = studentKeuzes;
+                    accountbeheerVM.StudentenString = studentService.SerializeObject(accountbeheerVM.Accounts);
+
+                    accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
+                    accountbeheerVM.SelectedRolId = model.SelectedRolId;
+
+                    return View(accountbeheerVM);
+                }
+            }
             var result = userService.Create(user, model.registerVM.Password);
             userService.AddUserToRoleUser(user.Id);
-
             return RedirectToAction("AddStudentRol", "Accountbeheer");
         }
 
