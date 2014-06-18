@@ -82,11 +82,12 @@ namespace BeoordelingProject.DAL.Services
                         Email = columns[kolommen["howest_email"]],
                         StudentId = int.Parse(columns[kolommen["studentid"]]),
                         Geslacht = columns[kolommen["geslacht"]],
-                        Geboortedatum = columns[kolommen["geboordat"]]
+                        Geboortedatum = columns[kolommen["geboordat"]],
+                        academiejaar = academiejaar
                     };
 
-                    studentRepository.Insert(student);
-                    uow.SaveChanges();
+                    /*studentRepository.Insert(student);
+                    uow.SaveChanges();*/
 
                     studenten.Add(student);
 

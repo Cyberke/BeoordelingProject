@@ -36,8 +36,8 @@
         </table>
         <br />
        
-        <input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">
-        <input type="submit" value="Importeer" id="importeer" class="actionbutton"/>
+        /*<input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">*/
+        <input type="button" value="Importeer" id="importeer" onclick="getFile()" class="actionbutton"/>
 
         @Html.Hidden("csvData", Model.csvData);
     }
@@ -55,10 +55,17 @@
         reader.onload = function (e) {
             datafield.value = reader.result;
         }
-		
-		 reader.readAsText(file, 'ISO-8859-1');
 
-        //document.getElementById("csvForm").submit();
+        reader.readAsText(file, 'ISO-8859-1');
+        
+        if (document.getElementById("csvForm")) {
+            setTimeout("submitForm()", 4000); // set timout 
+        }
+    }
+
+    function submitForm()
+    {
+        document.getElementById("csvForm").submit();
     }
 
     document.getElementById("file").onchange = function () {
