@@ -98,5 +98,20 @@ namespace BeoordelingProject.Controllers
 
             return View(vm);
         }
+
+        public ActionResult Rapport(int id)
+        {
+            Student student = studentService.GetStudentByID(id);
+
+            RapportVM rapport = new RapportVM
+            {
+                Academiejaar = student.academiejaar,
+                Naam = student.Naam,
+                Richting = student.Opleiding,
+                Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat
+            };
+            return new RazorPDF.PdfResult(rapport, "Rapport");
+
+        }
 	}
 }

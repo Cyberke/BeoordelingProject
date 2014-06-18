@@ -215,7 +215,6 @@
     <Compile Include="Controllers\BeoordelaarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatrixController.cs" />
-    <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\Context\BeoordelingsContext.cs" />
     <Compile Include="DAL\Repositories\AccountRepository.cs" />
@@ -360,7 +359,7 @@
     <Content Include="Views\Accountbeheer\EditUser.cshtml" />
     <Content Include="Views\Matrix\Index.cshtml" />
     <Content Include="Views\Matrix\EditMatrix.cshtml" />
-    <Content Include="Views\Rapport\Index.cshtml" />
+    <Content Include="Views\Beoordelaar\Rapport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

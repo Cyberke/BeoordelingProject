@@ -1,0 +1,49 @@
+﻿@model BeoordelingProject.ViewModel.RapportVM
+
+@{
+    Layout = "";
+}
+
+<itext>
+    <table align="right" size="8">
+        <row>
+            <cell>HOWEST - Campus Sint-Jorisstraat</cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>Bachelor in het onderwijs, lager onderwijs</cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>St.-Jorisstraat 71, 8000 Brugge</cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>Tel.: 050 33 32 68   Fax: 050 34 62 54</cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>Opleidingscoördinator: isabelle.donck@howest.be</cell>
+            <cell></cell>
+        </row>
+    </table>
+
+    <paragraph align="Center" size="24">Bachelorproef</paragraph>
+
+    <table>
+        <row>
+            <cell>@Model.Naam</cell>
+        </row>
+        <row>
+            <cell>@Model.Academiejaar</cell>
+        </row>
+        <row>
+            <cell>@Model.Richting</cell>
+        </row>
+        <row>
+            <cell>@Model.Punt/20 </cell>
+        </row>
+    </table>
+</itext>
+
+
