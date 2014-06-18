@@ -136,5 +136,53 @@ namespace BeoordelingProject.DAL.Repositories
             return opleidingen;
         }
 
+        public List<int> getRollenMatrix(int matid)
+        {
+            var query =
+            (
+                from m in context.Matrices
+                from h in m.Hoofdaspecten
+                where m.ID.Equals(matid)
+                select h
+            );
+
+            List<Hoofdaspect> hoofdaspecten = query.ToList<Hoofdaspect>();
+
+            List<int> rollist = new List<int>();
+
+            for(int i = 0; i < hoofdaspecten.Count * 3; i++)
+            {
+                rollist.Add(0);
+            }
+
+            int counter = 0;
+            int id = 0;
+            foreach(Hoofdaspect ho in hoofdaspecten)
+            {
+                List<Rol> rollen = ho.Rollen;
+                foreach(Rol rol in rollen)
+                {
+                    switch(rol.Naam)
+                    {
+                        case "Promotor":
+                            id = counter * 3;
+                            rollist[id] = 1;
+                            break;
+                        case "Tweede lezer":
+                            id = 1 + (counter * 3);
+                            rollist[id] = 2;
+                            break;
+                        case "Kritische vriend":
+                            id = 2 + (counter * 3);
+                            rollist[2 + (counter * 3)] = 3;
+                            break;
+                    }
+                }
+                counter++;
+            }
+
+            return rollist;
+        }
+
     }
 }

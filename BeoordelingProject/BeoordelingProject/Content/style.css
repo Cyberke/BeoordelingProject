@@ -931,3 +931,16 @@ span
     width: 100%;
     height: 200px;
 }
+
+.deelaspect
+{
+    font-weight: bold;
+    background-color: #fff600;
+}
+
+.weging
+{
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #4D8FBD;
+}

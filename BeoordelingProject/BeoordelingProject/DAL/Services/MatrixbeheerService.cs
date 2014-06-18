@@ -1,6 +1,7 @@
 ﻿using BeoordelingProject.DAL.Repositories;
 using BeoordelingProject.DAL.UnitOfWork;
 using BeoordelingProject.Models;
+using BeoordelingProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,22 @@ namespace BeoordelingProject.DAL.Services
         {
             int matid = matrixrepository.GetMatrixIdByRichtingByType(tussentijds, opleiding);
             return matrixrepository.GetByID(matid);
+        }
+
+        public List<int> getRollenMatrix(int matid)
+        {
+            return matrixrepository.getRollenMatrix(matid);
+        }
+
+        public List<Hoofdaspect> GetHoofdaspectenByMatrixId(int matid)
+        {
+            return matrixrepository.GetHoofdaspectenForMatrix(matid);
+        }
+
+        public void UpdateMatrix(Matrix m)
+        {
+            //matrixrepository.Update(m);
+            //uow.SaveChanges();
         }
 
     }
