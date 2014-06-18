@@ -39,6 +39,25 @@ namespace BeoordelingProject.DAL.Services
             return studentRepository.All().ToList<Student>();
         }
 
+        private Dictionary<string, int> getKolommen(string[] columnHeaders) {
+            Dictionary<string, int> kolommen = new Dictionary<string, int>();
+
+            // index: 7 20 1 15 14 18 17
+            string[] kolomNamen = new string[] {
+                "student", "trajecttype", "opleiding", "howest_email", "studentid", "geslacht", "geboordat"
+            };
+
+            for (int i = 0; i < columnHeaders.Length; i++) {
+                foreach (string kolomNaam in kolomNamen) {
+                    if (kolomNaam.Equals(columnHeaders[i].ToLower())) {
+                        kolommen.Add(kolomNaam, i);
+                    }
+                }
+            }
+
+            return kolommen;
+        }
+
         public List<Student> CreateStudenten(string csvData)
         {
             List<Student> studenten = new List<Student>();
@@ -46,19 +65,25 @@ namespace BeoordelingProject.DAL.Services
             using (StringReader textReader = new StringReader(csvData))
             {
                 string line = textReader.ReadLine();
-                int skipCount = 0;
 
-                while (line != null && skipCount < 1)
-                {
-                    line = textReader.ReadLine();
+                string[] columnHeaders = line.Split(';');
+                Dictionary<string, int> kolommen = getKolommen(columnHeaders);
 
-                    skipCount++;
-                }
+                line = textReader.ReadLine();
 
                 while (line != null)
                 {
                     string[] columns = line.Split(';');
-                    Student student = new Student { Naam = columns[7], Trajecttype = columns[20], Opleiding = columns[1], Email = columns[15], StudentId = Int32.Parse(columns[14]), Geslacht = columns[18], Geboortedatum = columns[17] };
+
+                    Student student = new Student() {
+                        Naam = columns[kolommen["student"]],
+                        Trajecttype = columns[kolommen["trajecttype"]],
+                        Opleiding = columns[kolommen["opleiding"]],
+                        Email = columns[kolommen["howest_email"]],
+                        StudentId = int.Parse(columns[kolommen["studentid"]]),
+                        Geslacht = columns[kolommen["geslacht"]],
+                        Geboortedatum = columns[kolommen["geboordat"]]
+                    };
 
                     studentRepository.Insert(student);
                     uow.SaveChanges();
