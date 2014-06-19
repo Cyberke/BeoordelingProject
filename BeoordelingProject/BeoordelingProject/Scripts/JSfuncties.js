@@ -69,10 +69,11 @@ function helptekst(pagename)
 		case "Account/Login":
 			helpTekst = "Voer je <b>gebruikersnaam</b> en <b>wachtwoord</b> in en klik op \"Log in\".\n";
 			helpTekst += "Gebruikersnaam of Wachtwoord vergeten? Contacteer de Administrator.";
+
 			return helpTekst;
 		break;
 		case "Beoordelaar/Beoordeling":
-			helpTekst = "Om meer informatie te krijgen over de beoordelingsgraden kunt u op <b>\"+\"</b> knop drukken.\n";
+			helpTekst = "Om meer informatie te krijgen over de beoordelingsgraden kunt u op \"+\" knop drukken.\n";
 			helpTekst += "Beoordelingsaspecten kunnen meerdere deelaspecten hebben.\n";
 			helpTekst += "Voor elke deelaspect moet er een punt gegeven worden!";
 
@@ -85,16 +86,16 @@ function helptekst(pagename)
 			return helpTekst;
 		break;
 	    case "Accountbeheer/AddStudentRol":
-	        helpTekst = "Op dit scherm kunt u een beoordelaar linken met een bepaalde student en hem voor de gekozen student een rol toekennen."
-	        helpTekst += " Om een nieuwe beoordelaar aan te maken klikt u op de knop Toevoegen en vult u het formuliertje in zoals u wilt."
-	        helpTekst += " U hebt natuurlijk ook de mogelijkheid om een bestaande beoordelaar te wijzigen (naam, rol voor een student of studenten zelf)"
-            helpTekst += " Ten slotte kunt u de beoordelaar ook verwijderen, daarna kan deze beoordelaar niet meer inloggen om een evaluatie uit te voeren"
+	        helpTekst = "Op dit scherm kunt u een beoordelaar linken met een bepaalde student en hem voor de gekozen student een rol toekennen.\n"
+	        helpTekst += "Om een nieuwe beoordelaar aan te maken klikt u op de knop Toevoegen en vult u het formuliertje in zoals u wilt.\n"
+	        helpTekst += "U hebt natuurlijk ook de mogelijkheid om een bestaande beoordelaar te wijzigen. (naam, rol voor een student of studenten zelf)\n"
+            helpTekst += "Ten slotte kunt u de beoordelaar ook verwijderen, daarna kan deze beoordelaar niet meer inloggen om een evaluatie uit te voeren."
 
 			return helpTekst;
 		break;
 		case "Adminpaneel/Index":
 			// Form
-			helpTekst += "U heeft de mogelijkheid om het e-mail adres te wijzigen en/of het wachtwoord te wijzigen van de administrator.\n";
+			helpTekst += "U hebt de mogelijkheid om het e-mail adres te wijzigen en/of het wachtwoord te wijzigen van de administrator.\n";
 			helpTekst += "Indien u feedbacks automatisch in uw e-mail adres wenst te verkrijgen kunt \"Feedback verzenden naar mijn mailbox\" aanvinken.\n";
 			helpTekst += "Naast bovenstaande mogelijkheden kunt u ook studentdata importeren in de database.\n";
 			helpTekst += "En u kunt accounts beheren.\n";
@@ -117,7 +118,7 @@ function helptekst(pagename)
 			break;
 	    case "/undefined":
 	        helpTekst = "Als administrator heeft u de mogelijkheid om alle studenten te zien per richting.\n";
-	        helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eindevaluatie gehad heeft met de bijhorende resultaten.\n";
+	        helpTekst += "U kunt kijken of de student al een tussentijdse- en/of eindevaluatie gehad hebt met de bijhorende resultaten.\n";
 	        helpTekst += "U ziet ook welke traject een student volgt.\n";
 	        helpTekst += "En u kunt de rapporten en/of feedback formulieren downloaden.";
 
@@ -130,13 +131,21 @@ function helptekst(pagename)
 	        return helpTekst;
 	        break;
 	    case "Student/Charts":
-	        helpTekst = "Deze pagina toont de statistieken weer voor de punten van de studenten. "
-	        helpTekst += "Er zijn 2 grafieken te zien per richting, voor tussentijds beoordeling en voor eindbeoordeling. "
+	        helpTekst = "Deze pagina toont de statistieken weer voor de punten van de studenten.\n"
+	        helpTekst += "Er zijn 2 grafieken te zien per richting, voor tussentijds beoordeling en voor eindbeoordeling.\n"
 	        helpTekst += "In de grafiek is voor iedere puntengroep een andere kleur."
+
 	        return helpTekst;
+	        break;
+	    case "Accountbeheer/EditUser":
+	        helpTekst = "U hebt de mogelijkheid om de gebruikersnaam en zijn toegewezen studenten en rollen kunt wijzigen.\n";
+	        helpTekst += "Om op te slaan, duwt u op \"Bewerken\".";
+
+            return helpTekst
 	        break;
 		default:
 		    helpTekst = "Er is iets misgelopen met de help."
+
 		    return helpTekst;
 		    break;
 	}
