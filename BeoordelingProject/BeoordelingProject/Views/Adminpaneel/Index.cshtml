@@ -20,7 +20,7 @@
     @Html.AntiForgeryToken()
     <div id="loginbox">
         <br />
-        @ViewBag.FeedBack
+        <label class="errorViewbag">@ViewBag.FeedBack</label>
         @Html.ValidationSummary(true)
         <table>
             <tr>

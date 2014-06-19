@@ -40,8 +40,19 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Index(CSVDataVM vm)
         {
-            studentService.CreateStudenten(vm.csvData, vm.academiejaar);
-            return RedirectToAction("StudentLijst", "Student");
+            if (ModelState.IsValid) {
+                if (!vm.csvData.Equals("ongeldig")) {
+                    studentService.CreateStudenten(vm.csvData, vm.academiejaar);
+
+                    ViewBag.Feedback = "Het bestand werd met success in geladen!";
+
+                    return View(vm);
+                }
+            }
+
+            ViewBag.Feedback = "Gelieve een juist bestand in te laden!";
+
+            return View(vm);
         }
 
         public ActionResult StudentLijst()

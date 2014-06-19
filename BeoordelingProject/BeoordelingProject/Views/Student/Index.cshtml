@@ -20,10 +20,14 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
+        <label class="errorViewbag">@ViewBag.Feedback</label>
         <table>
             <tr>
                 <td><input id="uploadFile" class="filetext" placeholder="Geen bestand gekozen..." disabled="disabled" /></td>
-                <td class="upload"><input id="file" type="file" name="upload" /></td>
+                <td class="upload">
+                    <input id="file" type="file" name="upload" accept="text/csv | application/vnd.ms-excel" />
+                    @Html.ValidationMessageFor(modelItem => Model.csvData, "Gelieve een bestand in te laden.")
+                </td>
             </tr>
             <tr>
                 <td>
@@ -31,29 +35,37 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="text" class="filetext" name="academiejaar" id="academiejaar" /></td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model.academiejaar, new { @class = "filetext" })
+                    @Html.ValidationMessageFor(modelItem => Model.academiejaar, "Academiejaar is verplicht!")
+                </td>
             </tr>
         </table>
         <br />
-       
-        /*<input type="button" value="Submit" id="submit" onclick="getFile();" class="actionbutton">*/
         <input type="button" value="Importeer" id="importeer" onclick="getFile()" class="actionbutton"/>
 
         @Html.Hidden("csvData", Model.csvData);
     }
 </div>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 <script>
     function getFile() {
         var datafield = document.getElementById("csvData");
         var fileInput = document.getElementById("file");
 
         var file = fileInput.files[0];
-        var textType = /text.*/;
+        var textTypes = new Array("text/csv", "application/vnd.ms-excel");
         var reader = new FileReader();
 
-        reader.onload = function (e) {
-            datafield.value = reader.result;
+        if (textTypes[0] == file.type || textTypes[1] == file.type) {
+            reader.onload = function (e) {
+                datafield.value = reader.result;
+            }
+        }
+        else {
+            datafield.value = "ongeldig";
         }
 
         reader.readAsText(file, 'ISO-8859-1');
