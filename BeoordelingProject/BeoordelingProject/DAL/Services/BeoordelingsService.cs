@@ -421,8 +421,8 @@ namespace BeoordelingProject.DAL.Services {
 
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(admin.UserName);
-            msg.To.Add(admin.UserName);
+            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
+            msg.To.Add("peter.vandenkerckhove@student.howest.be");
             string bodyTekst = "<p>Hier is het rapport van " + student.Naam + "</p>";
             bodyTekst += "<a href=\"http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\" download=\"" + student.Naam + "_" + student.academiejaar + ".pdf \">Download Rapport</a>";
             msg.IsBodyHtml = true;
