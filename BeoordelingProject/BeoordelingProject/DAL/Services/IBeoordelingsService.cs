@@ -14,7 +14,7 @@ namespace BeoordelingProject.DAL.Services
         int GetMatrixIdByRichtingByType(bool type, string richting);
         BeoordelingProject.Models.Resultaat getResultaatByStudentId(int studentid);
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetResultaten();
-        int getTotaalAantalDeelaspecten(int matid);
+        int getTotaalAantalDeelaspecten(int matid, int rolid);
         System.Collections.Generic.List<BeoordelingProject.Models.Resultaat> GetTussentijdseResultaten(int id);
         bool isCFaanwezig(int studentid);
         void stuurBreekpuntMail(int studentId);

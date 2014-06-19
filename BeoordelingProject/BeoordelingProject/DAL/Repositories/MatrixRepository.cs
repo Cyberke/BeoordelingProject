@@ -184,7 +184,7 @@ namespace BeoordelingProject.DAL.Repositories
             return rollist;
         }
         
-        public int getTotaalAantalDeelaspecten(int matid)
+        public int getTotaalAantalDeelaspecten(int matid, int rolid)
         {
             var query =
             (
@@ -193,6 +193,7 @@ namespace BeoordelingProject.DAL.Repositories
                 from d in h.Deelaspecten
 
                 where m.ID.Equals(matid)
+                where h.Rollen.Any(r => r.ID == rolid)
 
                 select d
             );
