@@ -285,6 +285,7 @@
   <ItemGroup>
     <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\help.png" />
+    <Content Include="Content\img\IPadLogo.png" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\logo_edit.png" />
     <Content Include="Content\img\min.png" />

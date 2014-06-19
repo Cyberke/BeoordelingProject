@@ -66,5 +66,16 @@ namespace BeoordelingProject.DAL.Repositories
             ).Count();
             return query;
         }
+
+        public int AantalStudentenByOpleiding(string opleiding)
+        {
+            var query =
+            (
+                from s in context.Studenten
+                where s.Opleiding == opleiding
+                select s
+            ).Count();
+            return query;
+        }
     }
 }

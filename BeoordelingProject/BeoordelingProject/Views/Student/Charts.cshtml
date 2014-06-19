@@ -14,7 +14,7 @@
         @Html.Label("Welkom " + User.Identity.Name.Split('.')[0] + "!", new { @class = "username" })
     }
     <br /><br />
-    <h1>BaKo</h1>
+    <h1>BaKo (@ViewBag.AantalBako studenten)</h1>
     <table class="statslist">
         <tr>
             <th>Tussentijdse beoordeling</th>
@@ -26,7 +26,7 @@
         </tr>
     </table>
     <br />
-    <h1>BaLo</h1>
+    <h1>BaLo (@ViewBag.AantalBalo studenten)</h1>
     <table class="statslist">
         <tr>
             <th>Tussentijdse beoordeling</th>
@@ -37,7 +37,7 @@
             <td><img src="ChartEindBalo" width="400" height="400" /></td>
         </tr>
     </table>
-    <h1>BaSo</h1>
+    <h1>BaSo (@ViewBag.AantalBaso studenten)</h1>
     <table class="statslist">
         <tr>
             <th>Tussentijdse beoordeling</th>
