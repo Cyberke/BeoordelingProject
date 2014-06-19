@@ -72,7 +72,7 @@ function helptekst(pagename)
 			return helpTekst;
 		break;
 		case "Beoordelaar/Beoordeling":
-			helpTekst = "Om meer informatie te krijgen over de beoordelingsgraden kunt u op <strong>\"+\"</strong> knop drukken.\n";
+			helpTekst = "Om meer informatie te krijgen over de beoordelingsgraden kunt u op <b>\"+\"</b> knop drukken.\n";
 			helpTekst += "Beoordelingsaspecten kunnen meerdere deelaspecten hebben.\n";
 			helpTekst += "Voor elke deelaspect moet er een punt gegeven worden!";
 

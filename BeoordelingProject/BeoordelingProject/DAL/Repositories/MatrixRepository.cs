@@ -202,5 +202,21 @@ namespace BeoordelingProject.DAL.Repositories
             return count;
         }
 
+        public List<Deelaspect> getDeelaspectenForMatrix(int matid)
+        {
+            var query =
+            (
+                from m in context.Matrices
+                from h in m.Hoofdaspecten
+                from d in h.Deelaspecten
+
+                where m.ID.Equals(matid)
+
+                select d
+            );
+
+            return query.ToList<Deelaspect>();
+        }
+
     }
 }

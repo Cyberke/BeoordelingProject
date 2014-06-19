@@ -72,13 +72,26 @@ namespace BeoordelingProject.DAL.Services {
                     List<DeelaspectResultaat> newdeelres = FillDeelaspectResultaten(m, vm.Scores);
                     List<DeelaspectResultaat> olddeelres = exist.DeelaspectResultaten;
 
-                    for (int i = 0; i < newdeelres.Count(); i++ )
+                    if (olddeelres.Count != 0)
                     {
-                        olddeelres[i].DeelaspectId = newdeelres[i].DeelaspectId;
-                        olddeelres[i].Score = newdeelres[i].Score;
-                    }
+                        for (int i = 0; i < newdeelres.Count(); i++)
+                        {
+                            olddeelres[i].DeelaspectId = newdeelres[i].DeelaspectId;
+                            olddeelres[i].Score = newdeelres[i].Score;
+                        }
 
-                    exist.DeelaspectResultaten = olddeelres;
+                        exist.DeelaspectResultaten = olddeelres;
+                    }
+                    else
+                    {
+                        List<Deelaspect> deelasp = matrixRepository.getDeelaspectenForMatrix(vm.MatrixID);
+                        for (int i = 0; i < deelasp.Count; i++)
+                        {
+                            newdeelres[i].DeelaspectId = deelasp[i].ID;
+                        }
+
+                        exist.DeelaspectResultaten = newdeelres;
+                    }
 
                     List<double> scores = GetListDeelaspectScore(exist.DeelaspectResultaten);
                     List<int> wegingen = GetListDeelaspectWegingen(exist.DeelaspectResultaten);
