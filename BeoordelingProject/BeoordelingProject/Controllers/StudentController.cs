@@ -29,6 +29,7 @@ namespace BeoordelingProject.Controllers
             this.studentService = studentService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Index()
         {
@@ -42,7 +43,6 @@ namespace BeoordelingProject.Controllers
             studentService.CreateStudenten(vm.csvData, vm.academiejaar);
             return RedirectToAction("StudentLijst", "Student");
         }
-
 
         public ActionResult StudentLijst()
         {

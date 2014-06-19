@@ -68,10 +68,22 @@
         document.getElementById("csvForm").submit();
     }
 
+    function nameInTextbox(file, uploadFile, webbrowser) {
+        var path = file.value;
+        var stukken = path.split("\\");
+
+        if (stukken[2] != undefined) {
+            uploadFile.value = stukken[2];
+        }
+        else {
+            uploadFile.value = path;
+        }
+    }
+
     document.getElementById("file").onchange = function () {
-        var path = this.value;
-        var stukken =  path.split("\\");
-        document.getElementById("uploadFile").value = stukken[2];
+        var uploadFile = document.getElementById("uploadFile");
+
+        nameInTextbox(this, uploadFile);
     };
 
 </script>

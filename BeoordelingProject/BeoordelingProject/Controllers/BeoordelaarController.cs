@@ -39,6 +39,7 @@ namespace BeoordelingProject.Controllers
 
         //
         // GET: /Beoordelaar/
+        [Authorize(Roles = "User")]
         public ActionResult Beoordeling(string studentRol, bool cfaanwezig = false, int matrix = 0)
         {
             if (studentRol != null && !studentRol.Equals("")) {
@@ -139,6 +140,7 @@ namespace BeoordelingProject.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Rapport(int id)
         {
             Student student = studentService.GetStudentByID(id);
