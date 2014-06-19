@@ -118,14 +118,11 @@ namespace BeoordelingProject.Controllers
             {
                 vm.Scores.Add(0);
             }
-<<<<<<< HEAD
-=======
             
             ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
             vm.Student = studentService.GetStudentByID(vm.Student.ID);
             vm.Resultaten = new Resultaat();
             return View(vm);
->>>>>>> bd66ea047a2395021e015c7aac879677edb2d027
         }
 
         [Authorize(Roles = "User")]
