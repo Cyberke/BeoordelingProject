@@ -126,9 +126,6 @@ namespace BeoordelingProject.Controllers
 
                 return View(vm);
             }
-
-            
-            
         }
 
         [Authorize(Roles = "User")]
@@ -148,22 +145,28 @@ namespace BeoordelingProject.Controllers
         public ActionResult Rapport(int id)
         {
             Student student = studentService.GetStudentByID(id);
-            double punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat;
-            if (punt != -1)
+            foreach(Resultaat resultaat in studentService.GetResultaat())
             {
-                RapportVM rapport = new RapportVM
+                if(resultaat.StudentId == id)
                 {
-                    Academiejaar = student.academiejaar,
-                    Naam = student.Naam,
-                    Richting = student.Opleiding,
-                    Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat,
-                    Feedback = studentService.GetResultaatByStudentId(id).CustomFeedback
-                };
-                return new RazorPDF.PdfResult(rapport, "Rapport");
+                    double punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat;
+                    if (punt > -1)
+                    {
+                        RapportVM rapport = new RapportVM
+                        {
+                            Academiejaar = student.academiejaar,
+                            Naam = student.Naam,
+                            Richting = student.Opleiding,
+                            Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat,
+                            Feedback = studentService.GetResultaatByStudentId(id).CustomFeedback
+                        };
+                        return new RazorPDF.PdfResult(rapport, "Rapport");
+                    }
+                    else
+                        return RedirectToAction("Index", "Admin");
+                }
             }
-            else
-                return RedirectToAction("Index", "Admin");
-
+            return RedirectToAction("Index", "Admin"); 
         }
 	}
 }

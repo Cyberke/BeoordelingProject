@@ -27,8 +27,8 @@
         <table class="studentlist" style="display:block">
             <tr>
                 <th ng-repeat="(i, th) in head">{{th}}</th>
-                <th>Evaluatie rapport</th>
-                <th>Feedback formulier</th>
+                <th>Toon rapport</th>
+                <th>Download rapport</th>
             </tr>
             <tr ng-repeat="student in studenten | filter:{naam:searchText}" ng-if="showOpleiding(student, '@Opleidingitem')">
                 <td>{{student.naam}}</td>
