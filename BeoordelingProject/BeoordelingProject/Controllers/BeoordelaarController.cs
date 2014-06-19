@@ -102,16 +102,21 @@ namespace BeoordelingProject.Controllers
         public ActionResult Rapport(int id)
         {
             Student student = studentService.GetStudentByID(id);
-
-            RapportVM rapport = new RapportVM
+            double punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat;
+            if (punt != -1)
             {
-                Academiejaar = student.academiejaar,
-                Naam = student.Naam,
-                Richting = student.Opleiding,
-                Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat,
-                Feedback = studentService.GetResultaatByStudentId(id).CustomFeedback
-            };
-            return new RazorPDF.PdfResult(rapport, "Rapport");
+                RapportVM rapport = new RapportVM
+                {
+                    Academiejaar = student.academiejaar,
+                    Naam = student.Naam,
+                    Richting = student.Opleiding,
+                    Punt = studentService.GetResultaatByStudentId(id).TotaalEindresultaat,
+                    Feedback = studentService.GetResultaatByStudentId(id).CustomFeedback
+                };
+                return new RazorPDF.PdfResult(rapport, "Rapport");
+            }
+            else
+                return RedirectToAction("Index", "Admin");
 
         }
 	}
