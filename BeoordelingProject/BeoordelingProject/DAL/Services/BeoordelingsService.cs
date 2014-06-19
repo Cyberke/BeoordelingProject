@@ -240,10 +240,15 @@ namespace BeoordelingProject.DAL.Services {
                     else
                     {
                         exist.TotaalEindresultaat = 6;
-                        //mail sturen hier
                         stuurBreekpuntMail(studentid); 
                     }
                     vm.Matrix = matrixRepository.GetByID(vm.MatrixID);
+
+                    ApplicationUser admin = adminService.GetAdmin();
+                    if (admin.MailZenden)
+                    {
+                        stuurMail(studentid);
+                    }
 
                     resultaatRepository.Update(exist);
                     uow.SaveChanges();
@@ -421,8 +426,8 @@ namespace BeoordelingProject.DAL.Services {
 
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(admin.UserName);
-            msg.To.Add(admin.UserName);
+            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
+            msg.To.Add("peter.vandenkerckhove@student.howest.be");
             string bodyTekst = "<p>Hier is het rapport van " + student.Naam + "</p>";
             bodyTekst += "<a href=\"http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\" download=\"" + student.Naam + "_" + student.academiejaar + ".pdf \">Download Rapport</a>";
             msg.IsBodyHtml = true;
@@ -450,8 +455,8 @@ namespace BeoordelingProject.DAL.Services {
             Student student = studentService.GetStudentByID(studentId);
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(admin.UserName);
-            msg.To.Add(admin.UserName);
+            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
+            msg.To.Add("peter.vandenkerckhove@student.howest.be");
             string bodyTekst = "Er zijn breekpunten aanwezig bij de bachelorproef van " + student.Naam + "\n";
             msg.Body = bodyTekst;
             msg.Subject = "BP breekpunt gevonden bij " + student.Naam;

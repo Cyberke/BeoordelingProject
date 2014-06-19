@@ -98,11 +98,7 @@ namespace BeoordelingProject.Controllers
                     vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
                     beoordelingsService.CreateBeoordeling(vm);
 
-                    ApplicationUser admin = adminService.GetAdmin();
-                    if (admin.MailZenden)
-                    {
-                        beoordelingsService.stuurMail(vm.Student.ID);
-                    }
+                    
                     return RedirectToAction("Index");
                 }
                 else
