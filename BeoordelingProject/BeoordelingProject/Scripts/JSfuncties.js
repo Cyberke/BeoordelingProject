@@ -68,7 +68,6 @@ function helptekst(pagename)
 	{
 		case "Account/Login":
 			helpTekst = "Voer je <b>gebruikersnaam</b> en <b>wachtwoord</b> in en klik op \"Log in\".\n";
-			helpTekst += "Gebruikersnaam of Wachtwoord vergeten? Contacteer de Administrator.";
 
 			return helpTekst;
 		break;
