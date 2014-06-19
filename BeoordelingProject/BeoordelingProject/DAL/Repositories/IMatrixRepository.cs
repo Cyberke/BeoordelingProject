@@ -10,7 +10,7 @@ namespace BeoordelingProject.DAL.Repositories
         int GetMatrixIdByRichtingByType(bool tussentijds, string richting);
         System.Collections.Generic.List<string> GetOpleidingen();
         System.Collections.Generic.List<int> getRollenMatrix(int matid);
-        int getTotaalAantalDeelaspecten(int matid);
+        int getTotaalAantalDeelaspecten(int matid, int rolid);
         int GetWegingForDeelaspect(int deelresID);
         int GetWegingForHoofdaspect(int hoofdresID);
     }

@@ -88,14 +88,13 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
-            vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
+            int count = beoordelingsService.getTotaalAantalDeelaspecten(vm.MatrixID, vm.Rol_ID);
 
-            int count = beoordelingsService.getTotaalAantalDeelaspecten(vm.MatrixID);
-
-            try
+            if(vm.Scores != null)
             {
-                if(count == vm.Scores.Count)
+                if (count == vm.Scores.Count)
                 {
+                    vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
                     beoordelingsService.CreateBeoordeling(vm);
 
                     ApplicationUser admin = adminService.GetAdmin();
@@ -107,25 +106,26 @@ namespace BeoordelingProject.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
-
-                    vm.Student = studentService.GetStudentByID(vm.Student.ID);
-                    vm.Resultaten = new Resultaat();
                     vm.Scores.Clear();
-
-                    return View(vm);
                 }
+                
             }
-            catch(Exception ex)
+
+            vm.Matrix = beoordelingsService.GetMatrixForRol(vm.MatrixID, vm.Rol_ID);
+
+            vm.Scores = new List<double>();
+            for (int i = 0; i < count; i++ )
             {
-                ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
-
-                vm.Student = studentService.GetStudentByID(vm.Student.ID);
-                vm.Resultaten = new Resultaat();
-                vm.Scores.Clear();
-
-                return View(vm);
+                vm.Scores.Add(0);
             }
+<<<<<<< HEAD
+=======
+            
+            ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
+            vm.Student = studentService.GetStudentByID(vm.Student.ID);
+            vm.Resultaten = new Resultaat();
+            return View(vm);
+>>>>>>> bd66ea047a2395021e015c7aac879677edb2d027
         }
 
         [Authorize(Roles = "User")]
