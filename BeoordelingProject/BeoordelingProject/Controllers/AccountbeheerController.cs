@@ -235,33 +235,44 @@ namespace BeoordelingProject.Controllers
             //user ophalen, dan controleren of deze naam al bezet is.
             ApplicationUser user = studentService.GetUserById(model.SelectedAccountId);
 
+
             var users = studentService.GetUsers();
             foreach (ApplicationUser gebruiker in users)
             {
                 //unieke gebruiker?
                 if (gebruiker.UserName.ToLower() == model.registerVM.UserName.ToLower())
                 {
-                    ViewBag.Error = "De gebruiker bestaat al.";
+                    if (user.UserName != model.registerVM.UserName)
+                    {
+                        ViewBag.Error = "De gebruiker bestaat al.";
 
-                    var accountbeheerVM = new AccountbeheerVM();
+                        var accountbeheerVM = new AccountbeheerVM();
 
-                    accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
-                    accountbeheerVM.Accounts = studentService.GetUsers();
+                        accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
 
-                    accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+                        List<ApplicationUser> huidigeuser = new List<ApplicationUser>();
+                        huidigeuser.Add(user);
+                        accountbeheerVM.Accounts = huidigeuser;
 
-                    accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
-                    accountbeheerVM.SelectedRolId = model.SelectedRolId;
+                        accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
 
-                    return View(accountbeheerVM);
+                        accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
+                        accountbeheerVM.SelectedRolId = model.SelectedRolId;
+
+                        return View(accountbeheerVM);
+                    }
+                    else
+                    {
+                        
+                    }
+                    
                 }
             }
 
             //not niet bezet => user editen
             user.UserName = model.registerVM.UserName;
-            //PasswordHasher pwdHasher = new PasswordHasher();
-            //user.PasswordHash = pwdHasher.HashPassword(model.registerVM.Password);
-            //user.StudentRollen.Clear();
+            user.StudentRollen.Clear();
+            
 
             //studentrollen editen
             bool inArray = false;
@@ -330,7 +341,7 @@ namespace BeoordelingProject.Controllers
 
             
 
-            //userService.EditUser(user);
+            userService.EditUser(user);
 
             return RedirectToAction("AddStudentRol","Accountbeheer");
         }
