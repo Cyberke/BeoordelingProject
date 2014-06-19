@@ -232,10 +232,36 @@ namespace BeoordelingProject.Controllers
         [HttpPost]
         public ActionResult EditUser(AccountbeheerVM model)
         {
-            //user editen
+            //user ophalen, dan controleren of deze naam al bezet is.
             ApplicationUser user = studentService.GetUserById(model.SelectedAccountId);
+
+            var users = studentService.GetUsers();
+            foreach (ApplicationUser gebruiker in users)
+            {
+                //unieke gebruiker?
+                if (gebruiker.UserName.ToLower() == model.registerVM.UserName.ToLower())
+                {
+                    ViewBag.Error = "De gebruiker bestaat al.";
+
+                    var accountbeheerVM = new AccountbeheerVM();
+
+                    accountbeheerVM.Studenten = new SelectList(studentService.GetStudenten(), "ID", "Naam");
+                    accountbeheerVM.Accounts = studentService.GetUsers();
+
+                    accountbeheerVM.Rollen = new SelectList(studentService.GetRoles(), "ID", "Naam");
+
+                    accountbeheerVM.SelectedStudentId = model.SelectedStudentId;
+                    accountbeheerVM.SelectedRolId = model.SelectedRolId;
+
+                    return View(accountbeheerVM);
+                }
+            }
+
+            //not niet bezet => user editen
             user.UserName = model.registerVM.UserName;
-            user.StudentRollen.Clear();
+            //PasswordHasher pwdHasher = new PasswordHasher();
+            //user.PasswordHash = pwdHasher.HashPassword(model.registerVM.Password);
+            //user.StudentRollen.Clear();
 
             //studentrollen editen
             bool inArray = false;
@@ -302,7 +328,9 @@ namespace BeoordelingProject.Controllers
 
             user.StudentRollen = studentrollen;
 
-            userService.EditUser(user);
+            
+
+            //userService.EditUser(user);
 
             return RedirectToAction("AddStudentRol","Accountbeheer");
         }

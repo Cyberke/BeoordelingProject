@@ -5,8 +5,14 @@ using BeoordelingProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.html;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Net.Mail;
 
 namespace BeoordelingProject.Controllers
 {
@@ -16,16 +22,19 @@ namespace BeoordelingProject.Controllers
         private IBeoordelingsEngine beoordelingsEngine = null;
         private IStudentService studentService = null;
         private IUserManagementService userService = null;
+        private IAdministratorService adminService = null;
 
         public BeoordelaarController(
             IBeoordelingsService beoordelingsService,
             IBeoordelingsEngine beoordelingsEngine,
             IStudentService studentService,
-            IUserManagementService userService) {
+            IUserManagementService userService,
+            IAdministratorService adminService) {
             this.beoordelingsService = beoordelingsService;
             this.beoordelingsEngine = beoordelingsEngine;
             this.studentService = studentService;
             this.userService = userService;
+            this.adminService = adminService;
         }
 
         //
@@ -80,9 +89,46 @@ namespace BeoordelingProject.Controllers
         public ActionResult Beoordeling(BeoordelingsVM vm)
         {
             vm.Matrix = beoordelingsService.GetMatrix(vm.MatrixID);
-            beoordelingsService.CreateBeoordeling(vm);
-            beoordelingsService.stuurMail(vm.Student.ID);
-            return RedirectToAction("Index");
+
+            int count = beoordelingsService.getTotaalAantalDeelaspecten(vm.MatrixID);
+
+            try
+            {
+                if(count == vm.Scores.Count)
+                {
+                    beoordelingsService.CreateBeoordeling(vm);
+
+                    ApplicationUser admin = adminService.GetAdmin();
+                    if (admin.MailZenden)
+                    {
+                        beoordelingsService.stuurMail(vm.Student.ID);
+                    }
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
+
+                    vm.Student = studentService.GetStudentByID(vm.Student.ID);
+                    vm.Resultaten = new Resultaat();
+                    vm.Scores.Clear();
+
+                    return View(vm);
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = "Gelieve een graad voor ieder deelaspect in te vullen";
+
+                vm.Student = studentService.GetStudentByID(vm.Student.ID);
+                vm.Resultaten = new Resultaat();
+                vm.Scores.Clear();
+
+                return View(vm);
+            }
+
+            
+            
         }
 
         [Authorize(Roles = "User")]
