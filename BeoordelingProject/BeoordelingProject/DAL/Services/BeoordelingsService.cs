@@ -426,8 +426,8 @@ namespace BeoordelingProject.DAL.Services {
 
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
-            msg.To.Add("peter.vandenkerckhove@student.howest.be");
+            msg.From = new MailAddress("nmct.stage@howest.be");
+            msg.To.Add(admin.UserName);
             string bodyTekst = "<p>Hier is het rapport van " + student.Naam + "</p>";
             bodyTekst += "<a href=\"http://bachelorproef.azurewebsites.net/Beoordelaar/Rapport/" + student.ID + "\" download=\"" + student.Naam + "_" + student.academiejaar + ".pdf \">Download Rapport</a>";
             msg.IsBodyHtml = true;
@@ -437,7 +437,7 @@ namespace BeoordelingProject.DAL.Services {
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Credentials = new NetworkCredential(msg.From.Address, "howest2014");
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -455,8 +455,8 @@ namespace BeoordelingProject.DAL.Services {
             Student student = studentService.GetStudentByID(studentId);
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("jelle.vanden.bulcke@student.howest.be");
-            msg.To.Add("peter.vandenkerckhove@student.howest.be");
+            msg.From = new MailAddress("nmct.stage@howest.be");
+            msg.To.Add(admin.UserName);
             string bodyTekst = "Er zijn breekpunten aanwezig bij de bachelorproef van " + student.Naam + "\n";
             msg.Body = bodyTekst;
             msg.Subject = "BP breekpunt gevonden bij " + student.Naam;
@@ -465,7 +465,7 @@ namespace BeoordelingProject.DAL.Services {
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(msg.From.Address, "raika123");
+            client.Credentials = new NetworkCredential(msg.From.Address, "howest2014");
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
